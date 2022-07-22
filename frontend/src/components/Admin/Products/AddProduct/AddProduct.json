@@ -1,0 +1,101 @@
+[
+  {
+    "for": "product",
+    "lable": "Brand",
+    "id": "product-brand",
+    "min": 1,
+    "type": "text",
+    "placeholder": "Add Product Brand"
+  },
+  {
+    "lable": "Model",
+    "id": "product-model",
+    "min": 1,
+    "type": "text",
+    "placeholder": "Add Product Model"
+  },
+  {
+    "lable": "Mrp",
+    "id": "product-mrp",
+    "min": 1,
+    "type": "number",
+    "placeholder": "Add Product Mrp"
+  },
+  {
+    "lable": "Price",
+    "id": "product-price",
+    "min": 1,
+    "type": "number",
+    "placeholder": "Add Product Price"
+  },
+  {
+    "lable": "Size",
+    "id": "product-size",
+    "min": 1,
+    "type": "text",
+    "placeholder": "Add Product Size"
+  },
+  {
+    "lable": "Model Type",
+    "id": "product-model-type",
+    "min": 1,
+    "type": "text",
+    "placeholder": "Add Product Model Type"
+  },
+  {
+    "lable": "Lense Type",
+    "id": "product-lense-type",
+    "min": 1,
+    "type": "text",
+    "placeholder": "Add Product Lense Type"
+  },
+  {
+    "lable": "Lense Color",
+    "id": "product-lense-color",
+    "min": 1,
+    "type": "text",
+    "placeholder": "Add Product Lense Color"
+  },
+  {
+    "lable": "Frame Type",
+    "id": "product-frame-type",
+    "min": 1,
+    "type": "text",
+    "placeholder": "Add Product Frame Type"
+  },
+  {
+    "lable": "Frame Color",
+    "id": "product-frame-color",
+    "min": 1,
+    "type": "text",
+    "placeholder": "Add Product Frame Color"
+  },
+  {
+    "lable": "Gende",
+    "id": "product-gender",
+    "min": 1,
+    "type": "text",
+    "placeholder": "Add Product Gender"
+  },
+  {
+    "lable": "Description",
+    "id": "product-lense-type",
+    "min": 1,
+    "type": "text",
+    "placeholder": "Add Product Description"
+  },
+  {
+    "lable": "Cover Image",
+    "id": "product-cover-image",
+    "min": 1,
+    "type": "file",
+    "placeholder": "Add Product Cover Image"
+  },
+  {
+    "lable": "Images",
+    "id": "product-images",
+    "min": 1,
+    "type": "file",
+    "placeholder": "Add Product Images"
+  }
+]

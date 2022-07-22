@@ -1,0 +1,13 @@
+@import "./../../Sacss/mixins";
+
+.home-brand {
+  margin-bottom: 10rem !important;
+  &__heading {
+    align-self: center;
+    text-align: center;
+  }
+
+  &__brands {
+    @include CategoryCardDiv;
+  }
+}

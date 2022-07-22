@@ -1,0 +1,10 @@
+@import "./../Sacss//mixins";
+
+.single-product-container {
+  grid-column: full-start/full-end;
+  min-height: 90vh;
+  width: 100%;
+  padding: 0rem 0 15rem 0rem;
+  @include displayGridMain;
+  row-gap: 15rem;
+}

@@ -1,0 +1,125 @@
+@import "./../../Sacss/mixins";
+
+.home-carousel-container {
+  width: 100%;
+  height: 60vh;
+  grid-column: full-start/full-end;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  @media (max-width: 56.25em) {
+    height: 35vh;
+  }
+
+  &-box {
+    width: 100%;
+    height: 100%;
+    height: 60vh;
+    position: relative;
+
+    @media (max-width: 56.25em) {
+      height: 35vh;
+    }
+    & .home-carousel {
+      @include absoluteOverlay;
+      transition: all 0.9s ease-in-out;
+      display: grid;
+      z-index: 4;
+
+      &__home-carousel-details {
+        height: 100%;
+        width: 100%;
+        position: relative;
+
+        &__text {
+          @media (max-width: 93.75em) {
+            padding: 0 5rem 0 20rem;
+          }
+
+          @media (max-width: 56.25em) {
+            padding: 0 2rem 0 15rem;
+          }
+
+          & button {
+            align-self: flex-end;
+            position: absolute;
+            bottom: 20%;
+            right: 5%;
+          }
+        }
+        & .home-carousel-image {
+          grid-column: 1 / span 1;
+          width: 100%;
+          height: 60vh;
+          object-fit: cover;
+          display: block;
+
+          @media (max-width: 56.25em) {
+            height: 35vh;
+          }
+        }
+      }
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////
+
+    & .slider-btn {
+      @include centeredFlex;
+      color: var(--color-white);
+      position: absolute;
+      z-index: 7;
+      top: 50%;
+      height: 4rem;
+      width: 4rem;
+      font-size: 3rem;
+      border-radius: 50%;
+      cursor: pointer;
+      background-color: rgba(0, 0, 0, 0.9);
+      border: none;
+    }
+
+    & .increase-btn {
+      right: 2rem;
+      transform: translate(0, -50%);
+    }
+
+    & .decrease-btn {
+      left: 2rem;
+      transform: translate(0, -50%);
+    }
+
+    &-dot {
+      position: absolute;
+      display: flex;
+      gap: 1rem;
+      bottom: 2rem;
+      border-radius: 12px;
+      left: 50%;
+      z-index: 20;
+      transform: translate(-50%, 6rem);
+      padding: 1rem 2rem;
+
+      & div {
+        height: 1.2rem;
+        width: 1.2rem;
+        background-color: var(--color-grey-dark);
+        border-radius: 50%;
+        cursor: pointer;
+      }
+
+      &-active {
+        transition: all.2s;
+        background-image: var(--bg-image-1);
+      }
+    }
+  }
+}
+.home-carousel-2 {
+  background-color: rgb(255, 0, 0) !important;
+}
+
+.active-home-carousel {
+  opacity: 1;
+}

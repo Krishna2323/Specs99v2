@@ -1,0 +1,7 @@
+.container {
+  overflow: hidden;
+  position: relative;
+  display: grid;
+  box-shadow: 0rem 3rem 2rem rgba(0, 0, 0, 0.5);
+  grid-template-columns: [full-start] 4fr [center-start] repeat(12, 1fr) [center-end] 4fr [full-end];
+}

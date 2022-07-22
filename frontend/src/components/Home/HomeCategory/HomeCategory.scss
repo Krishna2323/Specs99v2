@@ -1,0 +1,15 @@
+@import "./../../Sacss/mixins";
+
+.home-category {
+  grid-column: center-start/center-end;
+  padding: 0.2rem;
+  width: 100%;
+  height: min-content;
+  gap: 0rem;
+  position: relative;
+  z-index: 1;
+
+  &__categories {
+    @include CategoryCardDiv;
+  }
+}

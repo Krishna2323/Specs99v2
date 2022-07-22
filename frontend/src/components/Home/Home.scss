@@ -1,0 +1,22 @@
+@import "./../Sacss/_mixins.scss";
+
+.home-component {
+  grid-column: 1/-1;
+  z-index: 1;
+  @include displayGridMain;
+
+  .home-element {
+    margin-bottom: 5rem;
+    grid-column: center-start/center-end;
+    @media (max-width: 75em) {
+      grid-column: full-start/full-end;
+      padding: 0 4rem;
+    }
+    @media (max-width: 56.25em) {
+      padding: 0 2rem;
+    }
+    @media (max-width: 37.5em) {
+      padding: 0 1rem;
+    }
+  }
+}

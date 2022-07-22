@@ -1,0 +1,8 @@
+.dashboard-component {
+  min-height: 95vh;
+  grid-column: 1/-1;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  background: var(--color-grey-dark);
+  position: relative;
+}
