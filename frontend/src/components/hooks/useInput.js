@@ -1,11 +1,11 @@
-import react, { useState } from "react";
+import { useState } from "react";
 
 const useInput = (validationFunction) => {
   const [value, setValue] = useState("");
+  const [isFocused, setIsFocused] = useState(false);
   const [isTouched, setIsTouched] = useState(false);
   const valueIsValid = validationFunction(value);
-  const hasError = (isTouched || value.length > 0) && !valueIsValid;
-  console.log(hasError);
+  const hasError = isTouched && !valueIsValid;
 
   const inputHandler = (e) => {
     setValue(e.target.value);
@@ -13,6 +13,10 @@ const useInput = (validationFunction) => {
 
   const inputBlurHandler = () => {
     setIsTouched(true);
+  };
+
+  const inputFocusHandler = () => {
+    setIsFocused(true);
   };
 
   const resetInput = () => {
@@ -25,9 +29,11 @@ const useInput = (validationFunction) => {
     value,
     isTouched,
     inputBlurHandler,
+    inputFocusHandler,
     inputHandler,
     resetInput,
     hasError,
+    isFocused,
   };
 };
 

@@ -28,11 +28,11 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: [true, 'A Product Must Have A Model Type'],
   },
-  lenseType: {
+  lensType: {
     type: String,
     required: [true, 'A Product Must Have A Lense Type.'],
   },
-  lenseColor: {
+  lensColor: {
     type: String,
     required: [true, 'A Product Must Have A Lens Color.'],
   },
@@ -68,7 +68,7 @@ const productSchema = new mongoose.Schema({
     trim: true,
   },
   images: {
-    type: Array,
+    type: [String],
     trim: true,
   },
   createdAt: {

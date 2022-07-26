@@ -1,26 +1,29 @@
 .add-product-container {
   grid-column: 2/-1;
   // background: var(--bg-);
-  background-color: var(--color-grey-dark);
+  // background-color: var);
+  background-color: white;
   padding: 2rem 5rem 5rem 5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5rem;
+  // gap: 5rem;
 
   & .sidebar-toggle-icon {
     display: none;
   }
   & .add-product-form {
     width: 100%;
-    background: var(--bg-image-grad-purple);
+    background: var(--bg-image-grad-grey-light);
     border-radius: 31px;
     padding: 3rem;
     box-shadow: 0 3rem 3rem rgba(0, 0, 0, 0.2);
     gap: 3rem;
     align-items: center;
-    display: flex;
-    flex-wrap: wrap;
+    // display: flex;
+    // flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 35rem));
     justify-content: space-evenly;
 
     &-row {
@@ -98,7 +101,7 @@
       }
     }
     &-btn__container {
-      flex: 0 0 100%;
+      grid-column: 1/-1;
       display: flex;
       justify-content: center;
     }

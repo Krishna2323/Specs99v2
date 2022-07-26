@@ -10,6 +10,8 @@ import * as HiIcons from "react-icons/hi";
 import * as FiIcons from "react-icons/fi";
 
 import Search from "../Search/Search";
+import { Transition } from "react-transition-group";
+import HomeOffer from "../../Home/HomeOffers/HomeOffer";
 
 const setStyleOnNodelist = (thisKey, elements, targetLink) => {
   console.log(thisKey);
@@ -46,7 +48,7 @@ const Header = (props) => {
         ?.querySelectorAll(".header-nav__cta-icons");
 
       const navbar = link.closest(".header-component");
-      navbar.style.backgroundColor = this.background;
+      navbar.style.background = this.background;
 
       if (iconSiblings) {
         setStyleOnNodelist(this, iconSiblings, link);
@@ -64,7 +66,9 @@ const Header = (props) => {
           "mouseover",
           handleHover.bind({
             opacity: 1,
-            background: "#343a40",
+            // background: "#343a40",
+            background: "var(--bg-image-grad-purple)",
+
             color: "#fff",
             color2: "#999",
           })
@@ -78,7 +82,7 @@ const Header = (props) => {
           "mouseout",
           handleHover.bind({
             opacity: 1,
-            background: "#212529",
+            background: "var(--bg-image-grad-purple)",
             color: "#fff",
             color2: "#fff",
           })
@@ -110,13 +114,14 @@ const Header = (props) => {
   };
   return (
     <Fragment>
-      {searchBar && (
+      <Transition in={searchBar} mountOnEnter unmountOnExit timeout={300}>
         <Search
           text="Are You Sure To Logout?"
           onClick={handleLogout}
           closeModal={closeAskModal}
+          open={searchBar}
         />
-      )}
+      </Transition>
 
       {/* {loginForm && <Login closeModal={closeLoginForm} />} */}
       {/* {singupForm && <Singup closeModal={closeSingupForm} />} */}
@@ -127,9 +132,9 @@ const Header = (props) => {
           <FiIcons.FiMenu />
         </span> */}
           {/* CONTAINER 2 */}
-          <div className="header-nav__logo">
+          <Link to="/" className="header-nav__logo">
             <img src={logo} alt="Specs99_Logo" />
-          </div>
+          </Link>
           {/* CONTAINER 3 */}
           <div className={`header-nav__open-links`}>
             <li className="header-nav__open-item">
@@ -149,7 +154,7 @@ const Header = (props) => {
             </li>
             <li className="header-nav__open-item">
               {" "}
-              <Link to="/dashboard" className="header-nav__open-link">
+              <Link to="/products" className="header-nav__open-link">
                 Kids{" "}
               </Link>
             </li>
@@ -201,6 +206,7 @@ const Header = (props) => {
         </nav>
 
         <Sidenav toggleNav={handleSideNav} open={open} />
+        {/* <HomeOffer></HomeOffer> */}
       </div>
     </Fragment>
   );

@@ -1,13 +1,30 @@
 @import "./../../Sacss/mixins";
 
 .home-brand {
-  margin-bottom: 10rem !important;
+  // margin-bottom: 10rem !important;
   &__heading {
     align-self: center;
     text-align: center;
   }
 
   &__brands {
-    @include CategoryCardDiv;
+    // @include CategoryCardDiv;
+    // display: flex;
+    gap: 2rem;
+    width: 100%;
+    // display: flex;
+    // justify-content: center;
+    // height: 50rem;
+
+    .slick-slide {
+      // margin: 0px 0px 27px;
+    }
+
+    /* the parent */
+    .slick-list {
+      // margin: 0 -27px;
+      padding: 0;
+      margin: 0;
+    }
   }
 }

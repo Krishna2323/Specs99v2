@@ -1,21 +1,24 @@
 .category-card {
-  max-width: 30rem;
-  height: 25rem;
-  border-radius: 9px;
+  // max-width: 30rem;
+  // width: 10rem;
+  height: 15rem;
+  // border: 1px solid red;
+  display: flex;
+  justify-content: center;
+  // margin-left: 3rem;
+  margin-bottom: 3rem;
+  border-radius: 2rem;
+  width: 80%;
   overflow: hidden;
-  background-color: #adb5bd;
   box-shadow: var(--box-shadow-card);
 
   //
   text-decoration: none;
   list-style: none;
   display: flex;
-  flex-direction: column;
   transition: all 0.4s;
   color: white;
   font-weight: 300;
-  padding: 0rem 0 0.5rem 0;
-  align-items: center;
 
   &:hover {
     transform: scale(1.02);
@@ -26,22 +29,25 @@
   & img {
     display: block;
     width: 100%;
-    height: 80%;
+    height: 100%;
     background-color: white;
-    object-fit: fill;
+    object-fit: cover;
   }
 
-  & span {
-    font-size: 2.4rem;
-    text-decoration: dotted;
-    font-weight: 300;
-    letter-spacing: 1.2px;
-    // text-transform: ;
-    // height: fit-content;
-    margin: auto;
-  }
+  // & span {
+  //   font-size: 2.4rem;
+  //   text-decoration: dotted;
+  //   font-weight: 300;
+  //   letter-spacing: 1.2px;
+  //   // text-transform: ;
+  //   // height: fit-content;
+  //   margin: auto;
+  // }
 
   @media (max-width: 37.5em) {
-    height: 25rem;
+    height: 15rem;
+  }
+  @media (max-width: 25em) {
+    height: 12rem;
   }
 }

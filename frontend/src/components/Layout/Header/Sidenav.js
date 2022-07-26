@@ -18,7 +18,7 @@ const Sidenav = (props) => {
         </div>
 
         {links.map((el, i) => (
-          <li onClick={props.toggleNav}>
+          <li key={i} onClick={props.toggleNav}>
             <Link to="/">{el} </Link>
           </li>
         ))}

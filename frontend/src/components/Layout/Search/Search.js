@@ -1,25 +1,42 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import ReactDom from "react-dom";
 import "./Search.scss";
 import * as AiIcons from "react-icons/ai";
+import { Navigate, useNavigate } from "react-router-dom";
+import Backdrop from "./../../UI/Backdrop/Backdrop";
 
 const Search = (props) => {
+  const searchAnimation = props.open ? "search-open" : "search-close";
+  const [search, setSearch] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearchInput = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    navigate(`/products/${search}`);
+    props.closeModal();
+  };
   return (
     <Fragment>
+      <Backdrop
+        onBackdropClick={props.closeModal}
+        transitionTime=".3s"
+        open={props.open}
+      />
       {ReactDom.createPortal(
-        <div className="backdrop" onClick={props.closeModal}></div>,
-        document.getElementById("backdrop")
-      )}
-      {ReactDom.createPortal(
-        <div className="search">
-          <input type="text" className="search-input" />
-          <div>
-            <AiIcons.AiOutlineSearch
-              className="search-icon"
-              onClick={props.closeModal}
-            />
-          </div>
-        </div>,
+        <form onSubmit={handleSearch} className={`search ${searchAnimation}`}>
+          <input
+            type="text"
+            onChange={handleSearchInput}
+            className={`search-input ${searchAnimation}`}
+          />
+          <btn>
+            <AiIcons.AiOutlineSearch className="search-icon" />
+          </btn>
+        </form>,
         document.getElementById("search")
       )}
     </Fragment>

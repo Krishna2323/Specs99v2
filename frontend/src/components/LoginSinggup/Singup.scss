@@ -2,24 +2,7 @@
 
 $--singup-transition-time: 0.3s;
 
-.backdrop {
-  @include absoluteOverlay;
-  background-color: rgba(0, 0, 0, 0.85);
-  z-index: 1001;
-  transition: all $--singup-transition-time;
-  opacity: 0;
-
-  &-open {
-    opacity: 1;
-  }
-
-  &-close {
-    opacity: 0;
-  }
-}
-
-.singup-form {
-  padding: 5vh 3vw;
+.singup-form-outer {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -28,13 +11,10 @@ $--singup-transition-time: 0.3s;
   background-size: cover;
   border-radius: 31px;
   box-shadow: 0 2rem 2rem rgba(0, 0, 0, 0.09);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 2rem;
-  background: var(--bg-image-grad-purple);
-  width: 70rem;
-  // transition: all var(--singup-tarnsition-time);
+  overflow: hidden;
+  padding: 0;
+  padding-top: 1rem;
+  background-image: var(--bg-image-1-dark);
 
   &-open {
     animation: singupFormAnimation $--singup-transition-time ease-out forwards;
@@ -44,92 +24,59 @@ $--singup-transition-time: 0.3s;
       forwards;
   }
 
-  @media (max-width: 37.5em) {
-    width: 96vw;
-  }
-
-  &__close-icon {
-    position: absolute;
-    top: 2.5%;
-    right: 2.5%;
-    color: white;
-    font-size: 3rem;
-    cursor: pointer;
-  }
-
-  & .form-row {
+  & .singup-form {
+    padding: 5vh 3vw;
+    // border-radius: 31px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    // align-items: flex-end;
-    gap: 1rem;
-    //   margin-bottom: 2rem;
+    justify-content: center;
+    gap: 2rem;
+    // background: var(--bg-image-grad-grey-light);
+    background: var(--bg-image-grad-purple);
 
-    & input {
-      border: none;
-      padding: 0rem 2rem;
-      font-size: 2.4rem;
-      border-radius: 7px;
-      width: 100%;
-      font-family: inherit;
-      padding: 0.5rem 1rem;
-      box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.2);
-      outline: invert 3px solid transparent;
-
-      flex: 0 0 70%;
-      border-bottom: 3px solid transparent;
-      transition: all 0.5s;
-
-      // &[type="email"] {
-      //   background-color: #28b487;
-      //   font-size: 4rem;
-      // }
-      &:focus {
-        border: none;
-        border-bottom: 0.3rem solid rgb(0, 255, 106);
-        outline: none;
-      }
-
-      &:focus:invalid {
-        border-bottom: 0.3rem solid #ff1414;
-      }
-    }
-
-    & label {
-      flex: 0 0 30%;
-
-      margin-left: 1rem;
-      color: white;
-      font-size: 1.8rem;
-    }
-  }
-
-  &__link {
-    color: var(--color-grey-dark);
+    width: 70rem;
     color: white;
-    font-size: 1.4rem;
-    margin-left: 1rem;
-    align-self: flex-end;
-    letter-spacing: 1.1px;
-    list-style: none;
+
+    @media (max-width: 37.5em) {
+      width: 96vw;
+    }
+
+    &__close-icon {
+      position: absolute;
+      top: 2.5%;
+      right: 2.5%;
+      // color: white;
+      font-size: 3rem;
+      cursor: pointer;
+    }
+
+    &__link {
+      // color: var(--color-grey-dark);
+      // color: white;
+      font-size: 1.4rem;
+      margin-left: 1rem;
+      align-self: flex-end;
+      letter-spacing: 1.1px;
+      list-style: none;
+      color: inherit;
+    }
+  }
+
+  @keyframes singupFormAnimation {
+    0% {
+      top: 100%;
+      opacity: 0;
+    }
+    60% {
+      top: 40%;
+      opacity: 0.6;
+    }
+    100% {
+      top: 50%;
+      opacity: 1;
+    }
   }
 }
-
-@keyframes singupFormAnimation {
-  0% {
-    top: 100%;
-    opacity: 0;
-  }
-  60% {
-    top: 45%;
-    opacity: 0.6;
-  }
-  100% {
-    top: 50%;
-    opacity: 1;
-  }
-}
-
 @keyframes closeSingupFormAnimation {
   0% {
     top: 50%;

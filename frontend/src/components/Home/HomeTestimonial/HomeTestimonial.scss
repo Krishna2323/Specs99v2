@@ -34,7 +34,6 @@
       left: 0;
       transition: all 0.9s ease-in-out;
       z-index: 4;
-      // transform: translateX(-50%);
 
       &__user-details {
         display: flex;
@@ -63,9 +62,6 @@
         display: flex;
         height: 100%;
         align-items: center;
-
-        // gap: 2rem;
-        // padding: 0 0rem 0 6rem;
 
         & .review-title {
           font-size: 3.4rem;
@@ -148,17 +144,16 @@
       transform: translate(-50%, 6rem);
       padding: 1rem 2rem;
 
-      & div {
+      &__dot {
         height: 1.2rem;
         width: 1.2rem;
         background-color: rgb(104, 104, 104);
         border-radius: 50%;
         cursor: pointer;
-      }
-
-      & .dot-active {
-        transition: all.2s;
-        background-image: var(--bg-image-1-dark);
+        &-active {
+          transition: all.2s;
+          background-image: var(--bg-image-1-dark);
+        }
       }
     }
   }

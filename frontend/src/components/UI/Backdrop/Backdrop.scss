@@ -1,0 +1,16 @@
+@import "./../../Sacss/mixins";
+
+.backdrop {
+  @include absoluteOverlay;
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: 1001;
+  backdrop-filter: blur(2px);
+  opacity: 0;
+
+  &-open {
+    opacity: 1;
+  }
+  &-closed {
+    opacity: 0;
+  }
+}

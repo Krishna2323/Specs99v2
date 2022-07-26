@@ -16,8 +16,8 @@ const HomeCategory = () => {
       </div>
 
       <div className="home-category__categories">
-        {arrImg.map((el) => (
-          <CategoryCard img={el} title="Category" />
+        {arrImg.map((el, i) => (
+          <CategoryCard key={i} img={el} title="Category" />
         ))}
       </div>
     </div>

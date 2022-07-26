@@ -1,15 +1,4 @@
-.backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.85);
-  z-index: 1001;
-}
-
 .search {
-  // background-color: rgb(138, 138, 138);
   padding: 5rem;
   position: fixed;
   top: 0;
@@ -20,8 +9,15 @@
   transform: translate(-50%, -50%);
   border-radius: 31px;
   display: flex;
-
   align-items: center;
+
+  &-open {
+    animation: searchAnimation 0.3s ease-in-out;
+  }
+
+  &-close {
+    animation: closeSearchAnimation 0.3s ease-in-out;
+  }
 
   &-input {
     width: 50vw;
@@ -33,7 +29,6 @@
     font-family: inherit;
     font-weight: 500;
     color: #111;
-    // background: var(--bg-image-1);
 
     &:focus {
       border: none;
@@ -56,5 +51,35 @@
       transform: translateX(-180%) translateY(3px) scale(1.2);
       cursor: pointer;
     }
+  }
+}
+
+@keyframes searchAnimation {
+  0% {
+    top: 0%;
+    opacity: 0;
+  }
+  70% {
+    top: 40%;
+    opacity: 0.8;
+  }
+  100% {
+    top: 30%;
+    opacity: 1;
+  }
+}
+
+@keyframes closeSearchAnimation {
+  0% {
+    top: 30%;
+    opacity: 1;
+  }
+  50% {
+    top: 40%;
+    opacity: 0.8;
+  }
+  100% {
+    top: 0%;
+    opacity: 0.2;
   }
 }

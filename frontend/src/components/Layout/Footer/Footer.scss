@@ -1,6 +1,7 @@
 .footer {
   grid-column: full-start/full-end;
-  background-color: #212529;
+  // background-color: #212529;
+  background: var(--bg-image-grad-purple);
   min-height: 30rem;
   display: flex;
   flex-direction: column;

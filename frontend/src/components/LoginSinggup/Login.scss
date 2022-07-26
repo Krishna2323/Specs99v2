@@ -2,94 +2,95 @@
 
 $--login-transition-time: 0.3s;
 
-.backdrop {
-  @include absoluteOverlay;
-  background-color: rgba(0, 0, 0, 0.85);
-  z-index: 1001;
-  backdrop-filter: blur(1px);
-  transition: all $--login-transition-time;
-  &-open {
-    opacity: 1;
-  }
-  &-closed {
-    opacity: 0;
-  }
-}
-
-.login-form {
-  padding: 5vh 3vw;
+.login-form-outer {
+  background: var(--bg-image-1-dark);
+  // padding-top: 1rem;
+  padding: 0;
+  padding-top: 1rem;
   position: fixed;
   top: 50%;
   left: 50%;
   z-index: 1002;
   transform: translate(-50%, -50%);
   background-size: cover;
+  box-shadow: var(--box-shadow-banner);
   border-radius: 31px;
-  box-shadow: 0 2rem 2rem rgba(0, 0, 0, 0.09);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 2rem;
-  background: var(--bg-image-grad-purple);
-  width: 70rem;
-  transition: all $--login-transition-time;
+  overflow: hidden;
   opacity: 0;
+  // transition: all ;
 
   &-open {
     animation: loginFormAnimation $--login-transition-time ease-out forwards;
     z-index: 1003;
-    opacity: 1;
+    // opacity: 1;
   }
   &-closed {
     animation: closeLoginFormAnimation $--login-transition-time ease-out
       forwards;
-    opacity: 0.3;
+    // opacity: 0.3;
   }
+  & .login-form {
+    // border-radius: 31px;
+    padding: 5vh 3vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    width: 70rem;
+    transition: all $--login-transition-time;
+    background-image: var(--bg-image-grad-grey-light);
+    background: var(--bg-image-grad-purple);
+    color: var(--color-white);
 
-  @media (max-width: 37.5em) {
-    width: 96vw;
-  }
+    @media (max-width: 37.5em) {
+      width: 96vw;
+    }
 
-  &__close-icon {
-    position: absolute;
-    top: 2.5%;
-    right: 2.5%;
-    color: white;
-    font-size: 3rem;
-    cursor: pointer;
-  }
+    &__close-icon {
+      position: absolute;
+      top: 3%;
+      right: 2.5%;
+      font-size: 3rem;
+      cursor: pointer;
+    }
 
-  &__link {
-    color: var(--color-grey-dark);
-    color: white;
-    font-size: 1.4rem;
-    margin-left: 1rem;
-    align-self: flex-end;
-    letter-spacing: 1.1px;
-    list-style: none;
+    &__link {
+      // color: var(--color-grey-dark);
+      color: inherit;
+      font-size: 1.4rem;
+      margin-left: 1rem;
+      align-self: flex-end;
+      letter-spacing: 1.1px;
+      list-style: none;
+    }
   }
 }
-
 @keyframes loginFormAnimation {
   0% {
     top: 0%;
+    opacity: 0;
   }
-  50% {
+  60% {
     top: 65%;
+    opacity: 0.6;
   }
   100% {
     top: 50%;
+    opacity: 1;
   }
 }
 
 @keyframes closeLoginFormAnimation {
   0% {
     top: 50%;
+    opacity: 1;
   }
   50% {
     top: 65%;
+    opacity: 0.6;
   }
   100% {
     top: 0%;
+    opacity: 0;
   }
 }

@@ -1,4 +1,5 @@
 const express = require('express');
+const multer = require('multer');
 const { protect, restrictTo } = require('../controllers/authController');
 const {
   getProducts,
@@ -7,8 +8,11 @@ const {
   updateProduct,
   deleteProduct,
   uploadTourImages,
+  upload,
   resizeProductImages,
 } = require('../controllers/productController');
+
+const multerMid = multer();
 
 const router = express.Router();
 
@@ -18,7 +22,10 @@ router
   .post(
     protect,
     restrictTo('admin'),
-    uploadTourImages,
+    upload.fields([
+      { name: 'imageCover', maxCount: 1 },
+      { name: 'images', maxCount: 3 },
+    ]),
     resizeProductImages,
     createProduct
   );

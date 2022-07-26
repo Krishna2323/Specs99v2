@@ -24,21 +24,25 @@ const multerFilter = (req, file, cb) => {
   }
 };
 
-const upload = multer({
+exports.upload = multer({
   storage: multerStorage,
   fileFilter: multerFilter,
 });
 
-exports.uploadTourImages = upload.fields([
-  { name: 'imageCover', maxCount: 1 },
-  { name: 'images', maxCount: 5 },
-]);
-
-// upload.single('image') req.file
-// upload.array('images', 5) req.files
+// exports.uploadTourImages = upload.fields([
+//   { name: 'imageCover', maxCount: 1 },
+//   { name: 'images', maxCount: 5 },
+// ]);
 
 exports.resizeProductImages = catchAsync(async (req, res, next) => {
-  if (!req.files.imageCover || !req.files.images) return next();
+  console.log('Controller', req.files);
+  // console.log(req.files);
+
+  if (!req.files.imageCover || !req.files.images) {
+    console.log(false);
+    req.body.imageCover = 'testMulter';
+    return next();
+  }
 
   // 1) Cover image
   req.body.imageCover = `product-${req.body.brand

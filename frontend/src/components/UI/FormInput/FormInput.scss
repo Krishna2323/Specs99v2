@@ -12,21 +12,20 @@
     font-family: inherit;
     padding: 0.5rem 1rem;
     box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.2);
-    outline: invert 3px solid transparent;
-    border: none;
     flex: 0 0 70%;
     border-bottom: 3px solid transparent;
     transition: all 0.5s;
     outline: none;
-    margin-bottom: 1rem;
+    border: 1px solid var(--color-grey-light);
+    box-sizing: border-box;
+    height: fit-content;
 
     &--invalid {
-      border-bottom: 4px solid #ff1414;
-      // background-color: #fff5f5;
+      border-bottom: 3px solid #ff1414;
     }
 
     &--valid {
-      border-bottom: 4px solid rgb(0, 255, 106);
+      border-bottom: 3px solid rgb(0, 255, 106);
     }
   }
 
@@ -35,12 +34,11 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    gap: 2rem;
 
     & label {
-      flex: 0 0 0%;
-
       margin-left: 1rem;
-      color: white;
+      color: inherit;
       font-size: 1.8rem;
     }
 

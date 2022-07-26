@@ -1,0 +1,28 @@
+@import "../Sacss/mixins.scss";
+
+.products-page {
+  display: grid;
+  grid-column: 1/-1;
+  grid-template-columns: 1fr 5fr;
+  position: relative;
+  align-items: flex-start;
+
+  &__products {
+    padding: 5rem;
+    @include productCardContainer;
+    min-height: 80vh;
+  }
+
+  @media (max-width: 93.5em) {
+    &__products {
+      padding: 5rem 2rem;
+    }
+  }
+
+  @media (max-width: 75em) {
+    &__products {
+      padding: 5rem 2rem;
+      grid-column: 1/-1;
+    }
+  }
+}

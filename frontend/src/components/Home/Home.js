@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { fetchProducts } from "./../../store/productsSlice/productsActions";
+import { useSelector, useDispatch } from "react-redux";
 import "./Home.scss";
 import HomeCarousel from "./HomeCarousel/HomeCarousel";
 import HomeCategory from "./HomeCategory/HomeCategory";
@@ -15,21 +17,32 @@ import {
   kidsDummy,
   specsDummy,
   sunglassesDummy,
+  homeShapes1,
 } from "../dummyData/sunglassesDummy";
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const [sidebarState, setSidebarState] = useState(false);
+  const { products } = useSelector((state) => state.products);
+  const handleSidebar = () => {
+    setSidebarState((prevState) => !prevState);
+  };
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, []);
   return (
     <div className="home-component">
       <HomeCarousel />
-      {/* <HomeOffer /> */}
+      <HomeOffer />
       <HomeBrand />
-      <TopProducts products={specsDummy} heading="Specs" />
-      <TopProducts heading="Sunglasses" products={sunglassesDummy} />
-      <TopProducts heading="Kids Glasses" products={kidsDummy} />
+      <TopProducts heading="Wear The Trend" slides={homeShapes1} />
+      <HomeBanner img={img3}></HomeBanner>
+      <HomeShape />
+      {/* <TopProducts products={specsDummy} heading="Specs" /> */}
+      {/* <TopProducts heading="Kids Glasses" products={kidsDummy} /> */}
       <HomeBanner img={img1} />
       <HomeCategory />
-      <HomeShape />
-      <HomeBanner img={img3}></HomeBanner>
       <HomeBanner img={img2}></HomeBanner>
 
       <HomeTestimonial />

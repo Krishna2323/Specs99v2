@@ -8,7 +8,7 @@
 
 @mixin displayGridMain {
   display: grid;
-  grid-template-columns: [full-start] 1fr [center-start]repeat(8, 1fr) [center-end] 1fr [full-end];
+  grid-template-columns: [full-start] 1fr [center-start]repeat(10, 1fr) [center-end] 1fr [full-end];
   grid-template-rows: min-content;
 }
 
@@ -49,13 +49,15 @@
 @mixin productCardContainer {
   display: grid;
   // grid-template-columns: repeat(auto-fit, minmax(25rem, 28rem));
-  // grid-template-columns: repeat(auto-fit, minmax(38rem, 40rem));
+  // grid-template-columns: repeat(auto-fit, minmax(35rem, 45rem));
   grid-template-columns: repeat(3, 1fr);
+  // grid-template-columns: max-content;
+  // grid-template-rows: min-content;
+  grid-template-rows: min-content;
 
   column-gap: 5rem;
   row-gap: 7rem;
   justify-content: space-evenly;
-
   @media (max-width: 93.5em) {
     column-gap: 2rem;
     row-gap: 7rem;
@@ -63,9 +65,11 @@
   }
   @media (max-width: 56.25em) {
     column-gap: 2rem;
+    grid-template-columns: repeat(2, 1fr);
+
     // grid-template-columns: repeat(auto-fit, minmax(25rem, 28rem));
     // grid-template-columns: repeat(auto-fit, minmax(42rem, 45rem));
-    grid-template-columns: repeat(2, 1fr);
+    // grid-template-columns: repeat(2, 1fr);
   }
   @media (max-width: 37.5em) {
     gap: 4px;

@@ -1,0 +1,64 @@
+.notification-box {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-image-grad-grey-dark);
+  padding: 1rem;
+  border-radius: var(--brr-sm);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  &-error {
+    color: var(--color-red);
+  }
+  &-success {
+    color: var(--color-green);
+  }
+
+  &-loading {
+    color: var(--color-primary);
+  }
+
+  &-open {
+    animation: notification-open 0.3s ease-in forwards;
+  }
+  &-close {
+    animation: notification-close 0.3s ease-in forwards;
+  }
+
+  &__status {
+    font-size: 2rem;
+    font-weight: 500;
+  }
+  &__message {
+    font-size: 1.8rem;
+  }
+}
+@keyframes notification-open {
+  0% {
+    top: 0;
+  }
+
+  40% {
+    top: 2rem;
+  }
+  100% {
+    top: 1rem;
+  }
+}
+
+@keyframes notification-close {
+  0% {
+    top: 2rem;
+  }
+
+  40% {
+    top: 2rem;
+  }
+  100% {
+    top: 0rem;
+  }
+}

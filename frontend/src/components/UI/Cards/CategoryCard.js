@@ -6,7 +6,7 @@ const CategoryCard = (props) => {
   return (
     <Link to="/" className="category-card">
       <img src={props.img} alt="" />
-      <span className="">{props.title}</span>
+      {/* <span className="">{props.title}</span> */}
     </Link>
   );
 };

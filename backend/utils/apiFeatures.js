@@ -7,10 +7,20 @@ class ApiFeature {
   search() {
     const keyword = this.queryString.keyword
       ? {
-          model: {
-            $regex: this.queryString.keyword,
-            $options: 'i',
-          },
+          $or: [
+            {
+              brand: {
+                $regex: this.queryString.keyword,
+                $options: 'i',
+              },
+            },
+            {
+              model: {
+                $regex: this.queryString.keyword,
+                $options: 'i',
+              },
+            },
+          ],
         }
       : {};
 
@@ -21,7 +31,15 @@ class ApiFeature {
 
   filter() {
     const queryObj = { ...this.queryString };
-    const excludeFields = ['page', 'sort', 'limit', 'fields', 'keyword'];
+    const excludeFields = [
+      'page',
+      'sort',
+      'limit',
+      'fields',
+      'keyword',
+      'brand',
+      'model',
+    ];
     excludeFields.forEach((el) => delete queryObj[el]);
 
     let queryStr = JSON.stringify(queryObj);

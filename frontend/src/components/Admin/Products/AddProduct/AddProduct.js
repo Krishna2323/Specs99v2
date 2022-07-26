@@ -1,17 +1,246 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import Sidebar from "../../DashBoard/SideBar/Sidebar";
+import useInput from "../../../hooks/useInput";
 import "./AddProduct.scss";
-// import Data from "./AddProduct.json";
-// import AdminForm from "../../AdminForm/AdminFormRow";
+import FormInput from "./../../../UI/FormInput/FormInput";
 import * as MdIcons from "react-icons/md";
+import SelectInput from "../../../UI/SelectInput/SelectInput";
+import { addProduct } from "./../../../../store/productSlice/productActions";
 
 const AddProduct = (props) => {
-  // const el = "";
+  const dispatch = useDispatch();
   const [sidebar, setSidebar] = useState(false);
+  const [coverImage, setCoverImage] = useState();
+  const [images, setImages] = useState([]);
+
+  const coverImageHandler = (e) => {
+    setCoverImage(e.target.files[0]);
+  };
+
+  const imagesHandler = (e) => {
+    setImages([...e.target.files]);
+    console.log(e.target.files);
+  };
+
+  const brandNameValidator = (val) => {
+    return val.trim().length >= 3;
+  };
+
+  const {
+    value: brandValue,
+    inputHandler: brandHandler,
+    inputBlurHandler: brandBlurHandler,
+    isFocused: isBrandFocused,
+    inputFocusHandler: brandFocusHandler,
+    isTouched: isBrandTouched,
+    hasError: brandHasError,
+    // resetInput: resetBrand,
+  } = useInput(brandNameValidator);
+
+  const {
+    value: modelValue,
+    inputHandler: modelHandler,
+    inputBlurHandler: modelBlurHandler,
+    isFocused: isModelFocused,
+    inputFocusHandler: modelFocusHandler,
+    isTouched: isModelTouched,
+    hasError: modelHasError,
+    // resetInput: resetModel,
+  } = useInput(brandNameValidator);
+
+  const {
+    value: mrpValue,
+    inputHandler: mrpHandler,
+    inputBlurHandler: mrpBlurHandler,
+    isFocused: isMrpFocused,
+    inputFocusHandler: mrpFocusHandler,
+    isTouched: isMrpTouched,
+    hasError: mrpHasError,
+    // resetInput: resetMrp,
+  } = useInput(brandNameValidator);
+
+  const {
+    value: priceValue,
+    inputHandler: priceHandler,
+    inputBlurHandler: priceBlurHandler,
+    isFocused: isPriceFocused,
+    inputFocusHandler: priceFocusHandler,
+    isTouched: isPriceTouched,
+    hasError: priceHasError,
+    // resetInput: resetPrice,
+  } = useInput(brandNameValidator);
+
+  const {
+    value: sizeValue,
+    inputHandler: sizeHandler,
+    inputBlurHandler: sizeBlurHandler,
+    isFocused: isSizeFocused,
+    inputFocusHandler: sizeFocusHandler,
+    // isTouched: isSizeTouched,
+    hasError: sizeHasError,
+    // resetInput: resetSize,
+  } = useInput(brandNameValidator);
+
+  const {
+    value: modelTypeValue,
+    inputHandler: modelTypeHandler,
+    inputBlurHandler: modelTypeBlurHandler,
+    isFocused: isModelTypeFocused,
+    inputFocusHandler: modelTypeFocusHandler,
+    isTouched: isModelTypeTouched,
+    hasError: modelTypeHasError,
+    // resetInput: resetModelType,
+  } = useInput(brandNameValidator);
+
+  const {
+    value: lensTypeValue,
+    inputHandler: lensTypeHandler,
+    inputBlurHandler: lensTypeBlurHandler,
+    isFocused: isLensTypeFocused,
+    inputFocusHandler: lensTypeFocusHandler,
+    isTouched: isLensTypeTouched,
+    hasError: lensTypeHasError,
+    // resetInput: resetLensType,
+  } = useInput(brandNameValidator);
+
+  const {
+    value: lensColorValue,
+    inputHandler: lensColorHandler,
+    inputBlurHandler: lensColorBlurHandler,
+    isFocused: isLensColorFocused,
+    inputFocusHandler: lensColorFocusHandler,
+    isTouched: isLensColorTouched,
+    hasError: lensColorHasError,
+    // resetInput: resetLensColor,
+  } = useInput(brandNameValidator);
+
+  const {
+    value: frameColorValue,
+    inputHandler: frameColorHandler,
+    inputBlurHandler: frameColorBlurHandler,
+    isFocused: isFrameColorFocused,
+    inputFocusHandler: frameColorFocusHandler,
+    isTouched: isFrameColorTouched,
+    hasError: frameColorHasError,
+    // resetInput: resetFrameColor,
+  } = useInput(brandNameValidator);
+
+  const {
+    value: frameTypeValue,
+    inputHandler: frameTypeHandler,
+    inputBlurHandler: frameTypeBlurHandler,
+    isFocused: isFrameTypeFocused,
+    inputFocusHandler: frameTypeFocusHandler,
+    isTouched: isFrameTypeTouched,
+    hasError: frameTypeHasError,
+    // resetInput: resetframeType,
+  } = useInput(brandNameValidator);
+
+  const {
+    value: genderValue,
+    inputHandler: genderHandler,
+    inputBlurHandler: genderBlurHandler,
+    isFocused: isGenderFocused,
+    inputFocusHandler: genderFocusHandler,
+    isTouched: isGenderTouched,
+    hasError: genderHasError,
+    // resetInput: resetGender,
+  } = useInput(brandNameValidator);
+
+  const {
+    value: descriptionValue,
+    inputHandler: descriptionHandler,
+    inputBlurHandler: descriptionBlurHandler,
+    isFocused: isDescriptionFocused,
+    inputFocusHandler: descriptionFocusHandler,
+    isTouched: isDescriptionTouched,
+    hasError: descriptionHasError,
+    // resetInput: resetDescription,
+  } = useInput(brandNameValidator);
+
+  const checkIsTouched = () => {
+    return (
+      !isBrandFocused ||
+      !isModelFocused ||
+      !isMrpFocused ||
+      !isPriceFocused ||
+      !isSizeFocused ||
+      !isModelTypeFocused ||
+      !isLensTypeFocused ||
+      !isLensColorFocused ||
+      !isFrameColorFocused ||
+      !isFrameTypeFocused ||
+      !isGenderFocused ||
+      !isDescriptionFocused
+    );
+  };
+
+  const checkError = () => {
+    return (
+      brandHasError ||
+      modelHasError ||
+      mrpHasError ||
+      priceHasError ||
+      sizeHasError ||
+      modelTypeHasError ||
+      lensTypeHasError ||
+      lensColorHasError ||
+      frameTypeHasError ||
+      frameColorHasError ||
+      genderHasError ||
+      descriptionHasError
+    );
+  };
+
+  const setAllTouched = () => {
+    brandBlurHandler();
+    modelBlurHandler();
+    mrpBlurHandler();
+    priceBlurHandler();
+    sizeBlurHandler();
+    modelTypeBlurHandler();
+    lensTypeBlurHandler();
+    lensColorBlurHandler();
+    frameTypeBlurHandler();
+    frameColorBlurHandler();
+    genderBlurHandler();
+    descriptionBlurHandler();
+  };
 
   const toggleSidebar = () => {
     setSidebar((side) => !side);
   };
+
+  const submitForm = (e) => {
+    e.preventDefault();
+    if (checkIsTouched() || checkError()) {
+      setAllTouched();
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("brand", brandValue);
+    formData.append("model", modelValue);
+    formData.append("mrp", mrpValue);
+    formData.append("price", priceValue);
+    formData.append("size", sizeValue);
+    formData.append("modelType", modelTypeValue);
+    formData.append("lensType", lensTypeValue);
+    formData.append("lensColor", lensColorValue);
+    formData.append("gender", "Men");
+    formData.append("description", descriptionValue);
+    formData.append("frameType", frameTypeValue);
+    formData.append("frameColor", frameColorValue);
+    formData.append("imageCover", coverImage);
+
+    images.forEach((el) => {
+      formData.append("images", el);
+    });
+
+    dispatch(addProduct(formData));
+  };
+
   return (
     <div className="dashboard-component">
       <Sidebar isOpen={sidebar} />
@@ -20,201 +249,142 @@ const AddProduct = (props) => {
         <span className="sidebar-toggle-icon">
           <MdIcons.MdMenu onClick={toggleSidebar} />
         </span>
-        <span className="heading-3">Add Product</span>
-        <form className="add-product-form">
+        <span className="heading-1">Add Product</span>
+        <form onSubmit={submitForm} className="add-product-form">
           {/* ROW 1 */}
-          <div className="add-product-form-row">
-            <label
-              className="add-product-form-row__lable"
-              htmlFor="product-brand"
-            >
-              Brand
-            </label>
-            <input
-              className="add-product-form-row__input"
-              type="text"
-              placeholder="Enter Brand"
-              minLength={8}
-              defaultValue="Rayban"
-              id="product-brand"
-            />
-          </div>
-          {/* ROW 2 */}
-          <div className="add-product-form-row">
-            <label
-              className="add-product-form-row__lable"
-              htmlFor="product-model"
-            >
-              Model
-            </label>
-            <input
-              className="add-product-form-row__input"
-              type="text"
-              placeholder="Enter Model"
-              minLength={8}
-              id="product-model"
-            />
-          </div>{" "}
-          {/* ROW 3 */}
-          <div className="add-product-form-row">
-            <label
-              className="add-product-form-row__lable"
-              htmlFor="product-mrp"
-            >
-              Mrp
-            </label>
-            <input
-              className="add-product-form-row__input"
-              type="number"
-              placeholder="Enter Mrp"
-              minLength={8}
-              id="product-mrp"
-            />
-          </div>{" "}
-          {/* ROW 4 */}
-          <div className="add-product-form-row">
-            <label
-              className="add-product-form-row__lable"
-              htmlFor="product-price"
-            >
-              Price
-            </label>
-            <input
-              className="add-product-form-row__input"
-              type="number"
-              placeholder="Enter Price"
-              minLength={8}
-              id="product-price"
-            />
-          </div>{" "}
+          <FormInput
+            lable="Brand"
+            type={"text"}
+            value={brandValue}
+            hasError={brandHasError}
+            isTouched={isBrandTouched}
+            onChange={brandHandler}
+            onBlur={brandBlurHandler}
+            onFocus={brandFocusHandler}
+            errorMessage="Must Contain 3 Characters."
+          />
+          <FormInput
+            value={modelValue}
+            onChange={modelHandler}
+            onBlur={modelBlurHandler}
+            onFocus={modelFocusHandler}
+            hasError={modelHasError}
+            isTouched={isModelTouched}
+            lable="Model"
+            type="text"
+            errorMessage="Must Contain 3 Characters."
+          />
+          <FormInput
+            value={mrpValue}
+            onChange={mrpHandler}
+            onBlur={mrpBlurHandler}
+            onFocus={mrpFocusHandler}
+            isTouched={isMrpTouched}
+            hasError={mrpHasError}
+            lable="Mrp"
+            type="number"
+            errorMessage="Please Provide Valid Mrp."
+          />
+          <FormInput
+            value={priceValue}
+            onChange={priceHandler}
+            onBlur={priceBlurHandler}
+            onFocus={priceFocusHandler}
+            isTouched={isPriceTouched}
+            lable="Selling Price"
+            type="number"
+            hasError={priceHasError}
+            errorMessage="Please Provide Valid Price."
+          />
+          <SelectInput
+            options={["Small", "Medium", "Large"]}
+            lable="Size"
+            onChange={sizeHandler}
+            onBlur={sizeBlurHandler}
+            onFocus={sizeFocusHandler}
+            value={sizeValue}
+          />
           {/* ROW 5 */}
-          <div className="add-product-form-row">
-            <label
-              className="add-product-form-row__lable"
-              htmlFor="product-size"
-            >
-              Size
-            </label>
-            <input
-              className="add-product-form-row__input"
-              type="text"
-              placeholder="Enter Size"
-              minLength={8}
-              id="product-size"
-            />
-          </div>{" "}
+          <FormInput
+            lable="Model Type"
+            type="text"
+            onChange={modelTypeHandler}
+            onBlur={modelTypeBlurHandler}
+            onFocus={modelTypeFocusHandler}
+            isTouched={isModelTypeTouched}
+            hasError={modelTypeHasError}
+            errorMessage="Please Select Model."
+            value={modelTypeValue}
+          />
           {/* ROW 6 */}
-          <div className="add-product-form-row">
-            <label
-              className="add-product-form-row__lable"
-              htmlFor="product-model-type"
-            >
-              Model Type
-            </label>
-            <input
-              className="add-product-form-row__input"
-              type="text"
-              placeholder="Enter Model Type"
-              minLength={8}
-              id="product-model-type"
-            />
-          </div>{" "}
-          {/* ROW 7 */}
-          <div className="add-product-form-row">
-            <label
-              className="add-product-form-row__lable"
-              htmlFor="product-lense-type"
-            >
-              Lense Type
-            </label>
-            <input
-              className="add-product-form-row__input"
-              type="text"
-              placeholder="Enter Lense Type"
-              minLength={8}
-              id="product-lense-type"
-            />
-          </div>{" "}
-          {/* ROW 8 */}
-          <div className="add-product-form-row">
-            <label
-              className="add-product-form-row__lable"
-              htmlFor="product-lense-color"
-            >
-              Lens Color
-            </label>
-            <input
-              className="add-product-form-row__input"
-              type="text"
-              placeholder="Enter Lens Color"
-              minLength={8}
-              id="product-lense-color"
-            />
-          </div>{" "}
+          <FormInput
+            lable="Lens Type"
+            type="text"
+            onChange={lensTypeHandler}
+            onBlur={lensTypeBlurHandler}
+            onFocus={lensTypeFocusHandler}
+            isTouched={isLensTypeTouched}
+            hasError={lensTypeHasError}
+            errorMessage="Please Select Lens Type."
+            value={lensTypeValue}
+          />
+          <FormInput
+            lable="Lens Color"
+            type="text"
+            onChange={lensColorHandler}
+            onBlur={lensColorBlurHandler}
+            onFocus={lensColorFocusHandler}
+            isTouched={isLensColorTouched}
+            hasError={lensColorHasError}
+            errorMessage="Please Select Lens Color."
+            value={lensColorValue}
+          />
           {/* ROW 9 */}
-          <div className="add-product-form-row">
-            <label
-              className="add-product-form-row__lable"
-              htmlFor="product-frame-type"
-            >
-              Enter Frame Type
-            </label>
-            <input
-              className="add-product-form-row__input"
-              type="text"
-              placeholder="Enter Frame Type"
-              minLength={8}
-              id="product-frame-type"
-            />
-          </div>{" "}
-          {/* ROW 10 */}
-          <div className="add-product-form-row">
-            <label
-              className="add-product-form-row__lable"
-              htmlFor="product-frame-color"
-            >
-              Frame Color
-            </label>
-            <input
-              className="add-product-form-row__input"
-              type="text"
-              placeholder="Enter Frame Color"
-              minLength={8}
-              id="product-frame-color"
-            />
-          </div>{" "}
-          {/* ROW 11 */}
-          <div className="add-product-form-row">
-            <label
-              className="add-product-form-row__lable"
-              htmlFor="product-gender"
-            >
-              Gender
-            </label>
-            <input
-              className="add-product-form-row__input"
-              type="text"
-              placeholder="Enter Gender"
-              minLength={8}
-              id="product-gender"
-            />
-          </div>{" "}
+          <FormInput
+            lable="Frame Type"
+            type="text"
+            onChange={frameTypeHandler}
+            onBlur={frameTypeBlurHandler}
+            onFocus={frameTypeFocusHandler}
+            isTouched={isFrameTypeTouched}
+            hasError={frameTypeHasError}
+            errorMessage="Please Frame Frame Type."
+            value={frameTypeValue}
+          />
+          <FormInput
+            lable="Frame Color"
+            type="text"
+            onChange={frameColorHandler}
+            onBlur={frameColorBlurHandler}
+            onFocus={frameColorFocusHandler}
+            isTouched={isFrameColorTouched}
+            hasError={frameColorHasError}
+            errorMessage="Please Frame Frame Color."
+            value={frameColorValue}
+          />
+          <FormInput
+            lable="Gender"
+            type="text"
+            onChange={genderHandler}
+            onBlur={genderBlurHandler}
+            onFocus={genderFocusHandler}
+            isTouched={isGenderTouched}
+            hasError={genderHasError}
+            errorMessage="Please Provide Gender."
+            value={genderValue}
+          />
           {/* ROW 12 */}
-          <div className="add-product-form-row">
-            <label
-              className="add-product-form-row__lable"
-              htmlFor="product-description"
-            >
-              Description
-            </label>
-            <input
-              className="add-product-form-row__input"
-              type="text"
-              placeholder="Enter Description"
-              minLength={8}
-              id="product-description"
-            />
-          </div>{" "}
+          <FormInput
+            lable="Description"
+            type="text"
+            onChange={descriptionHandler}
+            onBlur={descriptionBlurHandler}
+            onFocus={descriptionFocusHandler}
+            isTouched={isDescriptionTouched}
+            hasError={descriptionHasError}
+            errorMessage="Please Provide Description."
+            value={descriptionValue}
+          />
           {/* ROW 13 */}
           <div className="add-product-form-row">
             <label
@@ -228,6 +398,8 @@ const AddProduct = (props) => {
               type="file"
               placeholder="Enter Cover Image"
               minLength={8}
+              onChange={coverImageHandler}
+              name="coverImage"
               id="product-cover-image"
             />
           </div>{" "}
@@ -240,10 +412,12 @@ const AddProduct = (props) => {
               Choose Images
             </label>
             <input
+              name="images"
               className="add-product-form-row__input"
               type="file"
+              multiple
+              onChange={imagesHandler}
               placeholder="Choose Images"
-              minLength={8}
               id="product-images"
             />
           </div>{" "}

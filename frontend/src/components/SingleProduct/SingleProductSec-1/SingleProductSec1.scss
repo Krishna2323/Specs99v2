@@ -6,7 +6,7 @@
   // border-radius: 9px;
   grid-column: full-start/full-end;
   // padding: 1rem 5rem;
-  background: var(--bg-image-grad-black);
+  background: var(--bg-image-grad-purple);
   // background: #f8f9fa;
 
   & .product-img-box {
@@ -17,7 +17,7 @@
     border-radius: var(--brr-regular);
     & img {
       width: 100%;
-      object-fit: cover;
+      object-fit: scale-down;
       border-radius: 9px;
       max-height: 50rem;
     }

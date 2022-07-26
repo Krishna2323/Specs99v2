@@ -1,7 +1,7 @@
 .header-component {
   position: sticky;
   grid-column: full-start/full-end;
-  background-color: #212529;
+  background: var(--bg-image-grad-purple);
   z-index: 2;
   padding: 1rem 3rem;
   transition: all 0.5s;
@@ -28,19 +28,37 @@
         width: 20rem;
         object-fit: contain;
       }
+
+      @media (max-width: 56.25rem) {
+        height: 50%;
+        & img {
+          display: block;
+          width: 15rem;
+          object-fit: contain;
+        }
+      }
     }
 
     &__open-links {
       margin-left: auto;
       display: flex;
 
-      gap: 0.5rem;
+      gap: 4rem;
       justify-self: flex-end;
       list-style: none;
+
+      @media (max-width: 93.75em) {
+        gap: 2rem;
+      }
+
+      @media (max-width: 75em) {
+        gap: 0.5rem;
+      }
 
       @media (max-width: 56.25em) {
         position: absolute;
         top: 0;
+        gap: 1rem;
         left: 0%;
         z-index: 1000;
         background: var(--bg-image-4);
@@ -57,7 +75,7 @@
       }
 
       & .header-nav__open-item {
-        padding: 1rem 2rem;
+        padding: 1rem 0rem;
       }
 
       & a {
@@ -234,5 +252,10 @@
 
   & .open {
     transform: translateX(0);
+  }
+  ///////////
+
+  @media (max-width: 37.25em) {
+    padding: 1rem;
   }
 }
