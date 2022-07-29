@@ -1,21 +1,52 @@
 import { Rating } from "react-simple-star-rating";
-import React from "react";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import * as BsIcons from "react-icons/bs";
 import * as FiIcons from "react-icons/fi";
+import { addItemToCart } from "../../../store/cartSlice/cartActions";
+import useNotification from "../../hooks/useNotification";
 
 const colors = ["#ff6b6b", "#74c0fc", "#40c057"];
 
 const ProductPageDetail = () => {
+  const { product } = useSelector((state) => state.product);
+  const { products: cart } = useSelector((state) => state.cart);
+  const { isLoggedIn } = useSelector((state) => state.user);
+  const { notify, clearNotification } = useNotification();
+
+  const dispatch = useDispatch();
+  const [quantity, setQuantity] = useState(1);
+
+  const handleAddToCart = () => {
+    if (!isLoggedIn) {
+      notify("loading", "Oops", "Login To Use Cart");
+      clearNotification();
+      return;
+    }
+    dispatch(addItemToCart(product, quantity, cart));
+  };
+  const addQuantity = () => {
+    if (quantity < 10) {
+      setQuantity((qty) => qty + 1);
+    }
+  };
+  const subtractQuantity = () => {
+    if (quantity > 1) {
+      setQuantity((qty) => qty - 1);
+    }
+  };
+
   return (
     <div className="product-detail-box">
-      <span className="product-detail-box__id">#198BCKDH568BDH8890</span>
-      <h2 className="product-detail-box__title">
-        Rayban Erick Serene Sunglasses (Stone Blue)
-      </h2>
+      <span className="product-detail-box__id">{product._id}</span>
+      <h2 className="product-detail-box__brand">{product.brand}</h2>
+      <h2 className="product-detail-box__title">{product.model}</h2>
 
       <span className="product-detail-box__price">
-        <span className="product-detail-box__price-offer">₹999</span>
-        <span className="product-detail-box__price-mrp"> ₹1499</span>
+        <span className="product-detail-box__price-offer">
+          ₹{product.price}
+        </span>
+        <span className="product-detail-box__price-mrp">₹{product.mrp}</span>
       </span>
 
       {/* RATING START */}
@@ -23,15 +54,16 @@ const ProductPageDetail = () => {
         {" "}
         <Rating
           // ratingValue={3.5}
-          initialValue={4.6}
+          initialValue={product.ratingsAverage}
           readonly={true}
           allowHalfIcon={true}
           size={"2.4rem"}
           fillColor="#099268"
-          // style={{ alingSelf: "flex-start" }}
         ></Rating>{" "}
-        <span className="product-detail-box__rating-average">4.6 </span>
-        599 Ratings & 122 Reviews
+        <span className="product-detail-box__rating-average">
+          {product.ratingsAverage}
+        </span>
+        {product.ratingsQuantity} Ratings & 122 Reviews
       </span>
 
       {/* RATING END */}
@@ -49,9 +81,13 @@ const ProductPageDetail = () => {
         </span>
         {/* COLORS END */}
         {/* SPECS START */}
-        <span className="product-detail-box__specs-size">Size: Medium</span>
-        <span className="product-detail-box__specs-lens">Lens: Polorized</span>
-
+        <span className="product-detail-box__specs-size">
+          Size:{" "}
+          {product.size.replace(product.size[0], product.size[0].toUpperCase())}
+        </span>
+        <span className="product-detail-box__specs-lens">
+          Lens: {product.lensType}
+        </span>
         <span className="product-detail-box__specs-weight">Weight: 18gm</span>
       </div>
 
@@ -64,17 +100,26 @@ const ProductPageDetail = () => {
         </span>
         <span class="product-detail-box__description-text">
           {" "}
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam ullam
-          harum non dolorum est, aliquam voluptatem facilis cumque natus quo
-          possimus eaque eveniet? Commodi, voluptas? Nulla atque placeat
-          corrupti exercitationem!
+          {product.description}
         </span>
       </div>
       {/* DESCRIPTION END */}
 
+      {/* QTY START */}
+      <div className="product-detail-box__quantity">
+        <span>Quantity: </span>
+        <button onClick={subtractQuantity}>-</button>
+        <span>{quantity}</span>
+        <button onClick={addQuantity}>+</button>
+      </div>
+      {/* QTY END */}
+
       {/* BUTTONS START */}
       <div className="product-detail-box__btn">
-        <button className="product-detail-box__btn-addToCartBtn btn-secondary">
+        <button
+          className="product-detail-box__btn-addToCartBtn btn-secondary"
+          onClick={handleAddToCart}
+        >
           Add To Cart
           <FiIcons.FiShoppingCart />
         </button>

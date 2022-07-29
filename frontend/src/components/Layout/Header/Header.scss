@@ -12,13 +12,15 @@
     justify-items: space-between;
 
     &__icon-menu {
-      // color: var(--color-grey-light);
       color: white;
-
-      display: flex;
+      display: none;
       align-items: center;
-      font-size: 3rem;
+      font-size: 4.8rem;
+      margin-right: 3rem;
       cursor: pointer;
+      @media (max-width: 56.25rem) {
+        display: flex;
+      }
     }
 
     &__logo {
@@ -30,11 +32,12 @@
       }
 
       @media (max-width: 56.25rem) {
-        height: 50%;
+        height: 7rem;
         & img {
           display: block;
-          width: 15rem;
-          object-fit: contain;
+          width: 20rem;
+          height: 100%;
+          object-fit: scale-down;
         }
       }
     }
@@ -47,6 +50,10 @@
       justify-self: flex-end;
       list-style: none;
 
+      &-logo {
+        display: none;
+      }
+
       @media (max-width: 93.75em) {
         gap: 2rem;
       }
@@ -56,22 +63,56 @@
       }
 
       @media (max-width: 56.25em) {
-        position: absolute;
+        position: fixed;
         top: 0;
         gap: 1rem;
         left: 0%;
         z-index: 1000;
-        background: var(--bg-image-4);
+        background: var(--bg-image-grad-purple);
         height: 100vh;
-        width: 40vw;
+        width: fit-content;
         flex-direction: column;
         align-items: center;
-        padding: 5rem 0rem;
-        display: none;
+        padding: 10rem 5rem;
+        // display: none;
+        transition: all 0.5s;
+        transform: translateX(-100%);
 
         &-open {
-          display: flex;
+          transform: translateX(0%);
         }
+
+        & .close-btn {
+          position: absolute;
+          top: 1rem;
+          right: 2rem;
+          font-size: 5rem;
+          color: rgb(255, 255, 255);
+          cursor: pointer;
+        }
+
+        &-logo {
+          display: block;
+          & img {
+            display: block;
+            width: 25rem;
+            object-fit: contain;
+          }
+
+          @media (max-width: 56.25rem) {
+            height: 9rem;
+            & img {
+              display: block;
+              width: 25rem;
+              height: 100%;
+              object-fit: scale-down;
+            }
+          }
+        }
+      }
+
+      @media (max-width: 18.75em) {
+        padding: 10rem 2rem;
       }
 
       & .header-nav__open-item {
@@ -128,6 +169,10 @@
         color: white;
         cursor: pointer;
         transition: all 0.3s;
+
+        @media (max-width: 56.25rem) {
+          font-size: 3.6rem;
+        }
 
         &:hover {
           transform: scale(1.2);
@@ -239,15 +284,6 @@
         font-size: 1.4rem;
       }
     }
-  }
-
-  & .close-btn {
-    position: absolute;
-    top: 1rem;
-    right: 2rem;
-    font-size: 4rem;
-    color: rgb(255, 255, 255);
-    cursor: pointer;
   }
 
   & .open {

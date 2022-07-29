@@ -8,6 +8,7 @@ import { signup } from "./../../store/userSlice/userActions";
 import Backdrop from "../UI/Backdrop/Backdrop";
 import FormInput from "./../UI/FormInput/FormInput";
 import * as VsIcons from "react-icons/vsc";
+import { Transition } from "react-transition-group";
 // import img1 from "./../../public/img/bs/ra4.jpg";
 // import * as AiIcons from "react-icons/ai";
 
@@ -117,76 +118,81 @@ const Singup = (props) => {
         onBackdropClick={props.closeSingupForm}
         transitionTime=".3s"
       />
-      {ReactDom.createPortal(
-        <div className={`singup-form-outer ${singupAnimation}`}>
-          <form onSubmit={onFormSubmit} className={`singup-form `}>
-            <h5 className="heading-3 mb-sm">Welcome To Specs99!</h5>
-            <FormInput
-              lable="Name"
-              value={nameValue}
-              onBlur={nameBlurHandler}
-              onChange={nameHandler}
-              type="text"
-              hasError={nameHasError}
-              errorMessage="Name Must Contain 3 Characters."
-              isTouched={isNameTouched}
-              onFocus={nameFocusHandler}
-            />
 
-            <FormInput
-              lable="Email"
-              value={emailValue}
-              onBlur={emailBlurHandler}
-              onChange={emailHandler}
-              type="email"
-              hasError={emailHasError}
-              errorMessage="Please Provide A Valid Email !"
-              isTouched={isEmailTouched}
-              onFocus={emailFocusHandler}
-            />
+      <Transition in={props.open} mountOnEnter unmountOnExit timeout={300}>
+        {(state) =>
+          ReactDom.createPortal(
+            <div className={`singup-form-outer ${singupAnimation}`}>
+              <form onSubmit={onFormSubmit} className={`singup-form `}>
+                <h5 className="heading-3 mb-sm">Welcome To Specs99!</h5>
+                <FormInput
+                  lable="Name"
+                  value={nameValue}
+                  onBlur={nameBlurHandler}
+                  onChange={nameHandler}
+                  type="text"
+                  hasError={nameHasError}
+                  errorMessage="Name Must Contain 3 Characters."
+                  isTouched={isNameTouched}
+                  onFocus={nameFocusHandler}
+                />
 
-            <FormInput
-              value={passwordValue}
-              lable="Password"
-              type="password"
-              onChange={passwordHandler}
-              onBlur={passwordBlurHandler}
-              onFocus={passwordFocusHandler}
-              hasError={passwordHasError}
-              isTouched={isPasswordTouched}
-              errorMessage="Password Must Contain 6 Characters."
-            />
+                <FormInput
+                  lable="Email"
+                  value={emailValue}
+                  onBlur={emailBlurHandler}
+                  onChange={emailHandler}
+                  type="email"
+                  hasError={emailHasError}
+                  errorMessage="Please Provide A Valid Email !"
+                  isTouched={isEmailTouched}
+                  onFocus={emailFocusHandler}
+                />
 
-            <FormInput
-              value={confirmPasswordValue}
-              lable="Confirm Password"
-              type="password"
-              onChange={confirmPasswordHandler}
-              onBlur={confirmPasswordBlurHandler}
-              onFocus={confirmPasswordFocusHandler}
-              hasError={confirmPasswordHasError}
-              isTouched={isConfirmPasswordTouched}
-              errorMessage="Confirm Password Must Be Same As Password."
-            />
+                <FormInput
+                  value={passwordValue}
+                  lable="Password"
+                  type="password"
+                  onChange={passwordHandler}
+                  onBlur={passwordBlurHandler}
+                  onFocus={passwordFocusHandler}
+                  hasError={passwordHasError}
+                  isTouched={isPasswordTouched}
+                  errorMessage="Password Must Contain 6 Characters."
+                />
 
-            <button className={`form-btn mt-small ${btnModifier}`}>
-              Submit
-            </button>
-            <Link
-              to="#"
-              onClick={props.onSigupToLoginLink}
-              className="singup-form__link mt-small-1"
-            >
-              Already A User? Login Here.
-            </Link>
-            <VsIcons.VscChromeClose
-              className="singup-form__close-icon"
-              onClick={props.closeSingupForm}
-            />
-          </form>
-        </div>,
-        document.getElementById("singup-form")
-      )}
+                <FormInput
+                  value={confirmPasswordValue}
+                  lable="Confirm Password"
+                  type="password"
+                  onChange={confirmPasswordHandler}
+                  onBlur={confirmPasswordBlurHandler}
+                  onFocus={confirmPasswordFocusHandler}
+                  hasError={confirmPasswordHasError}
+                  isTouched={isConfirmPasswordTouched}
+                  errorMessage="Confirm Password Must Be Same As Password."
+                />
+
+                <button className={`form-btn mt-small ${btnModifier}`}>
+                  Submit
+                </button>
+                <Link
+                  to="#"
+                  onClick={props.onSigupToLoginLink}
+                  className="singup-form__link mt-small-1"
+                >
+                  Already A User? Login Here.
+                </Link>
+                <VsIcons.VscChromeClose
+                  className="singup-form__close-icon"
+                  onClick={props.closeSingupForm}
+                />
+              </form>
+            </div>,
+            document.getElementById("singup-form")
+          )
+        }
+      </Transition>
     </Fragment>
   );
 };

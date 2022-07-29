@@ -8,6 +8,7 @@ const {
   updatePassword,
   protect,
   restrictTo,
+  loadUser,
 } = require('../controllers/authController');
 const {
   getAllUsers,
@@ -26,6 +27,7 @@ const router = express.Router();
 
 // LOGIN / SINGUP / LOGOUT
 router.route('/login').post(login);
+router.route('/loadUser').get(loadUser);
 router.route('/singup').post(signup);
 router.route('/logout').get(logout);
 

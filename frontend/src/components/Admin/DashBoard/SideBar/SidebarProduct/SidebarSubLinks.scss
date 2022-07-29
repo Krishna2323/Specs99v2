@@ -3,9 +3,12 @@
   width: 90%;
   padding: 1rem;
   border-radius: 11px;
-  opacity: 1;
+  z-index: 100;
   display: none;
-  transition: all 0.5s;
+  transition: width 0.5s;
+  opacity: 1;
+  animation: sidebarTransition 0.8s forwards;
+  // pointer-events: none;
 
   &__item {
     width: 100%;
@@ -41,5 +44,14 @@
       background-color: var(--color-tertiary);
       transition: all 0.3s;
     }
+  }
+}
+
+@keyframes sidebarTransition {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

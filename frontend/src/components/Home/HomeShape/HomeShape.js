@@ -13,7 +13,7 @@ const HomeShape = () => {
   return (
     <div className="home-element home-shape">
       <div className="box-center">
-        <h2 className="heading-1">Shop By Shapes</h2>
+        <h2 className="heading-1">FIND THE PERFECT FIT</h2>
       </div>
       <div className="home-shape__div-2">
         <Link

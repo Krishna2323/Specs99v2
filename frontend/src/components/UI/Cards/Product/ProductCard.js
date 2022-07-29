@@ -30,7 +30,7 @@ const ProductCard = (props) => {
   // }, [productId]);
 
   return (
-    <Link to="/product/rayban" className="product-card">
+    <Link to={`/product/${product._id}`} className="product-card">
       <div className="product-card__header">
         <img
           // src={`./src/public/img/products/${product.imageCover}`}

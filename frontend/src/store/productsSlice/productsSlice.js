@@ -13,6 +13,9 @@ const productsSlice = createSlice({
     setProducts(state, action) {
       state.products = action.payload.products;
       state.totalProducts = action.payload.totalProducts;
+      state.isLoading = action.payload.isLoading;
+      state.message = action.payload.message;
+      state.isError = action.payload.isError;
     },
   },
 });

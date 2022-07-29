@@ -1,0 +1,221 @@
+.cart {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  color: aliceblue;
+  z-index: 1005;
+  transform: translate(-50%, -50%);
+  border-radius: var(--brr-regular);
+  width: 80vw;
+  height: 80vh;
+  background: var(--bg-image-grad-purple);
+  padding: 3rem 5rem;
+  overflow-x: hidden;
+  &-open {
+    animation: cartIn 0.3s forwards;
+  }
+
+  &-close {
+    animation: cartOut 0.3s forwards;
+  }
+
+  &-container {
+    width: 100%;
+    height: 100%;
+    padding: 2rem;
+    overflow-y: scroll;
+
+    & .heading-1 {
+      width: fit-content;
+      margin: 0 auto 5rem auto;
+      color: white;
+      font-size: 400;
+
+      &::after,
+      &::before {
+        background: var(--color-tertiary);
+      }
+    }
+
+    &::-webkit-scrollbar {
+      width: 1.4rem;
+      padding: 0.5rem;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    &::-webkit-scrollbar-track {
+      display: block;
+      padding: 1rem;
+      background: var(--bg-image-2-dark);
+      border-radius: var(--brr-regular);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: white;
+      border-radius: 31px;
+      padding: 0.5rem;
+    }
+
+    &__div {
+      width: 100%;
+      border-radius: var(--brr-regular);
+      // height: 15rem;
+      background: var(--bg-image-2);
+      margin-bottom: 1rem;
+      overflow: hidden;
+      display: flex;
+      flex-wrap: wrap;
+      // padding-right: 2rem;
+
+      & img {
+        flex: 0 0 20%;
+        height: 15rem;
+        width: 100%;
+        // height: 100%;
+        object-fit: cover;
+      }
+
+      &-info-1 {
+        flex: 0 0 5%;
+        // height: 100%;
+        // background-color: red;
+        font-size: 2rem;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        & div {
+          background: var(--bg-image-grad-purple);
+          width: 2rem;
+          height: 2rem;
+          border-radius: 100%;
+          cursor: pointer;
+          transition: all 0.2s;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          &:hover {
+            transform: translateY(-2px);
+          }
+        }
+      }
+
+      &-info-2 {
+        flex: 0 0 20%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        justify-content: center;
+
+        &-brand {
+          font-size: 1.8rem;
+        }
+        &-model {
+          font-size: 2rem;
+        }
+      }
+
+      &-info-3 {
+        flex: 0 0 10%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+
+        &-price {
+          font-size: 2.2rem;
+          // font-size: ;
+        }
+        &-mrp {
+          font-size: 1.8rem;
+          text-decoration: line-through red;
+        }
+      }
+      &-info-4 {
+        flex: 0 0 5%;
+        display: flex;
+        // flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        font-size: 2.2rem;
+
+        &-equal {
+          font-size: 2.2rem;
+          // font-size: ;
+        }
+        &-total {
+          font-size: 2.4rem;
+        }
+      }
+      &-info-5 {
+        padding: 1rem 2rem;
+        margin-left: auto;
+        display: flex;
+        justify-self: flex-end;
+        flex-direction: column;
+        align-items: center;
+
+        // justify-content: space-between;
+        font-size: 2.2rem;
+        background: var(--bg-image-grad-purple);
+
+        & > span {
+          // margin-bottom: auto;
+        }
+
+        & div {
+          display: flex;
+          margin: auto 0;
+          gap: 1rem;
+          align-items: center;
+          justify-content: center;
+          &-equal {
+            font-size: 3.8rem;
+          }
+          &-total {
+            font-size: 2.4rem;
+          }
+        }
+      }
+
+      &-info-6 {
+        display: flex;
+        flex: 0 0 20%;
+        flex-direction: column;
+        gap: 0.5rem;
+        font-size: 1.8rem;
+        align-items: center;
+        padding: 2rem;
+        justify-content: center;
+      }
+    }
+  }
+}
+
+@keyframes cartIn {
+  0% {
+    top: 0%;
+    opacity: 0;
+  }
+  100% {
+    top: 50%;
+    opacity: 1;
+  }
+}
+
+@keyframes cartOut {
+  0% {
+    top: 50%;
+    opacity: 1;
+  }
+  100% {
+    top: 0%;
+    opacity: 0;
+  }
+}

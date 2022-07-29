@@ -3,6 +3,10 @@ import { Link } from "react-router-dom";
 import "./Header.scss";
 import logo from "./../../../public/img/bs/logo-1.png";
 import Sidenav from "./Sidenav";
+import Cart from "../../UI/Cart/Cart";
+import Login from "../../LoginSinggup/Login";
+import Singup from "../../LoginSinggup/Singup";
+import * as MdIcons from "react-icons/md";
 
 import * as AiIcons from "react-icons/ai";
 import * as HiIcons from "react-icons/hi";
@@ -11,11 +15,11 @@ import * as FiIcons from "react-icons/fi";
 
 import Search from "../Search/Search";
 import { Transition } from "react-transition-group";
-import HomeOffer from "../../Home/HomeOffers/HomeOffer";
+import { useDispatch, useSelector } from "react-redux";
+import { uiSliceAction } from "../../../store/uiSlice/uiSlice";
+// import { signup } from "../../../store/userSlice/userActions";
 
 const setStyleOnNodelist = (thisKey, elements, targetLink) => {
-  console.log(thisKey);
-
   elements.forEach((el) => {
     if (el !== targetLink) {
       el.style.opacity = thisKey.opacity;
@@ -28,8 +32,9 @@ const setStyleOnNodelist = (thisKey, elements, targetLink) => {
 };
 
 const Header = (props) => {
-  const { innerWidth } = window;
-  console.log(innerWidth);
+  const { cart, loginForm, singupForm } = useSelector((state) => state.ui);
+
+  const dispatch = useDispatch();
 
   const handleHover = function (e) {
     if (
@@ -95,7 +100,7 @@ const Header = (props) => {
     mouseOut(nav);
   }, []);
 
-  const [open, setOpen] = useState(false);
+  const [sidebar, setSidebar] = useState(false);
   const [searchBar, setSearchBar] = useState(false);
 
   //////////////////////////SINGUP FORM START/////////////////////////////////////
@@ -110,7 +115,23 @@ const Header = (props) => {
   };
 
   const handleSideNav = () => {
-    setOpen(!open);
+    setSidebar(!sidebar);
+  };
+
+  const handleCartState = () => {
+    dispatch(uiSliceAction.setCart());
+  };
+
+  const handleLoginFormState = () => {
+    dispatch(uiSliceAction.setLoginForm());
+  };
+
+  const handleSignupFormState = () => {
+    dispatch(uiSliceAction.setSignUpForm());
+  };
+
+  const handleLoginSingupToggle = () => {
+    dispatch(uiSliceAction.toggleLoginSingup());
   };
   return (
     <Fragment>
@@ -122,21 +143,25 @@ const Header = (props) => {
           open={searchBar}
         />
       </Transition>
-
-      {/* {loginForm && <Login closeModal={closeLoginForm} />} */}
-      {/* {singupForm && <Singup closeModal={closeSingupForm} />} */}
-
       <div className="header-component">
         <nav className="header-nav">
-          {/* <span class="header-nav__icon-menu" onClick={handleSideNav}>
-          <FiIcons.FiMenu />
-        </span> */}
+          <span class="header-nav__icon-menu" onClick={handleSideNav}>
+            <FiIcons.FiMenu />
+          </span>
           {/* CONTAINER 2 */}
           <Link to="/" className="header-nav__logo">
             <img src={logo} alt="Specs99_Logo" />
           </Link>
           {/* CONTAINER 3 */}
-          <div className={`header-nav__open-links`}>
+          <div
+            className={`header-nav__open-links ${
+              sidebar ? "header-nav__open-links-open" : ""
+            }`}
+            onClick={handleSideNav}
+          >
+            <Link to="/" className="header-nav__open-links-logo">
+              <img src={logo} alt="Specs99_Logo" />
+            </Link>
             <li className="header-nav__open-item">
               {" "}
               <Link className="header-nav__open-link" to="/">
@@ -147,7 +172,7 @@ const Header = (props) => {
               <Link
                 to="/"
                 className="header-nav__open-link"
-                onClick={props.openSingupForm}
+                onClick={handleSignupFormState}
               >
                 Women{" "}
               </Link>
@@ -176,6 +201,10 @@ const Header = (props) => {
                 Brands{" "}
               </Link>
             </li>
+
+            <span onClick={handleSideNav} className="close-btn">
+              <MdIcons.MdOutlineClose />
+            </span>
           </div>
           {/* CONTAINER 4 */}
 
@@ -191,12 +220,12 @@ const Header = (props) => {
                 onClick={openSearchBar}
               />
             </span>
-            <span className="header-nav__open-link">
+            <span className="header-nav__open-link" onClick={handleCartState}>
               <FiIcons.FiShoppingCart className="header-nav__cta-icons " />
             </span>
             <span
               className="header-nav__open-link"
-              onClick={props.openLoginForm}
+              onClick={handleLoginFormState}
             >
               <HiIcons.HiDotsVertical className="header-nav__cta-icons " />
             </span>
@@ -205,11 +234,24 @@ const Header = (props) => {
           {/* CONTAINER 4 */}
         </nav>
 
-        <Sidenav toggleNav={handleSideNav} open={open} />
-        {/* <HomeOffer></HomeOffer> */}
+        {/* <Sidenav toggleNav={handleSideNav} open={open} /> */}
       </div>
+      <Cart open={cart} onBackdropClick={handleCartState} />
+
+      <Login
+        open={loginForm}
+        closeLoginForm={handleLoginFormState}
+        onLoginToSingupLink={handleLoginSingupToggle}
+      />
+
+      <Singup
+        open={singupForm}
+        closeSingupForm={handleSignupFormState}
+        onSigupToLoginLink={handleLoginSingupToggle}
+      />
     </Fragment>
   );
+  // </Fragment>
 };
 
 export default Header;

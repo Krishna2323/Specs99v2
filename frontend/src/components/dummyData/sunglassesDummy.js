@@ -17,42 +17,57 @@ export const sunglassesDummy = [
 export const brandDummy = [
   {
     id: 4,
+    name: "Upto 10% Off",
     img: "https://india.ray-ban.com/pub/static/version1649445069/frontend/Aceturtle/Rayban_new/en_US/images/logo.svg",
   },
-  { id: 5, img: "https://www.idee-eyewear.com/pub/media/logo/stores/1/3.png" },
+  {
+    id: 5,
+    img: "https://www.idee-eyewear.com/pub/media/logo/stores/1/3.png",
+    name: "Upto 10% Off",
+  },
   {
     img: "https://i.pinimg.com/236x/d7/40/d0/d740d09554c42c5110ee3339caad56f7.jpg",
+    name: "Upto 14% Off",
   },
   {
     id: 6,
     img: "https://i.pinimg.com/564x/fe/b6/05/feb605d481ae0d7e4dd8429ec4c32d7d.jpg",
+    name: "Upto 15% Off",
   },
   {
     img: "https://i.pinimg.com/236x/25/96/60/259660a36a65557223ebe63bc6c46f9e.jpg",
+    name: "Upto 10% Off",
   },
   {
     img: "https://i.pinimg.com/236x/06/ea/41/06ea41f98b4483069e044948c16f66f7.jpg",
+    name: "Upto 25% Off",
   },
   {
     img: "https://i.pinimg.com/236x/15/c4/0b/15c40bc486b230b793b064229b17df7f.jpg",
+    name: "Upto 15% Off",
   },
   {
     img: "https://i.pinimg.com/564x/4b/ca/96/4bca96ce2ae71fa25576cd9c1f1a1ff1.jpg",
+    name: "Upto 30% Off",
   },
   {
     id: 7,
     img: "https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/371x178/9df78eab33525d08d6e5fb8d27136e95//v/i/vincent-chase-vc-e13786-c2-eyeglasses_vincent-chase-vc-e13786-c2-eyeglasses_g_3318.jpg",
+    name: "Upto 10% Off",
   },
   {
     id: 8,
     img: "https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/371x178/9df78eab33525d08d6e5fb8d27136e95//v/i/vincent-chase-vc-e14219-c2-eyeglasses_vincent-chase-vc-e14219-c2-eyeglasses_G_4014.jpg",
+    name: "Upto 15% Off",
   },
   {
     id: 9,
     img: "https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/371x178/9df78eab33525d08d6e5fb8d27136e95//l/i/Black-Silver-Black-Full-Rim-Rectangle-Lenskart-Air-Signia-LA-E11289-C1-Eyeglasses_lenskart-air-lnewa-e11289-rectangle-tr90-c1-eyeglnewasses_g_996611_02_2022.jpg",
+    name: "Upto 40% Off",
   },
   {
     img: "https://i.pinimg.com/564x/4b/ca/96/4bca96ce2ae71fa25576cd9c1f1a1ff1.jpg",
+    name: "Upto 20% Off",
   },
 ];
 

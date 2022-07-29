@@ -4,48 +4,132 @@ import { Link } from "react-router-dom";
 import "./AllProduct.scss";
 import * as MdIcons from "react-icons/md";
 import * as BsIcons from "react-icons/bs";
-
-const arr = [
-  11, 3, 33, 4, 5, 5, 5, 5, 6, 7, 8, 9, 5, 5, 3, 23, 2, 32, 32, 323, 3,
-];
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchProducts } from "../../../../store/productsSlice/productsActions";
 
 const AllProduct = () => {
+  const { products } = useSelector((state) => state.products);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, []);
   return (
     <div className="dashboard-component">
       <Sidebar />
-      <h1 className="all-product-container">
-        <div className="all-product-header">
+      <div className="all-product-container">
+        {/* <div className="all-product-header">
           <span className="heading-3">Welcome Admin</span>
           <p>Total Products : 99</p>
           <Link className="db-link" to="/addProduct">
             + Add Product
           </Link>
-        </div>
+        </div> */}
         <div className="all-product-info">
-          <div className="all-product-info__lable">
-            <span>Name</span>
-            <span>Id</span>
-            <span>Stock</span>
-            <span>Action</span>
-          </div>
+          <h3 className="heading-1 heading-1--white">Products</h3>
+          {products &&
+            products.map((el) => (
+              <div className="all-product-info__row">
+                <div className="all-product-info__row-details">
+                  <span className="all-product-info__row-name">
+                    Brand: {el.brand}
+                  </span>
 
-          {arr.map((el) => (
-            <div className="all-product-info__row">
-              <span className="all-product-info__row-name">
-                Specs 99 Avita Linux
-              </span>
-              <span className="all-product-info__row-id">AD137317GNS00r</span>
-              <span className="all-product-info__row-stock">60</span>
-              <div className="all-product-info__row-icons">
-                <Link to="/updateProduct">
-                  <MdIcons.MdModeEditOutline />
-                </Link>
-                <MdIcons.MdDelete />
+                  <span className="all-product-info__row-name">
+                    Model :{el.model}
+                  </span>
+                  <span className="all-product-info__row-id">Id: {el._id}</span>
+                  <span className="all-product-info__row-stock">
+                    Stock :200
+                  </span>
+                </div>
+
+                <div className="all-product-info__row-icons">
+                  <Link to="/updateProduct">
+                    <MdIcons.MdModeEditOutline />
+                  </Link>
+                  <MdIcons.MdDelete />
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          {products &&
+            products.map((el) => (
+              <div className="all-product-info__row">
+                <div className="all-product-info__row-details">
+                  <span className="all-product-info__row-name">
+                    Brand: {el.brand}
+                  </span>
+
+                  <span className="all-product-info__row-name">
+                    Model :{el.model}
+                  </span>
+                  <span className="all-product-info__row-id">Id: {el._id}</span>
+                  <span className="all-product-info__row-stock">
+                    Stock :200
+                  </span>
+                </div>
+
+                <div className="all-product-info__row-icons">
+                  <Link to="/updateProduct">
+                    <MdIcons.MdModeEditOutline />
+                  </Link>
+                  <MdIcons.MdDelete />
+                </div>
+              </div>
+            ))}
+          {products &&
+            products.map((el) => (
+              <div className="all-product-info__row">
+                <div className="all-product-info__row-details">
+                  <span className="all-product-info__row-name">
+                    Brand: {el.brand}
+                  </span>
+
+                  <span className="all-product-info__row-name">
+                    Model :{el.model}
+                  </span>
+                  <span className="all-product-info__row-id">Id: {el._id}</span>
+                  <span className="all-product-info__row-stock">
+                    Stock :200
+                  </span>
+                </div>
+
+                <div className="all-product-info__row-icons">
+                  <Link to="/updateProduct">
+                    <MdIcons.MdModeEditOutline />
+                  </Link>
+                  <MdIcons.MdDelete />
+                </div>
+              </div>
+            ))}
+          {products &&
+            products.map((el) => (
+              <div className="all-product-info__row">
+                <div className="all-product-info__row-details">
+                  <span className="all-product-info__row-name">
+                    Brand: {el.brand}
+                  </span>
+
+                  <span className="all-product-info__row-name">
+                    Model :{el.model}
+                  </span>
+                  <span className="all-product-info__row-id">Id: {el._id}</span>
+                  <span className="all-product-info__row-stock">
+                    Stock :200
+                  </span>
+                </div>
+
+                <div className="all-product-info__row-icons">
+                  <Link to="/updateProduct">
+                    <MdIcons.MdModeEditOutline />
+                  </Link>
+                  <MdIcons.MdDelete />
+                </div>
+              </div>
+            ))}
         </div>
-      </h1>
+      </div>
     </div>
   );
 };

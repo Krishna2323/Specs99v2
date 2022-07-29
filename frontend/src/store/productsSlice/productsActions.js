@@ -19,6 +19,7 @@ export const fetchProducts = (keyword, minPrice = 0) => {
           message: "Fetching Products",
         })
       );
+
       const { data } = await axios.get(url);
 
       dispatch(
@@ -35,11 +36,11 @@ export const fetchProducts = (keyword, minPrice = 0) => {
       await fetchProductsFunc();
     } catch (error) {
       const errorMessage = "Something Went Wrong!";
-      console.log(errorMessage);
       dispatch(
         productsSliceAction.setProducts({
           isLoading: false,
           message: errorMessage,
+          isError: true,
         })
       );
     }

@@ -6,11 +6,13 @@
   @include displayGridMain;
 
   .home-element {
-    margin-bottom: 5rem;
+    margin-bottom: 8rem;
     grid-column: center-start/center-end;
+    border-radius: var(--brr-regular);
     @media (max-width: 75em) {
       grid-column: full-start/full-end;
       padding: 2rem;
+      border-radius: 0;
     }
     @media (max-width: 56.25em) {
       padding: 2rem;

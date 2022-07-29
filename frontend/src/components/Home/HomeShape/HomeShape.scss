@@ -4,14 +4,20 @@
   background-position: 50%;
   background-size: cover;
   grid-column: center-start/center-end;
+  background: var(--bg-image-grad-grey-light);
   display: block;
   margin-bottom: 2rem;
+  padding: 2rem;
+  padding-bottom: 4rem;
+  // border-radius: var(--brr-regular);
+  box-shadow: var(--box-shadow-card);
 
   &__div-2 {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
+    // background: var(--bg-image-grad-purple);
     grid-template-rows: repeat(6, 10vh);
-    gap: 2rem;
+    gap: 1rem;
 
     &__box {
       box-shadow: 0.1rem 0.1rem 1.2rem 3px rgba(rgb(0, 0, 0), 0.1);

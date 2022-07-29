@@ -5,6 +5,7 @@
   // background: var(--bg-image-2);
   // background: orangered;
   color: white;
+  transition: all 0.5s;
 
   &__logo {
     display: flex;
@@ -35,11 +36,16 @@
         align-items: center;
         gap: 0.5rem;
 
+        position: relative;
+        transition: all 0.5s;
         &:hover {
           & .sidebar-product__links {
             display: block;
-            opacity: 1;
-            height: min-content;
+            // opacity: 1;
+            // height: min-content;
+            // pointer-events: all;
+            // width: fit-content;
+            // height: fi;
 
             &::after {
               width: 100%;

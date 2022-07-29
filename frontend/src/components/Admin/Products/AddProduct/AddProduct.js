@@ -249,8 +249,8 @@ const AddProduct = (props) => {
         <span className="sidebar-toggle-icon">
           <MdIcons.MdMenu onClick={toggleSidebar} />
         </span>
-        <span className="heading-1">Add Product</span>
         <form onSubmit={submitForm} className="add-product-form">
+          <span className="heading-1 heading-1--white ">Add Product</span>
           {/* ROW 1 */}
           <FormInput
             lable="Brand"

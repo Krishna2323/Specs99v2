@@ -1,20 +1,17 @@
 import React from "react";
-import "./TopProducts.scss";
+import "./HomeSlider.scss";
 import { Link } from "react-router-dom";
-import ProductCard from "../../UI/Cards/Product/ProductCard";
-// import img from "../../../public/img/bs/ra3.jpg";
-// import { sunglassesDummy } from "../../dummyData/sunglassesDummy";
+
 import Slider from "react-slick";
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
 
 const settings = {
   dots: true,
   infinite: true,
   slidesToShow: 6,
+  slidesToScroll: 2,
   autoplay: true,
   speed: 3000,
-  autoplaySpeed: 2000,
+  autoplaySpeed: 4000,
   cssEase: "linear",
   centerPadding: "60px",
 
@@ -22,7 +19,7 @@ const settings = {
     {
       breakpoint: 1500,
       settings: {
-        slidesToShow: 4,
+        slidesToShow: 6,
         slidesToScroll: 2,
         infinite: true,
         autoplay: true,
@@ -45,22 +42,30 @@ const settings = {
       settings: {
         slidesToShow: 3,
         // rows: 2,
-        slidesToScroll: 3,
+        slidesToScroll: 1,
         // initialSlide: 2,
       },
     },
     {
-      breakpoint: 400,
+      breakpoint: 450,
+      settings: {
+        slidesToShow: 3,
+        // rows: 4,
+        slidesToScroll: 2,
+      },
+    },
+    {
+      breakpoint: 320,
       settings: {
         slidesToShow: 2,
         // rows: 4,
-        slidesToScroll: 2,
+        slidesToScroll: 1,
       },
     },
   ],
 };
 
-const TopProducts = (props) => {
+const HomeSlider = (props) => {
   const { heading, slides } = props;
   return (
     <div className="home-element home-top-products">
@@ -70,19 +75,17 @@ const TopProducts = (props) => {
       <div className="home-top-products__container">
         <Slider {...settings}>
           {slides.map((el) => (
-            <Link to="#">
-              <img src={el.img} alt="" />
-              <span>{el.name}</span>
-            </Link>
+            <div className="home-top-products__container-box">
+              <Link to="#">
+                <img src={el.img} alt="" />
+                <span>{el.name}</span>
+              </Link>
+            </div>
           ))}
         </Slider>
       </div>
-
-      {/* <Link to="/" className="box-center text-link-primary mt-bg">
-        <span>View More</span>
-      </Link> */}
     </div>
   );
 };
 
-export default TopProducts;
+export default HomeSlider;

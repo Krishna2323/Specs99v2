@@ -1,18 +1,19 @@
 .home-offer {
   // display: grid;
-  grid-column: 1/-1 !important;
+  grid-column: center-start/center-end !important;
   // grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
   // grid-template-columns: repeat(8, 1fr);
   // justify-content: space-evenly;
   gap: 1rem;
   // border-radius: 9px;
-  margin-bottom: 5rem !important;
+  margin: 5rem !important;
 
   // padding: 4rem;
   // height: fit-content;
   // padding: 1rem 2.5rem;
-  background: var(--bg-image-grad-purple);
+  background: var(--bg-image-grad-black);
   // margin-top: 2rem;
+  border-radius: var(--brr-regular);
   padding: 6rem 2rem 2rem 2rem;
 
   &__box {
@@ -33,8 +34,8 @@
     & img {
       margin-left: 2rem;
       margin: 0 auto;
-      width: 50%;
-      height: 10rem;
+      width: 90%;
+      height: 15rem;
       border-radius: var(--brr-regular);
       object-fit: fill;
       background-color: white;

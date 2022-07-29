@@ -5,6 +5,7 @@ import {
   clearNotication,
 } from "../notificationSlice/notificationSlice";
 import axios from "axios";
+import { getCart } from "../cartSlice/cartActions";
 
 export const login = (data) => {
   return async (dispatch) => {
@@ -20,6 +21,8 @@ export const login = (data) => {
       const response = await axios.post("/api/v1/users/login", data);
 
       const { data: userData } = response.data;
+
+      dispatch(getCart());
 
       dispatch(
         userSliceActions.loginUser({
@@ -72,7 +75,10 @@ export const signup = (data) => {
       const response = await axios.post("/api/v1/users/singup", data);
 
       const { data: userData } = response.data;
-      console.log(userData);
+      await axios.post("/api/v1/cart", {
+        user: userData.user._id,
+        products: [],
+      });
 
       dispatch(
         userSliceActions.signupUser({
@@ -106,5 +112,27 @@ export const signup = (data) => {
     setTimeout(() => {
       dispatch(clearNotication());
     }, 3000);
+  };
+};
+
+export const loadUser = () => {
+  return async (dispatch) => {
+    const singupPost = async () => {
+      console.log("loading");
+      const response = await axios.get("/api/v1/users/loadUser");
+
+      const { user } = response.data;
+
+      dispatch(
+        userSliceActions.loginUser({
+          userData: user,
+          isLoggedIn: true,
+        })
+      );
+
+      dispatch(getCart());
+    };
+
+    singupPost();
   };
 };

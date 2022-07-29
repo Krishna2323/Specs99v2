@@ -11,13 +11,13 @@ const HomeBrand = () => {
     dots: true,
     infinite: true,
     slidesToShow: 6,
-    slidesToScroll: 1,
+    slidesToScroll: 2,
     autoplay: true,
-    speed: 1000,
-    autoplaySpeed: 2000,
+    speed: 2000,
+    autoplaySpeed: 3000,
     cssEase: "linear",
     centerPadding: "60px",
-    dots: false,
+    // dots: false,
 
     row: 1,
 
@@ -50,11 +50,11 @@ const HomeBrand = () => {
         },
       },
       {
-        breakpoint: 400,
+        breakpoint: 320,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
           // rows: 4,
-          slidesToScroll: 2,
+          slidesToScroll: 1,
         },
       },
     ],
@@ -66,7 +66,9 @@ const HomeBrand = () => {
       <div className="home-brand__brands">
         <Slider {...settings} pauseOnHover={true}>
           {brandDummy.map((el, i) => (
-            <CategoryCard key={i} img={el.img} title="Category" />
+            <div className="home-brand__brands-brand">
+              <CategoryCard key={i} img={el.img} title="Category" />
+            </div>
           ))}
         </Slider>
       </div>

@@ -8,6 +8,8 @@ import { login } from "../../store/userSlice/userActions";
 import FormInput from "../UI/FormInput/FormInput";
 import Backdrop from "../UI/Backdrop/Backdrop";
 import * as VsIcons from "react-icons/vsc";
+import { Transition } from "react-transition-group";
+import uiSlice, { uiSliceAction } from "../../store/uiSlice/uiSlice";
 // import { useEffect } from "react";
 // import { PasswordSharp } from "@mui/icons-material";
 
@@ -72,16 +74,11 @@ const Login = (props) => {
       return;
     }
     dispatch(login({ email: emailValue, password: passwordValue }));
-    if (requestInfo === "success") {
-      closeLoginForm();
-    }
+    // closeLoginForm();
+    dispatch(uiSliceAction.setLoginForm());
   };
 
-  useEffect(() => {
-    if (action === "login" && requestInfo === "success") {
-      closeLoginForm();
-    }
-  }, [action, requestInfo, closeLoginForm]);
+  useEffect(() => {}, [action, requestInfo, closeLoginForm]);
 
   return (
     <Fragment>
@@ -92,49 +89,51 @@ const Login = (props) => {
       />
 
       {ReactDom.createPortal(
-        <div className={`login-form-outer ${loginFormState}`}>
-          <form onSubmit={onFormSubmit} className={`login-form `}>
-            <VsIcons.VscChromeClose
-              className="login-form__close-icon"
-              onClick={closeLoginForm}
-            />
-            <h5 className="heading-3 mb-sm">Welcome Back To Specs99!</h5>
-            <FormInput
-              isTouched={emailIsTouched}
-              hasError={emailHasError}
-              onChange={emailHandler}
-              onBlur={emailBlurHandler}
-              type={"email"}
-              lable={"Email"}
-              value={emailValue}
-              errorMessage="Please Provide A Valid Email."
-              onFocus={emailFocusHandler}
-            />
+        <Transition in={open} mountOnEnter unmountOnExit timeout={300}>
+          <div className={`login-form-outer ${loginFormState}`}>
+            <form onSubmit={onFormSubmit} className={`login-form `}>
+              <VsIcons.VscChromeClose
+                className="login-form__close-icon"
+                onClick={closeLoginForm}
+              />
+              <h5 className="heading-3 mb-sm">Welcome Back To Specs99!</h5>
+              <FormInput
+                isTouched={emailIsTouched}
+                hasError={emailHasError}
+                onChange={emailHandler}
+                onBlur={emailBlurHandler}
+                type={"email"}
+                lable={"Email"}
+                value={emailValue}
+                errorMessage="Please Provide A Valid Email."
+                onFocus={emailFocusHandler}
+              />
 
-            <FormInput
-              type="password"
-              lable="Password"
-              onChange={passwordHandler}
-              onBlur={passwordBlurHandler}
-              isTouched={passwordIsTouched}
-              hasError={passwordHasError}
-              value={passwordValue}
-              errorMessage="Please Must Contain 6 Characters."
-              onFocus={passwordlFocusHandler}
-            />
+              <FormInput
+                type="password"
+                lable="Password"
+                onChange={passwordHandler}
+                onBlur={passwordBlurHandler}
+                isTouched={passwordIsTouched}
+                hasError={passwordHasError}
+                value={passwordValue}
+                errorMessage="Please Must Contain 6 Characters."
+                onFocus={passwordlFocusHandler}
+              />
 
-            <button className={`form-btn mt-small ${submitBtnModifier}`}>
-              Submit
-            </button>
-            <Link
-              to="#"
-              onClick={onLoginToSingupLink}
-              className="login-form__link mt-small-1"
-            >
-              New To Specs99? Singup Here.
-            </Link>
-          </form>
-        </div>,
+              <button className={`form-btn mt-small ${submitBtnModifier}`}>
+                Submit
+              </button>
+              <Link
+                to="#"
+                onClick={onLoginToSingupLink}
+                className="login-form__link mt-small-1"
+              >
+                New To Specs99? Singup Here.
+              </Link>
+            </form>
+          </div>
+        </Transition>,
         document.getElementById("login-form")
       )}
     </Fragment>

@@ -26,6 +26,12 @@
     grid-template-columns: repeat(auto-fit, minmax(25rem, 35rem));
     justify-content: space-evenly;
 
+    & .heading-1 {
+      grid-column: 1/-1;
+      justify-self: center;
+      margin-bottom: 1rem;
+    }
+
     &-row {
       display: flex;
       flex-direction: column;

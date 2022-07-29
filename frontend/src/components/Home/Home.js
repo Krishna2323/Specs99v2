@@ -8,22 +8,20 @@ import HomeOffer from "./HomeOffers/HomeOffer";
 import HomeShape from "./HomeShape/HomeShape";
 import HomeTestimonial from "./HomeTestimonial/HomeTestimonial";
 import HomeBrand from "./HomeBrand/HomeBrand";
-import TopProducts from "./TopProducts/TopProducts";
-import HomeBanner from "./HomeBanner/HomeBanner";
-import img1 from "./../../public/img/home/home1.webp";
-import img3 from "./../../public/img/home/home3.jpeg";
-import img2 from "./../../public/img/home/home4.jpeg";
+import HomeSlider from "./HomeSlider/HomeSlider";
 import {
-  kidsDummy,
-  specsDummy,
-  sunglassesDummy,
   homeShapes1,
+  homeOffer,
+  brandDummy,
 } from "../dummyData/sunglassesDummy";
+import TopProductSlider from "./TopProductSlider/TopProductSlider";
 
 const Home = () => {
   const dispatch = useDispatch();
   const [sidebarState, setSidebarState] = useState(false);
-  const { products } = useSelector((state) => state.products);
+  const { products, isLoading, isError, message } = useSelector(
+    (state) => state.products
+  );
   const handleSidebar = () => {
     setSidebarState((prevState) => !prevState);
   };
@@ -34,18 +32,37 @@ const Home = () => {
   return (
     <div className="home-component">
       <HomeCarousel />
-      <HomeOffer />
-      <HomeBrand />
-      <TopProducts heading="Wear The Trend" slides={homeShapes1} />
-      <HomeBanner img={img3}></HomeBanner>
+      {/* <HomeOffer /> */}
+      <HomeSlider heading="Get a new perspective" slides={homeOffer} />
+      <HomeSlider heading="Wear The Trend" slides={homeShapes1} />
+      <HomeSlider heading="Top Brands" slides={brandDummy} />
       <HomeShape />
+      <TopProductSlider
+        products={products}
+        loading={isLoading}
+        error={isError}
+        message={message}
+        heading="Top Sunglasses"
+      />
+      <TopProductSlider
+        products={products}
+        loading={isLoading}
+        error={isError}
+        message={message}
+        heading="Top Eyeglasses"
+      />
+      {/* <TopProductSlider products={products} heading="Top "/> */}
+
+      {/* <HomeBrand /> */}
+      {/* <HomeBanner img={img3}></HomeBanner> */}
       {/* <TopProducts products={specsDummy} heading="Specs" /> */}
+
       {/* <TopProducts heading="Kids Glasses" products={kidsDummy} /> */}
-      <HomeBanner img={img1} />
+      {/* <HomeBanner img={img1} />
       <HomeCategory />
       <HomeBanner img={img2}></HomeBanner>
 
-      <HomeTestimonial />
+      <HomeTestimonial /> */}
     </div>
   );
 };
