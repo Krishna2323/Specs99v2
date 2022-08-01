@@ -4,21 +4,22 @@
   grid-column: 1/-1;
   z-index: 1;
   @include displayGridMain;
+  // background: var(--bg-image-grad-);
 
   .home-element {
-    margin-bottom: 8rem;
+    margin-bottom: 5rem;
     grid-column: center-start/center-end;
     border-radius: var(--brr-regular);
     @media (max-width: 75em) {
       grid-column: full-start/full-end;
-      padding: 2rem;
+      // padding: 2rem;
       border-radius: 0;
     }
     @media (max-width: 56.25em) {
-      padding: 2rem;
+      // padding: 2rem;
     }
     @media (max-width: 37.5em) {
-      padding: 1rem;
+      // padding: 1rem;
     }
   }
 }

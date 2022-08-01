@@ -88,7 +88,15 @@ const ProductPageDetail = () => {
         <span className="product-detail-box__specs-lens">
           Lens: {product.lensType}
         </span>
-        <span className="product-detail-box__specs-weight">Weight: 18gm</span>
+        <span className="product-detail-box__specs-weight">
+          Lens Color: {product.lensColor}
+        </span>
+        <span className="product-detail-box__specs-weight">
+          Frame Color: {product.frameColor}
+        </span>
+        <span className="product-detail-box__specs-weight">
+          Frame Body: {product.frameType}
+        </span>
       </div>
 
       {/* SPECS END */}
@@ -106,16 +114,22 @@ const ProductPageDetail = () => {
       {/* DESCRIPTION END */}
 
       {/* QTY START */}
-      <div className="product-detail-box__quantity">
+      {/* <div className="product-detail-box__quantity">
         <span>Quantity: </span>
         <button onClick={subtractQuantity}>-</button>
         <span>{quantity}</span>
         <button onClick={addQuantity}>+</button>
-      </div>
+      </div> */}
       {/* QTY END */}
 
       {/* BUTTONS START */}
       <div className="product-detail-box__btn">
+        <div className="product-detail-box__quantity">
+          <span>Quantity: </span>
+          <button onClick={subtractQuantity}>-</button>
+          <span>{quantity}</span>
+          <button onClick={addQuantity}>+</button>
+        </div>
         <button
           className="product-detail-box__btn-addToCartBtn btn-secondary"
           onClick={handleAddToCart}
@@ -123,10 +137,10 @@ const ProductPageDetail = () => {
           Add To Cart
           <FiIcons.FiShoppingCart />
         </button>
-        <button className="product-detail-box__btn-addToWishlist btn-secondary--red">
+        {/* <button className="product-detail-box__btn-addToWishlist btn-secondary--red">
           Wishlist
           <BsIcons.BsFillSuitHeartFill />
-        </button>
+        </button> */}
       </div>
       {/* BUTTON END */}
     </div>

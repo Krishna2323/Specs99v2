@@ -9,12 +9,13 @@ $--singup-transition-time: 0.3s;
   z-index: 1002;
   transform: translate(-50%, -50%);
   background-size: cover;
-  border-radius: 31px;
+  // border-radius: 31px;
   box-shadow: 0 2rem 2rem rgba(0, 0, 0, 0.09);
   overflow: hidden;
   padding: 0;
   padding-top: 1rem;
   background-image: var(--bg-image-1-dark);
+  background: var(--bg-image-grad-purple);
 
   &-open {
     animation: singupFormAnimation $--singup-transition-time ease-out forwards;
@@ -32,7 +33,7 @@ $--singup-transition-time: 0.3s;
     justify-content: center;
     gap: 2rem;
     // background: var(--bg-image-grad-grey-light);
-    background: var(--bg-image-grad-purple);
+    // background: var(--bg-image-grad-purple);
 
     width: 70rem;
     color: white;

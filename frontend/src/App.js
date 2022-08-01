@@ -21,6 +21,7 @@ import ProductsPage from "./components/ProductsPage/ProductsPage";
 import Footer from "./components/Layout/Footer/Footer";
 import Login from "./components/LoginSinggup/Login";
 import Singup from "./components/LoginSinggup/Singup";
+import Checkout from "./components/UI/Checkout/Checkout";
 
 // Actions Imports
 import {
@@ -30,6 +31,7 @@ import {
 import Cart from "./components/UI/Cart/Cart";
 import { loadUser } from "./store/userSlice/userActions";
 import { fetchProducts } from "./store/productsSlice/productsActions";
+import Confirmation from "./components/UI/Confirmation/Confirmation";
 // import { signup } from "./store/userSlice/userActions";
 // import { login } from "./store/userSlice/userActions";
 
@@ -55,24 +57,28 @@ function App() {
   return (
     <Container>
       <Header />
-
-      <Transition in={display} unmountOnExit mountOnEnter timeout={300}>
-        <Notification open={display} />
-      </Transition>
+      {/* <Checkout /> */}
+      <Notification open={display} />
 
       <Routes>
         <Route path="/" element={<Home />} />
+
         <Route path="/products/">
           <Route path=":keyword" element={<ProductsPage />} />
           <Route path="" element={<ProductsPage />} />
         </Route>
+
         <Route path="/dashboard" element={<DashBoard />} />
+
         <Route
           path="/addProduct"
           element={<AddProduct product={products ? products[0] : undefined} />}
         />
-        <Route path="/updateProduct" element={<UpdateProduct />} />
+
+        <Route path="/updateProduct/:id" element={<UpdateProduct />} />
+
         <Route path="/allProduct" element={<AllProduct />} />
+
         <Route path="/product/:id" element={<ProductPage />} />
       </Routes>
 

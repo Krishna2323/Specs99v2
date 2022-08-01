@@ -163,6 +163,26 @@
       justify-self: flex-end;
       gap: 3rem;
 
+      &-cart {
+        position: relative;
+        & span {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 2rem;
+          height: 2rem;
+          // padding: 0.5rem;
+          border-radius: 100%;
+          background: var(--bg-image-1-dark);
+          color: black;
+          font-weight: 600;
+          transform: translate(40%, -40%);
+          font-size: 1.4rem;
+          z-index: 2;
+          text-align: center;
+        }
+      }
+
       &-icons {
         font-size: 2.7rem;
         // color: var(--color-grey-dark);

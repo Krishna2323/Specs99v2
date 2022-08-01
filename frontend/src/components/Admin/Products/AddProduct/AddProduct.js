@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Sidebar from "../../DashBoard/SideBar/Sidebar";
 import useInput from "../../../hooks/useInput";
 import "./AddProduct.scss";
@@ -7,12 +7,15 @@ import FormInput from "./../../../UI/FormInput/FormInput";
 import * as MdIcons from "react-icons/md";
 import SelectInput from "../../../UI/SelectInput/SelectInput";
 import { addProduct } from "./../../../../store/productSlice/productActions";
+import { useNavigate } from "react-router-dom";
 
 const AddProduct = (props) => {
   const dispatch = useDispatch();
   const [sidebar, setSidebar] = useState(false);
   const [coverImage, setCoverImage] = useState();
   const [images, setImages] = useState([]);
+  const { type, action } = useSelector((state) => state.notification);
+  const navigate = useNavigate();
 
   const coverImageHandler = (e) => {
     setCoverImage(e.target.files[0]);
@@ -35,7 +38,7 @@ const AddProduct = (props) => {
     inputFocusHandler: brandFocusHandler,
     isTouched: isBrandTouched,
     hasError: brandHasError,
-    // resetInput: resetBrand,
+    resetInput: resetBrand,
   } = useInput(brandNameValidator);
 
   const {
@@ -46,7 +49,7 @@ const AddProduct = (props) => {
     inputFocusHandler: modelFocusHandler,
     isTouched: isModelTouched,
     hasError: modelHasError,
-    // resetInput: resetModel,
+    resetInput: resetModel,
   } = useInput(brandNameValidator);
 
   const {
@@ -57,7 +60,7 @@ const AddProduct = (props) => {
     inputFocusHandler: mrpFocusHandler,
     isTouched: isMrpTouched,
     hasError: mrpHasError,
-    // resetInput: resetMrp,
+    resetInput: resetMrp,
   } = useInput(brandNameValidator);
 
   const {
@@ -68,7 +71,7 @@ const AddProduct = (props) => {
     inputFocusHandler: priceFocusHandler,
     isTouched: isPriceTouched,
     hasError: priceHasError,
-    // resetInput: resetPrice,
+    resetInput: resetPrice,
   } = useInput(brandNameValidator);
 
   const {
@@ -77,9 +80,9 @@ const AddProduct = (props) => {
     inputBlurHandler: sizeBlurHandler,
     isFocused: isSizeFocused,
     inputFocusHandler: sizeFocusHandler,
-    // isTouched: isSizeTouched,
+    isTouched: isSizeTouched,
     hasError: sizeHasError,
-    // resetInput: resetSize,
+    resetInput: resetSize,
   } = useInput(brandNameValidator);
 
   const {
@@ -90,7 +93,7 @@ const AddProduct = (props) => {
     inputFocusHandler: modelTypeFocusHandler,
     isTouched: isModelTypeTouched,
     hasError: modelTypeHasError,
-    // resetInput: resetModelType,
+    resetInput: resetModelType,
   } = useInput(brandNameValidator);
 
   const {
@@ -101,7 +104,7 @@ const AddProduct = (props) => {
     inputFocusHandler: lensTypeFocusHandler,
     isTouched: isLensTypeTouched,
     hasError: lensTypeHasError,
-    // resetInput: resetLensType,
+    resetInput: resetLensType,
   } = useInput(brandNameValidator);
 
   const {
@@ -112,7 +115,7 @@ const AddProduct = (props) => {
     inputFocusHandler: lensColorFocusHandler,
     isTouched: isLensColorTouched,
     hasError: lensColorHasError,
-    // resetInput: resetLensColor,
+    resetInput: resetLensColor,
   } = useInput(brandNameValidator);
 
   const {
@@ -123,7 +126,7 @@ const AddProduct = (props) => {
     inputFocusHandler: frameColorFocusHandler,
     isTouched: isFrameColorTouched,
     hasError: frameColorHasError,
-    // resetInput: resetFrameColor,
+    resetInput: resetFrameColor,
   } = useInput(brandNameValidator);
 
   const {
@@ -134,7 +137,7 @@ const AddProduct = (props) => {
     inputFocusHandler: frameTypeFocusHandler,
     isTouched: isFrameTypeTouched,
     hasError: frameTypeHasError,
-    // resetInput: resetframeType,
+    resetInput: resetframeType,
   } = useInput(brandNameValidator);
 
   const {
@@ -145,7 +148,7 @@ const AddProduct = (props) => {
     inputFocusHandler: genderFocusHandler,
     isTouched: isGenderTouched,
     hasError: genderHasError,
-    // resetInput: resetGender,
+    resetInput: resetGender,
   } = useInput(brandNameValidator);
 
   const {
@@ -156,7 +159,7 @@ const AddProduct = (props) => {
     inputFocusHandler: descriptionFocusHandler,
     isTouched: isDescriptionTouched,
     hasError: descriptionHasError,
-    // resetInput: resetDescription,
+    resetInput: resetDescription,
   } = useInput(brandNameValidator);
 
   const checkIsTouched = () => {
@@ -193,6 +196,19 @@ const AddProduct = (props) => {
     );
   };
 
+  const resetAllInput = () => {
+    resetBrand();
+    resetModel();
+    resetMrp();
+    resetPrice();
+    resetSize();
+    resetModelType();
+    resetLensType();
+    resetLensColor();
+    resetDescription();
+    resetFrameColor();
+    resetGender();
+  };
   const setAllTouched = () => {
     brandBlurHandler();
     modelBlurHandler();
@@ -213,6 +229,7 @@ const AddProduct = (props) => {
   };
 
   const submitForm = (e) => {
+    console.log("SS");
     e.preventDefault();
     if (checkIsTouched() || checkError()) {
       setAllTouched();
@@ -239,7 +256,14 @@ const AddProduct = (props) => {
     });
 
     dispatch(addProduct(formData));
+    // resetAllInput();
   };
+
+  useState(() => {
+    if (action === "addProduct" && type === "success") {
+      navigate("/allProducts");
+    }
+  }, [action, type]);
 
   return (
     <div className="dashboard-component">

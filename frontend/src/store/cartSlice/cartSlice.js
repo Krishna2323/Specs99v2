@@ -8,6 +8,8 @@ const cartSlice = createSlice({
     status: "",
     message: "",
     isLoading: false,
+    totalCost: 0,
+    isError: false,
   },
 
   reducers: {
@@ -15,10 +17,14 @@ const cartSlice = createSlice({
       state.isLoading = action.payload.isLoading;
       state.products = action.payload.products;
       state.totalProducts = action.payload.totalProducts;
+      state.totalCost = action.payload.totalCost;
+      state.isError = action.payload.isError;
     },
     addItem(state, action) {
       state.products = action.payload.products;
       state.totalProducts = state.totalProducts++;
+      state.isLoading = action.payload.isLoading;
+      state.isError = action.payload.isError;
     },
   },
 });

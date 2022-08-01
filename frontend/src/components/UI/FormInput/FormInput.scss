@@ -36,6 +36,10 @@
     flex-wrap: wrap;
     gap: 2rem;
 
+    &--white {
+      color: white;
+    }
+
     & label {
       margin-left: 1rem;
       color: inherit;

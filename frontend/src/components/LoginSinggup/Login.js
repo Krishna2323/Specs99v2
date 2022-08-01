@@ -9,7 +9,8 @@ import FormInput from "../UI/FormInput/FormInput";
 import Backdrop from "../UI/Backdrop/Backdrop";
 import * as VsIcons from "react-icons/vsc";
 import { Transition } from "react-transition-group";
-import uiSlice, { uiSliceAction } from "../../store/uiSlice/uiSlice";
+import { uiSliceAction } from "../../store/uiSlice/uiSlice";
+import { emailValidator, passwordValidator } from "../helpers/componentHelpers";
 // import { useEffect } from "react";
 // import { PasswordSharp } from "@mui/icons-material";
 
@@ -24,13 +25,6 @@ const Login = (props) => {
   );
 
   const dispatch = useDispatch();
-  const emailValidator = (value) => {
-    return value.length > 3 && value.includes("@") && value.includes(".");
-  };
-
-  const passwordValidator = (value) => {
-    return value.trim().length >= 6;
-  };
 
   const {
     value: emailValue,

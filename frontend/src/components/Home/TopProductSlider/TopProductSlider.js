@@ -13,8 +13,8 @@ const settings = {
   slidesToShow: 3,
   slidesToScroll: 3,
   autoplay: true,
-  speed: 2000,
-  autoplaySpeed: 4000,
+  speed: 1000,
+  autoplaySpeed: 5000,
   cssEase: "linear",
   //   centerPadding: "60px",
 
@@ -62,7 +62,7 @@ const settings = {
 
 const div = (e) => {
   return (
-    <div className="top-product-slider__container-item">
+    <div key={e._id} className="top-product-slider__container-item">
       <div className="top-product-slider__container-item-inner">
         <ProductCard product={e} />
       </div>
@@ -78,12 +78,17 @@ const TopProductSlider = (props) => {
     <div className="home-element top-product-slider">
       <h3 className="heading-1">{heading}</h3>
 
-      {loading && <Loading heading={"Loading..."} message={""} />}
-      {error && !loading && <Loading heading={message} message={""} />}
+      {loading && (
+        <Loading heading={"Loading..."} message={""} type="loading" />
+      )}
+      {error && !loading && (
+        <Loading heading={message} message={""} type="error" />
+      )}
 
       {products && (
         <div className="top-product-slider__container">
           <Slider {...settings}>
+            {products.map((e, i) => div(e))}
             {products.map((e, i) => div(e))}
             {products.map((e, i) => div(e))}
           </Slider>

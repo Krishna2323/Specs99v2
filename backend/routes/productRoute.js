@@ -32,7 +32,16 @@ router
 router
   .route('/:id')
   .get(getProduct)
-  .patch(protect, restrictTo('admin'), updateProduct)
+  .patch(
+    protect,
+    restrictTo('admin'),
+    upload.fields([
+      { name: 'imageCover', maxCount: 1 },
+      { name: 'images', maxCount: 3 },
+    ]),
+    resizeProductImages,
+    updateProduct
+  )
   .delete(protect, restrictTo('admin'), deleteProduct);
 
 module.exports = router;

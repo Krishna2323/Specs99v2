@@ -1,66 +1,94 @@
 import axios from "axios";
-import {
-  clearNotication,
-  notificationActions,
-} from "../notificationSlice/notificationSlice";
+import { clearNotication } from "../notificationSlice/notificationSlice";
 import { cartSliceAction } from "./cartSlice";
+import { dispatchNotification } from "../helper/helper";
+
+const calculateAndSetSummary = (cart) => {
+  let summary = cart.reduce(
+    (prevValue, currentValue) =>
+      prevValue + currentValue.product.price * currentValue.quantity,
+    0
+  );
+
+  return summary;
+};
 
 export const addItemToCart = (product, quantity, cart) => {
   return async (dispatch) => {
-    const cartCopy = [...cart];
-    const itemInCart = cartCopy.findIndex((el) => el._id === product._id);
+    const filterAndSet = async () => {
+      dispatch(
+        cartSliceAction.setCart({
+          isLoading: true,
+        })
+      );
+      const cartCopy = [...cart];
+      const itemInCart = cartCopy.findIndex(
+        (el) => el.product._id === product._id
+      );
 
-    if (itemInCart >= 0) {
-      const itemCopy = { ...cartCopy[itemInCart] };
-      itemCopy.quantity += quantity;
-      cartCopy[itemInCart] = itemCopy;
+      if (itemInCart >= 0) {
+        const itemCopy = { ...cartCopy[itemInCart] };
+        itemCopy.quantity += quantity;
 
-      const res = await axios.post("/api/v1/cart/updateCartItem", {
-        _id: itemCopy._id,
-        quantity: itemCopy.quantity,
-      });
-    } else {
-      cartCopy.push({
-        _id: product._id,
-        brand: product.brand,
-        model: product.model,
-        mrp: product.mrp,
-        price: product.price,
-        quantity: quantity,
-        frameColor: product.frameColor,
-        lensColor: product.lensColor,
-        imageCover: product.imageCover,
-      });
-
-      await axios.post("/api/v1/cart/updateCart", {
-        product: {
+        await axios.put("/api/v1/cart/updateCartItem", {
           _id: product._id,
-          brand: product.brand,
-          model: product.model,
-          mrp: product.mrp,
-          price: product.price,
+          quantity: itemCopy.quantity,
+        });
+
+        dispatchNotification(
+          dispatch,
+          "success",
+          "Success",
+          quantity >= 1 ? " Quantity Increased" : "Quantity Decreased",
+          "cart"
+        );
+
+        if (itemCopy.quantity <= 0) {
+          dispatchNotification(
+            dispatch,
+            "success",
+            "Success",
+            "Item Removed From Cart",
+            "cart"
+          );
+        }
+      } else {
+        const newProduct = {
+          product: product._id,
           quantity: quantity,
-          frameColor: product.frameColor,
-          lensColor: product.lensColor,
-          imageCover: product.imageCover,
-        },
-      });
+        };
+
+        await axios.put("/api/v1/cart/updateCart", {
+          product: newProduct,
+        });
+        dispatchNotification(
+          dispatch,
+          "success",
+          "Success",
+          "Item Added To Cart",
+          "cart"
+        );
+      }
+
+      dispatch(getCart());
+    };
+
+    try {
+      await filterAndSet();
+    } catch (error) {
+      const errorMessage =
+        error.response?.data.message || "Something Went Wrong";
+
+      dispatch(
+        cartSliceAction.setCart({
+          isLoading: false,
+          isError: true,
+          message: errorMessage,
+        })
+      );
+
+      dispatchNotification(dispatch, "error", "Error", errorMessage, "cart");
     }
-
-    dispatch(
-      cartSliceAction.addItem({
-        products: cartCopy,
-      })
-    );
-
-    dispatch(
-      notificationActions.setNotification({
-        type: "success",
-        status: "Success",
-        message: "Item Added To Cart",
-        action: "cart",
-      })
-    );
 
     dispatch(clearNotication());
   };
@@ -68,16 +96,39 @@ export const addItemToCart = (product, quantity, cart) => {
 
 export const getCart = () => {
   return async (dispatch) => {
-    const res = await axios.get("/api/v1/cart");
-    const { data } = res.data;
+    try {
+      dispatch(
+        cartSliceAction.setCart({
+          isLoading: true,
+        })
+      );
+      const res = await axios.get("/api/v1/cart");
+      const {
+        data: { cart },
+      } = res.data;
+      console.log(cart[0].products);
 
-    console.log(data);
+      dispatch(
+        cartSliceAction.setCart({
+          products: cart[0].products,
+          totalProducts: cart[0].products.length,
+          isLoading: false,
+          totalCost: calculateAndSetSummary(cart[0].products),
+        })
+      );
+    } catch (error) {
+      const errorMessage =
+        error.response?.data.message || "Something Went Wrong";
 
-    dispatch(
-      cartSliceAction.setCart({
-        products: data.products[0].products,
-        totalProducts: data.results,
-      })
-    );
+      dispatch(
+        cartSliceAction.setCart({
+          isLoading: false,
+          isError: true,
+          message: errorMessage,
+        })
+      );
+
+      dispatchNotification(dispatch, "error", "Error", errorMessage, "cart");
+    }
   };
 };

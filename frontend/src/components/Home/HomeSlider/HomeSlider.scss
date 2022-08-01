@@ -5,11 +5,11 @@
   width: 100%;
   background: var(--bg-image-grad-grey-light);
   // border-radius: var(--brr-regular);
-  padding: 2rem 0;
-  box-shadow: var(--box-shadow-card);
+  padding: 2rem 5rem 5rem 5rem;
+  // box-shadow: var(--box-shadow-card);
 
   @media (max-width: 37.5em) {
-    padding: 0.1rem;
+    padding: 1rem 4rem 3rem 4rem;
   }
 
   &__container {
@@ -19,6 +19,7 @@
       width: 100% !important;
       display: flex !important;
       justify-content: center;
+      align-items: center;
 
       & span {
         // color: black;
@@ -28,34 +29,51 @@
         display: flex;
         justify-content: center;
         margin: 0 auto;
+        @media (max-width: 37.5em) {
+          font-size: 1.6rem;
+        }
       }
 
-      & a {
-        // display: flex;
-        // justify-content: center;
-        // flex-direction: column;
+      &-card {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
         text-decoration: none;
         // position: relative;
         align-items: center;
         color: white;
         width: 80%;
-        height: 20rem;
+        height: 25rem;
+
+        @media (max-width: 37.5em) {
+          width: 92%;
+        }
+        @media (max-width: 25em) {
+          // height: 17rem;
+        }
 
         @media (max-width: 56.75em) {
-          height: 18rem;
+          // height: 23rem;
         }
 
         @media (max-width: 37.5em) {
-          height: 16rem;
+          height: 23rem;
         }
         @media (max-width: 25em) {
-          height: 13rem;
+          height: 17rem;
+        }
+
+        & a {
+          text-decoration: none;
+
+          // margin: 0 auto;
+          margin-top: 0.5rem;
         }
 
         & img {
-          height: 80%;
+          height: 70%;
           background-color: white;
-          object-fit: fill;
+          object-fit: cover;
           width: 100%;
           margin: 0 auto;
           display: block;

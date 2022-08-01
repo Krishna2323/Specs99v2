@@ -2,15 +2,31 @@ import axios from "axios";
 import { clearNotication } from "../notificationSlice/notificationSlice";
 import { productsSliceAction } from "./productsSlice";
 
-export const fetchProducts = (keyword, minPrice = 0) => {
+export const fetchProducts = (
+  keyword,
+  minPrice = 0,
+  maxPrice = 20000,
+  ratingsAverage = 0,
+  typeOfGlass = "",
+  frameSize = "",
+  frameColor = "",
+  lensColor = "",
+  gender = ""
+) => {
   // const { brand = "" } = filter;
 
   return async (dispatch) => {
-    let url = `/api/v1/products/?price[gte]=${minPrice}`;
+    let url = `/api/v1/products/?price[gte]=${minPrice}&price[lte]=${maxPrice}&ratingsAverage[gte]=${ratingsAverage}&modelType=${typeOfGlass}&size=${frameSize}&frameColor=${frameColor}&lensColor=${lensColor}&gender=${gender}`;
 
     if (keyword) {
-      url = `/api/v1/products/?keyword=${keyword}&price[gte]=${minPrice}`;
+      url = `/api/v1/products/?keyword=${keyword}&price[gte]=${minPrice}&price[lte]=${maxPrice}&ratingsAverage[gte]=${ratingsAverage}&modelType=${typeOfGlass}&size=${frameSize}&frameColor=${frameColor}&lensColor=${lensColor}&gender=${gender}`;
     }
+
+    // if (keyword && frameSize) {
+    //   url = `/api/v1/products/?keyword=${keyword}&price[gte]=${minPrice}&size=${frameSize}`;
+    // } else if (frameSize) {
+    //   url = `/api/v1/products/?price[gte]=${minPrice}&size=${frameSize}`;
+    // }
 
     const fetchProductsFunc = async () => {
       dispatch(
@@ -35,7 +51,8 @@ export const fetchProducts = (keyword, minPrice = 0) => {
     try {
       await fetchProductsFunc();
     } catch (error) {
-      const errorMessage = "Something Went Wrong!";
+      const errorMessage =
+        error.response.data.message || "Something Went Wrong!";
       dispatch(
         productsSliceAction.setProducts({
           isLoading: false,

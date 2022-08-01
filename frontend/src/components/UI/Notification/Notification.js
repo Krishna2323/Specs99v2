@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import ReactDom from "react-dom";
 import { useSelector } from "react-redux";
-// import { Transition } from "react-transition-group";
+import { Transition } from "react-transition-group";
 import "./Notification.scss";
 
 const Notification = (props) => {
@@ -14,15 +14,19 @@ const Notification = (props) => {
 
   return (
     <Fragment>
-      {ReactDom.createPortal(
-        <div
-          className={`notification-box notification-box-${type} ${notificationAnimation}`}
-        >
-          <h4 className="notification-box__status">{status} :</h4>
-          <span className="notification-box__message">{message}</span>
-        </div>,
-        document.getElementById("notification")
-      )}
+      <Transition in={props.open} unmountOnExit mountOnEnter timeout={300}>
+        {(state) =>
+          ReactDom.createPortal(
+            <div
+              className={`notification-box notification-box-${type} ${notificationAnimation}`}
+            >
+              <h4 className="notification-box__status">{status} :</h4>
+              <span className="notification-box__message">{message}</span>
+            </div>,
+            document.getElementById("notification")
+          )
+        }
+      </Transition>
     </Fragment>
   );
 };

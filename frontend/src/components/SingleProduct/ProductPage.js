@@ -25,9 +25,13 @@ const ProductPage = () => {
   return (
     <Fragment>
       <div className="single-product-container">
-        {isLoading && <Loading heading="Loading..." message="" />}
+        {isLoading && (
+          <Loading heading="Loading..." message="" type="loading" />
+        )}
 
-        {!isLoading && isError && <Loading heading={message} message="" />}
+        {!isLoading && isError && (
+          <Loading heading={message} message="" type="error" />
+        )}
         {product && (
           <Fragment>
             <SingleProductSec1 product={product} />

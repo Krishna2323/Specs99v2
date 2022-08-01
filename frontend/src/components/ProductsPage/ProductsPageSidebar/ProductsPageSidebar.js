@@ -38,7 +38,13 @@ const ProductsPageSidebar = (props) => {
 
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(20000);
-  const [minGroupSize, setMinGroupSize] = useState(0);
+  const [FrameColor, setFrameColor] = useState("");
+  const [gender, setGender] = useState("");
+  const [lensColor, setLensColor] = useState("");
+  const [frameSize, setFrameSize] = useState("");
+  const [typeOfGlass, setTypeOfGlass] = useState("");
+
+  ///////////////////////
   const [maxGroupSize, setMaxGroupSize] = useState(25);
   const [minTourDuration, setMinTourDuration] = useState(0);
   const [maxTourDuration, setMaxTourDuration] = useState(15);
@@ -50,17 +56,35 @@ const ProductsPageSidebar = (props) => {
   const handlePriceChange = (e) => {
     setMinPrice(e.target.value[0]);
     setMaxPrice(e.target.value[1]);
-    console.log(e.target.value);
   };
 
-  const handleGroupSizeChange = (e) => {
-    setMinGroupSize(e.target.value[0]);
-    setMaxGroupSize(e.target.value[1]);
+  const handleFrameColorChange = (e) => {
+    setFrameColor(e.target.value);
   };
 
   const handleRatingChange = (e) => {
     setMinRating(e.target.value);
   };
+
+  const handleFrameSizeChange = (e) => {
+    setFrameSize(e.target.value);
+  };
+
+  const handleLensColorChange = (e) => {
+    setLensColor(e.target.value);
+  };
+
+  const handleGenderChange = (e) => {
+    setGender(e.target.value);
+  };
+
+  const handleTypeOfGlassChange = (e) => {
+    setTypeOfGlass(e.target.value);
+  };
+
+  // const handleLensColorChange=(e)=>{
+  //   setLensColor(e.target.value);
+  // }
 
   const handleTourDurationChange = (e) => {
     setMinTourDuration(e.target.value[0]);
@@ -72,9 +96,16 @@ const ProductsPageSidebar = (props) => {
   };
 
   const handleFilterChange = () => {
-    props.handleFilterChange(minPrice);
-
-    // dispatch(fetchProducts)
+    props.handleFilterChange(
+      minPrice,
+      maxPrice,
+      minRating,
+      typeOfGlass,
+      frameSize,
+      FrameColor,
+      lensColor,
+      gender
+    );
   };
   const keyword = { params };
 
@@ -105,39 +136,6 @@ const ProductsPageSidebar = (props) => {
           </div>
         </div>
 
-        {/* DAYS SORTING */}
-
-        <SelectInput
-          onChange={handleDifficultyChange}
-          onBlur={handleDifficultyChange}
-          onFocus={handleDifficultyChange}
-          lable="Colors"
-          options={["All", "Red", "Green", "Golden", "Silver"]}
-          // value="All"
-        />
-
-        <div className="products-page-sidebar__slider products-page-sidebar__slider__price">
-          <h4>By Group Size:</h4>
-          <Slider
-            getAriaLabel={(index) =>
-              index === 0 ? "Minimum price" : "Maximum price"
-            }
-            min={0}
-            max={25}
-            defaultValue={[0, 25]}
-            color={"white"}
-            onChange={handleGroupSizeChange}
-            disableSwap
-            step={1}
-          />
-          <div className="products-page-sidebar__slider__price-lable">
-            <p>Min : {minGroupSize}</p>
-            <p>Max : {maxGroupSize}</p>
-          </div>
-        </div>
-
-        {/* RATING SORTING */}
-
         <div className="products-page-sidebar__slider products-page-sidebar__slider__rating">
           <h4>By Ratings:</h4>
           <Slider
@@ -155,71 +153,58 @@ const ProductsPageSidebar = (props) => {
             </p>
           </div>
         </div>
-        {/* TOUR DURATION SORTING */}
 
-        <div className="products-page-sidebar__slider products-page-sidebar__slider__price">
-          <h4>By Tour Duration:</h4>
-          <Slider
-            getAriaLabel={(index) =>
-              index === 0 ? "Minimum price" : "Maximum price"
-            }
-            min={0}
-            max={25}
-            defaultValue={[0, 25]}
-            color={"white"}
-            onChange={handleTourDurationChange}
-            disableSwap
-            step={1}
-          />
-          <div className="products-page-sidebar__slider__price-lable">
-            <p>Min : {minTourDuration}</p>
-            <p>Max : {maxTourDuration}</p>
-          </div>
-        </div>
+        {/* DAYS SORTING */}
 
-        {/* Difficulty SORTING */}
+        <SelectInput
+          onChange={handleTypeOfGlassChange}
+          value={typeOfGlass}
+          lable="Glass Type"
+          options={["Sunglasses", "Eyeglasses", "Bluecut"]}
+          allOption={true}
+          style={{ fontSize: "1.8rem", padding: ".3rem 1rem" }}
+        />
 
-        <div className="products-page-sidebar__slider products-page-sidebar__slider__difficulty">
-          <h4>By Difficulty:</h4>
-          <FormControl>
-            <RadioGroup
-              row
-              aria-labelledby="demo-row-radio-buttons-group-label"
-              name="row-radio-buttons-group"
-              color="white"
-              onChange={handleDifficultyChange}
-              defaultValue=""
-            >
-              <FormControlLabel
-                value=""
-                control={<Radio color="white" size="medium" />}
-                label="All"
-              />
-              <FormControlLabel
-                value="easy"
-                control={<Radio color="white" size="medium" />}
-                label="Easy"
-              />
-              <FormControlLabel
-                value="medium"
-                control={<Radio color="white" size="medium" />}
-                label="Medium"
-              />
+        <SelectInput
+          onChange={handleFrameSizeChange}
+          value={frameSize}
+          lable="Frame Size"
+          options={["Small", "Medium", "Large"]}
+          allOption={true}
+          style={{ fontSize: "1.8rem", padding: ".3rem 1rem" }}
+        />
 
-              <FormControlLabel
-                value="difficult"
-                control={<Radio color="white" size="medium" />}
-                label="Difficult"
-              />
-            </RadioGroup>
-          </FormControl>
-        </div>
-        {/* <div className="products-page-sidebar__slider products-page-sidebar__slider__submit-btn__box"> */}
-        <button onClick={handleFilterChange} className="form-btn">
+        <SelectInput
+          onChange={handleFrameColorChange}
+          value={FrameColor}
+          allOption={true}
+          lable="Frame Color"
+          options={["Red", "Green", "Golden", "Silver", "Blue", "Brown"]}
+          style={{ fontSize: "1.8rem", padding: ".3rem 1rem" }}
+        />
+
+        <SelectInput
+          onChange={handleLensColorChange}
+          value={lensColor}
+          allOption={true}
+          lable="Lens Color"
+          options={["Red", "Green", "Golden", "Silver", "Blue", "Brown"]}
+          style={{ fontSize: "1.8rem", padding: ".3rem 1rem" }}
+        />
+
+        <SelectInput
+          onChange={handleGenderChange}
+          value={gender}
+          allOption={true}
+          lable="Gender"
+          options={["Mens", "Womens", "Kids"]}
+          style={{ fontSize: "1.8rem", padding: ".3rem 1rem" }}
+        />
+
+        <button onClick={handleFilterChange} className="btn-small">
           {" "}
-          Save Changes
+          Apply
         </button>
-        {/* </div> */}
       </div>
     </ThemeProvider>
   );

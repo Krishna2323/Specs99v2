@@ -1,39 +1,39 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { fetchProducts } from "./../../store/productsSlice/productsActions";
 import { useSelector, useDispatch } from "react-redux";
 import "./Home.scss";
 import HomeCarousel from "./HomeCarousel/HomeCarousel";
-import HomeCategory from "./HomeCategory/HomeCategory";
-import HomeOffer from "./HomeOffers/HomeOffer";
+// import HomeCategory from "./HomeCategory/HomeCategory";
+// import HomeOffer from "./HomeOffers/HomeOffer";
 import HomeShape from "./HomeShape/HomeShape";
-import HomeTestimonial from "./HomeTestimonial/HomeTestimonial";
-import HomeBrand from "./HomeBrand/HomeBrand";
+// import HomeTestimonial from "./HomeTestimonial/HomeTestimonial";
+// import HomeBrand from "./HomeBrand/HomeBrand";
 import HomeSlider from "./HomeSlider/HomeSlider";
 import {
   homeShapes1,
-  homeOffer,
+  // homeOffer,
   brandDummy,
 } from "../dummyData/sunglassesDummy";
 import TopProductSlider from "./TopProductSlider/TopProductSlider";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const [sidebarState, setSidebarState] = useState(false);
+  // const [sidebarState, setSidebarState] = useState(false);
   const { products, isLoading, isError, message } = useSelector(
     (state) => state.products
   );
-  const handleSidebar = () => {
-    setSidebarState((prevState) => !prevState);
-  };
+  // const handleSidebar = () => {
+  //   setSidebarState((prevState) => !prevState);
+  // };
 
   useEffect(() => {
     dispatch(fetchProducts());
-  }, []);
+  }, [dispatch]);
   return (
     <div className="home-component">
       <HomeCarousel />
       {/* <HomeOffer /> */}
-      <HomeSlider heading="Get a new perspective" slides={homeOffer} />
+      {/* <HomeSlider heading="Get a new perspective" slides={homeOffer} /> */}
       <HomeSlider heading="Wear The Trend" slides={homeShapes1} />
       <HomeSlider heading="Top Brands" slides={brandDummy} />
       <HomeShape />

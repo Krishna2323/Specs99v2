@@ -1,0 +1,59 @@
+.confirmation-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  background: var(--bg-image-grad-white);
+  border-radius: var(--brr-regular);
+  transform: translate(-50%, -50%);
+  z-index: 1005;
+  padding: 2rem 6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  max-width: 50rem;
+
+  &-open {
+    animation: confirmationModalIn 0.3s ease-in-out forwards;
+  }
+
+  &-close {
+    animation: confirmationModalOut 0.3s ease-in-out forwards;
+  }
+
+  &-text {
+    // color: var(--color-grey-dark);
+    // color: black;
+    color: var(--color-gre-dark);
+    font-size: 2rem;
+    font-weight: 400;
+  }
+
+  &-btn-div {
+    display: flex;
+    // justify-content: space-between;
+    align-self: flex-end;
+    gap: 1.5rem;
+  }
+}
+
+@keyframes confirmationModalIn {
+  0% {
+    top: 20%;
+    opacity: 0;
+  }
+  100% {
+    top: 50%;
+    opacity: 1;
+  }
+}
+
+@keyframes confirmationModalOut {
+  0% {
+    top: 50%;
+    opacity: 1;
+  }
+  100% {
+    top: 20%;
+    opacity: 0;
+  }
+}

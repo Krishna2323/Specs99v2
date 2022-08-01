@@ -22,11 +22,44 @@ const ProductsPage = (props) => {
     setSidebarState((prevState) => !prevState);
   };
 
-  const handleFilterChange = (price) => {
+  const handleFilterChange = (
+    minPrice,
+    maxPrice,
+    ratingsAverage,
+    typeOfGlass,
+    frameSize,
+    frameColor,
+    lensColor,
+    gender
+  ) => {
     if (keyword) {
-      dispatch(fetchProducts(keyword, price));
+      dispatch(
+        fetchProducts(
+          keyword,
+          minPrice,
+          maxPrice,
+          ratingsAverage,
+          typeOfGlass,
+          frameSize,
+          frameColor,
+          lensColor,
+          gender
+        )
+      );
     } else {
-      dispatch(fetchProducts(undefined, price));
+      dispatch(
+        fetchProducts(
+          undefined,
+          minPrice,
+          maxPrice,
+          ratingsAverage,
+          typeOfGlass,
+          frameSize,
+          frameColor,
+          lensColor,
+          gender
+        )
+      );
     }
   };
 
@@ -47,7 +80,7 @@ const ProductsPage = (props) => {
         handleFilterChange={handleFilterChange}
       />
       <div className="products-page__products">
-        {isLoading && <Loading heading="Loading..." />}
+        {isLoading && <Loading heading="Loading..." type="loading" />}
         {products &&
           products.map((el, i) => (
             <ProductCard key={i} product={el} keyword={keyword} />
@@ -56,8 +89,9 @@ const ProductsPage = (props) => {
           <Loading
             heading={`We Couldn't Find A Match For ${
               keyword ? keyword : "Your Filter"
-            } :(`}
+            }`}
             message="Try Finding Something Else."
+            type="error"
           />
         )}
       </div>

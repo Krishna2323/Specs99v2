@@ -12,12 +12,18 @@ const FormInput = (props) => {
     value,
     errorMessage,
     onFocus,
+    labelColor,
   } = props;
+
+  const labelModifier = labelColor ? labelColor : "";
 
   return (
     <div className="form-row">
-      <div className="form-row-info">
-        <label htmlFor={`form-${lable.toLowerCase().split(" ").join("-")}`}>
+      <div className={`form-row-info`}>
+        <label
+          htmlFor={`form-${lable.toLowerCase().split(" ").join("-")}`}
+          style={{ color: labelModifier }}
+        >
           {lable}
         </label>
 

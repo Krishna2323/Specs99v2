@@ -33,6 +33,7 @@ const setStyleOnNodelist = (thisKey, elements, targetLink) => {
 
 const Header = (props) => {
   const { cart, loginForm, singupForm } = useSelector((state) => state.ui);
+  const { totalProducts } = useSelector((state) => state.cart);
 
   const dispatch = useDispatch();
 
@@ -145,7 +146,7 @@ const Header = (props) => {
       </Transition>
       <div className="header-component">
         <nav className="header-nav">
-          <span class="header-nav__icon-menu" onClick={handleSideNav}>
+          <span className="header-nav__icon-menu" onClick={handleSideNav}>
             <FiIcons.FiMenu />
           </span>
           {/* CONTAINER 2 */}
@@ -220,8 +221,12 @@ const Header = (props) => {
                 onClick={openSearchBar}
               />
             </span>
-            <span className="header-nav__open-link" onClick={handleCartState}>
-              <FiIcons.FiShoppingCart className="header-nav__cta-icons " />
+            <span
+              className="header-nav__open-link header-nav__cta-cart"
+              onClick={handleCartState}
+            >
+              <span>{totalProducts}</span>
+              <FiIcons.FiShoppingCart className="header-nav__cta-icons "></FiIcons.FiShoppingCart>
             </span>
             <span
               className="header-nav__open-link"

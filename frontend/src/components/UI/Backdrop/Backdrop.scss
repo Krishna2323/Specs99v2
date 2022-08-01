@@ -5,12 +5,30 @@
   background-color: rgba(0, 0, 0, 0.85);
   z-index: 1001;
   backdrop-filter: blur(2px);
-  opacity: 0;
 
   &-open {
+    animation: backdropIn 0.3s forwards;
+  }
+
+  &-closed {
+    animation: backdropOut 0.3s forwards;
+  }
+}
+
+@keyframes backdropIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+
+@keyframes backdropOut {
+  0% {
     opacity: 1;
   }
-  &-closed {
-    opacity: 0;
+  100% {
+    opacity: 0%;
   }
 }

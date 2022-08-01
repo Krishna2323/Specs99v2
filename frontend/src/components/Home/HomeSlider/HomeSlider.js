@@ -6,12 +6,12 @@ import Slider from "react-slick";
 
 const settings = {
   dots: true,
-  infinite: true,
-  slidesToShow: 6,
+  // infinite: true,
+  slidesToShow: 4,
   slidesToScroll: 2,
-  autoplay: true,
-  speed: 3000,
-  autoplaySpeed: 4000,
+  // autoplay: true,
+  speed: 500,
+  autoplaySpeed: 1000,
   cssEase: "linear",
   centerPadding: "60px",
 
@@ -19,12 +19,12 @@ const settings = {
     {
       breakpoint: 1500,
       settings: {
-        slidesToShow: 6,
+        slidesToShow: 4,
         slidesToScroll: 2,
-        infinite: true,
-        autoplay: true,
+        // infinite: true,
+        // autoplay: true,
         speed: 1000,
-        autoplaySpeed: 2000,
+        // autoplaySpeed: 2000,
         dots: true,
       },
     },
@@ -51,7 +51,7 @@ const settings = {
       settings: {
         slidesToShow: 3,
         // rows: 4,
-        slidesToScroll: 2,
+        slidesToScroll: 3,
       },
     },
     {
@@ -59,7 +59,7 @@ const settings = {
       settings: {
         slidesToShow: 2,
         // rows: 4,
-        slidesToScroll: 1,
+        slidesToScroll: 2,
       },
     },
   ],
@@ -75,11 +75,14 @@ const HomeSlider = (props) => {
       <div className="home-top-products__container">
         <Slider {...settings}>
           {slides.map((el) => (
-            <div className="home-top-products__container-box">
-              <Link to="#">
+            <div key={el.name} className="home-top-products__container-box">
+              <div className="home-top-products__container-box-card" to="#">
                 <img src={el.img} alt="" />
                 <span>{el.name}</span>
-              </Link>
+                <Link to="#" className="btn-small btn-small--primary">
+                  Explore
+                </Link>
+              </div>
             </div>
           ))}
         </Slider>

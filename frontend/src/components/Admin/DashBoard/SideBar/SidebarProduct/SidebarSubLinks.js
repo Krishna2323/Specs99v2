@@ -6,7 +6,7 @@ const SidebarProduct = (props) => {
   return (
     <ul className="sidebar-product__links">
       {props.links.map((itm) => (
-        <li className="sidebar-product__links__item">
+        <li key={itm.link} className="sidebar-product__links__item">
           <Link to={itm.link} className="sidebar-product__links__link">
             {itm.name}
           </Link>

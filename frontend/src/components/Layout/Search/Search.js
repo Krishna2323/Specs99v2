@@ -33,9 +33,9 @@ const Search = (props) => {
             onChange={handleSearchInput}
             className={`search-input ${searchAnimation}`}
           />
-          <btn>
-            <AiIcons.AiOutlineSearch className="search-icon" />
-          </btn>
+          <button className="search-button">
+            <AiIcons.AiOutlineSearch className="search-button-icon" />
+          </button>
         </form>,
         document.getElementById("search")
       )}

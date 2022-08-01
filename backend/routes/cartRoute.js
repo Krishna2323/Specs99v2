@@ -14,7 +14,7 @@ const router = Router();
 router.use(protect);
 
 router.route('/').get(getCart).post(setCartUserId, createCart);
-router.route('/updateCart').post(pushItem);
-router.route('/updateCartItem').post(updateCartItem);
+router.route('/updateCart').put(pushItem);
+router.route('/updateCartItem').put(updateCartItem);
 
 module.exports = router;

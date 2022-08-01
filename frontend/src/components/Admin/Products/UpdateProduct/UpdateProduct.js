@@ -1,20 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import Sidebar from "../../DashBoard/SideBar/Sidebar";
 import useInput from "../../../hooks/useInput";
 import "./UpdateProduct.scss";
 import FormInput from "./../../../UI/FormInput/FormInput";
 import * as MdIcons from "react-icons/md";
+import Loading from "../../../UI/Loading/Loading";
 import SelectInput from "../../../UI/SelectInput/SelectInput";
-import { addProduct } from "./../../../../store/productSlice/productActions";
-
+import {
+  fetchProduct,
+  updateProduct,
+} from "./../../../../store/productSlice/productActions";
+import { clearNotication } from "../../../../store/notificationSlice/notificationSlice";
+import useNotify from "../../../hooks/useNotification";
 const UpdateProduct = (props) => {
   const dispatch = useDispatch();
+  const params = useParams();
   const [sidebar, setSidebar] = useState(false);
   const [coverImage, setCoverImage] = useState();
   const [images, setImages] = useState([]);
+  const { notify } = useNotify();
 
-  const { products } = useSelector((state) => state.products);
+  const { product, isLoading } = useSelector((state) => state.product);
 
   const coverImageHandler = (e) => {
     setCoverImage(e.target.files[0]);
@@ -136,8 +144,7 @@ const UpdateProduct = (props) => {
     inputFocusHandler: frameTypeFocusHandler,
     isTouched: isFrameTypeTouched,
     hasError: frameTypeHasError,
-    // resetInput: resetframeType,
-  } = useInput(brandNameValidator);
+  } = useInput(brandNameValidator, product?.brand);
 
   const {
     value: genderValue,
@@ -216,8 +223,11 @@ const UpdateProduct = (props) => {
 
   const submitForm = (e) => {
     e.preventDefault();
-    if (checkIsTouched() || checkError()) {
+    if (checkError() || !images.length > 0 || !coverImage) {
       setAllTouched();
+      dispatch(clearNotication());
+      notify("error", "Error", "CoverImage Or Images  Not Specified.");
+      console.log("Errr");
       return;
     }
 
@@ -230,7 +240,7 @@ const UpdateProduct = (props) => {
     formData.append("modelType", modelTypeValue);
     formData.append("lensType", lensTypeValue);
     formData.append("lensColor", lensColorValue);
-    formData.append("gender", "Men");
+    formData.append("gender", genderValue);
     formData.append("description", descriptionValue);
     formData.append("frameType", frameTypeValue);
     formData.append("frameColor", frameColorValue);
@@ -240,25 +250,41 @@ const UpdateProduct = (props) => {
       formData.append("images", el);
     });
 
-    // dispatch(addProduct(formData));
+    dispatch(updateProduct(product._id, formData));
   };
 
   useEffect(() => {
-    if (products) {
-      brandHandler(products[0].brand);
-      modelHandler(products[0].model);
+    dispatch(fetchProduct(params.id));
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (product) {
+      brandHandler(product.brand);
+      modelHandler(product.model);
+      mrpHandler(product.mrp.toString());
+      priceHandler(product.price.toString());
+      sizeHandler(product.size);
+      modelTypeHandler(product.modelType);
+      lensTypeHandler(product.lensType);
+      lensColorHandler(product.lensColor);
+      genderHandler(product.gender);
+      descriptionHandler(product.description);
+      frameTypeHandler(product.frameType);
+      frameColorHandler(product.frameColor);
     }
-  }, [products]);
+  }, []);
 
   return (
     <div className="dashboard-component">
       <Sidebar isOpen={sidebar} />
+      <div className="add-product-container">
+        <span className="sidebar-toggle-icon">
+          <MdIcons.MdMenu onClick={toggleSidebar} />
+        </span>
 
-      {products && (
-        <div className="add-product-container">
-          <span className="sidebar-toggle-icon">
-            <MdIcons.MdMenu onClick={toggleSidebar} />
-          </span>
+        {isLoading && <Loading type="loading" heading="Loading..." />}
+
+        {product && (
           <form onSubmit={submitForm} className="add-product-form">
             <span className="heading-1 heading-1--white ">Update Product</span>
             {/* ROW 1 */}
@@ -434,9 +460,9 @@ const UpdateProduct = (props) => {
             <div className="add-product-form-btn__container">
               <button className="form-btn">Submit</button>
             </div>
-          </form>{" "}
-        </div>
-      )}
+          </form>
+        )}
+      </div>
     </div>
   );
 };

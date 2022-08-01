@@ -6,11 +6,14 @@
   grid-template-columns: 1fr 5fr;
   position: relative;
   align-items: flex-start;
+  min-height: 100vh;
 
   &__products {
     padding: 5rem;
     @include productCardContainer;
-    min-height: 80vh;
+    // min-height: 80vh;
+    // height: 100%;
+    // height: fit-content;
   }
 
   @media (max-width: 93.5em) {

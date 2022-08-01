@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Rating } from "react-simple-star-rating";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { useDispatch, useSelector } from "react-redux";
 
 import "./ProductCard.scss";
 import * as biIcons from "react-icons/bi";
@@ -10,27 +11,28 @@ import * as faIcons from "react-icons/fa";
 import * as fiIcons from "react-icons/fi";
 // import img from "../../../../public/img/products";
 import { useState } from "react";
-
-// const dummyUserCart = [1, 6, 7];
-// const dummyUserFav = [2, 3, 5];
+import { addItemToCart } from "../../../../store/cartSlice/cartActions";
 
 const ProductCard = (props) => {
   const { product } = props;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { products: cart } = useSelector((state) => state.cart);
 
   const [inCart, setInCart] = useState(false);
-  const [favStyle, setFavStyle] = useState("");
 
-  // useEffect(() => {
-  //   if (dummyUserCart.includes(productId)) {
-  //     setInCart(true);
-  //   }
-  //   if (dummyUserFav.includes(productId)) {
-  //     setFavStyle("filled--red");
-  //   }
-  // }, [productId]);
+  const onCardCLick = (e) => {
+    if (e.target.dataset.cart || e.target.parentNode.dataset.cart) {
+      dispatch(addItemToCart(product, 1, cart));
+      return;
+    } else {
+      navigate(`/product/${product._id}`);
+    }
+  };
 
   return (
-    <Link to={`/product/${product._id}`} className="product-card">
+    <div className="product-card" onClick={onCardCLick}>
       <div className="product-card__header">
         <img
           // src={`./src/public/img/products/${product.imageCover}`}
@@ -71,14 +73,17 @@ const ProductCard = (props) => {
           <div>
             <Rating
               // ratingValue={3.5}
-              initialValue={product.ratingsAverage + 4.7}
+              initialValue={product.ratingsAverage}
               readonly={true}
               allowHalfIcon={true}
               size={"1.6rem"}
               fillColor="#ff922b"
               style={{ alingItems: "flex-end" }}
             ></Rating>
-            <span>(4.7) {product.ratingsQuantity + 2} Ratings</span>
+            <span>
+              ({product.ratingsAverage.toString().padEnd(3, ".0")}){" "}
+              {product.ratingsQuantity}{" "}
+            </span>
           </div>
           {/* ///// */}
           {/* <div>
@@ -89,24 +94,27 @@ const ProductCard = (props) => {
       </div>
 
       <div className="product-card__product-cta">
-        <Link to="#">
+        {/* <span className="product-card__product-cta">
           <faIcons.FaHeart className={favStyle} />
-        </Link>
+        </span> */}
 
-        <Link to="#">
+        <span data-cart="add">
           {inCart ? (
-            <bsIcons.BsFillCartCheckFill className="filled--green" />
+            <bsIcons.BsFillCartCheckFill
+              data-cart="add"
+              className="filled--green"
+            />
           ) : (
-            <bsIcons.BsFillCartPlusFill />
+            <bsIcons.BsFillCartPlusFill data-cart="add" />
           )}
-        </Link>
+        </span>
       </div>
 
       {/* ///////////////////////////////////////// */}
       {/* <div className="product-card__footer">
   <button className="product-card__footer__btn">View Product</button>
 </div> */}
-    </Link>
+    </div>
   );
 };
 

@@ -7,16 +7,16 @@
   background: var(--bg-image-grad-grey-light);
   display: block;
   margin-bottom: 2rem;
-  padding: 2rem;
+  padding: 2rem 1rem;
   padding-bottom: 4rem;
   // border-radius: var(--brr-regular);
-  box-shadow: var(--box-shadow-card);
+  // box-shadow: var(--box-shadow-card);
 
   &__div-2 {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     // background: var(--bg-image-grad-purple);
-    grid-template-rows: repeat(6, 10vh);
+    grid-template-rows: repeat(6, 13vh);
     gap: 1rem;
 
     &__box {

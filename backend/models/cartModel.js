@@ -6,10 +6,16 @@ const cartSchema = new mongoose.Schema({
     ref: 'User',
     required: [true, 'Cart must belong to a user'],
   },
-  products: {
-    type: Array,
-    required: [true, 'Products must be specified.'],
-  },
+  products: [
+    {
+      product: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Product',
+        required: [true, 'Please Specify Product Id'],
+      },
+      quantity: { type: Number, required: true },
+    },
+  ],
 });
 
 const Cart = mongoose.model('Cart', cartSchema);

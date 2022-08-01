@@ -3,7 +3,9 @@
 $--login-transition-time: 0.3s;
 
 .login-form-outer {
-  background: var(--bg-image-1-dark);
+  background: var(--bg-image-grad-grey-light);
+  background: var(--bg-image-grad-purple);
+
   // padding-top: 1rem;
   padding: 0;
   padding-top: 1rem;
@@ -14,7 +16,7 @@ $--login-transition-time: 0.3s;
   transform: translate(-50%, -50%);
   background-size: cover;
   box-shadow: var(--box-shadow-banner);
-  border-radius: 31px;
+  // border-radius: 31px;
   overflow: hidden;
   opacity: 0;
   // transition: all ;
@@ -38,8 +40,8 @@ $--login-transition-time: 0.3s;
     gap: 2rem;
     width: 70rem;
     transition: all $--login-transition-time;
-    background-image: var(--bg-image-grad-grey-light);
-    background: var(--bg-image-grad-purple);
+    // background-image: var(--bg-image-grad-grey-light);
+    // background: var(--bg-image-grad-purple);
     color: var(--color-white);
 
     @media (max-width: 37.5em) {

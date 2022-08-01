@@ -5,7 +5,9 @@ const AppError = require('../utils/appError');
 const Cart = require('../models/cartModel');
 
 exports.getCart = catchAsync(async (req, res, next) => {
-  const doc = await Cart.find({ user: req.user.id });
+  const doc = await Cart.find({ user: req.user.id }).populate(
+    'products.product'
+  );
 
   if (!doc) {
     return next(new AppError('Nothing Here. Lets Shop Together', 404));
@@ -13,24 +15,34 @@ exports.getCart = catchAsync(async (req, res, next) => {
 
   res.status(200).json({
     status: 'success',
-    results: doc.length,
     data: {
-      products: doc,
+      cart: doc,
     },
   });
 });
 
 exports.updateCartItem = catchAsync(async (req, res, next) => {
-  const doc = await Cart.updateOne(
-    {
-      user: req.user._id,
-      products: { $elemMatch: { _id: req.body._id } },
-      // 'products._id': req.body._id,
-    },
-    { $set: { 'products.$.quantity': req.body.quantity } }
-  );
+  const { quantity, _id } = req.body;
+  let doc;
 
-  res.json({ doc });
+  if (quantity <= 0) {
+    doc = await Cart.updateOne(
+      {
+        user: req.user._id,
+      },
+      { $pull: { products: { product: _id } } }
+    );
+  } else {
+    doc = await Cart.updateOne(
+      {
+        user: req.user._id,
+        'products.product': req.body._id,
+      },
+      { $set: { 'products.$.quantity': req.body.quantity } }
+    );
+  }
+
+  res.status(200).json({ doc });
 });
 
 exports.pushItem = catchAsync(async (req, res, next) => {
