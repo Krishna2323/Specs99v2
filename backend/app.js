@@ -5,11 +5,14 @@ const fileUpload = require('express-fileupload');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
+const path = require('path');
+
 //ROUTES
 const productRoute = require('./routes/productRoute');
 const userRoute = require('./routes/userRoute');
 const reviewRoute = require('./routes/reviewRoute');
 const cartRoute = require('./routes/cartRoute');
+const orderRoute = require('./routes/orderRoutes');
 
 // UTILS AND HANDLERS
 const AppError = require('./utils/appError');
@@ -47,10 +50,19 @@ app.use('/api/v1/products', productRoute);
 app.use('/api/v1/users', userRoute);
 app.use('/api/v1/reviews', reviewRoute);
 app.use('/api/v1/cart', cartRoute);
+app.use('/api/v1/order', orderRoute);
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+app.use(express.static(path.join(__dirname, '../frontend/build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../frontend/build'));
+});
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 app.all('*', (req, res, next) => {
-  next(new AppError(`Can't Find ${req.originalUrl} On This Server.`, 404));
+  next(new AppError(`Can't Find ${req.originalUrl} On The Server.`, 404));
 });
 app.use(globalErrorHandler);
 

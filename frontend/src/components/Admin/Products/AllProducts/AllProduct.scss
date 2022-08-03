@@ -37,7 +37,14 @@
       background: var(--bg-image-grad-grey-light);
       padding: 4rem;
       gap: 1rem;
+      position: relative;
       border-radius: 21px;
+
+      &__add-product-link {
+        position: absolute;
+        top: 4rem;
+        right: 2%;
+      }
 
       &::-webkit-scrollbar {
         width: 1.4rem;
@@ -75,7 +82,7 @@
       &__row {
         // flex-wrap: wrap;
         display: grid;
-        grid-template-columns: 9fr 1fr;
+        grid-template-columns: 9fr 0.5fr;
         background: var(--bg-image-3);
         padding: 0.5rem 2rem;
         border-radius: 2rem;
@@ -88,12 +95,21 @@
         text-align: center;
 
         &-details {
-          display: flex;
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
           justify-content: space-between;
-          align-items: center;
+
+          gap: 3rem;
+          // align-items: center;
           flex-wrap: wrap;
           width: 100%;
           gap: 3rem;
+
+          &__div {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+          }
         }
 
         & span {
@@ -147,7 +163,13 @@
         display: flex;
 
         &__row {
-          grid-template-columns: 9fr 1fr;
+          // grid-template-columns: 9fr 1fr;
+
+          &-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+          }
           & span {
             width: fit-content;
           }

@@ -61,4 +61,18 @@ exports.setCartUserId = (req, res, next) => {
   next();
 };
 
+exports.clearCart = catchAsync(async (req, res, next) => {
+  const doc = await Cart.findOneAndUpdate(
+    { user: req.user._id },
+    {
+      $set: { products: [] },
+    }
+  );
+
+  res.status(200).json({
+    status: 'success',
+    data: { doc },
+  });
+});
+
 exports.createCart = factory.createOne(Cart);

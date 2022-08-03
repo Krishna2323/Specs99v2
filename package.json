@@ -1,0 +1,19 @@
+{
+  "name": "specs99_v2",
+  "version": "1.0.0",
+  "description": "Specs 99 v_2",
+  "main": "backend/server.js",
+  "scripts": {
+    "test": " "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Krishna2323/Specs99v2.git"
+  },
+  "author": "your name",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Krishna2323/Specs99v2/issues"
+  },
+  "homepage": "https://github.com/Krishna2323/Specs99v2#readme"
+}

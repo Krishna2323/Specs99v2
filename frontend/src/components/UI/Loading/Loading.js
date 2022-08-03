@@ -5,7 +5,7 @@ import * as bsIcons from "react-icons/bs";
 const Loading = (props) => {
   const div =
     props.type === "loading" ? (
-      <div class="lds-ellipsis">
+      <div className="lds-ellipsis">
         <div></div>
         <div></div>
         <div></div>

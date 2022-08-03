@@ -5,7 +5,7 @@
   --color-primary-light: #ffe273;
   --color-primary-dark: #cbb769;
 
-  --color-secondary: rgb(105, 219, 124);
+  --color-secondary: #69db7c;
   --color-secondary-light: #ffe273;
   --color-secondary-dark: #7aa45f;
 
@@ -249,7 +249,7 @@ body {
   font-weight: 400;
   position: relative;
   color: var(--color-grey-dark);
-  // background: var(--bg-image-grad-purple);
+  // background: var(--bg-image-grad-purple-2);
   // background-image: linear-gradient(to right, #d16ba5, #fff, #5ffbf1);
   // height: max-content;
   // background-color: #ba8c63;
@@ -477,6 +477,10 @@ body {
   &:hover {
     transform: translateY(-2px);
   }
+
+  &:disabled {
+    background: var(--color-grey-medium);
+  }
 }
 
 .btn-secondary {
@@ -534,6 +538,7 @@ body {
   font-family: inherit;
   font-size: 2rem;
   width: fit-content;
+  text-decoration: none;
   padding: 0.2rem 3rem;
   border-radius: 33px;
   border: none;
@@ -544,6 +549,10 @@ body {
   color: white;
   cursor: pointer;
   transition: all 0.2s;
+
+  &:disabled {
+    background: var(--color-grey-medium);
+  }
 
   &--primary {
     background: var(--bg-image-1);

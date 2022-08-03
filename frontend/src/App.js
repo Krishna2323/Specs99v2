@@ -1,12 +1,14 @@
-import { Fragment, useEffect, useState } from "react";
+import "./App.scss";
+import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { Transition } from "react-transition-group";
+// import { Transition } from "react-transition-group";
 import Notification from "./components/UI/Notification/Notification";
 import { useSelector } from "react-redux";
-import useNotification from "./components/hooks/useNotification";
-import { useCookies } from "react-cookie";
-import "./App.scss";
+// import useNotification from "./components/hooks/useNotification";
+// import { useCookies } from "react-cookie";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
 // Layout Imports
 import Home from "./components/Home/Home";
@@ -19,45 +21,41 @@ import AllProduct from "./components/Admin/Products/AllProducts/AllProduct";
 import ProductPage from "./components/SingleProduct/ProductPage";
 import ProductsPage from "./components/ProductsPage/ProductsPage";
 import Footer from "./components/Layout/Footer/Footer";
-import Login from "./components/LoginSinggup/Login";
-import Singup from "./components/LoginSinggup/Singup";
+// import Login from "./components/LoginSinggup/Login";
+// import Singup from "./components/LoginSinggup/Singup";
 import Checkout from "./components/UI/Checkout/Checkout";
 
-// Actions Imports
-import {
-  notificationActions,
-  clearNotication,
-} from "./store/notificationSlice/notificationSlice";
-import Cart from "./components/UI/Cart/Cart";
+// // Actions Imports
+// import {
+//   notificationActions,
+//   clearNotication,
+// } from "./store/notificationSlice/notificationSlice";
+// import Cart from "./components/UI/Cart/Cart";
 import { loadUser } from "./store/userSlice/userActions";
-import { fetchProducts } from "./store/productsSlice/productsActions";
-import Confirmation from "./components/UI/Confirmation/Confirmation";
+import UserOrders from "./components/Admin/User/UserOrders";
+// import { fetchProducts } from "./store/productsSlice/productsActions";
+// import Confirmation from "./components/UI/Confirmation/Confirmation";
 // import { signup } from "./store/userSlice/userActions";
 // import { login } from "./store/userSlice/userActions";
 
 function App() {
   const dispatch = useDispatch();
-  const { notify, clearNotification } = useNotification();
   const { display } = useSelector((state) => state.notification);
   const { user } = useSelector((state) => state.user);
   const { products } = useSelector((state) => state.products);
 
   useEffect(() => {
-    notify("success", "Welcome", "Thanks For Visiting", "Welcome");
-
     if (!user) {
       dispatch(loadUser());
     }
 
-    dispatch(fetchProducts());
-
-    clearNotification();
-  }, [dispatch]);
+    console.log(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
+    console.log(process.env);
+  }, [dispatch, user]);
 
   return (
     <Container>
       <Header />
-      {/* <Checkout /> */}
       <Notification open={display} />
 
       <Routes>
@@ -80,6 +78,17 @@ function App() {
         <Route path="/allProduct" element={<AllProduct />} />
 
         <Route path="/product/:id" element={<ProductPage />} />
+        <Route
+          path="/checkout"
+          element={
+            <Elements
+              stripe={loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY)}
+            >
+              <Checkout />
+            </Elements>
+          }
+        />
+        <Route path="/account/orders" element={<UserOrders />} />
       </Routes>
 
       <Footer />

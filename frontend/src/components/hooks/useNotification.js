@@ -7,14 +7,16 @@ import {
 const useNotification = () => {
   const dispatch = useDispatch();
 
+  const clearNotification = () => {
+    dispatch(actionClearNotification());
+  };
+
   const notify = (type = "", status = "", message = "", action = "") => {
     dispatch(
       notificationActions.setNotification({ type, status, message, action })
     );
-  };
 
-  const clearNotification = () => {
-    dispatch(actionClearNotification());
+    clearNotification();
   };
 
   return { notify, clearNotification };

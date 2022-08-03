@@ -1,8 +1,8 @@
 .dashboard-sidebar {
   grid-column: 1 / span 1;
 
-  background-color: rgb(0, 0, 0);
-  // background: var(--bg-image-2);
+  // background-color: rgb(0, 0, 0);
+  background: var(--bg-image-grad-grey-dark);
   // background: orangered;
   color: white;
   transition: all 0.5s;
@@ -41,12 +41,6 @@
         &:hover {
           & .sidebar-product__links {
             display: block;
-            // opacity: 1;
-            // height: min-content;
-            // pointer-events: all;
-            // width: fit-content;
-            // height: fi;
-
             &::after {
               width: 100%;
             }

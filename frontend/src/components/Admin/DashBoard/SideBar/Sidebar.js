@@ -46,12 +46,27 @@ const Sidebar = (props) => {
             </Link>
           </li>
           <li className="dashboard-sidebar__nav-links__item">
-            <span className="dashboard-sidebar__nav-links__link">Products</span>
+            <Link
+              to="/allProduct"
+              className="dashboard-sidebar__nav-links__link"
+            >
+              Products
+            </Link>
             <SidebarSubLinks links={productOptions}></SidebarSubLinks>
           </li>
           <li className="dashboard-sidebar__nav-links__item">
-            <span className="dashboard-sidebar__nav-links__link">Users</span>
+            <Link to="/allUser" className="dashboard-sidebar__nav-links__link">
+              Users
+            </Link>
             <SidebarSubLinks links={userOptions}></SidebarSubLinks>
+          </li>
+          <li className="dashboard-sidebar__nav-links__item">
+            <Link
+              to="/account/orders"
+              className="dashboard-sidebar__nav-links__link"
+            >
+              Orders
+            </Link>
           </li>
           <li className="dashboard-sidebar__nav-links__item">
             <span className="dashboard-sidebar__nav-links__link">Banners</span>

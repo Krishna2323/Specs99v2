@@ -9,10 +9,12 @@ const useInput = (validationFunction, initialValue) => {
 
   const inputHandler = (e) => {
     setValue(e.target ? e.target.value : e);
+    // console.log(e.target.value);
   };
 
   const inputBlurHandler = () => {
     setIsTouched(true);
+    console.log("set");
   };
 
   const inputFocusHandler = () => {

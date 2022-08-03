@@ -22,17 +22,12 @@ export const fetchProducts = (
       url = `/api/v1/products/?keyword=${keyword}&price[gte]=${minPrice}&price[lte]=${maxPrice}&ratingsAverage[gte]=${ratingsAverage}&modelType=${typeOfGlass}&size=${frameSize}&frameColor=${frameColor}&lensColor=${lensColor}&gender=${gender}`;
     }
 
-    // if (keyword && frameSize) {
-    //   url = `/api/v1/products/?keyword=${keyword}&price[gte]=${minPrice}&size=${frameSize}`;
-    // } else if (frameSize) {
-    //   url = `/api/v1/products/?price[gte]=${minPrice}&size=${frameSize}`;
-    // }
-
     const fetchProductsFunc = async () => {
       dispatch(
         productsSliceAction.setProducts({
           isLoading: true,
           message: "Fetching Products",
+          isError: false,
         })
       );
 
@@ -56,7 +51,7 @@ export const fetchProducts = (
       dispatch(
         productsSliceAction.setProducts({
           isLoading: false,
-          message: errorMessage,
+          message: errorMessage.slice(0, 37).padEnd(40, "..."),
           isError: true,
         })
       );

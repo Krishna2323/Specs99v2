@@ -25,6 +25,12 @@ const AllProduct = () => {
       <div className="all-product-container">
         <div className="all-product-info">
           <h3 className="heading-1 heading-1--white">Products</h3>
+          <Link
+            to="/addProduct"
+            className="btn-small all-product-info__add-product-link"
+          >
+            Add Product
+          </Link>
           {products &&
             products.map((el) => <ProductInfoRow key={el._id} product={el} />)}
           {isLoading && <Loading type="loading" heading="Loading..." />}

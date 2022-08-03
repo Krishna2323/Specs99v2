@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import ReactDOM from "react-dom";
+import { useNavigate } from "react-router-dom";
 import Backdrop from "../Backdrop/Backdrop";
 import { useSelector } from "react-redux";
 import "./Cart.scss";
@@ -9,9 +10,15 @@ import CartProductRow from "./CartProductRow/CartProductRow";
 import Loading from "../Loading/Loading";
 
 const Cart = (props) => {
+  const navigate = useNavigate();
   const { open, onBackdropClick } = props;
   const { products, totalCost, totalProducts, isLoading, isError } =
     useSelector((state) => state.cart);
+
+  const handleCheckout = () => {
+    navigate("/checkout");
+    props.onBackdropClick();
+  };
 
   const cartAnimationClass = open ? "cart-open" : "cart-close";
   return (
@@ -41,6 +48,7 @@ const Cart = (props) => {
                         key={e.product._id}
                         product={e.product}
                         quantity={e.quantity}
+                        imageLocation="../../../assests/products/"
                       />
                     ))}
                   <div className="cart-container-summary">
@@ -49,7 +57,13 @@ const Cart = (props) => {
                       <span>₹{totalCost}</span>
                     </div>
                     <div className="cart-container-summary__div-2">
-                      <button className="btn-primary">Checkout</button>
+                      <button
+                        disabled={products.length === 0}
+                        onClick={handleCheckout}
+                        className="btn-primary"
+                      >
+                        Checkout
+                      </button>
                     </div>
                   </div>
                 </div>

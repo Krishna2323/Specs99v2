@@ -15,7 +15,7 @@ const ProductsPage = (props) => {
   // const [paramsChange, setParamsChange] = useState("");
   const { keyword } = params;
   const [sidebarState, setSidebarState] = useState(false);
-  const { products, totalProducts, isLoading } = useSelector(
+  const { products, totalProducts, isLoading, isError, message } = useSelector(
     (state) => state.products
   );
   const handleSidebar = () => {
@@ -81,6 +81,8 @@ const ProductsPage = (props) => {
       />
       <div className="products-page__products">
         {isLoading && <Loading heading="Loading..." type="loading" />}
+        {isError && <Loading heading={message} />}
+
         {products &&
           products.map((el, i) => (
             <ProductCard key={i} product={el} keyword={keyword} />

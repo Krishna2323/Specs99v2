@@ -1,0 +1,39 @@
+.order-confirmation {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 40rem;
+  // height: 30rem;
+  z-index: 1005;
+  background: var(--bg-image-grad-grey-dark);
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  padding: 2rem 1rem;
+
+  & h5 {
+    color: white;
+    font-size: 1.6rem;
+  }
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: 1.6rem;
+  color: white;
+  align-items: center;
+
+  & button {
+    margin-top: auto;
+    // align-self: flex-end;
+  }
+
+  & input {
+    font-family: inherit;
+    font-size: 1.6rem;
+    border: none;
+    outline: none;
+    padding: 2px 5px;
+    font-weight: 500;
+    margin-bottom: 2rem;
+  }
+}

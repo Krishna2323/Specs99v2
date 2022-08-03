@@ -100,6 +100,7 @@ export const getCart = () => {
       dispatch(
         cartSliceAction.setCart({
           isLoading: true,
+          products: [],
         })
       );
       const res = await axios.get("/api/v1/cart");
