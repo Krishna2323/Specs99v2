@@ -107,6 +107,8 @@ export const getCart = () => {
         data: { cart },
       } = res.data;
 
+      console.log(cart);
+
       dispatch(
         cartSliceAction.setCart({
           products: cart[0].products,

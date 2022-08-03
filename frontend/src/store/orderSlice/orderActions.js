@@ -76,6 +76,13 @@ export const createCodOrder = (cart, shippingInfo) => {
       const errorMessage =
         error.resonse?.data?.messags || "Something Went Wrong";
       console.log(error);
+
+      dispatch(
+        orderSliceAction.createOrder({
+          message: "Order Failed",
+          status: "failed",
+        })
+      );
       dispatchNotification(
         dispatch,
         "error",

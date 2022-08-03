@@ -25,7 +25,7 @@ const OrderConfirmation = (props) => {
     <Fragment>
       <Backdrop open={props.open} />
 
-      <Transition mountOnEnter unmountOnExit in={props.open}>
+      <Transition mountOnEnter unmountOnExit in={props.open} timeout={300}>
         {(state) =>
           ReactDom.createPortal(
             <div className="order-confirmation">

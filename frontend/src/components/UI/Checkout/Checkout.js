@@ -196,7 +196,7 @@ const Checkout = () => {
     postalCodeBlurHandler();
   };
 
-  const dispatchCodFunc = () => {
+  const dispatchCodFunc = async () => {
     setConfirmationBtnDisable(true);
     dispacth(
       createCodOrder(cart, {
@@ -246,11 +246,7 @@ const Checkout = () => {
   };
 
   useEffect(() => {
-    if (status === "placed") {
-      navigate("/");
-    }
-    if (cart.products.length === 0 && status !== "placed" && !cart.isLoading) {
-      notify("loading", "Can't Checkout", "Cart Is Empty", "checkout");
+    if (status === "placed" || status === "failed") {
       navigate("/");
     }
   }, [status]);
