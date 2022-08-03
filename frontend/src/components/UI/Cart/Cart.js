@@ -8,6 +8,7 @@ import "./Cart.scss";
 import { Transition } from "react-transition-group";
 import CartProductRow from "./CartProductRow/CartProductRow";
 import Loading from "../Loading/Loading";
+import * as aiIcons from "react-icons/ai";
 
 const Cart = (props) => {
   const navigate = useNavigate();
@@ -68,6 +69,11 @@ const Cart = (props) => {
                   </div>
                 </div>
               )}
+
+              <span onClick={onBackdropClick} className="cart-close-icon">
+                {" "}
+                <aiIcons.AiOutlineClose />
+              </span>
             </div>,
             document.getElementById("cart")
           )

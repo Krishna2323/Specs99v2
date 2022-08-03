@@ -14,13 +14,13 @@
   // padding-bottom: 10rem;
   // overflow-x: hidden;
   @media (max-width: 75em) {
-    padding: 2rem;
-    width: 100vw;
+    padding: 5rem 2rem;
+    width: 95vw;
     border-radius: 0px;
   }
 
   @media (max-width: 37.5em) {
-    padding: 0;
+    padding: 5rem 1rem;
   }
 
   &-open {
@@ -145,6 +145,10 @@
           grid-column: 3/-1;
           // grid-row: ;
         }
+        @media (max-width: 25em) {
+          grid-column: 1/-1;
+          justify-content: center;
+        }
       }
 
       &-info-2 {
@@ -159,6 +163,9 @@
 
         @media (max-width: 37.5em) {
           grid-column: 3/-1;
+        }
+        @media (max-width: 25em) {
+          grid-row: 1 / span 2;
         }
         text-align: center;
 
@@ -270,6 +277,15 @@
         }
       }
     }
+  }
+
+  &-close-icon {
+    position: absolute;
+    font-size: 3rem;
+    color: white;
+    right: 2%;
+    top: 1%;
+    cursor: pointer;
   }
 }
 

@@ -21,22 +21,9 @@ import AllProduct from "./components/Admin/Products/AllProducts/AllProduct";
 import ProductPage from "./components/SingleProduct/ProductPage";
 import ProductsPage from "./components/ProductsPage/ProductsPage";
 import Footer from "./components/Layout/Footer/Footer";
-// import Login from "./components/LoginSinggup/Login";
-// import Singup from "./components/LoginSinggup/Singup";
 import Checkout from "./components/UI/Checkout/Checkout";
-
-// // Actions Imports
-// import {
-//   notificationActions,
-//   clearNotication,
-// } from "./store/notificationSlice/notificationSlice";
-// import Cart from "./components/UI/Cart/Cart";
 import { loadUser } from "./store/userSlice/userActions";
 import UserOrders from "./components/Admin/User/UserOrders";
-// import { fetchProducts } from "./store/productsSlice/productsActions";
-// import Confirmation from "./components/UI/Confirmation/Confirmation";
-// import { signup } from "./store/userSlice/userActions";
-// import { login } from "./store/userSlice/userActions";
 
 function App() {
   const dispatch = useDispatch();

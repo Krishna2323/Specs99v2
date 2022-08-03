@@ -87,11 +87,7 @@ const TopProductSlider = (props) => {
 
       {products && (
         <div className="top-product-slider__container">
-          <Slider {...settings}>
-            {products.map((e, i) => div(e))}
-            {products.map((e, i) => div(e))}
-            {products.map((e, i) => div(e))}
-          </Slider>
+          <Slider {...settings}>{products.map((e, i) => div(e))}</Slider>
         </div>
       )}
     </div>

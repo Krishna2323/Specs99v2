@@ -100,24 +100,23 @@ export const getCart = () => {
       dispatch(
         cartSliceAction.setCart({
           isLoading: true,
-          products: [],
         })
       );
       const res = await axios.get("/api/v1/cart");
       const {
         data: { cart },
       } = res.data;
-      console.log(cart[0].products);
 
       dispatch(
         cartSliceAction.setCart({
           products: cart[0].products,
-          totalProducts: cart[0].products.length,
+          totalProducts: cart[0].products?.length,
           isLoading: false,
           totalCost: calculateAndSetSummary(cart[0].products),
         })
       );
     } catch (error) {
+      console.log(error);
       const errorMessage =
         error.response?.data.message || "Something Went Wrong";
 
