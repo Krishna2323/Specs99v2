@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 
 process.on('uncaughtException', (err) => {
   /*eslint-disable */
@@ -9,8 +10,9 @@ process.on('uncaughtException', (err) => {
 });
 
 if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config({ path: './config.env' });
+  dotenv.config({ path: './backend/config.env' });
 }
+// console.log(process.env.PORT);
 const app = require('./app');
 
 const DB = process.env.DATABASE_URL.replace(
