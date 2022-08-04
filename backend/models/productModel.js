@@ -43,7 +43,10 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: [true, 'A Product Must Have A Frame Color.'],
   },
-
+  style: {
+    type: String,
+    required: [true, 'A Product Must Have A Style.'],
+  },
   gender: {
     type: String,
     required: [true, 'Please Specify Gender.'],

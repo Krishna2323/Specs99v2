@@ -4,11 +4,12 @@
   grid-template-columns: repeat(6, 1fr);
   min-height: 80vh;
   background: var(--bg-image-grad-grey-light);
+  position: relative;
 
   & .user-orders {
     grid-column: 2/-1;
     width: 100%;
-    padding: 5rem 15rem;
+    padding: 8rem 15rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -17,11 +18,11 @@
 
     @media (max-width: 75em) {
       grid-column: 1/-1;
-      padding: 5rem 7rem;
+      padding: 8rem 7rem;
     }
     @media (max-width: 37.25em) {
       // grid-column: 1/-1;
-      padding: 5rem 3rem;
+      padding: 8rem 3rem;
     }
   }
 }

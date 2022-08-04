@@ -10,11 +10,17 @@
   position: relative;
   overflow: hidden;
   width: fit-content;
-  min-width: 60rem;
+  // min-width: 60rem;
+  padding: 2rem 10rem;
   gap: 1rem;
   border-radius: var(--brr-regular);
   color: white;
   background: var(--bg-image-grad-purple);
+
+  @media (max-width: 37.5em) {
+    width: fit-content;
+    padding: 2rem 5rem;
+  }
 
   & h3 {
     animation: move 1.4s infinite;

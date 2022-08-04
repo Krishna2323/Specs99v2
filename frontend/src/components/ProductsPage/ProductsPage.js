@@ -7,12 +7,14 @@ import { fetchProducts } from "./../../store/productsSlice/productsActions";
 import ProductCard from "../UI/Cards/Product/ProductCard";
 import { useParams } from "react-router-dom";
 import Loading from "./../UI/Loading/Loading";
+import WithDefaultFilter from "./ProductsHOC/withDefaultFilter";
+import { useLocation } from "react-router";
 
 const ProductsPage = (props) => {
+  const { pathname } = useLocation();
   const dispatch = useDispatch();
+  const { filter } = props;
   const params = useParams();
-  // const location = useLocation();
-  // const [paramsChange, setParamsChange] = useState("");
   const { keyword } = params;
   const [sidebarState, setSidebarState] = useState(false);
   const { products, totalProducts, isLoading, isError, message } = useSelector(
@@ -22,7 +24,7 @@ const ProductsPage = (props) => {
     setSidebarState((prevState) => !prevState);
   };
 
-  const handleFilterChange = (
+  const handleFilterChange = ({
     minPrice,
     maxPrice,
     ratingsAverage,
@@ -30,11 +32,11 @@ const ProductsPage = (props) => {
     frameSize,
     frameColor,
     lensColor,
-    gender
-  ) => {
+    gender,
+  }) => {
     if (keyword) {
       dispatch(
-        fetchProducts(
+        fetchProducts({
           keyword,
           minPrice,
           maxPrice,
@@ -43,13 +45,14 @@ const ProductsPage = (props) => {
           frameSize,
           frameColor,
           lensColor,
-          gender
-        )
+          gender,
+          ...filter,
+        })
       );
     } else {
       dispatch(
-        fetchProducts(
-          undefined,
+        fetchProducts({
+          keyword: filter.brand ? filter.brand : undefined,
           minPrice,
           maxPrice,
           ratingsAverage,
@@ -57,32 +60,41 @@ const ProductsPage = (props) => {
           frameSize,
           frameColor,
           lensColor,
-          gender
-        )
+          gender,
+          ...filter,
+        })
       );
     }
   };
 
   useEffect(() => {
-    console.log("Fetching");
-
-    if (keyword) {
-      dispatch(fetchProducts(keyword));
-    } else {
-      dispatch(fetchProducts());
+    if (
+      filter &&
+      (filter.brand || filter.typeOfGlass || filter.gender || filter.style)
+    ) {
+      dispatch(fetchProducts({ ...filter }));
     }
-  }, [dispatch, keyword]);
+    if (keyword) {
+      dispatch(fetchProducts({ keyword, ...filter }));
+    } else if (!keyword && filter && !filter.brand) {
+      dispatch(fetchProducts(filter));
+    }
+  }, [dispatch, keyword, pathname]);
 
   return (
     <div onClick={handleSidebar} className="products-page">
       <ProductsPageSidebar
         sidebarState={sidebarState}
         handleFilterChange={handleFilterChange}
+        filter={filter}
       />
       <div className="products-page__products">
+        {props.filter?.heading && (
+          <h2 className="heading-1">{filter.heading}</h2>
+        )}
+        {keyword && <h2 className="heading-1">Results For: {keyword}</h2>}
         {isLoading && <Loading heading="Loading..." type="loading" />}
         {isError && <Loading heading={message} />}
-
         {products &&
           products.map((el, i) => (
             <ProductCard key={i} product={el} keyword={keyword} />

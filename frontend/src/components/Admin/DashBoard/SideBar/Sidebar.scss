@@ -103,7 +103,7 @@
     width: 30rem;
     transform: translateX(-100%);
     transition: all 0.5s;
-    z-index: 1003;
+    z-index: 1;
 
     &-open {
       transform: translateX(0%);

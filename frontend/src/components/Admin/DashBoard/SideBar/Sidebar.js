@@ -24,7 +24,7 @@ const Sidebar = (props) => {
   return (
     <div
       className={`dashboard-sidebar ${
-        props.isOpen ? "dashboard-sidebar-open" : ""
+        props.open ? "dashboard-sidebar-open" : ""
       }`}
     >
       {/* ///////////////////////////////////////////// */}

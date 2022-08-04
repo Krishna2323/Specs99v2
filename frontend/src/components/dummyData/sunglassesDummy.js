@@ -1,16 +1,21 @@
 export const sunglassesDummy = [
   {
     id: 1,
+    brand: "Rayban",
     img: "https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/628x301/9df78eab33525d08d6e5fb8d27136e95//v/i/vincent-chase-vc-s13128-c5-sunglasses_sunglasses_g_4424_2.jpg",
+    // link: id.brand.spilt(" ").join("-"),
   },
   {
     id: 2,
-
+    brand: "Vincent Chase",
     img: "https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/628x301/9df78eab33525d08d6e5fb8d27136e95//v/i/Gold-Grey-Full-Rim-Aviator-Shape--Vincent-Chase-VINTAGE-VC-5158-C85-Sunglasses_vincent-chase-vc-5158-c85-sunglasses_.sunglasses_m_3549_3_1_1_118_02_2022.jpg",
+    // link: this.brand.spilt(" ").join("-"),
   },
   {
+    brand: "Any",
     id: 0,
     img: "https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/628x301/9df78eab33525d08d6e5fb8d27136e95//v/i/vincent-chase-vc-s13121-c7-c7-sunglasses_sunglasses_G_0535.jpg",
+    // link: this.brand.spilt(" ").join("-"),
   },
 ];
 
@@ -18,56 +23,37 @@ export const brandDummy = [
   {
     id: 4,
     name: "Upto 10% Off",
+    brand: "Rayban",
     img: "https://india.ray-ban.com/pub/static/version1649445069/frontend/Aceturtle/Rayban_new/en_US/images/logo.svg",
+    link: "/brand/rayban",
   },
   {
     id: 5,
     img: "https://www.idee-eyewear.com/pub/media/logo/stores/1/3.png",
     name: "Upto 10% Off",
+    brand: "Idee",
+
+    link: "/brand/idee",
   },
   {
     img: "https://i.pinimg.com/236x/d7/40/d0/d740d09554c42c5110ee3339caad56f7.jpg",
     name: "Upto 14% Off",
+    brand: "ck",
+
+    link: "/brand/ck",
+  },
+  {
+    id: 7,
+    img: "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/eb3a4241-39a1-4e44-a6fd-5c47bae9b644.jpg",
+    name: "Upto 10% Off",
+    link: "/brand/vincent-chase",
+    brand: "Vincent Chase",
   },
   {
     id: 6,
     img: "https://i.pinimg.com/564x/fe/b6/05/feb605d481ae0d7e4dd8429ec4c32d7d.jpg",
-    name: "Upto 15% Off",
-  },
-  {
-    img: "https://i.pinimg.com/236x/25/96/60/259660a36a65557223ebe63bc6c46f9e.jpg",
-    name: "Upto 10% Off",
-  },
-  {
-    img: "https://i.pinimg.com/236x/06/ea/41/06ea41f98b4483069e044948c16f66f7.jpg",
-    name: "Upto 25% Off",
-  },
-  {
-    img: "https://i.pinimg.com/236x/15/c4/0b/15c40bc486b230b793b064229b17df7f.jpg",
-    name: "Upto 15% Off",
-  },
-  {
-    img: "https://i.pinimg.com/564x/4b/ca/96/4bca96ce2ae71fa25576cd9c1f1a1ff1.jpg",
-    name: "Upto 30% Off",
-  },
-  {
-    id: 7,
-    img: "https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/371x178/9df78eab33525d08d6e5fb8d27136e95//v/i/vincent-chase-vc-e13786-c2-eyeglasses_vincent-chase-vc-e13786-c2-eyeglasses_g_3318.jpg",
-    name: "Upto 10% Off",
-  },
-  {
-    id: 8,
-    img: "https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/371x178/9df78eab33525d08d6e5fb8d27136e95//v/i/vincent-chase-vc-e14219-c2-eyeglasses_vincent-chase-vc-e14219-c2-eyeglasses_G_4014.jpg",
-    name: "Upto 15% Off",
-  },
-  {
-    id: 9,
-    img: "https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/371x178/9df78eab33525d08d6e5fb8d27136e95//l/i/Black-Silver-Black-Full-Rim-Rectangle-Lenskart-Air-Signia-LA-E11289-C1-Eyeglasses_lenskart-air-lnewa-e11289-rectangle-tr90-c1-eyeglnewasses_g_996611_02_2022.jpg",
-    name: "Upto 40% Off",
-  },
-  {
-    img: "https://i.pinimg.com/564x/4b/ca/96/4bca96ce2ae71fa25576cd9c1f1a1ff1.jpg",
-    name: "Upto 20% Off",
+    link: "/brand/valentino",
+    brand: "Valentino",
   },
 ];
 
@@ -140,25 +126,43 @@ export const homeShapes1 = [
   {
     img: "https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/480x480/9df78eab33525d08d6e5fb8d27136e95//l/i/grey-transparent-blue-full-rim-round-lenskart-air-classic-la-e14530-c3-eyeglasses_g_9406.jpg",
     name: "Round",
+    link: "/style/round",
   },
   {
     img: "https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/480x480/9df78eab33525d08d6e5fb8d27136e95//v/i/black-gold-full-rim-cat-eye-vincent-chase-sleek-steel-vc-e12400-c2-eyeglasses_csvfile-1645794316610-g_0222.jpg",
     name: "Cat-Eye",
+    link: "/style/cat-eye",
   },
   {
     img: "https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/480x480/9df78eab33525d08d6e5fb8d27136e95//v/i/Black-Grey-Full-Rim-Club-Master-Vincent-Chase-Polarized-HAVANA-VC-S14482-C1-Sunglasses_vincent-chase-vc-s14482-c1-sunglasses_J_148618_02_2022.jpg",
     name: "Clubmaster",
+    link: "/style/round",
   },
   {
     img: "https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/480x480/9df78eab33525d08d6e5fb8d27136e95//h/i/kids-glasses:pink-transparent-full-rim-square-8-12-yrs-hooper-astra-hooper-c3_kids-glasses_transparent-pink-transparent-full-rim-square-8-12-yrs-hooper-astra-hooper-c3_g_8544_image_pla_23_03_2022.jpg",
     name: "Transparent",
+    link: "/style/round",
   },
   {
     img: "https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/480x480/9df78eab33525d08d6e5fb8d27136e95//l/e/lenskart-air-la-e14394-c4-eyeglasses_g_7098.jpg",
-    name: "Air Flex",
+    name: "Square",
+    link: "/style/square",
   },
   {
     img: "https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/480x480/9df78eab33525d08d6e5fb8d27136e95//j/i/blue-transparent-blue-full-rim-aviator-john-jacobs-rich-acetate-jj-e13192-c4-eyeglasses_g_4281_6_03_22.jpg",
-    name: "Retro Aviator",
+    name: "Aviator",
+    link: "/style/aviator",
   },
+];
+
+export const navGenderCategory = [
+  { gender: "Mens", link: "/category/mens" },
+  { gender: "Womens", link: "/category/womens" },
+  { gender: "Kids", link: "/category/kids" },
+];
+
+export const navGlassCategory = [
+  { glass: "Sunglasses", link: "/sunglasses" },
+  { glass: "Eyeglasses", link: "/eyeglasses" },
+  { glass: "Eyelenses", link: "/eyelenses" },
 ];

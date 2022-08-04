@@ -23,6 +23,9 @@ const Checkout = () => {
   const [checkOutConfirmation, setCheckOutConfirmation] = useState(false);
   const [confirmationBtnDisable, setConfirmationBtnDisable] = useState(false);
 
+  const closeConfirmation = () => {
+    setCheckOutConfirmation(false);
+  };
   const stripe = useStripe();
 
   const [paymentChange, setPaymentChange] = useState(false);
@@ -167,19 +170,18 @@ const Checkout = () => {
     setPaymentChange(true);
   };
 
-  const checkIsAllFocused = () => {
+  const checkIsAllValid = () => {
     return (
-      !isFirstNameFocused ||
-      !isLastNameFocused ||
-      !isContactFocused ||
-      !isAltContactFocused ||
-      !isAddressFocused ||
-      !isStreetFocused ||
-      !isCityFocused ||
-      !isStateFocused ||
-      !isCountryFocused ||
-      !paymentChange ||
-      !isPostalCodeFocused
+      firstName.length < 3 ||
+      lastName.length < 3 ||
+      contact.length < 3 ||
+      altContact.length < 3 ||
+      address.length < 3 ||
+      street.length < 3 ||
+      city.length < 3 ||
+      state.length < 3 ||
+      country.length < 3 ||
+      !paymentChange
     );
   };
 
@@ -235,7 +237,7 @@ const Checkout = () => {
   const submitForm = async (e) => {
     e.preventDefault();
 
-    if (checkIsAllFocused()) {
+    if (checkIsAllValid()) {
       blurAll();
       return;
     }
@@ -255,6 +257,7 @@ const Checkout = () => {
     <Fragment>
       <OrderConfirmation
         open={checkOutConfirmation}
+        onBackdropClick={closeConfirmation}
         onConfrimationClick={
           payment === "cod" ? dispatchCodFunc : stripeCheckout
         }

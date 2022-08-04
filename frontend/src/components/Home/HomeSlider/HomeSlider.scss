@@ -3,10 +3,11 @@
 .home-top-products {
   color: white;
   width: 100%;
-  background: var(--bg-image-grad-grey-light);
+  // background: var(--bg-image-grad-grey-light);
   // border-radius: var(--brr-regular);
   padding: 2rem 5rem 5rem 5rem;
   box-shadow: var(--box-shadow-banner);
+  background-color: white;
   // box-shadow: 0.3rem 1rem 1rem rgba(0, 0, 0, 0.4);
 
   @media (max-width: 37.5em) {
@@ -42,7 +43,7 @@
         text-decoration: none;
         // position: relative;
         align-items: center;
-        color: white;
+        color: black;
         width: 80%;
         height: 25rem;
 
@@ -61,7 +62,7 @@
           height: 23rem;
         }
         @media (max-width: 25em) {
-          height: 17rem;
+          height: 20rem;
         }
 
         & a {

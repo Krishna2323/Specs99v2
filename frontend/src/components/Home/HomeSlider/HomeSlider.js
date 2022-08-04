@@ -76,7 +76,7 @@ const HomeSlider = (props) => {
               <div className="home-top-products__container-box-card" to="#">
                 <img src={el.img} alt="" />
                 <span>{el.name}</span>
-                <Link to="#" className="btn-small btn-small--primary">
+                <Link to={el.link} className="btn-small btn-small--primary">
                   Explore
                 </Link>
               </div>

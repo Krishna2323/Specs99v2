@@ -96,7 +96,7 @@ const ProductsPageSidebar = (props) => {
   };
 
   const handleFilterChange = () => {
-    props.handleFilterChange(
+    props.handleFilterChange({
       minPrice,
       maxPrice,
       minRating,
@@ -104,8 +104,8 @@ const ProductsPageSidebar = (props) => {
       frameSize,
       FrameColor,
       lensColor,
-      gender
-    );
+      gender,
+    });
   };
   const keyword = { params };
 
@@ -156,14 +156,16 @@ const ProductsPageSidebar = (props) => {
 
         {/* DAYS SORTING */}
 
-        <SelectInput
-          onChange={handleTypeOfGlassChange}
-          value={typeOfGlass}
-          lable="Glass Type"
-          options={["Sunglasses", "Eyeglasses", "Bluecut"]}
-          allOption={true}
-          style={{ fontSize: "1.8rem", padding: ".3rem 1rem" }}
-        />
+        {!props.filter?.typeOfGlass && (
+          <SelectInput
+            onChange={handleTypeOfGlassChange}
+            value={typeOfGlass}
+            lable="Glass Type"
+            options={["Sunglasses", "Eyeglasses", "Bluecut"]}
+            allOption={true}
+            style={{ fontSize: "1.8rem", padding: ".3rem 1rem" }}
+          />
+        )}
 
         <SelectInput
           onChange={handleFrameSizeChange}
@@ -192,14 +194,16 @@ const ProductsPageSidebar = (props) => {
           style={{ fontSize: "1.8rem", padding: ".3rem 1rem" }}
         />
 
-        <SelectInput
-          onChange={handleGenderChange}
-          value={gender}
-          allOption={true}
-          lable="Gender"
-          options={["Mens", "Womens", "Kids"]}
-          style={{ fontSize: "1.8rem", padding: ".3rem 1rem" }}
-        />
+        {!props.filter?.gender && (
+          <SelectInput
+            onChange={handleGenderChange}
+            value={gender}
+            allOption={true}
+            lable="Gender"
+            options={["Mens", "Womens", "Kids"]}
+            style={{ fontSize: "1.8rem", padding: ".3rem 1rem" }}
+          />
+        )}
 
         <button onClick={handleFilterChange} className="btn-small">
           {" "}

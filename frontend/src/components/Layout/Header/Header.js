@@ -18,6 +18,10 @@ import { Transition } from "react-transition-group";
 import { useDispatch, useSelector } from "react-redux";
 import { uiSliceAction } from "../../../store/uiSlice/uiSlice";
 // import { signup } from "../../../store/userSlice/userActions";
+import {
+  navGenderCategory,
+  navGlassCategory,
+} from "../../dummyData/sunglassesDummy";
 
 const setStyleOnNodelist = (thisKey, elements, targetLink) => {
   elements.forEach((el) => {
@@ -33,6 +37,7 @@ const setStyleOnNodelist = (thisKey, elements, targetLink) => {
 
 const Header = (props) => {
   const { cart, loginForm, singupForm } = useSelector((state) => state.ui);
+  const [loginOptions, setLoginOptions] = useState(false);
   const { totalProducts } = useSelector((state) => state.cart);
 
   const dispatch = useDispatch();
@@ -104,6 +109,17 @@ const Header = (props) => {
   const [sidebar, setSidebar] = useState(false);
   const [searchBar, setSearchBar] = useState(false);
 
+  const openLoginOptions = () => {
+    setLoginOptions(true);
+  };
+  const closeLoginOptions = () => {
+    setLoginOptions(false);
+  };
+
+  const toggleLoginOptions = () => {
+    setLoginOptions((prev) => !prev);
+  };
+
   //////////////////////////SINGUP FORM START/////////////////////////////////////
   //////////////////////////SINGUP FORM END/////////////////////////////////////
 
@@ -163,43 +179,26 @@ const Header = (props) => {
             <Link to="/" className="header-nav__open-links-logo">
               <img src={logo} alt="Specs99_Logo" />
             </Link>
+
+            {navGenderCategory.map((e) => (
+              <li className="header-nav__open-item">
+                <Link className="header-nav__open-link" to={e.link}>
+                  {e.gender}
+                </Link>
+              </li>
+            ))}
+
+            {navGlassCategory.map((e) => (
+              <li className="header-nav__open-item">
+                <Link className="header-nav__open-link" to={e.link}>
+                  {e.glass}
+                </Link>
+              </li>
+            ))}
+
             <li className="header-nav__open-item">
-              {" "}
-              <Link className="header-nav__open-link" to="/">
-                Men{" "}
-              </Link>
-            </li>
-            <li className="header-nav__open-item">
-              <Link
-                to="/"
-                className="header-nav__open-link"
-                onClick={handleSignupFormState}
-              >
-                Women{" "}
-              </Link>
-            </li>
-            <li className="header-nav__open-item">
-              {" "}
-              <Link to="/products" className="header-nav__open-link">
-                Kids{" "}
-              </Link>
-            </li>
-            <li className="header-nav__open-item">
-              {" "}
-              <Link to="/dashboard" className="header-nav__open-link">
-                Sports{" "}
-              </Link>
-            </li>
-            <li className="header-nav__open-item">
-              {" "}
-              <Link to="/dashboard" className="header-nav__open-link">
-                Eye Lenses{" "}
-              </Link>
-            </li>
-            <li className="header-nav__open-item">
-              {" "}
-              <Link to="/dashboard" className="header-nav__open-link">
-                Brands{" "}
+              <Link className="header-nav__open-link" to={"/account/orders"}>
+                My Orders
               </Link>
             </li>
 
@@ -207,12 +206,6 @@ const Header = (props) => {
               <MdIcons.MdOutlineClose />
             </span>
           </div>
-          {/* CONTAINER 4 */}
-
-          {/* <div className="header-nav__search-box">
-            <input onClick={openSearchBar} type="search" placeholder="Search" />
-          </div> */}
-          {/* CONTAINER 5 */}
 
           <div className="header-nav__cta">
             <span className="header-nav__open-link">
@@ -230,9 +223,20 @@ const Header = (props) => {
             </span>
             <span
               className="header-nav__open-link"
-              onClick={handleLoginFormState}
+              onClick={toggleLoginOptions}
+              // onMouseEnter={openLoginOptions}
+              // onMouseLeave={closeLoginOptions}
             >
               <HiIcons.HiDotsVertical className="header-nav__cta-icons " />
+              <div
+                className={`header-nav__open-link__sub-link ${
+                  loginOptions ? "header-nav__open-link__sub-link-open" : ""
+                }`}
+              >
+                <span onClick={handleLoginFormState}>Login</span>
+                <span onClick={handleSignupFormState}>Singup</span>
+                <span>Logout</span>
+              </div>
             </span>
           </div>
 

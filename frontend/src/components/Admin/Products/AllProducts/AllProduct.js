@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Sidebar from "../../DashBoard/SideBar/Sidebar";
 import { Link } from "react-router-dom";
 import "./AllProduct.scss";
@@ -9,19 +9,26 @@ import { useEffect } from "react";
 import { fetchProducts } from "../../../../store/productsSlice/productsActions";
 import ProductInfoRow from "../ProductInfoRow/ProductInfoRow";
 import Loading from "../../../UI/Loading/Loading";
+import Navigation from "../../Navigation/Navigation";
 
 const AllProduct = () => {
+  const [sidebar, setSidebar] = useState(false);
+  const dispatch = useDispatch();
   const { products, isLoading, isError, message } = useSelector(
     (state) => state.products
   );
-  const dispatch = useDispatch();
+
+  const toggleSidebar = () => {
+    setSidebar((prev) => !prev);
+  };
 
   useEffect(() => {
     dispatch(fetchProducts());
   }, []);
   return (
     <div className="dashboard-component">
-      <Sidebar />
+      <Navigation onClick={toggleSidebar} />
+      <Sidebar open={sidebar} />
       <div className="all-product-container">
         <div className="all-product-info">
           <h3 className="heading-1 heading-1--white">Products</h3>

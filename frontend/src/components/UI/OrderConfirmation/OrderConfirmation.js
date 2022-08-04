@@ -23,7 +23,7 @@ const OrderConfirmation = (props) => {
 
   return (
     <Fragment>
-      <Backdrop open={props.open} />
+      <Backdrop open={props.open} onBackdropClick={props.onBackdropClick} />
 
       <Transition mountOnEnter unmountOnExit in={props.open} timeout={300}>
         {(state) =>

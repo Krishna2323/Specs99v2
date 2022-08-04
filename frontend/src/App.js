@@ -24,6 +24,13 @@ import Footer from "./components/Layout/Footer/Footer";
 import Checkout from "./components/UI/Checkout/Checkout";
 import { loadUser } from "./store/userSlice/userActions";
 import UserOrders from "./components/Admin/User/UserOrders";
+import WithDefaultFilter from "./components/ProductsPage/ProductsHOC/withDefaultFilter";
+import {
+  brandDummy,
+  homeShapes1,
+  navGenderCategory,
+  navGlassCategory,
+} from "./components/dummyData/sunglassesDummy";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,9 +42,6 @@ function App() {
     if (!user) {
       dispatch(loadUser());
     }
-
-    console.log(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
-    console.log(process.env);
   }, [dispatch, user]);
 
   return (
@@ -49,7 +53,7 @@ function App() {
         <Route path="/" element={<Home />} />
 
         <Route path="/products/">
-          <Route path=":keyword" element={<ProductsPage />} />
+          <Route path=":keyword" element={<ProductsPage open={false} />} />
           <Route path="" element={<ProductsPage />} />
         </Route>
 
@@ -65,6 +69,51 @@ function App() {
         <Route path="/allProduct" element={<AllProduct />} />
 
         <Route path="/product/:id" element={<ProductPage />} />
+
+        {homeShapes1.map((e) => (
+          <Route
+            key={e.id}
+            path={`/style/${e.name.split(" ").join("-")}`}
+            element={WithDefaultFilter({
+              style: e.name.toLocaleLowerCase(),
+              heading: `${e.name} `,
+            })(ProductsPage)}
+          />
+        ))}
+
+        {navGenderCategory.map((e) => (
+          <Route
+            key={e.gender}
+            path={`/category/${e.gender.split(" ").join("-")}`}
+            element={WithDefaultFilter({
+              gender: e.gender.toLocaleLowerCase(),
+              heading: `${e.gender} Sections`,
+            })(ProductsPage)}
+          />
+        ))}
+
+        {navGlassCategory.map((e) => (
+          <Route
+            key={e.glass}
+            path={`/${e.glass.split(" ").join("-")}`}
+            element={WithDefaultFilter({
+              typeOfGlass: e.glass.toLocaleLowerCase(),
+              heading: `${e.glass}`,
+            })(ProductsPage)}
+          />
+        ))}
+
+        {brandDummy.map((e) => (
+          <Route
+            key={e.link}
+            path={`/brand/${e.brand.split(" ").join("-")}`}
+            element={WithDefaultFilter({
+              keyword: e.brand,
+              heading: `${e.brand} `,
+            })(ProductsPage)}
+          />
+        ))}
+
         <Route
           path="/checkout"
           element={

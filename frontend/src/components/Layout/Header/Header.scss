@@ -67,7 +67,7 @@
         top: 0;
         gap: 1rem;
         left: 0%;
-        z-index: 1010;
+        z-index: 1040;
         background: var(--bg-image-grad-purple);
         height: 100vh;
         width: fit-content;
@@ -196,6 +196,52 @@
 
         &:hover {
           transform: scale(1.2);
+        }
+      }
+
+      & .header-nav__open-link {
+        position: relative;
+        &__sub-link {
+          height: 0px;
+          width: 0px;
+          position: absolute;
+          top: 100%;
+          right: 0;
+          background: var(--bg-image-grad-purple);
+          display: flex;
+          width: fit-content;
+          flex-direction: column;
+          opacity: 0;
+          pointer-events: none;
+          transition: all 0.3s;
+          justify-content: center;
+          align-items: center;
+          height: fit-content;
+          z-index: 2;
+
+          &-open {
+            pointer-events: all;
+            height: fit-content;
+            opacity: 1;
+            width: fit-content;
+            gap: 0.8rem;
+            padding: 1rem 2rem;
+          }
+
+          & span {
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+          }
+
+          @media (max-width: 56.25em) {
+            &-open {
+              padding: 1rem 3rem;
+            }
+            & span {
+              font-size: 2.6rem;
+            }
+          }
         }
       }
     }

@@ -8,13 +8,11 @@ import App from "./App";
 import store from "./store/store";
 
 ReactDOM.render(
-  <BrowserRouter>
-    <Provider store={store}>
-      <CookiesProvider>
-        <App />
-      </CookiesProvider>
-    </Provider>
-  </BrowserRouter>,
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>,
   document.getElementById("root")
 );
 

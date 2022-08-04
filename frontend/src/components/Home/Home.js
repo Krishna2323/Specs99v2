@@ -27,7 +27,7 @@ const Home = () => {
   // };
 
   useEffect(() => {
-    dispatch(fetchProducts());
+    dispatch(fetchProducts({}));
   }, [dispatch]);
   return (
     <div className="home-component">
