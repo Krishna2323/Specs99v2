@@ -11,7 +11,7 @@ module.exports = class Email {
   }
 
   newTransport() {
-    if (process.env.NODE_ENV === 'production') {
+    if (process.env.NODE_ENV === 'development') {
       // Sendgrid
       return nodemailer.createTransport({
         service: 'SendGrid',
@@ -50,12 +50,14 @@ module.exports = class Email {
       text: htmlToText.fromString(html),
     };
 
+    console.log('SENDING MAIL');
     // 3) Create a transport and send email
     await this.newTransport().sendMail(mailOptions);
+    console.log(`SENDING MAIL TO ${this.to}`);
   }
 
   async sendWelcome() {
-    await this.send('welcome', 'Welcome to the Natours Family!');
+    await this.send('welcome', 'Welcome to the Specs99 Family!');
   }
 
   async sendPasswordReset() {

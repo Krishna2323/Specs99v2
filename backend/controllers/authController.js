@@ -43,7 +43,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
   });
-  await new Email(newUser, 'new.com').sendWelcome();
+  await new Email(newUser, 'https://specs99v2.herokuapp.com/').sendWelcome();
 
   createSendToken(newUser, 201, res);
 });
