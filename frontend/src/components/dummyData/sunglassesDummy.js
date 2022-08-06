@@ -36,11 +36,11 @@ export const brandDummy = [
     link: "/brand/idee",
   },
   {
-    img: "https://i.pinimg.com/236x/d7/40/d0/d740d09554c42c5110ee3339caad56f7.jpg",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYRMpzw5wXO6BVTDRLzTEjb79GUyDtJ35kMw&usqp=CAU",
     name: "Upto 14% Off",
-    brand: "ck",
+    brand: "fastrack",
 
-    link: "/brand/ck",
+    link: "/brand/fastrack",
   },
   {
     id: 7,
@@ -54,6 +54,14 @@ export const brandDummy = [
     img: "https://i.pinimg.com/564x/fe/b6/05/feb605d481ae0d7e4dd8429ec4c32d7d.jpg",
     link: "/brand/valentino",
     brand: "Valentino",
+    name: "Valentino",
+  },
+  {
+    id: 7,
+    name: "Vogue",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSP6LEEcl14t1vHPyFhuZzV1XJslyFotDanj9hxDJ_PA-YxLuOvDMgeyNNzi-nOi0hV1j8&usqp=CAU",
+    link: "/brand/vogue",
+    brand: "Vogue",
   },
 ];
 
@@ -136,12 +144,12 @@ export const homeShapes1 = [
   {
     img: "https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/480x480/9df78eab33525d08d6e5fb8d27136e95//v/i/Black-Grey-Full-Rim-Club-Master-Vincent-Chase-Polarized-HAVANA-VC-S14482-C1-Sunglasses_vincent-chase-vc-s14482-c1-sunglasses_J_148618_02_2022.jpg",
     name: "Clubmaster",
-    link: "/style/round",
+    link: "/style/clubmaster",
   },
   {
     img: "https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/480x480/9df78eab33525d08d6e5fb8d27136e95//h/i/kids-glasses:pink-transparent-full-rim-square-8-12-yrs-hooper-astra-hooper-c3_kids-glasses_transparent-pink-transparent-full-rim-square-8-12-yrs-hooper-astra-hooper-c3_g_8544_image_pla_23_03_2022.jpg",
     name: "Transparent",
-    link: "/style/round",
+    link: "/style/transparent",
   },
   {
     img: "https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/480x480/9df78eab33525d08d6e5fb8d27136e95//l/e/lenskart-air-la-e14394-c4-eyeglasses_g_7098.jpg",

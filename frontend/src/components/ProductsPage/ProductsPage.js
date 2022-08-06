@@ -7,8 +7,8 @@ import { fetchProducts } from "./../../store/productsSlice/productsActions";
 import ProductCard from "../UI/Cards/Product/ProductCard";
 import { useParams } from "react-router-dom";
 import Loading from "./../UI/Loading/Loading";
-import WithDefaultFilter from "./ProductsHOC/withDefaultFilter";
 import { useLocation } from "react-router";
+import * as FaIcons from "react-icons/fa";
 
 const ProductsPage = (props) => {
   const { pathname } = useLocation();
@@ -82,11 +82,12 @@ const ProductsPage = (props) => {
   }, [dispatch, keyword, pathname]);
 
   return (
-    <div onClick={handleSidebar} className="products-page">
+    <div className="products-page">
       <ProductsPageSidebar
         sidebarState={sidebarState}
         handleFilterChange={handleFilterChange}
         filter={filter}
+        closeSidebar={handleSidebar}
       />
       <div className="products-page__products">
         {props.filter?.heading && (
@@ -109,6 +110,10 @@ const ProductsPage = (props) => {
           />
         )}
       </div>
+
+      <button className="products-page__filter-btn" onClick={handleSidebar}>
+        <FaIcons.FaFilter />
+      </button>
     </div>
   );
 };

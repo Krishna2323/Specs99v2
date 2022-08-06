@@ -14,12 +14,25 @@ import {
 } from "./../../../../store/productSlice/productActions";
 import { clearNotication } from "../../../../store/notificationSlice/notificationSlice";
 import useNotify from "../../../hooks/useNotification";
+import MultipleSelectInput from "../../../UI/SelectInput/MultipleSelectInput";
 const UpdateProduct = (props) => {
   const dispatch = useDispatch();
   const params = useParams();
   const [sidebar, setSidebar] = useState(false);
   const [coverImage, setCoverImage] = useState();
   const [images, setImages] = useState([]);
+  const [style, setStyle] = useState([]);
+
+  const handleStyleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setStyle(typeof value === "string" ? value.split(",") : value);
+    // setStyle(prev=>prev.includes(value)?":[...prev,value])
+
+    console.log(style);
+  };
+
   const { notify } = useNotify();
 
   const { product, isLoading } = useSelector((state) => state.product);
@@ -244,6 +257,8 @@ const UpdateProduct = (props) => {
     formData.append("description", descriptionValue);
     formData.append("frameType", frameTypeValue);
     formData.append("frameColor", frameColorValue);
+    style.forEach((el) => formData.append("style", el));
+
     formData.append("imageCover", coverImage);
 
     images.forEach((el) => {
@@ -271,8 +286,9 @@ const UpdateProduct = (props) => {
       descriptionHandler(product.description);
       frameTypeHandler(product.frameType);
       frameColorHandler(product.frameColor);
+      setStyle(product.style);
     }
-  }, []);
+  }, [product]);
 
   return (
     <div className="dashboard-component">
@@ -351,6 +367,21 @@ const UpdateProduct = (props) => {
               hasError={modelTypeHasError}
               errorMessage="Please Select Model."
               value={modelTypeValue}
+            />
+            <MultipleSelectInput
+              selected={style}
+              options={[
+                "Transparent",
+                "Aviator",
+                "Clubmaster",
+                "Cat-Eye",
+                "Round",
+                "Square",
+                "Rectangle",
+              ]}
+              lable="Style"
+              onChange={handleStyleChange}
+              value={style}
             />
             {/* ROW 6 */}
             <FormInput

@@ -19,6 +19,7 @@
     box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.2);
     box-sizing: border-box;
     height: fit-content;
+    transition: all 0.3s;
 
     &--invalid {
       border-bottom: 3px solid #ff1414;
@@ -49,6 +50,25 @@
     &__error {
       color: var(--color-primary);
       font-size: 1.4rem;
+    }
+  }
+
+  & .form-input {
+    flex: 0 0 100%;
+    width: 100%;
+    position: relative;
+
+    &-svg {
+      position: absolute;
+      top: 50%;
+      right: 2%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      cursor: pointer;
+
+      &--open {
+        color: var(--color-primary);
+      }
     }
   }
 }

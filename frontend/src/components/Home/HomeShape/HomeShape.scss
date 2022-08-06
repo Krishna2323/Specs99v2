@@ -23,7 +23,7 @@
     &__box {
       box-shadow: 0.1rem 0.1rem 1.2rem 3px rgba(rgb(0, 0, 0), 0.1);
       overflow: hidden;
-      border-radius: var(--brr-regular);
+      border-radius: var(--brr-sm);
 
       & img {
         height: 100%;
@@ -44,28 +44,24 @@
       }
 
       &-2 {
-        background-color: red;
         height: 100%;
         width: 100%;
         grid-column: 5 / span 2;
         grid-row: 1 / span 4;
       }
       &-3 {
-        background-color: red;
         height: 100%;
         width: 100%;
         grid-column: 1 / span 2;
         grid-row: 3 / span 2;
       }
       &-4 {
-        background-color: red;
         height: 100%;
         width: 100%;
         grid-column: 3 / span 2;
         grid-row: 3 / span 2;
       }
       &-5 {
-        background-color: red;
         height: 100%;
         width: 100%;
         grid-column: 1 / span 4;

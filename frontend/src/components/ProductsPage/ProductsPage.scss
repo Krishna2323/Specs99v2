@@ -28,4 +28,25 @@
       grid-column: 1/-1;
     }
   }
+
+  &__filter-btn {
+    position: fixed;
+    bottom: 4rem;
+    left: 50%;
+    font-size: 3rem;
+    color: white;
+    border: none;
+    transform: translateX(-50%);
+    background: var(--bg-image-grad-purple);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 6rem;
+    height: 6rem;
+    display: none;
+    @media (max-width: 75em) {
+      display: block;
+    }
+  }
 }

@@ -53,7 +53,7 @@ export const fetchProducts = (filter) => {
       dispatch(
         productsSliceAction.setProducts({
           isLoading: false,
-          message: errorMessage.slice(0, 37).padEnd(40, "..."),
+          message: errorMessage.slice(0, 37),
           isError: true,
         })
       );

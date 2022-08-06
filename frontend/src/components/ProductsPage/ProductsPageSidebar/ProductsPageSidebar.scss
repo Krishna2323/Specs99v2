@@ -16,7 +16,23 @@
   flex-direction: column;
   gap: 2.2rem;
 
-  & button {
+  &__close-btn {
+    font-size: 3.8rem;
+    background: none;
+    position: absolute;
+    display: none;
+    top: 1.5rem;
+    right: 1.5rem;
+    color: white;
+    border: none;
+    margin: 0;
+
+    @media (max-width: 75em) {
+      display: block;
+    }
+  }
+
+  &__apply-btn {
     align-self: center;
     margin-top: 2.4rem;
     background: var(--bg-image-1);
@@ -24,7 +40,7 @@
     width: fit-content;
   }
   &__heading {
-    margin-bottom: 2rem;
+    margin: 3rem 0 0rem 0rem;
     text-transform: none;
   }
 
@@ -44,6 +60,12 @@
         display: flex;
         width: 100%;
         justify-content: space-between;
+        align-items: center;
+
+        & svg {
+          transform: translateY(1.5px);
+          font-size: 1.8rem;
+        }
       }
     }
 
@@ -84,14 +106,9 @@
     }
 
     &__submit-btn__box {
-      // background-color: white;
-      // padding: 0.5rem 1rem;
       align-self: center;
       width: fit-content;
       margin: 3rem auto;
-      // border-radius: 2rem;
-      // box-shadow: 0 1rem 1rem rgba($color: #000000, $alpha: 0.2);
-      // transition: all 0.2s;
 
       &:hover {
         transform: translateY(-0.2rem);

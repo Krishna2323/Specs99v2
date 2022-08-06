@@ -44,7 +44,7 @@ const ProductInfoRow = (props) => {
         </div>
 
         <div className="all-product-info__row-icons">
-          <Link to={`/updateProduct/${el._id}`}>
+          <Link to={`/addProduct/${el._id}`}>
             <MdIcons.MdModeEditOutline />
           </Link>
           <MdIcons.MdDelete onClick={setConfirm} />

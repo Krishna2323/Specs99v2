@@ -1,5 +1,5 @@
 import "./App.scss";
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useDispatch } from "react-redux";
 // import { Transition } from "react-transition-group";
@@ -15,7 +15,7 @@ import Home from "./components/Home/Home";
 import Header from "./components/Layout/Header/Header";
 import Container from "./components/UI/Container/Container";
 import DashBoard from "./components/Admin/DashBoard/DashBoard";
-import AddProduct from "./components/Admin/Products/AddProduct/AddProduct";
+import AddUpdateProduct from "./components/Admin/Products/AddUpdateProduct/AddUpdateProduct";
 import UpdateProduct from "./components/Admin/Products/UpdateProduct/UpdateProduct";
 import AllProduct from "./components/Admin/Products/AllProducts/AllProduct";
 import ProductPage from "./components/SingleProduct/ProductPage";
@@ -25,18 +25,23 @@ import Checkout from "./components/UI/Checkout/Checkout";
 import { loadUser } from "./store/userSlice/userActions";
 import UserOrders from "./components/Admin/User/UserOrders";
 import WithDefaultFilter from "./components/ProductsPage/ProductsHOC/withDefaultFilter";
+import { Navigate } from "react-router-dom";
+
+import LoggedInUserRoute from "./components/ProtectedRoutes/LoggedInUserRoute";
 import {
   brandDummy,
   homeShapes1,
   navGenderCategory,
   navGlassCategory,
 } from "./components/dummyData/sunglassesDummy";
+import UserAccount from "./components/Admin/User/UserAccount/UserAccount";
 
 function App() {
   const dispatch = useDispatch();
   const { display } = useSelector((state) => state.notification);
   const { user } = useSelector((state) => state.user);
   const { products } = useSelector((state) => state.products);
+  const { isLoggedIn } = useSelector((state) => state.user);
 
   useEffect(() => {
     if (!user) {
@@ -50,26 +55,21 @@ function App() {
       <Notification open={display} />
 
       <Routes>
+        {/* ROUTES FOR ALL USERS */}
+
+        {/* HOME PAGE */}
         <Route path="/" element={<Home />} />
 
+        {/* PRODUCTS PAGE */}
         <Route path="/products/">
           <Route path=":keyword" element={<ProductsPage open={false} />} />
           <Route path="" element={<ProductsPage />} />
         </Route>
 
-        <Route path="/dashboard" element={<DashBoard />} />
-
-        <Route
-          path="/addProduct"
-          element={<AddProduct product={products ? products[0] : undefined} />}
-        />
-
-        <Route path="/updateProduct/:id" element={<UpdateProduct />} />
-
-        <Route path="/allProduct" element={<AllProduct />} />
-
+        {/* PRODUCTS DETAIL PAGE */}
         <Route path="/product/:id" element={<ProductPage />} />
 
+        {/* PRODUCTS PAGE WITH DEFAULT FILTERS START*/}
         {homeShapes1.map((e) => (
           <Route
             key={e.id}
@@ -113,6 +113,18 @@ function App() {
             })(ProductsPage)}
           />
         ))}
+        {/* ROUTES FOR ALL USERS END */}
+
+        {/* LOGGED IN USER PAGES */}
+        <Route
+          path="/user/account"
+          element={isLoggedIn ? <UserAccount /> : <Navigate to="/" />}
+        />
+        {/* <Route path="/user/account">
+          <LoggedInUserRoute Component={UserAccount} />
+        </Route> */}
+
+        <Route path="/account/orders" element={<UserOrders />} />
 
         <Route
           path="/checkout"
@@ -124,7 +136,37 @@ function App() {
             </Elements>
           }
         />
-        <Route path="/account/orders" element={<UserOrders />} />
+
+        {/* {LOGGED IN USER PAGES END} */}
+
+        {/* ADMIN ROUTES */}
+        <Route path="/allProduct" element={<AllProduct />} />
+        <Route path="/dashboard" element={<DashBoard />} />
+        {/* <Route
+          path="/addProduct" element={<AddProduct product={products ? products[0] : undefined} />}
+        /> */}
+        <Route path="/addProduct/">
+          <Route
+            path=""
+            element={
+              <AddUpdateProduct
+                product={products ? products[0] : undefined}
+                heading="Add Product"
+              />
+            }
+          />
+          <Route
+            path=":id"
+            element={
+              <AddUpdateProduct
+                action="updateProduct"
+                heading="Update Product"
+              />
+            }
+          />
+        </Route>
+        <Route path="/updateProduct/:id" element={<UpdateProduct />} />
+        {/* ADMIN ROUTES END */}
       </Routes>
 
       <Footer />

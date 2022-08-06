@@ -1,8 +1,13 @@
 import React, { Fragment } from "react";
 import "./OrderRow.scss";
+import useNotification from "../../../hooks/useNotification";
 
 const OrderRow = (props) => {
   const { order } = props;
+  const { notify } = useNotification();
+  const handleOnReviewClick = () => {
+    notify("loading", "Action", "Not Yet Impemented", "review");
+  };
   return (
     <Fragment>
       {order &&
@@ -25,7 +30,10 @@ const OrderRow = (props) => {
               <span className="order-info__total-price">
                 Total Price: {order.totalPrice}
               </span>
-              <button className="btn-small btn-small--primary">
+              <button
+                className="btn-small btn-small--primary"
+                onClick={handleOnReviewClick}
+              >
                 Add Review
               </button>
             </div>
@@ -36,13 +44,18 @@ const OrderRow = (props) => {
                 Payment Method: {order.paymentMethod.toUpperCase()}
               </span>
               <span className="order-info__payment-status">
-                Payment Status: {order.paymentStatus}
+                Payment Status: {order.paymentStatus.toUpperCase()}
               </span>
               <span className="order-info__deliver-status">
-                Delivery Status: {order.deliveryStatus}
+                Delivery Status: {order.deliveryStatus.toUpperCase()}
               </span>
               <span className="order-info__ordered-on">
-                Order On: {new Date(order.orderedAt).getFullYear()}
+                Order On:{" "}
+                {new Intl.DateTimeFormat("en-GB", {
+                  month: "long",
+                  day: "2-digit",
+                  year: "numeric",
+                }).format(new Date(order.orderedAt))}
               </span>
             </div>
           </div>

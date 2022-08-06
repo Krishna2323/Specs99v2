@@ -110,7 +110,7 @@
   // background: var(--bg-);
   // background-color: var);
   background-color: white;
-  padding: 2rem 5rem 5rem 5rem;
+  padding: 5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -121,8 +121,8 @@
   }
   & .add-product-form {
     width: 100%;
-    background: var(--bg-image-grad-grey-light);
-    border-radius: 31px;
+    background: var(--bg-image-grad-grey-dark);
+    border-radius: 3px;
     padding: 3rem;
     box-shadow: 0 3rem 3rem rgba(0, 0, 0, 0.2);
     gap: 3rem;

@@ -37,7 +37,7 @@ exports.upload = multer({
 exports.resizeProductImages = catchAsync(async (req, res, next) => {
   // console.log(req.files);
 
-  if (!req.files.imageCover || !req.files.images) {
+  if (!req.files?.imageCover || !req.files?.images) {
     req.body.imageCover = 'testMulter';
     return next();
   }
@@ -53,7 +53,7 @@ exports.resizeProductImages = catchAsync(async (req, res, next) => {
     .toFormat('jpeg')
     .jpeg({ quality: 90 })
     .toFile(
-      `../frontend/src/components/assests/products/${req.body.imageCover}`
+      `./frontend/src/components/assests/products/${req.body.imageCover}`
     );
 
   // 2) Images
@@ -71,7 +71,7 @@ exports.resizeProductImages = catchAsync(async (req, res, next) => {
         .resize(2000, 1333)
         .toFormat('jpeg')
         .jpeg({ quality: 90 })
-        .toFile(`../frontend/src/components/assests/products/${filename}`);
+        .toFile(`./frontend/src/components/assests/products/${filename}`);
 
       req.body.images.push(filename);
     })
@@ -85,3 +85,5 @@ exports.getProduct = getOne(Product);
 exports.createProduct = createOne(Product);
 exports.updateProduct = updateOne(Product);
 exports.deleteProduct = deleteOne(Product);
+
+//

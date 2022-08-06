@@ -125,6 +125,7 @@ export const deleteProduct = (id) => {
     try {
       await sendRequest();
       dispatch(clearNotication());
+      dispatch(fetchProduct({}));
     } catch (error) {
       const errorMessage =
         error.response.data.message || "Something Went Wrong!";

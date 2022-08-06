@@ -6,6 +6,7 @@ import {
 } from "../notificationSlice/notificationSlice";
 import axios from "axios";
 import { getCart } from "../cartSlice/cartActions";
+import { dispatchNotification } from "../helper/helper";
 
 export const login = (data) => {
   return async (dispatch) => {
@@ -109,9 +110,7 @@ export const signup = (data) => {
         })
       );
     }
-    setTimeout(() => {
-      dispatch(clearNotication());
-    }, 3000);
+    dispatch(clearNotication());
   };
 };
 
@@ -134,5 +133,63 @@ export const loadUser = () => {
     };
 
     singupPost();
+  };
+};
+
+export const updateUser = (data) => {
+  return async (dispatch) => {
+    const sendRequest = async () => {
+      dispatchNotification(
+        dispatch,
+        "loading",
+        "Updating",
+        "Request Sent",
+        "updateUser"
+      );
+
+      // dispatch(
+      //   userSliceActions.updateDetail({
+      //     isLoading: true,
+      //   })
+      // );
+
+      const res = await axios.post("/api/v1/users/updateMe", data);
+
+      console.log(res);
+
+      const { user } = res.data.data;
+
+      dispatch(
+        userSliceActions.updateDetail({
+          user,
+          isLoading: false,
+        })
+      );
+
+      dispatchNotification(
+        dispatch,
+        "success",
+        "Success",
+        "Account Updated",
+        "updateUser"
+      );
+    };
+
+    try {
+      await sendRequest();
+      dispatch(clearNotication());
+    } catch (error) {
+      const errorMessage =
+        error.response?.data.message || "Something Went Wrong!";
+      dispatchNotification(
+        dispatch,
+        "error",
+        "Error",
+        errorMessage,
+        "updateUser"
+      );
+      dispatch(clearNotication());
+    }
+    dispatch(clearNotication());
   };
 };

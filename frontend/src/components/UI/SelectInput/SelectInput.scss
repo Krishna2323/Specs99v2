@@ -3,9 +3,12 @@
   flex-direction: column;
   gap: 1rem;
 
+  & .form-row-lable {
+    color: white;
+  }
+
   &-select {
     border: none;
-    padding: 0rem 2rem;
     font-size: 2.4rem;
     border-radius: 7px;
     width: 100%;
@@ -19,14 +22,19 @@
     transition: all 0.5s;
     outline: none;
     border: 1px solid var(--color-grey-light);
+    // color: white;
 
     & option {
       font-size: 2.4rem;
-      background-color: var(--color-grey-medium);
-      color: white;
+      // background-color: var(--color-grey-dark);
+      color: var(--color-grey-dark);
       &:hover {
       }
     }
+  }
+
+  & #demo-multiple-checkbox {
+    padding: 1.3rem 1.5rem !important;
   }
 
   &-lable {

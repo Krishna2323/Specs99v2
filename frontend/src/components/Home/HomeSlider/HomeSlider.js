@@ -44,19 +44,19 @@ const settings = {
       },
     },
     {
-      breakpoint: 450,
+      breakpoint: 500,
       settings: {
-        slidesToShow: 3,
-        // rows: 4,
-        slidesToScroll: 3,
+        slidesToShow: 2,
+        rows: 2,
+        slidesToScroll: 2,
       },
     },
     {
-      breakpoint: 320,
+      breakpoint: 400,
       settings: {
-        slidesToShow: 3,
-        // rows: 4,
-        slidesToScroll: 3,
+        slidesToShow: 2,
+        rows: 2,
+        slidesToScroll: 2,
       },
     },
   ],
@@ -65,15 +65,15 @@ const settings = {
 const HomeSlider = (props) => {
   const { heading, slides } = props;
   return (
-    <div className="home-element home-top-products">
+    <div className="home-element home-slider">
       <div className="box-center">
         <h2 className="heading-1">{heading}</h2>
       </div>
-      <div className="home-top-products__container">
+      <div className="home-slider__container">
         <Slider {...settings}>
           {slides.map((el) => (
-            <div key={el.name} className="home-top-products__container-box">
-              <div className="home-top-products__container-box-card" to="#">
+            <div key={el.name} className="home-slider__container-box">
+              <div className="home-slider__container-box-card" to="#">
                 <img src={el.img} alt="" />
                 <span>{el.name}</span>
                 <Link to={el.link} className="btn-small btn-small--primary">

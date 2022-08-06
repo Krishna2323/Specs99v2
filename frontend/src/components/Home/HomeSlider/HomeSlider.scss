@@ -1,6 +1,6 @@
 @import "./../../Sacss/mixins";
 
-.home-top-products {
+.home-slider {
   color: white;
   width: 100%;
   // background: var(--bg-image-grad-grey-light);
@@ -38,9 +38,11 @@
 
       &-card {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         flex-direction: column;
         text-decoration: none;
+        padding: 1rem 0;
+
         // position: relative;
         align-items: center;
         color: black;
@@ -48,7 +50,7 @@
         height: 25rem;
 
         @media (max-width: 37.5em) {
-          width: 92%;
+          width: 95%;
         }
         @media (max-width: 25em) {
           // height: 17rem;
@@ -85,9 +87,9 @@
           //   height: 17rem;
           // }
 
-          // @media (max-width: 37.25em) {
-          //   height: 15rem;
-          // }
+          @media (max-width: 37.25em) {
+            height: 65%;
+          }
         }
       }
     }

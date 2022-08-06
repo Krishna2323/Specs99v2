@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import "./FormInput.scss";
+import * as faIcons from "react-icons/fa";
 
 const FormInput = (props) => {
   const {
@@ -15,7 +16,12 @@ const FormInput = (props) => {
     labelColor,
   } = props;
 
-  const labelModifier = labelColor ? labelColor : "";
+  const labelModifier = labelColor ? labelColor : "white";
+  const [inititalType, setInitialType] = useState(type);
+
+  const toggleTypeToText = () => {
+    setInitialType((prev) => (prev === "text" ? "password" : "text"));
+  };
 
   return (
     <div className="form-row">
@@ -33,19 +39,30 @@ const FormInput = (props) => {
       </div>
 
       {/* console.log */}
-      <input
-        className={`form-row-input ${
-          isTouched && hasError
-            ? "form-row-input--invalid"
-            : value.length > 0 && "form-row-input--valid"
-        }`}
-        onFocus={onFocus}
-        type={type}
-        id={`form-${lable?.toLowerCase().split(" ").join("-")}`}
-        onBlur={onBlur}
-        onChange={onChange}
-        value={value}
-      />
+      <div className="form-input">
+        <input
+          className={`form-row-input ${
+            isTouched && hasError
+              ? "form-row-input--invalid"
+              : value.length > 0 && "form-row-input--valid"
+          }`}
+          onFocus={onFocus}
+          type={inititalType}
+          id={`form-${lable?.toLowerCase().split(" ").join("-")}`}
+          onBlur={onBlur}
+          onChange={onChange}
+          value={value}
+          hidden={false}
+        />
+        {type === "password" && (
+          <faIcons.FaRegEye
+            className={`form-input-svg ${
+              inititalType === "password" ? "" : "form-input-svg--open"
+            }`}
+            onClick={toggleTypeToText}
+          />
+        )}
+      </div>
     </div>
   );
 };

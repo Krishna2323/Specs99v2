@@ -23,8 +23,8 @@ const AllProduct = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchProducts());
-  }, []);
+    dispatch(fetchProducts({}));
+  }, [dispatch]);
   return (
     <div className="dashboard-component">
       <Navigation onClick={toggleSidebar} />

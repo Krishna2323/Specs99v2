@@ -14,7 +14,6 @@ const useInput = (validationFunction, initialValue) => {
 
   const inputBlurHandler = () => {
     setIsTouched(true);
-    console.log("set");
   };
 
   const inputFocusHandler = () => {

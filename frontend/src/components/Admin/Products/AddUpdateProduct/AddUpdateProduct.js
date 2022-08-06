@@ -1,21 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Sidebar from "../../DashBoard/SideBar/Sidebar";
 import useInput from "../../../hooks/useInput";
-import "./AddProduct.scss";
-import FormInput from "./../../../UI/FormInput/FormInput";
+import "./AddUpdateProduct.scss";
+import FormInput from "../../../UI/FormInput/FormInput";
 import * as MdIcons from "react-icons/md";
 import SelectInput from "../../../UI/SelectInput/SelectInput";
-import { addProduct } from "./../../../../store/productSlice/productActions";
-import { useNavigate } from "react-router-dom";
+import {
+  addProduct,
+  fetchProduct,
+  updateProduct,
+} from "../../../../store/productSlice/productActions";
+import { useNavigate, useParams } from "react-router-dom";
+import MultipleSelectInput from "../../../UI/SelectInput/MultipleSelectInput";
+import {
+  availabelColors,
+  specsTypeOptions,
+} from "../../../helpers/componentHelpers";
 
 const AddProduct = (props) => {
   const dispatch = useDispatch();
+  const params = useParams();
   const [sidebar, setSidebar] = useState(false);
   const [coverImage, setCoverImage] = useState();
   const [images, setImages] = useState([]);
+  const [style, setStyle] = useState([]);
   const { type, action } = useSelector((state) => state.notification);
   const navigate = useNavigate();
+  const { product, isLoading } = useSelector((state) => state.product);
+
+  const handleStyleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setStyle(typeof value === "string" ? value.split(",") : value);
+    // setStyle(prev=>prev.includes(value)?":[...prev,value])
+
+    console.log(style);
+  };
 
   const coverImageHandler = (e) => {
     setCoverImage(e.target.files[0]);
@@ -94,6 +116,17 @@ const AddProduct = (props) => {
     isTouched: isModelTypeTouched,
     hasError: modelTypeHasError,
     resetInput: resetModelType,
+  } = useInput(brandNameValidator);
+
+  const {
+    value: styleTypeValue,
+    inputHandler: styleTypeHandler,
+    inputBlurHandler: styleTypeBlurHandler,
+    isFocused: isStyleTypeFocused,
+    inputFocusHandler: styleTypeFocusHandler,
+    isTouched: isStyleTypeTouched,
+    hasError: styleTypeHasError,
+    resetInput: resetStyleType,
   } = useInput(brandNameValidator);
 
   const {
@@ -241,29 +274,56 @@ const AddProduct = (props) => {
     formData.append("model", modelValue);
     formData.append("mrp", mrpValue);
     formData.append("price", priceValue);
-    formData.append("size", sizeValue);
-    formData.append("modelType", modelTypeValue);
-    formData.append("lensType", lensTypeValue);
-    formData.append("lensColor", lensColorValue);
-    formData.append("gender", "Men");
+    formData.append("size", sizeValue.toLowerCase());
+    formData.append("modelType", modelTypeValue.toLowerCase());
+    formData.append("lensType", lensTypeValue.toLowerCase());
+    formData.append("lensColor", lensColorValue.toLowerCase());
+    formData.append("gender", genderValue);
     formData.append("description", descriptionValue);
-    formData.append("frameType", frameTypeValue);
-    formData.append("frameColor", frameColorValue);
+    formData.append("frameType", frameTypeValue.toLowerCase());
+    formData.append("frameColor", frameColorValue.toLowerCase());
     formData.append("imageCover", coverImage);
+    style.forEach((el) => formData.append("style", el));
 
     images.forEach((el) => {
       formData.append("images", el);
     });
 
-    dispatch(addProduct(formData));
+    if (props.action === "updateProduct") {
+      dispatch(updateProduct(product._id, formData));
+    } else {
+      dispatch(addProduct(formData));
+    }
+
     // resetAllInput();
   };
 
-  useState(() => {
+  useEffect(() => {
+    if (props.action === "updateProduct" && product) {
+      brandHandler(product.brand);
+      modelHandler(product.model);
+      mrpHandler(product.mrp.toString());
+      priceHandler(product.price.toString());
+      sizeHandler(product.size);
+      modelTypeHandler(product.modelType);
+      lensTypeHandler(product.lensType);
+      lensColorHandler(product.lensColor);
+      genderHandler(product.gender);
+      descriptionHandler(product.description);
+      frameTypeHandler(product.frameType);
+      frameColorHandler(product.frameColor);
+      setStyle(product.style);
+    }
+  }, [product]);
+
+  useEffect(() => {
     if (action === "addProduct" && type === "success") {
       navigate("/allProducts");
     }
-  }, [action, type]);
+    if (props.action === "updateProduct") {
+      dispatch(fetchProduct(params.id));
+    }
+  }, [action, type, navigate]);
 
   return (
     <div className="dashboard-component">
@@ -274,7 +334,7 @@ const AddProduct = (props) => {
           <MdIcons.MdMenu onClick={toggleSidebar} />
         </span>
         <form onSubmit={submitForm} className="add-product-form">
-          <span className="heading-1 heading-1--white ">Add Product</span>
+          <span className="heading-1">{props.heading}</span>
           {/* ROW 1 */}
           <FormInput
             lable="Brand"
@@ -328,15 +388,33 @@ const AddProduct = (props) => {
             onFocus={sizeFocusHandler}
             value={sizeValue}
           />
+          {/* MUltiple Select */}
+          <MultipleSelectInput
+            selected={style}
+            options={[
+              "Transparent",
+              "Aviator",
+              "Clubmaster",
+              "Cat-Eye",
+              "Round",
+              "Square",
+              "Rectangle",
+            ]}
+            lable="Style"
+            onChange={handleStyleChange}
+            onBlur={styleTypeBlurHandler}
+            onFocus={styleTypeFocusHandler}
+            value={style}
+          />
+          {/* <h2>{style}</h2> */}
           {/* ROW 5 */}
-          <FormInput
+          <SelectInput
             lable="Model Type"
             type="text"
+            options={specsTypeOptions}
             onChange={modelTypeHandler}
             onBlur={modelTypeBlurHandler}
             onFocus={modelTypeFocusHandler}
-            isTouched={isModelTypeTouched}
-            hasError={modelTypeHasError}
             errorMessage="Please Select Model."
             value={modelTypeValue}
           />
@@ -352,14 +430,13 @@ const AddProduct = (props) => {
             errorMessage="Please Select Lens Type."
             value={lensTypeValue}
           />
-          <FormInput
+          <SelectInput
             lable="Lens Color"
             type="text"
+            options={availabelColors}
             onChange={lensColorHandler}
             onBlur={lensColorBlurHandler}
             onFocus={lensColorFocusHandler}
-            isTouched={isLensColorTouched}
-            hasError={lensColorHasError}
             errorMessage="Please Select Lens Color."
             value={lensColorValue}
           />
@@ -375,9 +452,10 @@ const AddProduct = (props) => {
             errorMessage="Please Frame Frame Type."
             value={frameTypeValue}
           />
-          <FormInput
+          <SelectInput
             lable="Frame Color"
             type="text"
+            options={availabelColors}
             onChange={frameColorHandler}
             onBlur={frameColorBlurHandler}
             onFocus={frameColorFocusHandler}
@@ -386,16 +464,14 @@ const AddProduct = (props) => {
             errorMessage="Please Frame Frame Color."
             value={frameColorValue}
           />
-          <FormInput
+          <SelectInput
             lable="Gender"
             type="text"
             onChange={genderHandler}
             onBlur={genderBlurHandler}
             onFocus={genderFocusHandler}
-            isTouched={isGenderTouched}
-            hasError={genderHasError}
-            errorMessage="Please Provide Gender."
             value={genderValue}
+            options={["Mens", "Womens", "Kids", "Unisex"]}
           />
           {/* ROW 12 */}
           <FormInput

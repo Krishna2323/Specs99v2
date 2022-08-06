@@ -8,13 +8,14 @@
   flex-direction: column;
   align-items: center;
   // gap: 5rem;
+  color: white;
 
   & .sidebar-toggle-icon {
     display: none;
   }
   & .add-product-form {
     width: 100%;
-    background: var(--bg-image-grad-grey-light);
+    background: var(--bg-image-grad-grey-dark);
     border-radius: 31px;
     padding: 3rem;
     box-shadow: 0 3rem 3rem rgba(0, 0, 0, 0.2);
@@ -46,11 +47,13 @@
 
       &__input {
         width: 35rem;
-        padding: 0.5rem 1rem;
+        padding: 1rem 1rem;
         font-size: 2.4rem;
         font-family: inherit;
         font-weight: inherit;
-        border-radius: 11px;
+        border-radius: 4px;
+        border-bottom: 3px solid transparent;
+
         border: none;
         &::-ms-browse {
           border: none;

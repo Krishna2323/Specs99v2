@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import "./ProductsPageSidebar.scss";
 import Slider from "@mui/material/Slider";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormControl from "@mui/material/FormControl";
+import * as aiIcons from "react-icons/ai";
+import * as biIcons from "react-icons/bi";
+
 // import FormLabel from "@mui/material/FormLabel";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { purple } from "@mui/material/colors";
@@ -13,8 +12,15 @@ import { purple } from "@mui/material/colors";
 // import { useDispatch } from "react-redux";
 import StarIcon from "@mui/icons-material/Star";
 import SelectInput from "../../UI/SelectInput/SelectInput";
-import { fetchProducts } from "../../../store/productsSlice/productsActions";
+// import { fetchProducts } from "../../../store/productsSlice/productsActions";
 import { useDispatch } from "react-redux";
+import { useLocation } from "react-router";
+import {
+  availabelColors,
+  genderOptions,
+  sizeOptions,
+  specsTypeOptions,
+} from "../../helpers/componentHelpers";
 
 const theme = createTheme({
   palette: {
@@ -35,23 +41,21 @@ const ProductsPageSidebar = (props) => {
     ? "products-page-sidebar-open"
     : "";
   const params = useParams();
+  const { pathname } = useLocation();
 
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(20000);
-  const [FrameColor, setFrameColor] = useState("");
+  const [frameColor, setFrameColor] = useState("");
   const [gender, setGender] = useState("");
   const [lensColor, setLensColor] = useState("");
   const [frameSize, setFrameSize] = useState("");
   const [typeOfGlass, setTypeOfGlass] = useState("");
 
   ///////////////////////
-  const [maxGroupSize, setMaxGroupSize] = useState(25);
-  const [minTourDuration, setMinTourDuration] = useState(0);
-  const [maxTourDuration, setMaxTourDuration] = useState(15);
+
   const [minRating, setMinRating] = useState(0);
-  const [difficulty, setDifficulty] = useState(null);
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(6);
+  // const [page, setPage] = useState(1);
+  // const [limit, setLimit] = useState(6);
 
   const handlePriceChange = (e) => {
     setMinPrice(e.target.value[0]);
@@ -82,38 +86,31 @@ const ProductsPageSidebar = (props) => {
     setTypeOfGlass(e.target.value);
   };
 
-  // const handleLensColorChange=(e)=>{
-  //   setLensColor(e.target.value);
-  // }
-
-  const handleTourDurationChange = (e) => {
-    setMinTourDuration(e.target.value[0]);
-    setMaxTourDuration(e.target.value[1]);
-  };
-
-  const handleDifficultyChange = (e) => {
-    setDifficulty(e.target.value);
-  };
-
   const handleFilterChange = () => {
     props.handleFilterChange({
       minPrice,
       maxPrice,
-      minRating,
+      ratingsAverage: minRating,
       typeOfGlass,
       frameSize,
-      FrameColor,
+      frameColor,
       lensColor,
       gender,
     });
+    props.closeSidebar();
   };
-  const keyword = { params };
 
-  useDispatch(() => {}, [keyword]);
+  useDispatch(() => {}, [pathname]);
   return (
     <ThemeProvider theme={theme}>
       <div className={`products-page-sidebar ${sidebarModifier}`}>
-        <h3 className="heading-5">Filter:</h3>
+        <button
+          className="products-page-sidebar__close-btn"
+          onClick={props.closeSidebar}
+        >
+          <aiIcons.AiOutlineClose />
+        </button>
+        <h3 className="heading-5 products-page-sidebar__heading">Filter:</h3>
 
         {/* PRICE SORTING */}
         <div className="products-page-sidebar__slider products-page-sidebar__slider__price">
@@ -131,8 +128,14 @@ const ProductsPageSidebar = (props) => {
             step={100}
           />
           <div className="products-page-sidebar__slider__price-lable">
-            <p>Min : ${minPrice}</p>
-            <p>Max : ${maxPrice}</p>
+            <p>
+              Min : <biIcons.BiRupee></biIcons.BiRupee>
+              {minPrice}
+            </p>
+            <p>
+              Max : <biIcons.BiRupee></biIcons.BiRupee>
+              {maxPrice}
+            </p>
           </div>
         </div>
 
@@ -161,7 +164,7 @@ const ProductsPageSidebar = (props) => {
             onChange={handleTypeOfGlassChange}
             value={typeOfGlass}
             lable="Glass Type"
-            options={["Sunglasses", "Eyeglasses", "Bluecut"]}
+            options={specsTypeOptions}
             allOption={true}
             style={{ fontSize: "1.8rem", padding: ".3rem 1rem" }}
           />
@@ -171,17 +174,17 @@ const ProductsPageSidebar = (props) => {
           onChange={handleFrameSizeChange}
           value={frameSize}
           lable="Frame Size"
-          options={["Small", "Medium", "Large"]}
+          options={sizeOptions}
           allOption={true}
           style={{ fontSize: "1.8rem", padding: ".3rem 1rem" }}
         />
 
         <SelectInput
           onChange={handleFrameColorChange}
-          value={FrameColor}
+          value={frameColor}
           allOption={true}
           lable="Frame Color"
-          options={["Red", "Green", "Golden", "Silver", "Blue", "Brown"]}
+          options={availabelColors}
           style={{ fontSize: "1.8rem", padding: ".3rem 1rem" }}
         />
 
@@ -190,7 +193,7 @@ const ProductsPageSidebar = (props) => {
           value={lensColor}
           allOption={true}
           lable="Lens Color"
-          options={["Red", "Green", "Golden", "Silver", "Blue", "Brown"]}
+          options={availabelColors}
           style={{ fontSize: "1.8rem", padding: ".3rem 1rem" }}
         />
 
@@ -200,12 +203,15 @@ const ProductsPageSidebar = (props) => {
             value={gender}
             allOption={true}
             lable="Gender"
-            options={["Mens", "Womens", "Kids"]}
+            options={genderOptions}
             style={{ fontSize: "1.8rem", padding: ".3rem 1rem" }}
           />
         )}
 
-        <button onClick={handleFilterChange} className="btn-small">
+        <button
+          onClick={handleFilterChange}
+          className="btn-small products-page-sidebar__apply-btn"
+        >
           {" "}
           Apply
         </button>

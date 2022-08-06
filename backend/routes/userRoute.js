@@ -40,7 +40,7 @@ router.use(protect);
 
 router.route('/updateMyPassword').post(updatePassword);
 router.get('/me', getMe, getUser);
-router.patch('/updateMe', uploadUserPhoto, resizeUserPhoto, updateMe);
+router.post('/updateMe', updateMe);
 router.delete('/deleteMe', deleteMe);
 
 // ONLY ACCESSABLE FOR ADMIN

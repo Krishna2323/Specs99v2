@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import * as tiIcons from "react-icons/ti";
 import "./SelectInput.scss";
+
 const SelectInput = (props) => {
+  console.log(props);
   const { style } = props;
+  useState(props.selected);
+
+  useEffect(() => {}, [props.selected]);
   return (
     <div className="form-row">
       <label className="form-row-lable">{props.lable}</label>
@@ -15,9 +21,7 @@ const SelectInput = (props) => {
       >
         {props.allOption && <option value={""}>All</option>}
         {props.options.map((el, i) => (
-          <option key={el} value={el.toLowerCase()}>
-            {el}
-          </option>
+          <option value={el.toLowerCase()}>{el}</option>
         ))}
       </select>
     </div>
