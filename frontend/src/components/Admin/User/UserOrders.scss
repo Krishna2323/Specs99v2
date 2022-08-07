@@ -3,13 +3,15 @@
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   min-height: 80vh;
-  background: var(--bg-image-grad-grey-light);
+  background: var(--bg-image-grad-grey-dark);
+
   position: relative;
 
   & .user-orders {
     grid-column: 2/-1;
     width: 100%;
     padding: 8rem 15rem;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;

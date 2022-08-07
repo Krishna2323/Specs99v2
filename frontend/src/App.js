@@ -27,7 +27,6 @@ import UserOrders from "./components/Admin/User/UserOrders";
 import WithDefaultFilter from "./components/ProductsPage/ProductsHOC/withDefaultFilter";
 import { Navigate } from "react-router-dom";
 
-import LoggedInUserRoute from "./components/ProtectedRoutes/LoggedInUserRoute";
 import {
   brandDummy,
   homeShapes1,
@@ -39,9 +38,8 @@ import UserAccount from "./components/Admin/User/UserAccount/UserAccount";
 function App() {
   const dispatch = useDispatch();
   const { display } = useSelector((state) => state.notification);
-  const { user } = useSelector((state) => state.user);
+  const { user, isLoggedIn } = useSelector((state) => state.user);
   const { products } = useSelector((state) => state.products);
-  const { isLoggedIn } = useSelector((state) => state.user);
 
   useEffect(() => {
     if (!user) {
@@ -116,15 +114,12 @@ function App() {
         {/* ROUTES FOR ALL USERS END */}
 
         {/* LOGGED IN USER PAGES */}
-        <Route
-          path="/user/account"
-          element={isLoggedIn ? <UserAccount /> : <Navigate to="/" />}
-        />
+        <Route path="/user/account" element={<UserAccount />} />
         {/* <Route path="/user/account">
           <LoggedInUserRoute Component={UserAccount} />
         </Route> */}
 
-        <Route path="/account/orders" element={<UserOrders />} />
+        <Route path="/user/orders" element={<UserOrders />} />
 
         <Route
           path="/checkout"

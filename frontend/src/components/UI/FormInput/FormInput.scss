@@ -71,4 +71,10 @@
       }
     }
   }
+
+  @media (max-width: 56.25em) {
+    &-input {
+      font-size: 2.8rem;
+    }
+  }
 }

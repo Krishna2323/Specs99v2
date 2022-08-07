@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from "react";
 import ReactDom from "react-dom";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import useInput from "./../hooks/useInput";
+import useInput from "../hooks/useInput";
 import "./Login.scss";
 import { login } from "../../store/userSlice/userActions";
 import FormInput from "../UI/FormInput/FormInput";
@@ -15,7 +15,7 @@ import { emailValidator, passwordValidator } from "../helpers/componentHelpers";
 // import { PasswordSharp } from "@mui/icons-material";
 
 const Login = (props) => {
-  const { open, closeLoginForm, onLoginToSingupLink } = props;
+  const { open, closeLoginForm, onLoginToSignupLink } = props;
   const loginFormState = open
     ? "login-form-outer-open"
     : "login-form-outer-closed";
@@ -90,7 +90,7 @@ const Login = (props) => {
                 className="login-form__close-icon"
                 onClick={closeLoginForm}
               />
-              <h5 className="heading-3 mb-sm">Welcome Back To Specs99!</h5>
+              <h5 className="heading-1  mb-sm">Login</h5>
               <FormInput
                 isTouched={emailIsTouched}
                 hasError={emailHasError}
@@ -120,10 +120,10 @@ const Login = (props) => {
               </button>
               <Link
                 to="#"
-                onClick={onLoginToSingupLink}
+                onClick={onLoginToSignupLink}
                 className="login-form__link mt-small-1"
               >
-                New To Specs99? Singup Here.
+                New To Specs99? Signup Here.
               </Link>
             </form>
           </div>

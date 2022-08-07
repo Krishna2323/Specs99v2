@@ -14,21 +14,23 @@ const OrderRow = (props) => {
         order.products.map((product) => (
           <div className="order-row">
             <img
-              src={require(`../../../assests/products/${product.product.imageCover}`)}
+              src={product.product.imageCover}
               className="order-row__image"
               alt=""
             />
 
             <div className="order-row__info__div order-row__info__div-2">
-              <span className="order-info__price">Price: {product.price}</span>
-              <span className="order-info__mrp">
+              <span className="order-row__info__price">
+                Price: {product.price}
+              </span>
+              <span className="order-row__info__mrp">
                 Mrp: {product.product.mrp}
               </span>
-              <span className="order-info__quantity">
+              <span className="order-row__info__quantity">
                 Quantity: {product.quantity}
               </span>
-              <span className="order-info__total-price">
-                Total Price: {order.totalPrice}
+              <span className="order-row__info__total-price">
+                Total Price: {product.quantity * product.price}
               </span>
               <button
                 className="btn-small btn-small--primary"
@@ -39,17 +41,19 @@ const OrderRow = (props) => {
             </div>
 
             <div className="order-row__info__div order-row__info__div-1">
-              <span className="order-info__id">Order Id: {order._id} </span>
-              <span className="order-info__payment-method">
+              <span className="order-row__info__id">
+                Order Id: {order._id}{" "}
+              </span>
+              <span className="order-row__info__payment-method">
                 Payment Method: {order.paymentMethod.toUpperCase()}
               </span>
-              <span className="order-info__payment-status">
+              <span className="order-row__info__payment-status">
                 Payment Status: {order.paymentStatus.toUpperCase()}
               </span>
-              <span className="order-info__deliver-status">
+              <span className="order-row__info__deliver-status">
                 Delivery Status: {order.deliveryStatus.toUpperCase()}
               </span>
-              <span className="order-info__ordered-on">
+              <span className="order-row__info__ordered-on">
                 Order On:{" "}
                 {new Intl.DateTimeFormat("en-GB", {
                   month: "long",

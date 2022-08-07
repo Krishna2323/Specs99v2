@@ -13,16 +13,19 @@
   @media (max-width: 56.25em) {
     height: 35vh;
   }
+  @media (max-width: 37.5em) {
+    height: 25vh;
+  }
 
   &-box {
     width: 100%;
     height: 100%;
-    height: 60vh;
-    position: relative;
+    // height: 60vh;
+    // position: relative;
 
-    @media (max-width: 56.25em) {
-      height: 35vh;
-    }
+    // @media (max-width: 56.25em) {
+    //   height: 35vh;
+    // }
     & .home-carousel {
       @include absoluteOverlay;
       transition: all 0.9s ease-in-out;
@@ -64,6 +67,9 @@
 
           @media (max-width: 56.25em) {
             height: 35vh;
+          }
+          @media (max-width: 37.5em) {
+            height: 25vh;
           }
         }
       }

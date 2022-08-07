@@ -17,31 +17,37 @@ const orderRoute = require('./routes/orderRoutes');
 // UTILS AND HANDLERS
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
+const { getFileStream } = require('./controllers/s3');
+const { getImages } = require('./controllers/productController');
 
 //MIDDLEWARES
 const app = express();
 app.use(cors());
-
-// app.use(express.json());
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
-// app.use(fileUpload());
+app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
     extended: true,
   })
 );
-app.use(bodyParser.json());
 
 app.use(cookieParser());
 
-if ((process.env.ENV_NODE = 'development')) {
+if ((process.env.NODE_ENV = 'development')) {
   app.use(morgan('dev'));
 }
 
 // ROUTES
 
-app.use('/api/v1/products', productRoute);
+app.use(
+  '/api/v1/products',
+  (req, res, next) => {
+    console.log(req.body);
+    next();
+  },
+  productRoute
+);
+
+app.use('/api/v1/images/:key', getImages);
 app.use('/api/v1/users', userRoute);
 app.use('/api/v1/reviews', reviewRoute);
 app.use('/api/v1/cart', cartRoute);

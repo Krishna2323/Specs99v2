@@ -12,6 +12,7 @@ import {
 } from "../../../helpers/componentHelpers";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "../../../../store/userSlice/userActions";
+import Navigation from "../../Navigation/Navigation";
 
 const UserAccount = () => {
   const [detailToChange, setDetailToChange] = useState("user-detail");
@@ -155,6 +156,7 @@ const UserAccount = () => {
   return (
     <div className="user-account-page">
       <Sidebar />
+      <Navigation />
       <div className="user-account-container">
         <div className="user-account-container__details">
           <h5 className="heading-1">Account</h5>

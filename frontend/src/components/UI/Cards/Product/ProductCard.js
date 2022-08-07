@@ -36,7 +36,8 @@ const ProductCard = (props) => {
       <div className="product-card__header">
         <img
           // src={`./src/public/img/products/${product.imageCover}`}
-          src={require(`../../../assests/products/${product.imageCover}`)}
+          // src={product.imageCover}
+          src={product.imageCover}
           alt=""
         />
       </div>

@@ -26,7 +26,7 @@ const UserOrders = () => {
     <Fragment>
       <div className="user-orders-page">
         <Navigation onClick={toggleSidebar} />
-        <Sidebar open={sidebar} />
+        <Sidebar />
         <div className="user-orders">
           <h1 className="user-orders__heading heading-1 heading-1--white">
             Your Order History
@@ -35,6 +35,9 @@ const UserOrders = () => {
           {isLoading && <Loading heading="Loading..." type="loading" />}
 
           {orders && orders.map((e) => <OrderRow key={e._id} order={e} />)}
+          {orders && orders.length === 0 && (
+            <Loading heading="No Orders Yet..." type="error" />
+          )}
         </div>
       </div>
     </Fragment>

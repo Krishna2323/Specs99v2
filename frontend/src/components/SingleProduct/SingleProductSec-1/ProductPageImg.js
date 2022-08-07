@@ -19,12 +19,15 @@ const SingleProductImg = () => {
   return (
     <div className="product-img-box">
       <Slider {...settings} swipe={true}>
-        {images.map((e) => (
-          <img key={e} src={require(`../../assests/products/${e}`)} alt="" />
+        {images.map((e, i) => (
+          <img key={e} src={images[i]} alt="" />
         ))}
       </Slider>
     </div>
   );
 };
 
+{
+  /* <img key={e} src={require(`../../assests/products/${e}`)} alt="" /> */
+}
 export default SingleProductImg;

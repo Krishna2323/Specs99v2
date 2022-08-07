@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchProducts } from "./../../store/productsSlice/productsActions";
 import { useSelector, useDispatch } from "react-redux";
 import "./Home.scss";
@@ -16,19 +16,20 @@ import {
 } from "../dummyData/sunglassesDummy";
 import TopProductSlider from "./TopProductSlider/TopProductSlider";
 
-const Home = () => {
+const Home = (props) => {
   const dispatch = useDispatch();
-  // const [sidebarState, setSidebarState] = useState(false);
+  const [sidebarState, setSidebarState] = useState(false);
   const { products, isLoading, isError, message } = useSelector(
     (state) => state.products
   );
-  // const handleSidebar = () => {
-  //   setSidebarState((prevState) => !prevState);
-  // };
+  const handleSidebar = () => {
+    setSidebarState((prevState) => !prevState);
+  };
 
   useEffect(() => {
     dispatch(fetchProducts({}));
   }, [dispatch]);
+
   return (
     <div className="home-component">
       <HomeCarousel />

@@ -10,11 +10,27 @@ const {
   uploadTourImages,
   upload,
   resizeProductImages,
+  testFunc,
+  uploadAWS,
+  getImages,
+  testFuncResize,
 } = require('../controllers/productController');
 
-const multerMid = multer();
-
 const router = express.Router();
+
+// router
+//   .route('/')
+//   .get(getProducts)
+//   .post(
+//     protect,
+//     restrictTo('admin'),
+//     upload.fields([
+//       { name: 'imageCover', maxCount: 1 },
+//       { name: 'images', maxCount: 3 },
+//     ]),
+//     resizeProductImages,
+//     createProduct
+//   );
 
 router
   .route('/')
@@ -26,9 +42,10 @@ router
       { name: 'imageCover', maxCount: 1 },
       { name: 'images', maxCount: 3 },
     ]),
-    resizeProductImages,
+    testFuncResize,
     createProduct
   );
+
 router
   .route('/:id')
   .get(getProduct)
@@ -39,7 +56,7 @@ router
       { name: 'imageCover', maxCount: 1 },
       { name: 'images', maxCount: 3 },
     ]),
-    resizeProductImages,
+    testFuncResize,
     updateProduct
   )
   .delete(protect, restrictTo('admin'), deleteProduct);

@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/Krishna2323/Specs99v2#readme",
   "dependencies": {
+    "aws-sdk": "^2.1189.0",
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",

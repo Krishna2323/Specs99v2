@@ -16,16 +16,18 @@
   & .add-product-form {
     width: 100%;
     background: var(--bg-image-grad-grey-dark);
-    border-radius: 31px;
+    border-radius: 7px;
     padding: 3rem;
     box-shadow: 0 3rem 3rem rgba(0, 0, 0, 0.2);
+    overflow: hidden;
     gap: 3rem;
     align-items: center;
     // display: flex;
     // flex-wrap: wrap;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(25rem, 35rem));
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 35rem));
     justify-content: space-evenly;
+    font-size: 2.4rem;
 
     & .heading-1 {
       grid-column: 1/-1;
@@ -46,15 +48,15 @@
       }
 
       &__input {
-        width: 35rem;
+        font-size: inherit;
         padding: 1rem 1rem;
-        font-size: 2.4rem;
         font-family: inherit;
         font-weight: inherit;
         border-radius: 4px;
         border-bottom: 3px solid transparent;
 
         border: none;
+        height: fit-content;
         &::-ms-browse {
           border: none;
           background-color: wheat;
@@ -67,13 +69,15 @@
     }
 
     #product-cover-image {
-      z-index: 2;
       position: relative;
-      // width: 50%;
+      z-index: 0;
+      width: 100%;
 
       &::before {
+        padding: 1rem 1rem;
         content: "Choose Cover Image";
         display: block;
+        border-radius: 7px;
         position: absolute;
         // justify-self: flex-start;
         top: 0;
@@ -82,7 +86,7 @@
         height: 100%;
         color: white;
         background: var(--bg-image-grad-purple);
-        z-index: 30;
+        z-index: 1;
         display: flex;
         padding: 0.5rem 1rem;
         align-items: center;
@@ -90,11 +94,13 @@
     }
 
     #product-images {
-      z-index: 2;
+      z-index: 0;
       position: relative;
-      // width: 50%;
+      width: 100%;
       &::before {
         content: "Choose Image";
+        border-radius: 7px;
+
         display: block;
         position: absolute;
         top: 0;
@@ -103,7 +109,7 @@
         height: 100%;
         color: white;
         background: var(--bg-image-grad-purple);
-        z-index: 30;
+        z-index: 0;
         display: flex;
         padding: 0.5rem 1rem;
         align-items: center;
@@ -121,6 +127,11 @@
   }
 
   @media (max-width: 75em) {
+    & .add-product-form {
+      grid-template-columns: repeat(auto-fit, minmax(35rem, 40rem));
+      // font-size: 3rem;
+    }
+
     & .sidebar-toggle-icon {
       position: absolute;
       display: block;

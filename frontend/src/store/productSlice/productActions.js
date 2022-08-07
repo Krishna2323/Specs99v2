@@ -119,7 +119,7 @@ export const deleteProduct = (id) => {
         "deleteProduct"
       );
 
-      dispatch(fetchProducts());
+      // dispatch(fetchProducts());
     };
 
     try {

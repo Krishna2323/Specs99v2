@@ -1,8 +1,8 @@
 @import "./../Sacss/mixins";
 
-$--singup-transition-time: 0.3s;
+$--signup-transition-time: 0.3s;
 
-.singup-form-outer {
+.signup-form-outer {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -18,14 +18,14 @@ $--singup-transition-time: 0.3s;
   background: var(--bg-image-grad-grey-dark);
 
   &-open {
-    animation: singupFormAnimation $--singup-transition-time ease-out forwards;
+    animation: signupFormAnimation $--signup-transition-time ease-out forwards;
   }
   &-closed {
-    animation: closeSingupFormAnimation $--singup-transition-time ease-out
+    animation: closesignupFormAnimation $--signup-transition-time ease-out
       forwards;
   }
 
-  & .singup-form {
+  & .signup-form {
     padding: 5vh 3vw;
     // border-radius: 31px;
     display: flex;
@@ -63,7 +63,7 @@ $--singup-transition-time: 0.3s;
     }
   }
 
-  @keyframes singupFormAnimation {
+  @keyframes signupFormAnimation {
     0% {
       top: 100%;
       opacity: 0;
@@ -78,7 +78,7 @@ $--singup-transition-time: 0.3s;
     }
   }
 }
-@keyframes closeSingupFormAnimation {
+@keyframes closesignupFormAnimation {
   0% {
     top: 50%;
     opacity: 1;

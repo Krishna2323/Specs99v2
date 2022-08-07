@@ -14,6 +14,7 @@
     display: flex;
     align-items: center;
     justify-items: center;
+    background: var(--bg-image-grad-grey-dark);
 
     &__details {
       overflow: hidden;
@@ -23,7 +24,7 @@
       display: flex;
       flex-direction: column;
       // align-items: center;
-      box-shadow: var(--box-shadow-card);
+      box-shadow: var(--box-shadow-banner);
       width: 50%;
       margin: 0 auto;
 

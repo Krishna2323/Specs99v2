@@ -79,7 +79,7 @@ const ProductsPage = (props) => {
     } else if (!keyword && filter && !filter.brand) {
       dispatch(fetchProducts(filter));
     }
-  }, [dispatch, keyword, pathname]);
+  }, [keyword, pathname]);
 
   return (
     <div className="products-page">

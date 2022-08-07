@@ -100,7 +100,10 @@ const ProductsPageSidebar = (props) => {
     props.closeSidebar();
   };
 
-  useDispatch(() => {}, [pathname]);
+  // useDispatch(() => {
+  //   console.log();
+  // }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <div className={`products-page-sidebar ${sidebarModifier}`}>

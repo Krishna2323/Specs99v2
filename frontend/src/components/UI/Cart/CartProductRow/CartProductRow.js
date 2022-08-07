@@ -21,10 +21,7 @@ const CartProductRow = (props) => {
   return (
     <div className="cart-container__div">
       <div className="cart-container__div-info-image">
-        <img
-          src={require(`../../../assests/products/${product.imageCover}`)}
-          alt="img"
-        />
+        <img src={product.imageCover} alt="img" />
       </div>
       <div className="cart-container__div-info-1">
         <div onClick={onAddQuantity}>{/* <aiIcons.AiFillPlusCircle /> */}+</div>

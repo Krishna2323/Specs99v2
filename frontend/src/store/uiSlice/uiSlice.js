@@ -2,7 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const uiSlice = createSlice({
   name: "ui",
-  initialState: { cart: false, loginForm: false, singupForm: false },
+  initialState: {
+    cart: false,
+    loginForm: false,
+    signupForm: false,
+    adminSidebar: false,
+  },
   reducers: {
     setCart(state, actions) {
       state.cart = !state.cart;
@@ -11,11 +16,14 @@ const uiSlice = createSlice({
       state.loginForm = !state.loginForm;
     },
     setSignUpForm(state) {
-      state.singupForm = !state.singupForm;
+      state.signupForm = !state.signupForm;
     },
-    toggleLoginSingup(state, actions) {
+    toggleLoginSignup(state, actions) {
       state.loginForm = !state.loginForm;
-      state.singupForm = !state.singupForm;
+      state.signupForm = !state.signupForm;
+    },
+    toggleAdminSidebar(state, action) {
+      state.adminSidebar = !state.adminSidebar;
     },
   },
 });

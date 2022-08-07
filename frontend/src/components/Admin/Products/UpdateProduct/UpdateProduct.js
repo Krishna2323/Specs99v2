@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Sidebar from "../../DashBoard/SideBar/Sidebar";
 import useInput from "../../../hooks/useInput";
-import "./UpdateProduct.scss";
+// import "./UpdateProduct.scss";
 import FormInput from "./../../../UI/FormInput/FormInput";
 import * as MdIcons from "react-icons/md";
 import Loading from "../../../UI/Loading/Loading";

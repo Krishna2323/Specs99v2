@@ -1,23 +1,38 @@
 .account-navigation {
   position: fixed;
-  top: 50%;
-  left: 0;
-  width: fit-content;
+  bottom: 0%;
+  left: 0%;
+  width: 100%;
+  // width: fit-content;
   // border-radius: 50%;
   grid-column: 1/-1;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: var(--bg-image-grad-purple);
   color: white;
   font-size: 3.6rem;
   z-index: 1;
+  padding: 1rem;
+  justify-content: space-around;
+  display: none;
+  z-index: 2;
 
-  & span {
-    background: var(--bg-image-3-dark);
-    // padding: 1rem 2rem;
-    border-radius: 100%;
+  &__row {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.6rem;
+    color: white;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
 
-    height: 7rem;
-    width: 7rem;
+    & svg {
+      font-size: 2.8rem;
+    }
+  }
+
+  @media (max-width: 75em) {
+    display: flex;
   }
 }

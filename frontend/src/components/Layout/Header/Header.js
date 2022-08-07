@@ -4,8 +4,8 @@ import "./Header.scss";
 import logo from "./../../../public/img/bs/logo-1.png";
 import Sidenav from "./Sidenav";
 import Cart from "../../UI/Cart/Cart";
-import Login from "../../LoginSinggup/Login";
-import Singup from "../../LoginSinggup/Singup";
+import Login from "../../LoginSigngup/Login";
+import Signup from "../../LoginSigngup/Signup";
 import * as MdIcons from "react-icons/md";
 
 import * as AiIcons from "react-icons/ai";
@@ -36,7 +36,7 @@ const setStyleOnNodelist = (thisKey, elements, targetLink) => {
 };
 
 const Header = (props) => {
-  const { cart, loginForm, singupForm } = useSelector((state) => state.ui);
+  const { cart, loginForm, signupForm } = useSelector((state) => state.ui);
   const [loginOptions, setLoginOptions] = useState(false);
   const { totalProducts } = useSelector((state) => state.cart);
 
@@ -120,8 +120,8 @@ const Header = (props) => {
     setLoginOptions((prev) => !prev);
   };
 
-  //////////////////////////SINGUP FORM START/////////////////////////////////////
-  //////////////////////////SINGUP FORM END/////////////////////////////////////
+  //////////////////////////SIGNUP FORM START/////////////////////////////////////
+  //////////////////////////SIGNUP FORM END/////////////////////////////////////
 
   const handleLogout = () => {};
   const closeAskModal = () => {
@@ -147,8 +147,8 @@ const Header = (props) => {
     dispatch(uiSliceAction.setSignUpForm());
   };
 
-  const handleLoginSingupToggle = () => {
-    dispatch(uiSliceAction.toggleLoginSingup());
+  const handleLoginSignupToggle = () => {
+    dispatch(uiSliceAction.toggleLoginSignup());
   };
   return (
     <Fragment>
@@ -234,7 +234,7 @@ const Header = (props) => {
                 }`}
               >
                 <span onClick={handleLoginFormState}>Login</span>
-                <span onClick={handleSignupFormState}>Singup</span>
+                <span onClick={handleSignupFormState}>Signup</span>
                 <span>Logout</span>
               </div>
             </span>
@@ -250,13 +250,13 @@ const Header = (props) => {
       <Login
         open={loginForm}
         closeLoginForm={handleLoginFormState}
-        onLoginToSingupLink={handleLoginSingupToggle}
+        onLoginToSignupLink={handleLoginSignupToggle}
       />
 
-      <Singup
-        open={singupForm}
-        closeSingupForm={handleSignupFormState}
-        onSigupToLoginLink={handleLoginSingupToggle}
+      <Signup
+        open={signupForm}
+        closeSignupForm={handleSignupFormState}
+        onSigupToLoginLink={handleLoginSignupToggle}
       />
     </Fragment>
   );

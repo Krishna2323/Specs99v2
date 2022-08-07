@@ -17,6 +17,7 @@ import {
   availabelColors,
   specsTypeOptions,
 } from "../../../helpers/componentHelpers";
+import Navigation from "../../Navigation/Navigation";
 
 const AddProduct = (props) => {
   const dispatch = useDispatch();
@@ -327,12 +328,10 @@ const AddProduct = (props) => {
 
   return (
     <div className="dashboard-component">
-      <Sidebar isOpen={sidebar} />
+      <Sidebar />
+      <Navigation />
 
       <div className="add-product-container">
-        <span className="sidebar-toggle-icon">
-          <MdIcons.MdMenu onClick={toggleSidebar} />
-        </span>
         <form onSubmit={submitForm} className="add-product-form">
           <span className="heading-1">{props.heading}</span>
           {/* ROW 1 */}

@@ -2,21 +2,21 @@ import React, { Fragment } from "react";
 import ReactDom from "react-dom";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import useInput from "./../hooks/useInput";
-import "./Singup.scss";
-import { signup } from "./../../store/userSlice/userActions";
+import useInput from "../hooks/useInput";
+import "./Signup.scss";
+import { signup } from "../../store/userSlice/userActions";
 import Backdrop from "../UI/Backdrop/Backdrop";
-import FormInput from "./../UI/FormInput/FormInput";
+import FormInput from "../UI/FormInput/FormInput";
 import * as VsIcons from "react-icons/vsc";
 import { Transition } from "react-transition-group";
 // import img1 from "./../../public/img/bs/ra4.jpg";
 // import * as AiIcons from "react-icons/ai";
 
-const Singup = (props) => {
+const Signup = (props) => {
   const dispatch = useDispatch();
-  const singupAnimation = props.open
-    ? "singup-form-outer-open"
-    : "singup-form-outer-closed";
+  const signupAnimation = props.open
+    ? "signup-form-outer-open"
+    : "signup-form-outer-closed";
 
   const { type } = useSelector((state) => state.notification);
 
@@ -115,16 +115,16 @@ const Singup = (props) => {
     <Fragment>
       <Backdrop
         open={props.open}
-        onBackdropClick={props.closeSingupForm}
+        onBackdropClick={props.closeSignupForm}
         transitionTime=".3s"
       />
 
       <Transition in={props.open} mountOnEnter unmountOnExit timeout={300}>
         {(state) =>
           ReactDom.createPortal(
-            <div className={`singup-form-outer ${singupAnimation}`}>
-              <form onSubmit={onFormSubmit} className={`singup-form `}>
-                <h5 className="heading-3 mb-sm">Welcome To Specs99!</h5>
+            <div className={`signup-form-outer ${signupAnimation}`}>
+              <form onSubmit={onFormSubmit} className={`signup-form `}>
+                <h5 className="heading-1  mb-sm">Signup</h5>
                 <FormInput
                   lable="Name"
                   value={nameValue}
@@ -179,17 +179,17 @@ const Singup = (props) => {
                 <Link
                   to="#"
                   onClick={props.onSigupToLoginLink}
-                  className="singup-form__link mt-small-1"
+                  className="signup-form__link mt-small-1"
                 >
                   Already A User? Login Here.
                 </Link>
                 <VsIcons.VscChromeClose
-                  className="singup-form__close-icon"
-                  onClick={props.closeSingupForm}
+                  className="signup-form__close-icon"
+                  onClick={props.closeSignupForm}
                 />
               </form>
             </div>,
-            document.getElementById("singup-form")
+            document.getElementById("signup-form")
           )
         }
       </Transition>
@@ -197,4 +197,4 @@ const Singup = (props) => {
   );
 };
 
-export default Singup;
+export default Signup;
