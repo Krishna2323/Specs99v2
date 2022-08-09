@@ -40,8 +40,8 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     metadata: {
       address: address.address,
       street: address.street,
-      contact: address.contactNumber,
-      altContact: address.altContactNumber,
+      contactNumber: address.contactNumber,
+      altContactNumber: address.altContactNumber,
       email: address.email,
       firstName: address.firstName,
       lastName: address.lastName,
