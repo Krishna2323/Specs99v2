@@ -28,6 +28,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
       amount: el.product.price * 100,
       currency: 'inr',
       quantity: el.quantity,
+      id: el.product._id,
     };
   });
 
@@ -37,9 +38,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     cancel_url: `${req.protocol}://${req.get('host')}/`,
     customer_email: req.user.email,
     client_reference_id: req.user._id,
-    line_items: {
-      productInfo,
-    },
+    line_items: productInfo,
   });
 
   res.status(200).json({
