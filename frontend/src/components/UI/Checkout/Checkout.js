@@ -22,6 +22,7 @@ const Checkout = () => {
   const { notify } = useNotification();
   const [checkOutConfirmation, setCheckOutConfirmation] = useState(false);
   const [confirmationBtnDisable, setConfirmationBtnDisable] = useState(false);
+  const { user } = useSelector((state) => state.user);
 
   const closeConfirmation = () => {
     setCheckOutConfirmation(false);
@@ -223,6 +224,7 @@ const Checkout = () => {
         state,
         country,
         postalCode,
+        userId: user._id,
       });
       await stripe.redirectToCheckout({
         sessionId: session,

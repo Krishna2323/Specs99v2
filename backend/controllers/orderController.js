@@ -49,6 +49,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
       city: address.city,
       postalCode: address.postalCode,
       country: address.country,
+      userId: address.userId,
     },
   });
 
@@ -70,15 +71,15 @@ createBookingCheckout = async (data) => {
         };
       });
 
-      const user = await User.find({ email: data.customer_email });
+      const user = await User.find({ email: data.object.metadata.userId });
 
-      console.log('EMAIL', data.customer_email);
+      console.log('EMAIL', data.object.metadata.userId);
       console.log('USER', user);
 
       await Order.create({
         products,
         shippingInfo: { ...data.object.metadata },
-        user: user.id,
+        user: data.object.metadata.userId,
         totalPrice: data.object.amount_total / 100,
         paymentMethod: 'online',
         paymentStatus: 'paid',
