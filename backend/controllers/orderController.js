@@ -74,7 +74,7 @@ createBookingCheckout = async (data) => {
 
       await Order.create({
         products,
-        shippingInfo: { ...data.metadata },
+        shippingInfo: { ...data.object.metadata },
         user,
         totalPrice: data.object.amount_total / 100,
         paymentMethod: 'online',

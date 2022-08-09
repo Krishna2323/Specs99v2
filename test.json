@@ -1,0 +1,82 @@
+{
+  "received": {
+    "id": "evt_1LUn46SFRdbDTW0VNxOFPxvM",
+    "object": "event",
+    "api_version": "2020-08-27",
+    "created": 1660030886,
+    "data": {
+      "object": {
+        "id": "cs_test_b1C0gA7w5ULwj0bYpcyGXq4D8klzKvKijDeDrxt126ncAhszpp0eL967RA",
+        "object": "checkout.session",
+        "after_expiration": null,
+        "allow_promotion_codes": null,
+        "amount_subtotal": 1959300,
+        "amount_total": 1959300,
+        "automatic_tax": {
+          "enabled": false,
+          "status": null
+        },
+        "billing_address_collection": null,
+        "cancel_url": "http://specs99v2.herokuapp.com/",
+        "client_reference_id": null,
+        "consent": null,
+        "consent_collection": null,
+        "currency": "inr",
+        "customer": "cus_MDDVZv6AHci0xi",
+        "customer_creation": "always",
+        "customer_details": {
+          "address": {
+            "city": null,
+            "country": "IN",
+            "line1": null,
+            "line2": null,
+            "postal_code": null,
+            "state": null
+          },
+          "email": "belivethatkg@gmail.com",
+          "name": "Krishna",
+          "phone": null,
+          "tax_exempt": "none",
+          "tax_ids": []
+        },
+        "customer_email": "belivethatkg@gmail.com",
+        "expires_at": 1660117250,
+        "livemode": false,
+        "locale": null,
+        "metadata": {},
+        "mode": "payment",
+        "payment_intent": "pi_3LUn3WSFRdbDTW0V06nzgLGu",
+        "payment_link": null,
+        "payment_method_options": {},
+        "payment_method_types": ["card"],
+        "payment_status": "paid",
+        "phone_number_collection": {
+          "enabled": false
+        },
+        "recovered_from": null,
+        "setup_intent": null,
+        "shipping": null,
+        "shipping_address_collection": null,
+        "shipping_options": [],
+        "shipping_rate": null,
+        "status": "complete",
+        "submit_type": null,
+        "subscription": null,
+        "success_url": "http://specs99v2.herokuapp.com/",
+        "total_details": {
+          "amount_discount": 0,
+          "amount_shipping": 0,
+          "amount_tax": 0
+        },
+        "url": null
+      }
+    },
+    "livemode": false,
+    "pending_webhooks": 1,
+    "request": {
+      "id": null,
+      "idempotency_key": null
+    },
+    "type": "checkout.session.completed"
+  }
+}
