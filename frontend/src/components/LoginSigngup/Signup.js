@@ -37,9 +37,8 @@ const Signup = (props) => {
     inputHandler: nameHandler,
     inputBlurHandler: nameBlurHandler,
     hasError: nameHasError,
-    inputFocusHandler: nameFocusHandler,
-    isFocused: isNameFocused,
-    isTouched: isNameTouched,
+    error: nameError,
+    showErrorHandler: nameShowErrorHandler,
   } = useInput(nameValidator);
 
   const {
@@ -47,9 +46,8 @@ const Signup = (props) => {
     inputHandler: emailHandler,
     inputBlurHandler: emailBlurHandler,
     hasError: emailHasError,
-    inputFocusHandler: emailFocusHandler,
-    isFocused: isEmailFocused,
-    isTouched: isEmailTouched,
+    error: emailError,
+    showErrorHandler: emailShowErrorHandler,
   } = useInput(emailValidator);
 
   const {
@@ -57,9 +55,8 @@ const Signup = (props) => {
     inputHandler: passwordHandler,
     inputBlurHandler: passwordBlurHandler,
     hasError: passwordHasError,
-    inputFocusHandler: passwordFocusHandler,
-    isFocused: IsPasswordFocused,
-    isTouched: isPasswordTouched,
+    error: passwordError,
+    showErrorHandler: passwordShowErrorHandler,
   } = useInput(passwordValidator);
 
   const confrimPasswordValidator = (value) => {
@@ -71,30 +68,22 @@ const Signup = (props) => {
     inputHandler: confirmPasswordHandler,
     inputBlurHandler: confirmPasswordBlurHandler,
     hasError: confirmPasswordHasError,
-    inputFocusHandler: confirmPasswordFocusHandler,
-    isFocused: IsConfirmPasswordFocused,
-    isTouched: isConfirmPasswordTouched,
+    error: confirmPasswordError,
+    showErrorHandler: confirmPasswordShowErrorHandler,
   } = useInput(confrimPasswordValidator);
 
   const disableSubmitBtn =
-    nameHasError ||
-    emailHasError ||
-    passwordHasError ||
-    confirmPasswordHasError ||
-    !isEmailFocused ||
-    !isNameFocused ||
-    !IsPasswordFocused ||
-    !IsConfirmPasswordFocused;
+    passwordError || nameError || emailError || confirmPasswordError;
 
   const btnModifier = disableSubmitBtn ? "form-btn-invalid" : "form-btn-valid";
 
   const onFormSubmit = (e) => {
     e.preventDefault();
     if (disableSubmitBtn) {
-      nameBlurHandler();
-      emailBlurHandler();
-      passwordBlurHandler();
-      confirmPasswordBlurHandler();
+      passwordShowErrorHandler();
+      nameShowErrorHandler();
+      emailShowErrorHandler();
+      confirmPasswordShowErrorHandler();
       return;
     }
 
@@ -133,8 +122,7 @@ const Signup = (props) => {
                   type="text"
                   hasError={nameHasError}
                   errorMessage="Name Must Contain 3 Characters."
-                  isTouched={isNameTouched}
-                  onFocus={nameFocusHandler}
+                  error={nameError}
                 />
 
                 <FormInput
@@ -145,8 +133,7 @@ const Signup = (props) => {
                   type="email"
                   hasError={emailHasError}
                   errorMessage="Please Provide A Valid Email !"
-                  isTouched={isEmailTouched}
-                  onFocus={emailFocusHandler}
+                  error={emailError}
                 />
 
                 <FormInput
@@ -155,10 +142,9 @@ const Signup = (props) => {
                   type="password"
                   onChange={passwordHandler}
                   onBlur={passwordBlurHandler}
-                  onFocus={passwordFocusHandler}
                   hasError={passwordHasError}
-                  isTouched={isPasswordTouched}
                   errorMessage="Password Must Contain 6 Characters."
+                  error={passwordError}
                 />
 
                 <FormInput
@@ -167,10 +153,9 @@ const Signup = (props) => {
                   type="password"
                   onChange={confirmPasswordHandler}
                   onBlur={confirmPasswordBlurHandler}
-                  onFocus={confirmPasswordFocusHandler}
                   hasError={confirmPasswordHasError}
-                  isTouched={isConfirmPasswordTouched}
                   errorMessage="Confirm Password Must Be Same As Password."
+                  error={confirmPasswordError}
                 />
 
                 <button className={`form-btn mt-small ${btnModifier}`}>

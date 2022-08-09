@@ -13,6 +13,7 @@ const userRoute = require('./routes/userRoute');
 const reviewRoute = require('./routes/reviewRoute');
 const cartRoute = require('./routes/cartRoute');
 const orderRoute = require('./routes/orderRoutes');
+const orderController = require('./controllers/orderController');
 
 // UTILS AND HANDLERS
 const AppError = require('./utils/appError');
@@ -23,6 +24,13 @@ const { getImages } = require('./controllers/productController');
 //MIDDLEWARES
 const app = express();
 app.use(cors());
+
+app.post(
+  '/webhook-checkout',
+  express.raw({ type: 'application/json' }),
+  orderController.webhookCheckout
+);
+
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({

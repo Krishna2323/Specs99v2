@@ -11,6 +11,7 @@
     grid-column: full-start/full-end;
     padding: 5rem 15rem;
     border-radius: var(--brr-regular);
+
     position: relative;
 
     &::after,
@@ -20,11 +21,13 @@
       // top: 0;
       bottom: 0;
       left: 0;
-      background: var(--bg-image-grad-purple-2);
+      // background: var(--bg-image-grad-grey-dark);
+      // background: var(--bg-image-grad-purple-2);
       // background: var(--bg-image-1);
+      background-color: var(--color-primary);
 
       width: 100%;
-      height: 3px;
+      height: 1px;
     }
 
     &:last-child {

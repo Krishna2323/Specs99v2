@@ -11,8 +11,9 @@
   height: 90vh;
   background: var(--bg-image-grad-grey-dark);
   padding: 3rem 5rem;
+  // overflow: hidden;
   // padding-bottom: 10rem;
-  // overflow-x: hidden;
+  overflow-x: hidden;
   @media (max-width: 75em) {
     padding: 5rem 2rem;
     width: 95vw;

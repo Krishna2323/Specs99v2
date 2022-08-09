@@ -5,19 +5,27 @@ const useInput = (validationFunction, initialValue) => {
   const [isFocused, setIsFocused] = useState(false);
   const [isTouched, setIsTouched] = useState(false);
   const valueIsValid = validationFunction(value);
-  const hasError = isTouched && !valueIsValid;
+  const error = !valueIsValid;
+  const [showError, setShowError] = useState(false);
+  // const hasError = (isTouched && error) || (showError && error);
+  const hasError = showError && error;
 
   const inputHandler = (e) => {
     setValue(e.target ? e.target.value : e);
-    // console.log(e.target.value);
   };
 
   const inputBlurHandler = () => {
     setIsTouched(true);
+    setShowError(true);
   };
 
-  const inputFocusHandler = () => {
+  const inputFocusHandler = (e) => {
     setIsFocused(true);
+    console.log(e);
+  };
+
+  const showErrorHandler = () => {
+    setShowError(true);
   };
 
   const resetInput = () => {
@@ -34,7 +42,10 @@ const useInput = (validationFunction, initialValue) => {
     inputHandler,
     resetInput,
     hasError,
+    error,
     isFocused,
+    showError,
+    showErrorHandler,
   };
 };
 

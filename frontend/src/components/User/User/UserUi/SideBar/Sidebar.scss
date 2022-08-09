@@ -1,0 +1,135 @@
+.dashboard-sidebar {
+  grid-column: 1 / span 1;
+
+  // background-color: rgb(0, 0, 0);
+  background: var(--bg-image-grad-grey-dark);
+  // background: orangered;
+  color: white;
+  transition: all 0.5s;
+  min-height: 100vh;
+  box-shadow: var(--box-shadow-dark);
+
+  &__logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 6rem;
+    & img {
+      width: 60%;
+      height: 60%;
+    }
+  }
+
+  &__close-icon {
+    position: absolute;
+    color: white;
+    display: none;
+    font-size: 3.6rem;
+    top: 1rem;
+    right: 1rem;
+  }
+
+  &__nav {
+    &-links {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      align-items: center;
+      // justify-content: center;
+      list-style: none;
+      margin-top: 3rem;
+      padding: 0 2rem;
+
+      &__item {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+
+        position: relative;
+        transition: all 0.5s;
+        &:hover {
+          & .sidebar-product__links {
+            display: block;
+            &::after {
+              width: 100%;
+            }
+          }
+
+          & .dashboard-sidebar__nav-links__link {
+            &::after {
+              width: 100%;
+            }
+          }
+        }
+      }
+
+      &__link {
+        text-decoration: none;
+        font-size: 2.4rem;
+        color: white;
+        padding: 1rem 5rem;
+        cursor: pointer;
+
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0.8rem;
+        border-radius: 31px;
+        z-index: 1;
+
+        // &:hover {
+        //   &::after {
+        //     width: 100%;
+        //   }
+        // }
+
+        &::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 1%;
+          height: 100%;
+          background: var(--bg-image-grad-purple);
+          border-radius: 5px;
+          z-index: -1;
+          transition: all 0.3s;
+          justify-self: flex-start;
+          align-self: flex-start;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 75em) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 30rem;
+    transform: translateX(-100%);
+    transition: all 0.5s;
+    z-index: 1;
+    min-height: fit-content;
+
+    &-open {
+      transform: translateX(0%);
+    }
+
+    &__close-icon {
+      display: block;
+    }
+
+    &__nav {
+      // background-color: red;
+      &-links__item-user {
+        display: none;
+      }
+    }
+  }
+}

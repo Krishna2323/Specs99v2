@@ -65,6 +65,7 @@
       transform: translateY(-50%);
       font-size: 2rem;
       cursor: pointer;
+      color: var(--color-grey-dark);
 
       &--open {
         color: var(--color-primary);

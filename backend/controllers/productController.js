@@ -110,7 +110,9 @@ exports.testFuncResize = catchAsync(async (req, res, next) => {
     .join('-')}-${Date.now()}-cover.jpeg`;
 
   const rest = await sharp(req.files.imageCover[0].buffer)
-    .resize(2000, 1333)
+    .resize(2300, 1333)
+    .toFormat('jpeg')
+    .jpeg({ quality: 100 })
     .toFile(`./uploads/${imageCoverFilename}`);
 
   const result = await uploadFileAWS(
@@ -133,7 +135,7 @@ exports.testFuncResize = catchAsync(async (req, res, next) => {
       await sharp(file.buffer)
         .resize(2000, 1333)
         .toFormat('jpeg')
-        .jpeg({ quality: 90 })
+        .jpeg({ quality: 100 })
         .toFile(`./uploads/${filename}`);
 
       const result = await uploadFileAWS(`./uploads/${filename}`, filename);

@@ -26,6 +26,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
       amount: el.product.price * 100,
       currency: 'inr',
       quantity: el.quantity,
+      id: el._id,
     };
   });
 
@@ -35,7 +36,9 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     cancel_url: `${req.protocol}://${req.get('host')}/`,
     customer_email: req.user.email,
     client_reference_id: req.user._id,
-    line_items: productInfo,
+    line_items: {
+      productInfo,
+    },
   });
 
   res.status(200).json({
@@ -43,6 +46,30 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     session,
   });
 });
+
+const createBookingCheckout = (session) => {
+  console.log(session.line_items);
+};
+
+exports.webhookCheckout = (req, res, next) => {
+  const signature = req.headers['stripe-signature'];
+
+  let event;
+  try {
+    event = stripe.webhooks.constructEvent(
+      req.body,
+      signature,
+      process.env.STRIPE_WEBHOOK_SECRET
+    );
+  } catch (error) {
+    return res.status(400).send(`Webhook Error: ${error.message}`);
+  }
+
+  if (event.type === 'checkout.session.completed') {
+    createBookingCheckout(event.data.object);
+    res.status(200).json({ received: true });
+  }
+};
 
 exports.createUnpaidOrder = factory.createOne(Order);
 exports.getAllOrder = factory.getAll(Order);

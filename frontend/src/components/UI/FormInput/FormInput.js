@@ -4,7 +4,6 @@ import * as faIcons from "react-icons/fa";
 
 const FormInput = (props) => {
   const {
-    isTouched,
     hasError,
     onChange,
     onBlur,
@@ -14,6 +13,7 @@ const FormInput = (props) => {
     errorMessage,
     onFocus,
     labelColor,
+    error,
   } = props;
 
   const labelModifier = labelColor ? labelColor : "white";
@@ -42,9 +42,11 @@ const FormInput = (props) => {
       <div className="form-input">
         <input
           className={`form-row-input ${
-            isTouched && hasError
+            hasError
               ? "form-row-input--invalid"
-              : value.length > 0 && "form-row-input--valid"
+              : !error
+              ? "form-row-input--valid"
+              : ""
           }`}
           onFocus={onFocus}
           type={inititalType}

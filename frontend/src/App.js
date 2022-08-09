@@ -14,16 +14,16 @@ import { loadStripe } from "@stripe/stripe-js";
 import Home from "./components/Home/Home";
 import Header from "./components/Layout/Header/Header";
 import Container from "./components/UI/Container/Container";
-import DashBoard from "./components/Admin/DashBoard/DashBoard";
-import AddUpdateProduct from "./components/Admin/Products/AddUpdateProduct/AddUpdateProduct";
-import UpdateProduct from "./components/Admin/Products/UpdateProduct/UpdateProduct";
-import AllProduct from "./components/Admin/Products/AllProducts/AllProduct";
+import DashBoard from "./components/User/Admin/DashBoard/DashBoard";
+import AddUpdateProduct from "./components/User/Admin/AddUpdateProduct/AddUpdateProduct";
+// import UpdateProduct from "./components/User/Products/UpdateProduct/UpdateProduct";
+import AllProduct from "./components/User/Admin/AllProducts/AllProduct";
 import ProductPage from "./components/SingleProduct/ProductPage";
 import ProductsPage from "./components/ProductsPage/ProductsPage";
 import Footer from "./components/Layout/Footer/Footer";
 import Checkout from "./components/UI/Checkout/Checkout";
 import { loadUser } from "./store/userSlice/userActions";
-import UserOrders from "./components/Admin/User/UserOrders";
+import UserOrders from "./components/User/User/UserOrders/UserOrders";
 import WithDefaultFilter from "./components/ProductsPage/ProductsHOC/withDefaultFilter";
 import { Navigate } from "react-router-dom";
 
@@ -33,7 +33,7 @@ import {
   navGenderCategory,
   navGlassCategory,
 } from "./components/dummyData/sunglassesDummy";
-import UserAccount from "./components/Admin/User/UserAccount/UserAccount";
+import UserAccount from "./components/User/User/UserAccount/UserAccount";
 
 function App() {
   const dispatch = useDispatch();
@@ -135,12 +135,12 @@ function App() {
         {/* {LOGGED IN USER PAGES END} */}
 
         {/* ADMIN ROUTES */}
-        <Route path="/allProduct" element={<AllProduct />} />
-        <Route path="/dashboard" element={<DashBoard />} />
+        <Route path="/admin/editProducts" element={<AllProduct />} />
+        <Route path="/admin/dashboard" element={<DashBoard />} />
         {/* <Route
           path="/addProduct" element={<AddProduct product={products ? products[0] : undefined} />}
         /> */}
-        <Route path="/addProduct/">
+        <Route path="/admin/addProduct/">
           <Route
             path=""
             element={
@@ -160,7 +160,7 @@ function App() {
             }
           />
         </Route>
-        <Route path="/updateProduct/:id" element={<UpdateProduct />} />
+        {/* <Route path="/updateProduct/:id" element={<UpdateProduct />} /> */}
         {/* ADMIN ROUTES END */}
       </Routes>
 

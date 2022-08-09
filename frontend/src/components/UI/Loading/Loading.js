@@ -16,7 +16,7 @@ const Loading = (props) => {
     );
 
   return (
-    <div className="loading">
+    <div className={`loading ${props.dark ? "loading--dark" : ""}`}>
       <h3>{props.heading}</h3>
       {div}
       {/* <span>{props.message}</span> */}

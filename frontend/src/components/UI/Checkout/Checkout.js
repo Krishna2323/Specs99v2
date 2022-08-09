@@ -37,132 +37,120 @@ const Checkout = () => {
     value: firstName,
     inputHandler: firstNameHandler,
     inputBlurHandler: firstNameBlurHandler,
-    isTouched: isFirstNameTouched,
-    isFocused: isFirstNameFocused,
-    inputFocusHandler: firstNameFocusHandler,
     hasError: firstNameHasError,
     resetInput: resetFirstName,
+    error: firstNameError,
+    showErrorHandler: firstNameShowErrorHandler,
   } = useInput(NameValidator);
 
   const {
     value: lastName,
     inputHandler: lastNameHandler,
     inputBlurHandler: lastNameBlurHandler,
-    isTouched: isLastNameTouched,
-    isFocused: isLastNameFocused,
-    inputFocusHandler: lastNameFocusHandler,
     hasError: lastNameHasError,
     resetInput: resetLastName,
+    error: lastNameError,
+    showErrorHandler: lastNameShowErrorHandler,
   } = useInput(NameValidator);
 
   const {
     value: email,
     inputHandler: emailHandler,
     inputBlurHandler: emailBlurHandler,
-    isTouched: isEmailTouched,
-    isFocused: isEmailFocused,
-    inputFocusHandler: emailFocusHandler,
     hasError: emailHasError,
     resetInput: resetEmail,
+    error: emailError,
+    showErrorHandler: emailShowErrorHandler,
   } = useInput(NameValidator);
 
   const {
     value: contact,
     inputHandler: contactHandler,
     inputBlurHandler: contactBlurHandler,
-    isTouched: isContactTouched,
-    isFocused: isContactFocused,
-    inputFocusHandler: contactFocusHandler,
     hasError: contactHasError,
     resetInput: resetContact,
+    error: contactError,
+    showErrorHandler: contactShowErrorHandler,
   } = useInput(NameValidator);
 
   const {
     value: altContact,
     inputHandler: altContactHandler,
     inputBlurHandler: altContactBlurHandler,
-    isTouched: isAltContactTouched,
-    isFocused: isAltContactFocused,
-    inputFocusHandler: altContactFocusHandler,
     hasError: altContactHasError,
     resetInput: resetaltContact,
+    error: altContactError,
+    showErrorHandler: altContactShowErrorHandler,
   } = useInput(NameValidator);
 
   const {
     value: address,
     inputHandler: addressHandler,
     inputBlurHandler: addressBlurHandler,
-    isTouched: isAddressTouched,
-    isFocused: isAddressFocused,
-    inputFocusHandler: addressFocusHandler,
     hasError: addressHasError,
     resetInput: resetaddress,
+    error: addressError,
+    showErrorHandler: addressShowErrorHandler,
   } = useInput(NameValidator);
 
   const {
     value: street,
     inputHandler: streetHandler,
     inputBlurHandler: streetBlurHandler,
-    isTouched: isStreetTouched,
-    isFocused: isStreetFocused,
-    inputFocusHandler: streetFocusHandler,
     hasError: streetHasError,
-    resetInput: resetstreet,
+    resetInput: resetStreet,
+    error: streetError,
+    showErrorHandler: streetShowErrorHandler,
   } = useInput(NameValidator);
 
   const {
     value: city,
     inputHandler: cityHandler,
     inputBlurHandler: cityBlurHandler,
-    isTouched: isCityTouched,
-    isFocused: isCityFocused,
-    inputFocusHandler: cityFocusHandler,
     hasError: cityHasError,
     resetInput: resetcity,
+    error: cityError,
+    showErrorHandler: cityShowErrorHandler,
   } = useInput(NameValidator);
 
   const {
     value: state,
     inputHandler: stateHandler,
     inputBlurHandler: stateBlurHandler,
-    isTouched: isStateTouched,
-    isFocused: isStateFocused,
-    inputFocusHandler: stateFocusHandler,
     hasError: stateHasError,
     resetInput: resetstate,
+    error: stateError,
+    showErrorHandler: stateShowErrorHandler,
   } = useInput(NameValidator);
 
   const {
     value: country,
     inputHandler: countryHandler,
     inputBlurHandler: countryBlurHandler,
-    isTouched: isCountryTouched,
-    isFocused: isCountryFocused,
-    inputFocusHandler: countryFocusHandler,
     hasError: countryHasError,
     resetInput: resetcountry,
+    error: countryError,
+    showErrorHandler: countryShowErrorHandler,
   } = useInput(NameValidator);
 
   const {
     value: postalCode,
     inputHandler: postalCodeHandler,
     inputBlurHandler: postalCodeBlurHandler,
-    isTouched: isPostalCodeTouched,
-    isFocused: isPostalCodeFocused,
-    inputFocusHandler: postalCodeFocusHandler,
     hasError: postalCodeHasError,
     resetInput: resetpostalCode,
+    error: postalCodeError,
+    showErrorHandler: postalCodeShowErrorHandler,
   } = useInput(NameValidator);
 
   const {
     value: payment,
     inputHandler: paymentHandler,
     inputBlurHandler: paymentBlurHandler,
-    isTouched: isPaymentTouched,
-    isFocused: isPaymentFocused,
-    inputFocusHandler: paymentFocusHandler,
     hasError: paymentHasError,
     resetInput: resetpayment,
+    // error:paymentError,
+    showErrorHandler: paymentShowErrorHandler,
   } = useInput(NameValidator);
 
   const handlePaymentChange = (e) => {
@@ -172,30 +160,30 @@ const Checkout = () => {
 
   const checkIsAllValid = () => {
     return (
-      firstName.length < 3 ||
-      lastName.length < 3 ||
-      contact.length < 3 ||
-      altContact.length < 3 ||
-      address.length < 3 ||
-      street.length < 3 ||
-      city.length < 3 ||
-      state.length < 3 ||
-      country.length < 3 ||
-      !paymentChange
+      firstNameError ||
+      lastNameError ||
+      contactError ||
+      altContactError ||
+      addressError ||
+      streetError ||
+      cityError ||
+      stateError ||
+      countryError
     );
   };
 
-  const blurAll = () => {
-    firstNameBlurHandler();
-    lastNameBlurHandler();
-    contactBlurHandler();
-    altContactBlurHandler();
-    addressBlurHandler();
-    streetBlurHandler();
-    cityBlurHandler();
-    stateBlurHandler();
-    countryBlurHandler();
-    postalCodeBlurHandler();
+  const showAllError = () => {
+    firstNameShowErrorHandler();
+    lastNameShowErrorHandler();
+    emailShowErrorHandler();
+    contactShowErrorHandler();
+    altContactShowErrorHandler();
+    addressShowErrorHandler();
+    streetShowErrorHandler();
+    cityShowErrorHandler();
+    stateShowErrorHandler();
+    countryShowErrorHandler();
+    postalCodeShowErrorHandler();
   };
 
   const dispatchCodFunc = async () => {
@@ -238,7 +226,10 @@ const Checkout = () => {
     e.preventDefault();
 
     if (checkIsAllValid()) {
-      blurAll();
+      showAllError();
+      if (!paymentChange) {
+        setPaymentError("Select Payment Method.");
+      }
       return;
     }
 
@@ -267,152 +258,141 @@ const Checkout = () => {
       <div className="checkout">
         <div>
           <form onSubmit={submitForm} className="checkout-form-address">
-            <h3 className="heading-3 text-center mb-md">Shipping Info</h3>
+            <h3 className="heading-1 text-center mb-md">Shipping Info</h3>
             <FormInput
               value={firstName}
               onChange={firstNameHandler}
               onBlur={firstNameBlurHandler}
-              onFocus={firstNameFocusHandler}
-              isTouched={isFirstNameTouched}
               hasError={firstNameHasError}
               lable="First Name"
               errorMessage="Must Contain 3 Characters."
               labelColor="white"
               type="text"
+              error={firstNameError}
             />
             <FormInput
               value={lastName}
               onChange={lastNameHandler}
               onBlur={lastNameBlurHandler}
-              onFocus={lastNameFocusHandler}
               lable="Last Name"
               errorMessage="Must Contain 3 Characters."
-              isTouched={isLastNameTouched}
               type="text"
               labelColor="white"
               hasError={lastNameHasError}
+              error={lastNameError}
             />
             <FormInput
               value={email}
               onChange={emailHandler}
               onBlur={emailBlurHandler}
-              onFocus={emailFocusHandler}
               lable="Email"
               errorMessage="Provide A Valid Email."
-              isTouched={isEmailTouched}
               type="text"
               labelColor="white"
               hasError={emailHasError}
+              error={emailError}
             />
 
             <FormInput
               value={contact}
               onChange={contactHandler}
               onBlur={contactBlurHandler}
-              onFocus={contactFocusHandler}
               lable="Contact"
               errorMessage="Provide A Valid Contact."
-              isTouched={isContactTouched}
               type="number"
               labelColor="white"
               hasError={contactHasError}
+              error={contactError}
             />
 
             <FormInput
               value={altContact}
               onChange={altContactHandler}
               onBlur={altContactBlurHandler}
-              onFocus={altContactFocusHandler}
               lable="Alternative Contact"
               errorMessage="Provide A Valid Alternative Contact."
-              isTouched={isAltContactTouched}
-              type="text"
+              type="number"
               labelColor="white"
               hasError={altContactHasError}
+              error={altContactError}
             />
 
             <FormInput
               value={address}
               onChange={addressHandler}
               onBlur={addressBlurHandler}
-              onFocus={addressFocusHandler}
               lable="Address"
               errorMessage="Provide A  address ."
-              isTouched={isAddressTouched}
               type="text"
               labelColor="white"
               hasError={addressHasError}
+              error={addressError}
             />
 
             <FormInput
               value={street}
               onChange={streetHandler}
               onBlur={streetBlurHandler}
-              onFocus={streetFocusHandler}
               lable="Apartment / Street / House.No"
               errorMessage="Provide A  Street ."
-              isTouched={isStreetTouched}
               type="text"
               labelColor="white"
               hasError={streetHasError}
+              error={streetError}
             />
 
             <FormInput
               value={city}
               onChange={cityHandler}
               onBlur={cityBlurHandler}
-              onFocus={cityFocusHandler}
               lable="City"
               errorMessage="Provide A  city ."
-              isTouched={isCityTouched}
               type="text"
               labelColor="white"
               hasError={cityHasError}
+              error={cityError}
             />
 
             <FormInput
               value={state}
               onChange={stateHandler}
               onBlur={stateBlurHandler}
-              onFocus={stateFocusHandler}
               lable="State"
               errorMessage="Provide A  state ."
-              isTouched={isStateTouched}
               type="text"
               labelColor="white"
               hasError={stateHasError}
+              error={stateError}
             />
 
             <FormInput
               value={country}
               onChange={countryHandler}
               onBlur={countryBlurHandler}
-              onFocus={countryFocusHandler}
               lable="Country"
               errorMessage="Provide A  country ."
-              isTouched={isCountryTouched}
               type="text"
               labelColor="white"
               hasError={countryHasError}
+              error={countryError}
             />
 
             <FormInput
               value={postalCode}
               onChange={postalCodeHandler}
               onBlur={postalCodeBlurHandler}
-              onFocus={postalCodeFocusHandler}
               lable="Postal Code"
               errorMessage="Provide A Postal Code ."
-              isTouched={isPostalCodeTouched}
               type="text"
               labelColor="white"
               hasError={postalCodeHasError}
+              error={postalCodeError}
             />
 
             <div className="checkout-form-payment">
               <h4 className="heading-3 text-center mb-sm">Payment Method</h4>
               <span className="checkout-form-payment__error">
-                {paymentError}
+                {paymentError} {""}
               </span>
               <div className="checkout-form-payment__methods">
                 <div className="checkout-form-payment__methods-row">

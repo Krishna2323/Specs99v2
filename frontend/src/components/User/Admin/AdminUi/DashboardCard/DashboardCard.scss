@@ -1,0 +1,24 @@
+.dashboard-card {
+  width: 100%;
+  background: var(--bg-image-grad-grey-dark);
+  //   height: 25rem;
+  border-radius: var(--brr-sm);
+  box-shadow: var(--box-shadow-dark);
+  overflow: hidden;
+  padding: 2rem;
+  text-align: center;
+
+  &__details {
+    &-row {
+      display: flex;
+      font-size: 1.6rem;
+      justify-content: center;
+      color: white;
+      gap: 1rem;
+    }
+  }
+
+  @media (max-width: 37.25em) {
+    padding: 1rem;
+  }
+}

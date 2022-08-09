@@ -98,6 +98,10 @@
       transform: translate(24px, 0);
     }
   }
+
+  &--dark {
+    box-shadow: var(--box-shadow-dark);
+  }
 }
 
 // @keyframes move {

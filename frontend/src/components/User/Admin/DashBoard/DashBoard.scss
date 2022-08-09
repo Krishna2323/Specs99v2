@@ -1,0 +1,50 @@
+.dashboard-component {
+  min-height: 95vh;
+  grid-column: 1/-1;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  position: relative;
+
+  &-container {
+    grid-column: 2/-1;
+    background: var(--bg-image-grad-grey-dark);
+    padding: 5rem;
+
+    &__cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 5rem;
+    }
+  }
+
+  @media (max-width: 75em) {
+    &-container {
+      grid-column: 1/-1;
+      &__cards {
+        gap: 4rem;
+      }
+    }
+  }
+
+  @media (max-width: 56.25em) {
+    &-container {
+      padding: 5rem;
+      grid-column: 1/-1;
+      &__cards {
+        gap: 5rem;
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  }
+
+  @media (max-width: 37.25em) {
+    &-container {
+      padding: 5rem 1rem;
+      grid-column: 1/-1;
+      &__cards {
+        gap: 2rem;
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  }
+}

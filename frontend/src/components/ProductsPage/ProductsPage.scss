@@ -11,9 +11,7 @@
   &__products {
     padding: 5rem;
     @include productCardContainer;
-    // min-height: 80vh;
-    // height: 100%;
-    // height: fit-content;
+    overflow: hidden;
   }
 
   @media (max-width: 93.5em) {

@@ -30,11 +30,10 @@ const Login = (props) => {
     value: emailValue,
     inputHandler: emailHandler,
     hasError: emailHasError,
-    // resetInput: emailInputReset,
-    isTouched: emailIsTouched,
+    resetInput: emailInputReset,
     inputBlurHandler: emailBlurHandler,
-    inputFocusHandler: emailFocusHandler,
-    isFocused: isEmailFocused,
+    error: emailError,
+    showErrorHandler: emailShowErrorHandler,
   } = useInput(emailValidator);
 
   const {
@@ -42,19 +41,12 @@ const Login = (props) => {
     inputHandler: passwordHandler,
     hasError: passwordHasError,
     inputBlurHandler: passwordBlurHandler,
-    // resetInput: passwordInputReset,
-    isTouched: passwordIsTouched,
-    inputFocusHandler: passwordlFocusHandler,
-    isFocused: isPasswordFocused,
+    resetInput: passwordInputReset,
+    error: passwordError,
+    showErrorHandler: passwordShowErrorHandler,
   } = useInput(passwordValidator);
 
-  const disableSubmit =
-    passwordHasError ||
-    emailHasError ||
-    !isEmailFocused ||
-    !isPasswordFocused ||
-    !passwordValidator(passwordValue) ||
-    !emailValidator(emailValue);
+  const disableSubmit = emailError || passwordError;
 
   const submitBtnModifier = !disableSubmit
     ? "form-btn-valid"
@@ -63,13 +55,14 @@ const Login = (props) => {
   const onFormSubmit = (e) => {
     e.preventDefault();
     if (!emailValidator(emailValue) || !passwordValidator(passwordValue)) {
-      passwordBlurHandler();
-      emailBlurHandler();
+      emailShowErrorHandler();
+      passwordShowErrorHandler();
       return;
     }
     dispatch(login({ email: emailValue, password: passwordValue }));
-    // closeLoginForm();
     dispatch(uiSliceAction.setLoginForm());
+    emailInputReset();
+    passwordInputReset();
   };
 
   useEffect(() => {}, [action, requestInfo, closeLoginForm]);
@@ -92,15 +85,14 @@ const Login = (props) => {
               />
               <h5 className="heading-1  mb-sm">Login</h5>
               <FormInput
-                isTouched={emailIsTouched}
-                hasError={emailHasError}
                 onChange={emailHandler}
                 onBlur={emailBlurHandler}
                 type={"email"}
                 lable={"Email"}
                 value={emailValue}
                 errorMessage="Please Provide A Valid Email."
-                onFocus={emailFocusHandler}
+                hasError={emailHasError}
+                error={emailError}
               />
 
               <FormInput
@@ -108,11 +100,10 @@ const Login = (props) => {
                 lable="Password"
                 onChange={passwordHandler}
                 onBlur={passwordBlurHandler}
-                isTouched={passwordIsTouched}
                 hasError={passwordHasError}
                 value={passwordValue}
                 errorMessage="Please Must Contain 6 Characters."
-                onFocus={passwordlFocusHandler}
+                error={passwordError}
               />
 
               <button className={`form-btn mt-small ${submitBtnModifier}`}>
