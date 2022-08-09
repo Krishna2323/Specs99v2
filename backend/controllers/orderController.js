@@ -35,7 +35,6 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     cancel_url: `${req.protocol}://${req.get('host')}/`,
     customer_email: req.user.email,
     client_reference_id: req.user._id,
-    line_items: productInfo,
     shipping_details: {
       address: {
         city: address.city,
@@ -46,6 +45,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
       },
       name: address.firstName + ' ' + address.lastName,
     },
+    line_items: productInfo,
   });
 
   res.status(200).json({
