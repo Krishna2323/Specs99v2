@@ -70,7 +70,9 @@ createBookingCheckout = async (data) => {
         };
       });
 
-      const user = await User.findOne({ email: data.customer_email });
+      const user = await User.find({ email: data.customer_email });
+
+      console.log(user);
 
       await Order.create({
         products,
