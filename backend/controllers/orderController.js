@@ -45,8 +45,14 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   });
 });
 
-const createBookingCheckout = (session) => {
-  console.log(session.line_items);
+const createBookingCheckout = (sessionId) => {
+  const lineItems = stripe.checkout.sessions.listLineItems(
+    sessionId,
+    { limit: 5 },
+    function (err, lineItems) {}
+  );
+
+  return lineItems;
 };
 
 exports.webhookCheckout = (req, res, next) => {
@@ -64,8 +70,8 @@ exports.webhookCheckout = (req, res, next) => {
   }
 
   if (event.type === 'checkout.session.completed') {
-    createBookingCheckout(event.data.object);
-    res.status(200).json({ received: event.data.object.line_items });
+    const listItems = createBookingCheckout(event.data.object.id);
+    res.status(200).json({ received: listItems });
   }
 };
 
