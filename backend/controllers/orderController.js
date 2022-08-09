@@ -40,14 +40,14 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     metadata: {
       address: address.address,
       street: address.street,
-      contact: address.contact,
-      altContact: address.altContact,
+      contact: address.contactNumber,
+      altContact: address.altContactNumber,
       email: address.email,
       firstName: address.firstName,
       lastName: address.lastName,
       state: address.state,
       city: address.city,
-      postalCode: address.poastalCode,
+      postalCode: address.postalCode,
       country: address.country,
     },
   });
@@ -70,12 +70,12 @@ createBookingCheckout = async (data) => {
         };
       });
 
-      const user = await User.findOne({ email: data.customer_email })._id;
+      const user = await User.findOne({ email: data.customer_email });
 
       await Order.create({
         products,
         shippingInfo: { ...data.object.metadata },
-        user,
+        user: user.id,
         totalPrice: data.object.amount_total / 100,
         paymentMethod: 'online',
         paymentStatus: 'paid',
