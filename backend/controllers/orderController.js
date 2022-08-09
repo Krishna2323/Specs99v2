@@ -72,7 +72,8 @@ createBookingCheckout = async (data) => {
 
       const user = await User.find({ email: data.customer_email });
 
-      console.log(user);
+      console.log('EMAIL', data.customer_email);
+      console.log('USER', user);
 
       await Order.create({
         products,
