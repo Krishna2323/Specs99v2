@@ -37,9 +37,6 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     customer_email: req.user.email,
     client_reference_id: req.user._id,
     line_items: productInfo,
-    shipping_address_collection: {
-      allowed_countries: ['US', 'IN'],
-    },
     metadata: {
       address: address.address,
       street: address.street,
@@ -55,8 +52,6 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     },
   });
 
-  console.log(session);
-
   res.status(200).json({
     status: 'success',
     session,
@@ -64,34 +59,39 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
 });
 
 createBookingCheckout = async (data) => {
+  console.log('DATA', data);
   const getResponse = async (response) => {
-    const products = response.data.map((el) => {
-      return {
-        quantity: el.quantity,
-        price: el.amount / 100,
-        product: el.description,
-      };
-    });
+    try {
+      const products = response.data.map((el) => {
+        return {
+          quantity: el.quantity,
+          price: el.amount_total / 100,
+          product: el.description,
+        };
+      });
 
-    const user = await User.findOne({ email: data.customer_email })._id;
+      const user = await User.findOne({ email: data.customer_email })._id;
 
-    await Order.create({
-      products,
-      shippingInfo: { ...data.metadata },
-      user,
-      totalPrice: data.object.amount_total / 100,
-      paymentMethod: 'online',
-      paymentStatus: 'paid',
-    });
+      await Order.create({
+        products,
+        shippingInfo: { ...data.metadata },
+        user,
+        totalPrice: data.object.amount_total / 100,
+        paymentMethod: 'online',
+        paymentStatus: 'paid',
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
   await stripe.checkout.sessions.listLineItems(
     data.object.id,
     { limit: 5 },
-    async function (error, response) {
+    function (error, response) {
       if (error) {
         return res.status(400).send(`Error : ${error.message}`);
       }
-      await getResponse(response);
+      getResponse(response);
     }
   );
 };
