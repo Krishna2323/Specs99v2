@@ -36,18 +36,6 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     customer_email: req.user.email,
     client_reference_id: req.user._id,
     line_items: productInfo,
-    metadata: {
-      address: {
-        city: address.city,
-        country: address.country,
-        line1: address.street,
-        postal_code: address.postalCode,
-        state: address.state,
-        phone: address.phone,
-        email: address.email,
-        name: address.firstName + ' ' + address.lastName,
-      },
-    },
   });
 
   res.status(200).json({
