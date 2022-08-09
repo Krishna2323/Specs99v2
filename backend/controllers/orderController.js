@@ -35,18 +35,26 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     cancel_url: `${req.protocol}://${req.get('host')}/`,
     customer_email: req.user.email,
     client_reference_id: req.user._id,
-    shipping_details: {
-      address: {
-        city: address.city,
-        country: 'IN',
-        line1: address.street,
-        postal_code: address.postalCode,
-        state: address.state,
-      },
-      name: address.firstName + ' ' + address.lastName,
-    },
     line_items: productInfo,
+    shipping_address_collection: {
+      allowed_countries: ['US', 'IN'],
+    },
+    metadata: {
+      address: address.address,
+      street: address.street,
+      contact: address.contact,
+      altContact: address.altContact,
+      email: address.email,
+      firstName: address.firstName,
+      lastName: address.lastName,
+      state: address.state,
+      city: address.city,
+      postalCode: address.poastalCode,
+      country: address.country,
+    },
   });
+
+  console.log(session);
 
   res.status(200).json({
     status: 'success',
@@ -91,7 +99,7 @@ exports.webhookCheckout = async (req, res, next) => {
 
   if (event.type === 'checkout.session.completed') {
     const listItems = await createBookingCheckout(event.data.object);
-    res.status(200).json({ received: listItems });
+    res.status(200).json({ received: event });
   }
 };
 

@@ -229,7 +229,7 @@ const Checkout = () => {
       });
     } catch (error) {
       console.log(error);
-      setConfirmationBtnDisable(true);
+      setConfirmationBtnDisable(false);
     }
     setCheckOutConfirmation(false);
   };
