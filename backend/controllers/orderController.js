@@ -20,18 +20,15 @@ exports.getUserOrders = catchAsync(async (req, res, next) => {
 exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   const { products } = req.body;
 
-  console.log(products);
-
   const productInfo = products.map((el) => {
     return {
       name: `${el.product.brand} ${el.product.model}`,
       amount: el.product.price * 100,
       currency: 'inr',
       quantity: el.quantity,
+      description: el.product._id,
     };
   });
-
-  console.log(productInfo);
 
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
@@ -68,7 +65,7 @@ exports.webhookCheckout = (req, res, next) => {
 
   if (event.type === 'checkout.session.completed') {
     createBookingCheckout(event.data.object);
-    res.status(200).json({ received: true });
+    res.status(200).json({ received: event });
   }
 };
 
