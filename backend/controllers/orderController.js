@@ -3,6 +3,7 @@ const factory = require('./handlerFactory');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const Order = require('../models/orderModel');
+const User = require('../models/userModel');
 
 exports.getUserOrders = catchAsync(async (req, res, next) => {
   const orders = await Order.find({ user: req.user._id })
@@ -31,8 +32,8 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   });
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
-    success_url: `${req.protocol}://${req.get('host')}/`,
-    cancel_url: `${req.protocol}://${req.get('host')}/`,
+    success_url: `${req.protocol}://${req.get('host')}/user/orders`,
+    cancel_url: `${req.protocol}://${req.get('host')}/user/orders`,
     customer_email: req.user.email,
     client_reference_id: req.user._id,
     line_items: productInfo,
@@ -63,22 +64,34 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
 });
 
 createBookingCheckout = async (data) => {
-  console.log(data);
-  const getResponse = (response) => {
-    response.data.map((el) => {
+  const getResponse = async (response) => {
+    const products = response.data.map((el) => {
       return {
         quantity: el.quantity,
+        price: el.amount / 100,
+        product: el.description,
       };
+    });
+
+    const user = await User.findOne({ email: data.customer_email })._id;
+
+    await Order.create({
+      products,
+      shippingInfo: { ...data.metadata },
+      user,
+      totalPrice: data.object.amount_total / 100,
+      paymentMethod: 'online',
+      paymentStatus: 'paid',
     });
   };
   await stripe.checkout.sessions.listLineItems(
-    data.id,
+    data.object.id,
     { limit: 5 },
-    function (error, response) {
+    async function (error, response) {
       if (error) {
         return res.status(400).send(`Error : ${error.message}`);
       }
-      getResponse(response);
+      await getResponse(response);
     }
   );
 };
@@ -98,7 +111,7 @@ exports.webhookCheckout = async (req, res, next) => {
   }
 
   if (event.type === 'checkout.session.completed') {
-    const listItems = await createBookingCheckout(event.data.object);
+    await createBookingCheckout(event.data);
     res.status(200).json({ received: event });
   }
 };
