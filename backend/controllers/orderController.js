@@ -18,7 +18,7 @@ exports.getUserOrders = catchAsync(async (req, res, next) => {
 });
 
 exports.getCheckoutSession = catchAsync(async (req, res, next) => {
-  const { products } = req.body;
+  const { products, address } = req.body;
 
   const productInfo = products.map((el) => {
     return {
@@ -29,7 +29,6 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
       description: el.product._id,
     };
   });
-
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
     success_url: `${req.protocol}://${req.get('host')}/`,
@@ -37,6 +36,18 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     customer_email: req.user.email,
     client_reference_id: req.user._id,
     line_items: productInfo,
+    shipping_details: {
+      address: {
+        city: address.city,
+        country: address.country,
+        line1: address.street,
+        postal_code: address.postalCode,
+        state: address.state,
+      },
+      name: address.firstName + ' ' + address.lastName,
+      email: address.email,
+      phone: address.phone,
+    },
   });
 
   res.status(200).json({
@@ -45,17 +56,28 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   });
 });
 
-const createBookingCheckout = (sessionId) => {
-  const lineItems = stripe.checkout.sessions.listLineItems(
-    sessionId,
+createBookingCheckout = async (data) => {
+  console.log(data);
+  const getResponse = (response) => {
+    response.data.map((el) => {
+      return {
+        quantity: el.quantity,
+      };
+    });
+  };
+  await stripe.checkout.sessions.listLineItems(
+    data.id,
     { limit: 5 },
-    function (err, lineItems) {}
+    function (error, response) {
+      if (error) {
+        return res.status(400).send(`Error : ${error.message}`);
+      }
+      getResponse(response);
+    }
   );
-
-  return lineItems;
 };
 
-exports.webhookCheckout = (req, res, next) => {
+exports.webhookCheckout = async (req, res, next) => {
   const signature = req.headers['stripe-signature'];
 
   let event;
@@ -70,7 +92,7 @@ exports.webhookCheckout = (req, res, next) => {
   }
 
   if (event.type === 'checkout.session.completed') {
-    const listItems = createBookingCheckout(event.data.object.id);
+    const listItems = await createBookingCheckout(event.data.object);
     res.status(200).json({ received: listItems });
   }
 };
