@@ -96,10 +96,11 @@ export const createCodOrder = (cart, shippingInfo) => {
   };
 };
 
-export const createStripeOrder = async (cartProducts) => {
+export const createStripeOrder = async (cartProducts, address) => {
   try {
     const res = await axios.post("/api/v1/order/check-out-session", {
       products: cartProducts,
+      address,
     });
 
     return res.data.session.id;

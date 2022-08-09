@@ -211,7 +211,19 @@ const Checkout = () => {
   const stripeCheckout = async () => {
     try {
       setConfirmationBtnDisable(true);
-      const session = await createStripeOrder(cart.products);
+      const session = await createStripeOrder(cart.products, {
+        firstName,
+        lastName,
+        email,
+        contactNumber: contact,
+        altContactNumber: altContact,
+        address,
+        street,
+        city,
+        state,
+        country,
+        postalCode,
+      });
       await stripe.redirectToCheckout({
         sessionId: session,
       });
