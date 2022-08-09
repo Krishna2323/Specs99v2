@@ -36,17 +36,17 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     customer_email: req.user.email,
     client_reference_id: req.user._id,
     line_items: productInfo,
-    shipping_details: {
+    metadata: {
       address: {
         city: address.city,
         country: address.country,
         line1: address.street,
         postal_code: address.postalCode,
         state: address.state,
+        phone: address.phone,
+        email: address.email,
+        name: address.firstName + ' ' + address.lastName,
       },
-      name: address.firstName + ' ' + address.lastName,
-      email: address.email,
-      phone: address.phone,
     },
   });
 
