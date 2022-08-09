@@ -66,7 +66,7 @@ createBookingCheckout = async (data) => {
       const products = response.data.map((el) => {
         return {
           quantity: el.quantity,
-          price: el.amount_total / 100,
+          price: el.amount_total / 100 / el.quantity,
           product: el.description,
         };
       });
