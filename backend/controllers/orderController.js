@@ -20,13 +20,15 @@ exports.getUserOrders = catchAsync(async (req, res, next) => {
 exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   const { products } = req.body;
 
+  console.log(products);
+
   const productInfo = products.map((el) => {
     return {
       name: `${el.product.brand} ${el.product.model}`,
       amount: el.product.price * 100,
       currency: 'inr',
       quantity: el.quantity,
-      id: el._id,
+      id: el.product._id,
     };
   });
 
