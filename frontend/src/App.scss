@@ -73,8 +73,8 @@
 
   --bg-image-2: linear-gradient(
     to right,
-    rgba(0, 0, 0, 0.3),
-    rgba(0, 0, 0, 0.3)
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.2)
   );
 
   --bg-image-2-dark: linear-gradient(
@@ -134,6 +134,18 @@
     #555c7b,
     #558eb5,
     #44c4df,
+    #5ffbf1
+  );
+  --bg-image-grad-purple-3: linear-gradient(
+    45deg,
+    #d16ba5,
+    #a85680,
+    #80435e,
+    #5a3040,
+    #555c7b,
+    #558eb5,
+    #44c4df,
+    #5ffbf1,
     #5ffbf1
   );
   --bg-image-grad-purple-2: linear-gradient(
@@ -245,6 +257,8 @@ body {
   font-weight: 400;
   position: relative;
   color: var(--color-grey-dark);
+  // background: var(--bg-image-grad-grey-dark);
+
   // background: var(--bg-image-grad-purple-2);
   // background-image: linear-gradient(to right, #d16ba5, #fff, #5ffbf1);
   // height: max-content;
@@ -329,6 +343,7 @@ body {
 .heading-1 {
   font-size: 3.8rem;
   line-height: 1.1;
+
   color: transparent;
   background: var(--bg-image-1);
   background-clip: text;
@@ -362,6 +377,7 @@ body {
     content: "\a0";
     z-index: 0;
     background: var(--bg-image-grad-purple-2);
+    box-shadow: var(--box-shadow-card);
   }
   &::before {
     margin-left: -50vw;
@@ -583,6 +599,7 @@ body {
   font-weight: 400;
   font-size: 2rem;
   display: inline-block;
+  grid-column: 1/-1;
   transition: all 0.3s;
   border-bottom: 1px solid var(--color-secondary);
   padding: 0.2rem 2rem;

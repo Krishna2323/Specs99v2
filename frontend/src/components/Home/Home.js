@@ -15,6 +15,7 @@ import {
   brandDummy,
 } from "../dummyData/sunglassesDummy";
 import TopProductSlider from "./TopProductSlider/TopProductSlider";
+import Testimonials from "./HomeTestimonials/Testimonials";
 
 const Home = (props) => {
   const dispatch = useDispatch();
@@ -43,15 +44,32 @@ const Home = (props) => {
         loading={isLoading}
         error={isError}
         message={message}
-        heading="Top Sunglasses"
+        heading="Sunglasses"
       />
       <TopProductSlider
         products={products}
         loading={isLoading}
         error={isError}
         message={message}
-        heading="Top Eyeglasses"
+        heading="Eyeglasses"
       />
+
+      <TopProductSlider
+        products={products}
+        loading={isLoading}
+        error={isError}
+        message={message}
+        heading="Contact Lenses"
+      />
+      <TopProductSlider
+        products={products}
+        loading={isLoading}
+        error={isError}
+        message={message}
+        heading="EYEWEAR ACCESSORIES"
+      />
+
+      <Testimonials />
       {/* <TopProductSlider products={products} heading="Top "/> */}
 
       {/* <HomeBrand /> */}

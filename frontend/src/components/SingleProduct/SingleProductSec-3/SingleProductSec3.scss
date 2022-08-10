@@ -1,20 +1,20 @@
 .single-product__section-3 {
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-  grid-column: center-start/center-end;
+  // display: flex;
+  // flex-direction: column;
+  // gap: 3rem;
+  grid-column: 1/-1;
   min-height: 30rem;
   width: 100%;
   // background-color: var(--color-grey-medium);
   border-radius: var(--brr-regular);
   // box-shadow: var(--box-shadow-banner);
-  padding: 2rem 5rem;
+  // padding: 2rem 5rem;
 
   & .user-reviews {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
-    justify-content: center;
-    gap: 5rem;
+    // display: grid;
+    // grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    // justify-content: center;
+    // gap: 5rem;
   }
 
   @media (max-width: 75rem) {

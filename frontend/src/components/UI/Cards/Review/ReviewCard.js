@@ -14,11 +14,13 @@ const ReviewCard = (props) => {
         </p>
         <div className="review-card__user-details">
           <img
-            src={props.img}
+            src={
+              "https://images.indianexpress.com/2021/08/money-heist-professor-1200.jpg"
+            }
             alt=""
             className="review-card__user-details__img"
           />
-          <span className="review-card__user-details__name">- Jhon Wick</span>
+          <span className="review-card__user-details__name">- Professor</span>
         </div>
       </div>
     </div>

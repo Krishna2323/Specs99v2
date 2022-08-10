@@ -1,0 +1,52 @@
+export const dummyTestimonialsImage = [
+  {
+    image:
+      "https://media.istockphoto.com/photos/portrait-of-men-with-sunglasses-picture-id509715030?k=20&m=509715030&s=612x612&w=0&h=TWFmQ5Wqf9De7qIZkGWgHRhE-hophGCzGXu32VlsIwY=",
+  },
+  {
+    image:
+      "https://media.istockphoto.com/photos/girl-trying-glasses-at-the-optician-picture-id506616340?k=20&m=506616340&s=612x612&w=0&h=uy2B14K7YTdzCsF1yxWww7jAQc8taV4Cpg8s8h_axlk=",
+  },
+
+  {
+    image:
+      "https://cdn03.plentymarkets.com/ciw7a3ibeo67/frontend/Top_5_Best_Sunglasses_for_Men.jpg",
+  },
+  {
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRstv706qZCLDicC7jE8ql5NsOKZiJnbObXYDjStC5pd-J05YzgrsWMrE_-hsMh616Flcs&usqp=CAU",
+  },
+  {
+    image:
+      "https://cdn.allaboutvision.com/images/girl-sunglasses-hat-beach-330x220.jpg",
+  },
+
+  {
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaejg-x06woC-Y88SWtuxDvZm9Y87TqoCdaA&usqp=CAU",
+  },
+  {
+    image:
+      "https://i.pinimg.com/236x/31/5f/5c/315f5c5be0daa1463d2987f5904fb5f6--wayfarer-ray-bans-aviators-ray-bans.jpg",
+  },
+  {
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiQFjiKkYF3U0KzM5V2NXica5lRK38jWIaLNzax7Ag05qY-upY_a3OrWhtY_-2732gXxg&usqp=CAU",
+  },
+  {
+    image:
+      "https://i.pinimg.com/736x/82/e2/b2/82e2b24b3bd1428808d20f748646caef--women-models-eyeglasses.jpg",
+  },
+  {
+    image:
+      "https://www.superiorwallpapers.com/images/lthumbs/2015-06/9850_A-model-with-sunglasses-from-Diane-Von-Furstenberg.jpg",
+  },
+  {
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgB2XhK-gbO9QvrSxFsq6154NSoB0hKSFXhA&usqp=CAU",
+  },
+  {
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbCx1Z1aWO6t_V_HFOqgviwqXVmSBdX-aYmw&usqp=CAU",
+  },
+];

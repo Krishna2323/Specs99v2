@@ -6,13 +6,21 @@ import "./ProductPage.scss";
 import SingleProductSec1 from "./SingleProductSec-1/SingleProductSec1";
 import SingleProductSec2 from "./SingleProductSec-2/SingleProductSec2";
 import SingleProductSec3 from "./SingleProductSec-3/SingleProductSec3";
+import TopProductSlider from "../Home/TopProductSlider/TopProductSlider";
 import { Fragment } from "react";
 import Loading from "../UI/Loading/Loading";
+import { fetchProducts } from "../../store/productsSlice/productsActions";
 
 const ProductPage = () => {
   const { product, isLoading, isError, message } = useSelector(
     (state) => state.product
   );
+  const {
+    products,
+    isLoading: topProductsLoading,
+    isError: topProductsIsError,
+    message: topProductsMessage,
+  } = useSelector((state) => state.products);
   const dispatch = useDispatch();
   const params = useParams();
   const { id } = params;
@@ -20,6 +28,7 @@ const ProductPage = () => {
   useEffect(() => {
     if (id) {
       dispatch(fetchProduct(id));
+      dispatch(fetchProducts({}));
     }
   }, [dispatch, id]);
   return (
@@ -37,6 +46,20 @@ const ProductPage = () => {
             <SingleProductSec1 product={product} />
             <SingleProductSec2 product={product} />
             <SingleProductSec3 product={product} />
+            <TopProductSlider
+              products={products}
+              loading={topProductsLoading}
+              error={topProductsIsError}
+              message={topProductsMessage}
+              heading={`Similar Products`}
+            />
+            <TopProductSlider
+              products={products}
+              loading={topProductsLoading}
+              error={topProductsIsError}
+              message={topProductsMessage}
+              heading={`More From ${product.brand}`}
+            />
           </Fragment>
         )}
       </div>

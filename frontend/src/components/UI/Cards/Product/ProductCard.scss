@@ -8,13 +8,13 @@
   height: 100%;
   cursor: pointer;
   // background-image: var(--bg-image-grad-grey-dark);
-  background-image: var(--bg-image-grad-purple-2);
-  border-radius: var(--brr-sm);
+  background-image: var(--bg-image-grad-purple-3);
+  border-radius: var(--brr-md);
   overflow: hidden;
   transition: all 0.3s;
   text-decoration: none !important;
-  box-shadow: var(--box-shadow-card);
-  // align-self: stretch;
+  box-shadow: var(--box-shadow-dark);
+  align-self: stretch;
 
   &::after {
     content: "";

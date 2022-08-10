@@ -4,12 +4,11 @@
   gap: 4rem;
   justify-content: center;
   align-items: center;
-  background-color: var(--color-grey-dark);
-  // height: 30rem;
+  background: var(--bg-image-grad-purple);
   width: 100%;
-  border-radius: var(--brr-regular);
+  border-radius: var(--brr-md);
   grid-column: center-start/center-end;
-  box-shadow: var(--box-shadow-banner);
+  box-shadow: var(--box-shadow-dark);
   padding: 2rem;
   transition: all 0.4s;
 

@@ -1,26 +1,18 @@
 .top-product-slider {
   width: 100%;
-  //   height: 50rem;
   grid-column: center-start/center-end;
-  // border-radius: var(--brr-regular);
   padding: 3rem 4rem 5rem 4rem;
-  // box-shadow: var(--box-shadow-card);
-  //   text-align: center;
-  // background: var(--bg-image-grad-grey-light);
-  background-color: white;
-  // padding: ;
 
   &__container {
-    // width: 100% !important;
-
     &-item {
       padding: 2rem 0;
-      //   width: 80% !important;
       display: flex !important;
       justify-content: center;
 
       &-inner {
         width: 95% !important;
+        align-self: stretch !important;
+        justify-content: stretch !important;
       }
     }
   }

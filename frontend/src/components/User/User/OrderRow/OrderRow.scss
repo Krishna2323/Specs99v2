@@ -6,6 +6,9 @@
   grid-template-rows: min-content;
   justify-items: center;
   align-items: center;
+  border-radius: var(--brr-md);
+  overflow: hidden;
+  box-shadow: var(--box-shadow-dark);
 
   &__image {
     width: 100%;

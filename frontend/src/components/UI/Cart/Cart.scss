@@ -1,18 +1,15 @@
 .cart {
   position: fixed;
-  // top: 10%;
   left: 50%;
   overflow-y: scroll;
   color: aliceblue;
   z-index: 1005;
   transform: translate(-50%, -50%);
-  border-radius: var(--brr-regular);
+  border-radius: var(--brr-md);
   width: 90vw;
   height: 90vh;
   background: var(--bg-image-grad-grey-dark);
   padding: 3rem 5rem;
-  // overflow: hidden;
-  // padding-bottom: 10rem;
   overflow-x: hidden;
   @media (max-width: 75em) {
     padding: 5rem 2rem;
@@ -43,7 +40,7 @@
     display: block;
     padding: 1rem;
     background: var(--bg-image-2-dark);
-    border-radius: var(--brr-regular);
+    border-radius: var(--brr-md);
   }
 
   &::-webkit-scrollbar-thumb {
@@ -71,7 +68,7 @@
 
     &__div {
       width: 100%;
-      border-radius: var(--brr-regular);
+      border-radius: var(--brr-md);
       background: var(--bg-image-2);
       margin-bottom: 1rem;
       overflow: hidden;
@@ -261,7 +258,7 @@
       padding: 1rem 2rem;
       align-items: center;
       justify-content: space-between;
-      border-radius: var(--brr-regular);
+      border-radius: var(--brr-md);
       background: var(--bg-image-grad-purple);
 
       &__div-1 {

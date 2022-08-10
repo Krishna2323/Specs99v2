@@ -6,17 +6,15 @@
   grid-column: center-start/center-end;
   // background: var(--bg-image-grad-grey-light);
   display: block;
-  background-color: white;
+  // background-color: white;
   margin-bottom: 2rem;
   padding: 2rem 1rem;
   padding-bottom: 4rem;
-  // border-radius: var(--brr-regular);
-  // box-shadow: var(--box-shadow-card);
+  // background: var(--bg-image-grad-purple);
 
   &__div-2 {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    // background: var(--bg-image-grad-purple);
     grid-template-rows: repeat(6, 13vh);
     gap: 1rem;
 
@@ -24,6 +22,12 @@
       box-shadow: 0.1rem 0.1rem 1.2rem 3px rgba(rgb(0, 0, 0), 0.1);
       overflow: hidden;
       border-radius: var(--brr-sm);
+      border-radius: var(--brr-md);
+      padding: 0.3rem;
+      background: var(--bg-image-grad-purple-2);
+      // background: var(--bg-image-grad-grey-dark);
+
+      box-shadow: var(--box-shadow-card);
 
       & img {
         height: 100%;
@@ -31,6 +35,7 @@
         object-fit: fill;
         display: block;
         transition: all 0.3s;
+        border-radius: var(--brr-md);
 
         &:hover {
           transform: scale(1.1);
