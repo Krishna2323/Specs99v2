@@ -17,6 +17,9 @@ const productsSlice = createSlice({
       state.message = action.payload.message;
       state.isError = action.payload.isError;
     },
+    clearProducts(state, action) {
+      state.products = [];
+    },
   },
 });
 

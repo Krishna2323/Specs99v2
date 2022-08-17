@@ -34,6 +34,8 @@ import {
   navGlassCategory,
 } from "./components/dummyData/sunglassesDummy";
 import UserAccount from "./components/User/User/UserAccount/UserAccount";
+import ScrollToTop from "./components/UI/Container/ScrollToTop";
+import NotFound from "./components/UI/NotFound/NotFound";
 
 function App() {
   const dispatch = useDispatch();
@@ -51,118 +53,116 @@ function App() {
     <Container>
       <Header />
       <Notification open={display} />
+      <ScrollToTop>
+        <Routes>
+          {/* ROUTES FOR ALL USERS */}
 
-      <Routes>
-        {/* ROUTES FOR ALL USERS */}
+          {/* HOME PAGE */}
+          <Route path="/" element={<Home />} />
 
-        {/* HOME PAGE */}
-        <Route path="/" element={<Home />} />
+          {/* PRODUCTS PAGE */}
+          <Route path="/products/">
+            <Route
+              path=":keyword"
+              element={WithDefaultFilter({})(ProductsPage)}
+            />
+            <Route path="" element={WithDefaultFilter({})(ProductsPage)} />
+          </Route>
 
-        {/* PRODUCTS PAGE */}
-        <Route path="/products/">
-          <Route path=":keyword" element={<ProductsPage open={false} />} />
-          <Route path="" element={<ProductsPage />} />
-        </Route>
-
-        {/* PRODUCTS DETAIL PAGE */}
-        <Route path="/product/:id" element={<ProductPage />} />
-
-        {/* PRODUCTS PAGE WITH DEFAULT FILTERS START*/}
-        {homeShapes1.map((e) => (
           <Route
-            key={e.id}
-            path={`/style/${e.name.split(" ").join("-")}`}
-            element={WithDefaultFilter({
-              style: e.name.toLocaleLowerCase(),
-              heading: `${e.name} `,
-            })(ProductsPage)}
+            path="/brand/:brandName"
+            element={<ProductsPage open={false} />}
           />
-        ))}
 
-        {navGenderCategory.map((e) => (
+          {/* PRODUCTS DETAIL PAGE */}
+          <Route path="/product/:id" element={<ProductPage />} />
+
+          {/* PRODUCTS PAGE WITH DEFAULT FILTERS START*/}
+          {homeShapes1.map((e) => (
+            <Route
+              key={e.id}
+              path={`/style/${e.name.split(" ").join("-")}`}
+              element={WithDefaultFilter({
+                style: e.name.toLocaleLowerCase(),
+                heading: `${e.name} `,
+              })(ProductsPage)}
+            />
+          ))}
+
+          {navGenderCategory.map((e) => (
+            <Route
+              key={e.gender}
+              path={`/category/${e.gender.split(" ").join("-")}`}
+              element={WithDefaultFilter({
+                gender: e.gender.toLocaleLowerCase(),
+                heading: `${e.gender} Sections`,
+              })(ProductsPage)}
+            />
+          ))}
+
+          {navGlassCategory.map((e) => (
+            <Route
+              key={e.glass}
+              path={`/${e.glass.split(" ").join("-")}`}
+              element={WithDefaultFilter({
+                typeOfGlass: e.glass.toLocaleLowerCase(),
+                heading: `${e.glass}`,
+              })(ProductsPage)}
+            />
+          ))}
+
+          {/* ROUTES FOR ALL USERS END */}
+
+          {/* LOGGED IN USER PAGES */}
+          <Route path="/user/account" element={<UserAccount />} />
+
+          <Route path="/user/orders" element={<UserOrders />} />
+
           <Route
-            key={e.gender}
-            path={`/category/${e.gender.split(" ").join("-")}`}
-            element={WithDefaultFilter({
-              gender: e.gender.toLocaleLowerCase(),
-              heading: `${e.gender} Sections`,
-            })(ProductsPage)}
+            path="/checkout"
+            element={
+              <Elements
+                stripe={loadStripe(
+                  process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY
+                )}
+              >
+                <Checkout />
+              </Elements>
+            }
           />
-        ))}
 
-        {navGlassCategory.map((e) => (
-          <Route
-            key={e.glass}
-            path={`/${e.glass.split(" ").join("-")}`}
-            element={WithDefaultFilter({
-              typeOfGlass: e.glass.toLocaleLowerCase(),
-              heading: `${e.glass}`,
-            })(ProductsPage)}
-          />
-        ))}
+          {/* {LOGGED IN USER PAGES END} */}
 
-        {brandDummy.map((e) => (
-          <Route
-            key={e.link}
-            path={`/brand/${e.brand.split(" ").join("-")}`}
-            element={WithDefaultFilter({
-              keyword: e.brand,
-              heading: `${e.brand} `,
-            })(ProductsPage)}
-          />
-        ))}
-        {/* ROUTES FOR ALL USERS END */}
-
-        {/* LOGGED IN USER PAGES */}
-        <Route path="/user/account" element={<UserAccount />} />
-        {/* <Route path="/user/account">
-          <LoggedInUserRoute Component={UserAccount} />
-        </Route> */}
-
-        <Route path="/user/orders" element={<UserOrders />} />
-
-        <Route
-          path="/checkout"
-          element={
-            <Elements
-              stripe={loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY)}
-            >
-              <Checkout />
-            </Elements>
-          }
-        />
-
-        {/* {LOGGED IN USER PAGES END} */}
-
-        {/* ADMIN ROUTES */}
-        <Route path="/admin/editProducts" element={<AllProduct />} />
-        <Route path="/admin/dashboard" element={<DashBoard />} />
-        {/* <Route
+          {/* ADMIN ROUTES */}
+          <Route path="/admin/editProducts" element={<AllProduct />} />
+          <Route path="/admin/dashboard" element={<DashBoard />} />
+          {/* <Route
           path="/addProduct" element={<AddProduct product={products ? products[0] : undefined} />}
         /> */}
-        <Route path="/admin/addProduct/">
-          <Route
-            path=""
-            element={
-              <AddUpdateProduct
-                product={products ? products[0] : undefined}
-                heading="Add Product"
-              />
-            }
-          />
-          <Route
-            path=":id"
-            element={
-              <AddUpdateProduct
-                action="updateProduct"
-                heading="Update Product"
-              />
-            }
-          />
-        </Route>
-        {/* <Route path="/updateProduct/:id" element={<UpdateProduct />} /> */}
-        {/* ADMIN ROUTES END */}
-      </Routes>
+          <Route path="/admin/addProduct/">
+            <Route
+              path=""
+              element={
+                <AddUpdateProduct
+                  product={products ? products[0] : undefined}
+                  heading="Add Product"
+                />
+              }
+            />
+            <Route
+              path=":id"
+              element={
+                <AddUpdateProduct
+                  action="updateProduct"
+                  heading="Update Product"
+                />
+              }
+            />
+          </Route>
+          <Route path="*" element={<NotFound />} />
+          {/* ADMIN ROUTES END */}
+        </Routes>
+      </ScrollToTop>
 
       <Footer />
     </Container>

@@ -7,7 +7,7 @@
   // background: var(--bg-image-grad-grey-light);
   display: block;
   // background-color: white;
-  margin-bottom: 2rem;
+  // margin-bottom: 2rem;
   padding: 2rem 1rem;
   padding-bottom: 4rem;
   // background: var(--bg-image-grad-purple);
@@ -86,13 +86,22 @@
     &__div-2 {
       grid-template-rows: repeat(6, 8vh);
       gap: 1rem;
+      &__box {
+        padding: 0.2rem;
+      }
     }
   }
 
   @media (max-width: 37.5em) {
+    padding: 1rem !important;
     &__div-2 {
       grid-template-rows: repeat(6, 5vh);
       gap: 4px;
+
+      &__box {
+        padding: 0.1rem;
+        // padding: 0;
+      }
     }
   }
 }

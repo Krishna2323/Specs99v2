@@ -6,7 +6,7 @@
   // background: var(--bg-image-grad-grey-dark);
   // background: transparent;
 
-  padding: 1rem 3rem;
+  padding: 0.8rem 3rem;
   transition: all 0.5s;
 
   & .header-nav {
@@ -49,7 +49,7 @@
       margin-left: auto;
       display: flex;
 
-      gap: 4rem;
+      gap: 3rem;
       justify-self: flex-end;
       list-style: none;
 
@@ -125,7 +125,7 @@
       & a {
         text-decoration: none;
         color: var(--color-grey-dark);
-        font-size: 1.9rem;
+        font-size: 1.6rem;
         font-weight: 300;
         letter-spacing: 1.2px;
         padding: 0.5rem 1rem;

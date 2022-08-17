@@ -9,7 +9,6 @@
 
   & .all-product {
     &-header {
-      // background: var(--bg-image-2-dark);
       padding: 1rem 2rem;
       width: 100%;
       display: flex;
@@ -27,10 +26,8 @@
       }
     }
     &-info {
-      // max-height: 80vh;
+      border-radius: var(--brr-md);
       width: 95%;
-      // overflow-y: scroll;
-      // margin: auto;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -38,10 +35,10 @@
       align-items: center;
       flex-wrap: wrap;
       background: var(--bg-image-grad-grey-dark);
+
       padding: 8rem 4rem;
       gap: 1rem;
       position: relative;
-      border-radius: var(--brr-sm);
       box-shadow: var(--box-shadow-dark);
 
       &__add-product-link {
@@ -89,14 +86,14 @@
         grid-template-columns: 9fr 0.5fr;
         background: var(--bg-image-3);
         padding: 0.5rem 2rem;
-        border-radius: var(--brr-sm);
+        border-radius: var(--brr-md);
         gap: 1rem;
         color: white;
         // flex: 0 0 50%;
         width: 100%;
         align-items: center;
         justify-items: center;
-        text-align: center;
+        // text-align: center;
 
         &-details {
           display: grid;
@@ -160,6 +157,7 @@
 
   @media (max-width: 56.5rem) {
     grid-column: 1/-1;
+    padding: 5rem 2rem;
 
     & .all-product {
       &-info {
@@ -187,6 +185,7 @@
   }
   @media (max-width: 37.5rem) {
     grid-column: 1/-1;
+    padding: 5rem 0.5rem;
 
     & .all-product {
       &-info {
@@ -217,6 +216,7 @@
 
   @media (max-width: 25em) {
     grid-column: 1/-1;
+    padding: 5rem 0.5rem;
 
     & .all-product {
       padding: 2rem 0.5rem;

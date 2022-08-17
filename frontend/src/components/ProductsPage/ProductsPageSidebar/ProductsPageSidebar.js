@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./ProductsPageSidebar.scss";
 import Slider from "@mui/material/Slider";
@@ -42,6 +42,7 @@ const ProductsPageSidebar = (props) => {
     : "";
   const params = useParams();
   const { pathname } = useLocation();
+  const [initial, setInitial] = useState(true);
 
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(20000);
@@ -54,8 +55,6 @@ const ProductsPageSidebar = (props) => {
   ///////////////////////
 
   const [minRating, setMinRating] = useState(0);
-  // const [page, setPage] = useState(1);
-  // const [limit, setLimit] = useState(6);
 
   const handlePriceChange = (e) => {
     setMinPrice(e.target.value[0]);
@@ -103,6 +102,16 @@ const ProductsPageSidebar = (props) => {
   // useDispatch(() => {
   //   console.log();
   // }, []);
+  useEffect(() => {
+    setMinPrice(0);
+    setMaxPrice(2000);
+    setFrameColor("");
+    setFrameSize("");
+    setGender("");
+    setLensColor("");
+    setTypeOfGlass("");
+    setMinRating(0);
+  }, [pathname]);
 
   return (
     <ThemeProvider theme={theme}>

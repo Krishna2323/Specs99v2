@@ -2,10 +2,14 @@
   grid-column: 1/-1;
   padding: 5rem 10rem;
   display: grid;
-  gap: 5rem;
+  // gap: 5rem;
   align-items: center;
   height: fit-content;
   // text-align: center;
+  background: var(--bg-image-grad-grey-dark);
+  border-radius: var(--brr-regular);
+  box-shadow: var(--box-shadow-dark);
+  margin: 0rem 0;
 
   &__reviews {
     flex-direction: column;
@@ -86,7 +90,7 @@
   }
 
   @media (max-width: 25em) {
-    padding: 2rem;
+    padding: 0rem;
     &__reviews {
       grid-template-columns: repeat(1, 1fr);
     }

@@ -31,7 +31,7 @@ export const brandDummy = [
     id: 5,
     img: "https://www.idee-eyewear.com/pub/media/logo/stores/1/3.png",
     name: "Upto 10% Off",
-    brand: "Idee",
+    brand: "irus by Idee",
 
     link: "/brand/idee",
   },
@@ -172,5 +172,6 @@ export const navGenderCategory = [
 export const navGlassCategory = [
   { glass: "Sunglasses", link: "/sunglasses" },
   { glass: "Eyeglasses", link: "/eyeglasses" },
-  { glass: "Eyelenses", link: "/eyelenses" },
+  { glass: "Contact Lenses", link: "/contact-lenses" },
+  { glass: "Computer Glasses", link: "/computer-glasses" },
 ];

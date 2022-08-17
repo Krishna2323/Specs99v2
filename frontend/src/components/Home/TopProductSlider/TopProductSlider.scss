@@ -1,7 +1,12 @@
 .top-product-slider {
   width: 100%;
-  grid-column: center-start/center-end;
+  grid-column: 1/-1;
   padding: 3rem 4rem 5rem 4rem;
+  background: var(--bg-image-grad-grey-dark);
+  border-radius: var(--brr-regular);
+  box-shadow: var(--box-shadow-dark);
+  margin: 0rem 0;
+  padding: 5rem 15rem;
 
   &__container {
     &-item {
@@ -15,5 +20,19 @@
         justify-content: stretch !important;
       }
     }
+  }
+
+  @media (max-width: 75em) {
+    grid-column: full-start/full-end;
+    // padding: 2rem;
+    padding: 5rem 5rem;
+
+    border-radius: 0;
+  }
+  @media (max-width: 56.25em) {
+  }
+  @media (max-width: 37.5em) {
+    // padding: 1rem;
+    padding: 4rem;
   }
 }

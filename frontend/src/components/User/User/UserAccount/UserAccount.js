@@ -13,76 +13,82 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "../../../../store/userSlice/userActions";
 import Navigation from "../../User/UserUi/Navigation/Navigation";
+import useNotification from "../../../hooks/useNotification";
 
 const UserAccount = () => {
   const [detailToChange, setDetailToChange] = useState("user-detail");
-  const [confirmPasswordError, setConfirmPasswordError] = useState(false);
+
   const { user } = useSelector((state) => state.user);
+  const { notify } = useNotification();
   const dispatch = useDispatch();
 
   const {
     value: nameValue,
-    isTouched: nameIsTouched,
-    isFocused: nameIsFocused,
     inputHandler: nameHandler,
     inputBlurHandler: nameBlurHandler,
     hasError: nameHasError,
     resetInput: nameReset,
-    inputFocusHandler: nameFocusHandler,
+    error: nameError,
+    showErrorHandler: nameShowErrorHandler,
   } = useInput(NameValidator);
 
   const {
     value: emailValue,
-    isTouched: emailIsTouched,
-    isFocused: emailIsFocused,
+
     inputHandler: emailHandler,
     inputBlurHandler: emailBlurHandler,
     hasError: emailHasError,
     resetInput: emailReset,
-    inputFocusHandler: emailFocusHandler,
+    error: emailError,
+    showErrorHandler: emailShowErrorHandler,
   } = useInput(emailValidator);
 
   const {
     value: oldPasswordValue,
-    isTouched: oldPasswordIsTouched,
-    isFocused: oldPasswordIsFocused,
+
     inputHandler: oldPasswordHandler,
     inputBlurHandler: oldPasswordBlurHandler,
     hasError: oldPasswordHasError,
     resetInput: oldPasswordReset,
-    inputFocusHandler: oldPasswordFocusHandler,
+    error: oldPasswordError,
+    showErrorHandler: oldPasswordShowErrorHandler,
   } = useInput(passwordValidator);
 
   const {
     value: newPasswordValue,
-    isTouched: newPasswordIsTouched,
-    isFocused: newPasswordIsFocused,
     inputHandler: newPasswordHandler,
     inputBlurHandler: newPasswordBlurHandler,
     hasError: newPasswordHasError,
     resetInput: newPasswordReset,
-    inputFocusHandler: newPasswordFocusHandler,
-  } = useInput(passwordValidator);
-  const {
-    value: confirmPasswordValue,
-    isTouched: confirmPasswordIsTouched,
-    isFocused: confirmPasswordIsFocused,
-    inputHandler: confirmPasswordHandler,
-    inputBlurHandler: confirmPasswordBlurHandler,
-    hasError: confirmPasswordHasError,
-    resetInput: confirmPasswordReset,
-    inputFocusHandler: confirmPasswordFocusHandler,
+    error: newPasswordError,
+    showErrorHandler: newPasswordShowErrorHandler,
   } = useInput(passwordValidator);
 
-  const setPasswordBlured = () => {
-    newPasswordBlurHandler();
-    oldPasswordBlurHandler();
-    confirmPasswordBlurHandler();
+  const { value: confirmPasswordValue, inputHandler: confirmPasswordHandler } =
+    useInput(confirmPasswordValidator);
+
+  const [confirmPasswordError, setConfirmPasswordError] = useState(
+    confirmPasswordValidator(newPasswordValue, confirmPasswordValue)
+  );
+  const [confirmPasswordShowError, setConfirmPasswordShowError] =
+    useState(false);
+
+  const confirmPasswordHasError =
+    confirmPasswordError && confirmPasswordShowError;
+
+  const confirmPasswordBlurHandler = (e) => {
+    setConfirmPasswordShowError(true);
   };
 
-  const setDetailBlured = () => {
-    nameBlurHandler();
-    emailBlurHandler();
+  const setPasswordShowError = () => {
+    oldPasswordShowErrorHandler();
+    newPasswordShowErrorHandler();
+    setConfirmPasswordShowError(true);
+  };
+
+  const setDetailShowError = () => {
+    emailShowErrorHandler();
+    nameShowErrorHandler();
   };
 
   const setPasswordToChange = () => {
@@ -92,66 +98,42 @@ const UserAccount = () => {
     setDetailToChange("user-detail");
   };
 
-  const checkIsPasswordTouched = () => {
-    return (
-      newPasswordIsFocused && oldPasswordIsFocused && confirmPasswordIsFocused
-    );
-  };
   const checkPasswordError = () => {
-    return oldPasswordHasError || newPasswordHasError || confirmPasswordError;
+    return oldPasswordError || newPasswordError || confirmPasswordError;
   };
 
-  const checkIsDetailTouched = () => {
-    return nameIsFocused || emailIsFocused;
-  };
   const checkDetailError = () => {
-    return emailHasError || nameHasError;
+    return emailError || nameError;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (detailToChange === "user-detail") {
-      if (!checkIsDetailTouched() || checkDetailError()) {
-        setDetailBlured();
+      if (checkDetailError()) {
+        setDetailShowError();
         return;
       } else {
         dispatch(updateUser({ name: nameValue, email: emailValue }));
       }
     }
     if (detailToChange === "user-password") {
-      if (!checkIsPasswordTouched() || checkPasswordError()) {
-        setPasswordBlured();
-        console.log("Returning");
+      if (checkPasswordError()) {
+        setPasswordShowError();
       } else {
+        notify("loading", "Action", "Not Implemented Yet.", "ChnagePassword");
       }
-
-      console.log(
-        oldPasswordHasError,
-        newPasswordHasError,
-        checkPasswordError(),
-        checkIsPasswordTouched()
-      );
     }
   };
 
   useEffect(() => {
-    setConfirmPasswordError(
-      (state) =>
-        confirmPasswordIsTouched && confirmPasswordValue !== newPasswordValue
-    );
-  }, [
-    confirmPasswordValue,
-    newPasswordValue,
-    setConfirmPasswordError,
-    confirmPasswordIsTouched,
-  ]);
-
-  useState(() => {
     if (user) {
       nameHandler(user.name);
       emailHandler(user.email);
     }
-  }, [user]);
+    setConfirmPasswordError(
+      (state) => confirmPasswordValue !== newPasswordValue
+    );
+  }, [confirmPasswordValue, newPasswordValue, newPasswordError, user]);
 
   return (
     <div className="user-account-page">
@@ -167,7 +149,6 @@ const UserAccount = () => {
             {detailToChange === "user-detail" && (
               <>
                 <FormInput
-                  isTouched={nameIsTouched}
                   hasError={nameHasError}
                   onChange={nameHandler}
                   onBlur={nameBlurHandler}
@@ -175,11 +156,10 @@ const UserAccount = () => {
                   lable="Name"
                   value={nameValue}
                   errorMessage="Provide Name To Updated. "
-                  onFocus={nameFocusHandler}
                   labelColor="white"
+                  error={nameError}
                 />
                 <FormInput
-                  isTouched={emailIsTouched}
                   hasError={emailHasError}
                   onChange={emailHandler}
                   onBlur={emailBlurHandler}
@@ -189,25 +169,24 @@ const UserAccount = () => {
                   errorMessage="Provide Email To Update."
                   onFocus={() => {}}
                   labelColor="white"
+                  error={emailError}
                 />
               </>
             )}
             {detailToChange === "user-password" && (
               <>
                 <FormInput
-                  isTouched={oldPasswordIsTouched}
                   hasError={oldPasswordHasError}
                   onChange={oldPasswordHandler}
                   onBlur={oldPasswordBlurHandler}
-                  onFocus={oldPasswordFocusHandler}
                   type="password"
                   lable="Old Password"
                   value={oldPasswordValue}
                   errorMessage="Provide Old Password."
                   labelColor="white"
+                  error={oldPasswordError}
                 />
                 <FormInput
-                  isTouched={newPasswordIsTouched}
                   hasError={newPasswordHasError}
                   onChange={newPasswordHandler}
                   onBlur={newPasswordBlurHandler}
@@ -215,20 +194,19 @@ const UserAccount = () => {
                   lable="New Password"
                   value={newPasswordValue}
                   errorMessage="Provide New Password."
-                  onFocus={newPasswordFocusHandler}
                   labelColor="white"
+                  error={newPasswordError}
                 />
                 <FormInput
-                  isTouched={confirmPasswordIsTouched}
-                  hasError={confirmPasswordError}
+                  hasError={confirmPasswordHasError}
                   onChange={confirmPasswordHandler}
                   onBlur={confirmPasswordBlurHandler}
                   type="password"
                   lable="Confirm Password"
                   value={confirmPasswordValue}
                   errorMessage="Does Not Match With New Password."
-                  onFocus={confirmPasswordFocusHandler}
                   labelColor="white"
+                  error={confirmPasswordError}
                 />
               </>
             )}

@@ -133,7 +133,7 @@ exports.testFuncResize = catchAsync(async (req, res, next) => {
       }.jpeg`;
 
       await sharp(file.buffer)
-        .resize(2000, 1333)
+        .resize(2300, 1333)
         .toFormat('jpeg')
         .jpeg({ quality: 100 })
         .toFile(`./uploads/${filename}`);

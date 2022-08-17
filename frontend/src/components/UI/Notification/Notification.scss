@@ -3,7 +3,7 @@
   top: 1rem;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--bg-image-grad-black);
+  background: var(--bg-image-grad-purple);
   padding: 1rem;
   border-radius: var(--brr-sm);
   z-index: 2000;
@@ -11,6 +11,7 @@
   align-items: center;
   width: fit-content;
   gap: 1rem;
+  box-shadow: var(--box-shadow-card);
 
   &-error {
     color: var(--color-red);

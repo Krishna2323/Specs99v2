@@ -142,6 +142,7 @@
     #a85680,
     #80435e,
     #5a3040,
+    #5a3040,
     #555c7b,
     #558eb5,
     #44c4df,
@@ -341,16 +342,24 @@ body {
 //////////// HEADINGS
 
 .heading-1 {
+  // #d16ba5,
+  // #a85680,
+  // #80435e,
+  // #5a3040,
+  // #555c7b,
+  // #558eb5,
+  // #44c4df,
+  // #5ffbf1,
+  // #5ffbf1
   font-size: 3.8rem;
   line-height: 1.1;
-
   color: transparent;
   background: var(--bg-image-1);
   background-clip: text;
   width: fit-content;
   align-self: center;
   text-transform: uppercase;
-  font-weight: 400;
+  font-weight: 300;
   letter-spacing: 1px;
   transition: all 0.4s;
   position: relative;
@@ -358,6 +367,11 @@ body {
   margin: 0 auto;
   margin-bottom: 3rem;
   grid-column: 1/-1;
+  color: #ffffff;
+  color: #ffffff;
+  background: transparent;
+  text-shadow: 0 -1px 1px #ffffff, 0 -1px 1px #000000, 0 -1px 3px #000000,
+    0 -0px 10px #000000;
 
   &--white {
     color: white;
@@ -620,6 +634,7 @@ body {
   padding: 0.2rem 2rem;
   margin: 2rem auto 0 auto;
   position: relative;
+  cursor: pointer;
 
   &::before {
     position: absolute;
@@ -636,5 +651,21 @@ body {
 
   &--sm {
     font-size: 1.4rem;
+  }
+}
+
+.slick-dots li button:before {
+  line-height: 0 !important;
+  color: white !important;
+}
+
+.slick-arrow {
+  // background-color: aqua;
+  &::after,
+  &::before {
+    color: white;
+    // background: var(--bg-image-1) !important;
+    // background-clip: text !important;
+    opacity: 100 !important;
   }
 }

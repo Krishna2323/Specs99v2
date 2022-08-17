@@ -27,6 +27,7 @@ export const availabelColors = [
   "Pink",
   "Grey",
   "Multicolor",
+  "Black",
 ];
 
 export const genderOptions = ["Mens", "Womens", "Kids", "Unisex"];
@@ -34,6 +35,7 @@ export const sizeOptions = ["Small", "Medium", "Large"];
 export const specsTypeOptions = [
   "Sunglasses",
   "Eyeglasses",
-  "Eyelenses",
+  "Contact Lenses",
   "Computer Glasses",
+  "Accessories",
 ];

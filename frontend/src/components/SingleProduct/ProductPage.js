@@ -52,6 +52,7 @@ const ProductPage = () => {
               error={topProductsIsError}
               message={topProductsMessage}
               heading={`Similar Products`}
+              viewMore={`/${product.modelType.split(" ").join("-")}`}
             />
             <TopProductSlider
               products={products}
@@ -59,6 +60,7 @@ const ProductPage = () => {
               error={topProductsIsError}
               message={topProductsMessage}
               heading={`More From ${product.brand}`}
+              viewMore={`/brand/${product.brand.split(" ").join("-")}`}
             />
           </Fragment>
         )}

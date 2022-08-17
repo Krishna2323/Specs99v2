@@ -7,26 +7,22 @@
   grid-column: full-start/full-end;
   height: fit-content;
   // padding: 1rem 5rem;
+  background: var(--bg-image-grad-purple);
   background: var(--bg-image-grad-grey-dark);
-  margin-top: 5rem;
+  // margin-top: 5rem;
   box-shadow: var(--box-shadow-dark);
+  padding-top: 5rem;
 
   & .product-img-box {
     flex: 0 0 55%;
     padding: 4rem;
-    // display: flex;
     align-items: center;
-    background-color: white;
-
     overflow: hidden;
-    // border-radius: var(--brr-md);
 
-    & img {
+    &__image {
       height: 50rem;
       width: 100%;
       object-fit: scale-down;
-      border-radius: 9px;
-      // height: 50%;
     }
   }
 
@@ -34,6 +30,7 @@
 
   & .product-detail-box {
     color: white;
+
     flex: 0 0 45%;
     padding: 2rem;
 

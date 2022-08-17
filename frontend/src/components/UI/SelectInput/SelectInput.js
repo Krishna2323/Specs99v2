@@ -3,7 +3,6 @@ import * as tiIcons from "react-icons/ti";
 import "./SelectInput.scss";
 
 const SelectInput = (props) => {
-  console.log(props);
   const { style, labelModifier, lable, hasError, errorMessage } = props;
   useState(props.selected);
 

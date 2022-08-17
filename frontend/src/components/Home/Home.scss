@@ -4,14 +4,17 @@
   grid-column: 1/-1;
   z-index: 1;
   @include displayGridMain;
-  background: var(--bg-image-grad-grey-dark);
+  background: var(--bg-image-grad-purple);
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
 
   .home-element {
-    // margin-bottom: 5rem;
-    // grid-column: center-start/center-end;
     grid-column: full-start/full-end;
     padding: 5rem 15rem;
+    background: var(--bg-image-grad-grey-dark);
     border-radius: var(--brr-regular);
+    box-shadow: var(--box-shadow-dark);
 
     position: relative;
 
@@ -31,17 +34,6 @@
       &::after,
       &::before {
         height: 0px;
-      }
-    }
-
-    & .slick-arrow {
-      // background-color: aqua;
-      &::after,
-      &::before {
-        color: transparent;
-        background: var(--bg-image-1);
-        background-clip: text;
-        opacity: 100;
       }
     }
 

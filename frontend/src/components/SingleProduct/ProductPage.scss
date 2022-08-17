@@ -4,9 +4,10 @@
   grid-column: full-start/full-end;
   min-height: 90vh;
   width: 100%;
-  padding: 0rem 0 15rem 0rem;
+  padding: 0rem 0 0rem 0rem;
   @include displayGridMain;
-  row-gap: 5rem;
-  background: var(--bg-image-grad-grey-dark);
+  // row-gap: 2rem;
+  background: var(--bg-image-grad-purple);
   position: relative;
+  row-gap: 5rem;
 }

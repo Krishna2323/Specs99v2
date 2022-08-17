@@ -71,19 +71,25 @@ exports.getAll = (Model) =>
     let filter = {};
     if (req.params.tourId) filter = { tour: req.params.tourId };
 
-    const features = new APIFeatures(Model.find(filter), req.query)
+    const featuresWithoutPagination = new APIFeatures(
+      Model.find(filter),
+      req.query
+    )
       .search()
       .filter()
       .sort()
       .limitFields()
-      .paginate();
-    // const doc = await features.query.explain();
-    const doc = await features.query;
+      .paginate()
+      .getLength();
+    const doc = await featuresWithoutPagination.query;
+
+    // console.log(featuresWithoutPagination);
 
     // SEND RESPONSE
     res.status(200).json({
       status: 'success',
       results: doc.length,
+      totalResults: doc.length,
       data: {
         data: doc,
       },

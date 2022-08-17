@@ -48,4 +48,17 @@
       display: block;
     }
   }
+
+  &-pagination {
+    grid-column: 1/-1;
+    justify-self: center;
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    & span {
+      justify-self: unset;
+      margin: 0;
+      padding: 0 0.3rem;
+    }
+  }
 }

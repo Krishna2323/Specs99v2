@@ -20,7 +20,12 @@ const SingleProductImg = () => {
     <div className="product-img-box">
       <Slider {...settings} swipe={true}>
         {images.map((e, i) => (
-          <img key={e} src={images[i]} alt="" />
+          <img
+            className="product-img-box__image"
+            key={e}
+            src={images[i]}
+            alt=""
+          />
         ))}
       </Slider>
     </div>

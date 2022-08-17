@@ -4,15 +4,15 @@ import ReviewCard from "../../UI/Cards/Review/ReviewCard";
 import { dummyTestimonialsImage } from "../../dummyData/dummyTestimonials";
 import Slider from "react-slick";
 
-const Testimonials = () => {
+const Testimonials = (props) => {
   const settings = {
     dots: true,
     infinite: true,
     slidesToShow: 4,
-    slidesToScroll: 1,
+    slidesToScroll: 2,
     autoplay: true,
-    speed: 5000,
-
+    speed: 1000,
+    autoplaySpeed: 5000,
     cssEase: "linear",
     centerPadding: "60px",
 
@@ -42,7 +42,7 @@ const Testimonials = () => {
         },
       },
       {
-        breakpoint: 450,
+        breakpoint: 500,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
@@ -76,6 +76,7 @@ const Testimonials = () => {
           ))}
         </Slider>
       </div>
+      {props.children}
     </div>
   );
 };

@@ -196,11 +196,11 @@ const Header = (props) => {
               </li>
             ))}
 
-            <li className="header-nav__open-item">
+            {/* <li className="header-nav__open-item">
               <Link className="header-nav__open-link" to={"/user/account"}>
                 My Account
               </Link>
-            </li>
+            </li> */}
 
             <span onClick={handleSideNav} className="close-btn">
               <MdIcons.MdOutlineClose />

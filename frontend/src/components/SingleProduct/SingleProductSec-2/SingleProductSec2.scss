@@ -1,15 +1,15 @@
 .single-product__section-2 {
+  grid-column: full-start/full-end;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
   gap: 4rem;
   justify-content: center;
   align-items: center;
-  background: var(--bg-image-grad-purple);
+  background: var(--bg-image-grad-grey-dark);
   width: 100%;
-  border-radius: var(--brr-md);
-  grid-column: center-start/center-end;
+  // border-radius: var(--brr-md);
   box-shadow: var(--box-shadow-dark);
-  padding: 2rem;
+  padding: 2rem 15rem;
   transition: all 0.4s;
 
   &:hover {

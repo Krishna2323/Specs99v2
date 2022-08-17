@@ -1,7 +1,7 @@
 .loading {
   margin: 5rem auto;
   grid-column: 1/-1;
-  padding: 3rem 3rem;
+  // padding: 3rem 3rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,12 +11,13 @@
   overflow: hidden;
   width: fit-content;
   // min-width: 60rem;
-  padding: 2rem 10rem;
+  padding: 2rem 5em;
 
   gap: 1rem;
   border-radius: var(--brr-sm);
   color: white;
   background: var(--bg-image-grad-purple);
+  box-shadow: var(--box-shadow-dark);
 
   @media (max-width: 37.5em) {
     width: fit-content;
@@ -27,6 +28,7 @@
     animation: move 1.4s infinite;
     font-size: 2.8rem;
     font-weight: 400;
+    margin: 0;
     margin-bottom: 1rem;
   }
 

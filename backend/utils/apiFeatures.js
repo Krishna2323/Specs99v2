@@ -2,6 +2,7 @@ class ApiFeature {
   constructor(query, queryString) {
     this.query = query;
     this.queryString = queryString;
+    this.totalLength = 0;
   }
 
   search() {
@@ -53,6 +54,11 @@ class ApiFeature {
     console.log(queryStr);
     this.query = this.query.find(JSON.parse(queryStr));
 
+    return this;
+  }
+
+  getLength() {
+    this.totalLength = this.query.find().length;
     return this;
   }
 

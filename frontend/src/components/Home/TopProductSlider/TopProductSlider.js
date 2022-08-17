@@ -6,6 +6,7 @@ import Loading from "../../UI/Loading/Loading";
 import ProductCard from "./../../UI/Cards/Product/ProductCard";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Link } from "react-router-dom";
 
 const settings = {
   dots: true,
@@ -17,7 +18,7 @@ const settings = {
   autoplaySpeed: 5000,
   cssEase: "linear",
   //   centerPadding: "60px",
-
+  row: 1,
   responsive: [
     {
       breakpoint: 1500,
@@ -75,8 +76,16 @@ const TopProductSlider = (props) => {
   const { products, heading, loading, error, message } = props;
 
   return (
-    <div className="home-element top-product-slider">
+    <div className="top-product-slider">
       <h3 className="heading-1">{heading}</h3>
+
+      {products && !loading && products.length === 0 && (
+        <Loading
+          heading={"No Matching Product Found!"}
+          message={""}
+          type="error"
+        />
+      )}
 
       {loading && (
         <Loading heading={"Loading..."} message={""} type="loading" />
@@ -88,6 +97,17 @@ const TopProductSlider = (props) => {
       {products && (
         <div className="top-product-slider__container">
           <Slider {...settings}>{products.map((e, i) => div(e))}</Slider>
+        </div>
+      )}
+
+      {props.viewMore && (
+        <div className="box-center mt-sm">
+          <Link
+            to={props.viewMore}
+            className="text-link-primary--white mt-sm text-center "
+          >
+            View More
+          </Link>
         </div>
       )}
     </div>
