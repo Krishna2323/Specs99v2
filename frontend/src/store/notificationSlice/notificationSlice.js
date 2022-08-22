@@ -36,8 +36,8 @@ export const notificationActions = notificationSlice.actions;
 export const clearNotication = () => {
   return async (dispatch) => {
     setTimeout(() => {
-      dispatch(notificationActions.clearDisplay());
       dispatch(notificationActions._clearNotication());
+      dispatch(notificationActions.clearDisplay());
     }, 3000);
   };
 };

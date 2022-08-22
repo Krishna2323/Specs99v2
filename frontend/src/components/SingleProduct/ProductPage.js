@@ -29,12 +29,7 @@ const ProductPage = () => {
     similarBrandIsError,
     similarBrandMessage,
   } = useSelector((state) => state.product);
-  const {
-    products,
-    isLoading: topProductsLoading,
-    isError: topProductsIsError,
-    message: topProductsMessage,
-  } = useSelector((state) => state.products);
+
   const dispatch = useDispatch();
   const params = useParams();
   const { id } = params;
@@ -47,7 +42,7 @@ const ProductPage = () => {
 
   useEffect(() => {
     dispatch(fetchProduct(id));
-  }, []);
+  }, [id]);
 
   return (
     <Fragment>

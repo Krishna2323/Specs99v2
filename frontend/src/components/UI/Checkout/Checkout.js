@@ -22,7 +22,7 @@ const Checkout = () => {
   const { notify } = useNotification();
   const [checkOutConfirmation, setCheckOutConfirmation] = useState(false);
   const [confirmationBtnDisable, setConfirmationBtnDisable] = useState(false);
-  const { user } = useSelector((state) => state.user);
+  const { user, isLoggedIn } = useSelector((state) => state.user);
 
   const closeConfirmation = () => {
     setCheckOutConfirmation(false);
@@ -253,6 +253,10 @@ const Checkout = () => {
   };
 
   useEffect(() => {
+    if (!isLoggedIn) {
+      notify("loading", "🧐", "Login To Get Access");
+      navigate("/");
+    }
     if (status === "placed" || status === "failed") {
       navigate("/user/orders");
     }

@@ -217,7 +217,7 @@ const Header = (props) => {
             >
               <span>
                 {/* {!totalProducts && <biIcons.BiDotsHorizontalRounded />} */}
-                {totalProducts ? (
+                {isLoggedIn && totalProducts ? (
                   totalProducts
                 ) : (
                   <biIcons.BiDotsHorizontalRounded />
