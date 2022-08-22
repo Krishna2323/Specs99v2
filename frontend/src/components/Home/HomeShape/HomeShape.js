@@ -17,40 +17,87 @@ const HomeShape = () => {
       </div>
       <div className="home-shape__div-2">
         <Link
-          to="#"
+          to="/products/titan"
           className="home-shape__div-2__box home-shape__div-2__box-1"
         >
-          <img src={img2} alt="" />
+          <img
+            src={
+              "https://cdn1.titaneyeplus.com/tep_m2_prod/media/wysiwyg/Bold_DT.webp"
+            }
+            alt=""
+          />
+          <div>
+            <span>Titan Bold Collection</span>
+          </div>
         </Link>
         <Link
-          to="#"
+          to="products/rayban/silver"
           className="home-shape__div-2__box home-shape__div-2__box-2"
         >
-          <img src={img5} alt="" />
+          <img
+            src={
+              "https://india.ray-ban.com/pub/media/wysiwyg/Rb_home_opti/RB_Website_Titanium_Desktop_Banner_930x600.jpg"
+            }
+            alt=""
+          />
+          <div>
+            <span>Rayban Titanium Collection</span>
+          </div>
         </Link>
         <Link
-          to="#"
+          to="products/john jacobs"
           className="home-shape__div-2__box home-shape__div-2__box-3"
         >
-          <img src={img4} alt="" />
+          <img
+            src={
+              "https://cdn.shopify.com/s/files/1/1276/5299/files/New-this-week-desktop-01-aug-22_1200x.jpg?v=1659350327"
+            }
+            alt="john jacobs"
+          />
+          <div>
+            <span>John Jacobs Collection</span>
+          </div>
         </Link>
         <Link
-          to="#"
+          to="products/rayban/golden"
           className="home-shape__div-2__box home-shape__div-2__box-4"
         >
-          <img src={img} alt="" />
+          <img
+            src={
+              "https://cdn1.titaneyeplus.com/tep_m2_prod/media/wysiwyg/Rayban-DT.webp"
+            }
+            alt=""
+          />
+          <div>
+            <span>Rayban Gold Collection</span>
+          </div>
         </Link>
         <Link
           to="#"
           className="home-shape__div-2__box home-shape__div-2__box-5"
         >
-          <img src={img3} alt="" />
+          <img
+            src={
+              "https://heartland.wisconsinvision.com/Content/files/GenCart/ProductCatImages/CKLadiesApril.jpg"
+            }
+            alt=""
+          />
+          <div>
+            <span>Calvin Klein Collection</span>
+          </div>
         </Link>
         <Link
-          to="#"
+          to="products/emporio armani"
           className="home-shape__div-2__box home-shape__div-2__box-6"
         >
-          <img src={img7} alt="" />
+          <img
+            // https://bonton.in/banners/emporio-home-page.jpg
+            src={"https://bonton.in/banners/emporio-home-page.jpg"}
+            alt=""
+          />
+          <div>
+            <span>Eporio Armani Collection</span>
+          </div>
         </Link>
       </div>
     </div>

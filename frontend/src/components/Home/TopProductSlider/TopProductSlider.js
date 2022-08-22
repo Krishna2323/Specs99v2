@@ -51,7 +51,7 @@ const settings = {
       },
     },
     {
-      breakpoint: 500,
+      breakpoint: 400,
       settings: {
         slidesToShow: 1,
         // rows: 4,
@@ -96,7 +96,9 @@ const TopProductSlider = (props) => {
 
       {products && (
         <div className="top-product-slider__container">
-          <Slider {...settings}>{products.map((e, i) => div(e))}</Slider>
+          <Slider {...settings} nextArrow={false} prevArrow={false}>
+            {products.map((e, i) => div(e))}
+          </Slider>
         </div>
       )}
 

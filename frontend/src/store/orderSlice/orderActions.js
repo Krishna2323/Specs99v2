@@ -124,7 +124,6 @@ export const getOrders = () => {
 
       const { orders } = res.data.data;
 
-      console.log(orders);
       dispatch(
         orderSliceAction.setOrder({
           orders,

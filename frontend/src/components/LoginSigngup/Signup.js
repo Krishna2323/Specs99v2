@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import ReactDom from "react-dom";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,11 +9,13 @@ import Backdrop from "../UI/Backdrop/Backdrop";
 import FormInput from "../UI/FormInput/FormInput";
 import * as VsIcons from "react-icons/vsc";
 import { Transition } from "react-transition-group";
+import uiSlice, { uiSliceAction } from "../../store/uiSlice/uiSlice";
 // import img1 from "./../../public/img/bs/ra4.jpg";
 // import * as AiIcons from "react-icons/ai";
 
 const Signup = (props) => {
   const dispatch = useDispatch();
+  const { isLoggedIn } = useSelector((state) => state.user);
   const signupAnimation = props.open
     ? "signup-form-outer-open"
     : "signup-form-outer-closed";
@@ -75,6 +77,7 @@ const Signup = (props) => {
   const disableSubmitBtn =
     passwordError || nameError || emailError || confirmPasswordError;
 
+  const { closeSignupForm } = props;
   const btnModifier = disableSubmitBtn ? "form-btn-invalid" : "form-btn-valid";
 
   const onFormSubmit = (e) => {
@@ -95,10 +98,16 @@ const Signup = (props) => {
         passwordConfirm: confirmPasswordValue,
       })
     );
-    if (type === "success") {
-      props.closeSingupForm();
-    }
   };
+  useEffect(() => {
+    if (isLoggedIn) {
+      dispatch(uiSliceAction.closeSignupForm());
+      emailHandler("");
+      nameHandler("");
+      passwordHandler("");
+      confirmPasswordHandler("");
+    }
+  }, [isLoggedIn]);
 
   return (
     <Fragment>

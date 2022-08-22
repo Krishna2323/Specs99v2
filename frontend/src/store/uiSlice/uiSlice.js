@@ -15,6 +15,12 @@ const uiSlice = createSlice({
     setLoginForm(state, actions) {
       state.loginForm = !state.loginForm;
     },
+    closeSignupForm(state) {
+      state.signupForm = false;
+    },
+    closeLoginForm(state) {
+      state.loginForm = false;
+    },
     setSignUpForm(state) {
       state.signupForm = !state.signupForm;
     },

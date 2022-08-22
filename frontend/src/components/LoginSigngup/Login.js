@@ -16,6 +16,8 @@ import { emailValidator, passwordValidator } from "../helpers/componentHelpers";
 
 const Login = (props) => {
   const { open, closeLoginForm, onLoginToSignupLink } = props;
+  const { isLoggedIn } = useSelector((state) => state.user);
+
   const loginFormState = open
     ? "login-form-outer-open"
     : "login-form-outer-closed";
@@ -60,12 +62,15 @@ const Login = (props) => {
       return;
     }
     dispatch(login({ email: emailValue, password: passwordValue }));
-    dispatch(uiSliceAction.setLoginForm());
-    emailInputReset();
-    passwordInputReset();
   };
 
-  useEffect(() => {}, [action, requestInfo, closeLoginForm]);
+  useEffect(() => {
+    if (isLoggedIn) {
+      dispatch(uiSliceAction.closeLoginForm());
+      emailInputReset();
+      passwordInputReset();
+    }
+  }, [isLoggedIn]);
 
   return (
     <Fragment>

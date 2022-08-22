@@ -14,4 +14,8 @@ export const dispatchNotification = (
       action,
     })
   );
+
+  setTimeout(() => {
+    dispatch(notificationActions.clearDisplay());
+  }, 3000);
 };

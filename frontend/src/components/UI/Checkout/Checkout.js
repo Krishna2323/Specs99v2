@@ -254,9 +254,9 @@ const Checkout = () => {
 
   useEffect(() => {
     if (status === "placed" || status === "failed") {
-      navigate("/");
+      navigate("/user/orders");
     }
-  }, [status]);
+  }, [status, navigate]);
 
   return (
     <Fragment>

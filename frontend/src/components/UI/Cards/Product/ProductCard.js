@@ -12,11 +12,14 @@ import * as fiIcons from "react-icons/fi";
 // import img from "../../../../public/img/products";
 import { useState } from "react";
 import { addItemToCart } from "../../../../store/cartSlice/cartActions";
+import useNotification from "../../../hooks/useNotification";
 
 const ProductCard = React.forwardRef((props, ref) => {
   const { product } = props;
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { notify } = useNotification();
+  const { isLoggedIn } = useSelector((state) => state.user);
 
   const { products: cart } = useSelector((state) => state.cart);
 
@@ -24,8 +27,11 @@ const ProductCard = React.forwardRef((props, ref) => {
 
   const onCardCLick = (e) => {
     if (e.target.dataset.cart || e.target.parentNode.dataset.cart) {
+      if (!isLoggedIn) {
+        notify("loading", "🤓", "Login To Use Cart");
+        return;
+      }
       dispatch(addItemToCart(product, 1, cart));
-      return;
     } else {
       navigate(`/product/${product._id}`);
     }
@@ -58,7 +64,7 @@ const ProductCard = React.forwardRef((props, ref) => {
                 {product.mrp}
               </span>
             </div>
-            <div className="product-card__info--1">
+            {/* <div className="product-card__info--1">
               <span>Color: {product.frameColor}</span>
               <span>
                 Size:{" "}
@@ -66,12 +72,12 @@ const ProductCard = React.forwardRef((props, ref) => {
                   product.size[0],
                   product.size[0].toUpperCase()
                 )}
-              </span>
-              {/* <span>
+              </span> */}
+            {/* <span>
           <RiIcons.RiLeafFill></RiIcons.RiLeafFill> 9.8gm
         </span>
         <span>Lense: Polarized</span> */}
-            </div>
+            {/* </div> */}
             <div className="product-card__info--3">
               <div>
                 <Rating

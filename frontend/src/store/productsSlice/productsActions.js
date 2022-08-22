@@ -3,7 +3,6 @@ import { clearNotication } from "../notificationSlice/notificationSlice";
 import { productsSliceAction } from "./productsSlice";
 
 export const fetchProducts = (filter, products) => {
-  console.log(filter, products);
   const {
     keyword = "",
     minPrice = 0,
@@ -37,7 +36,6 @@ export const fetchProducts = (filter, products) => {
       );
 
       const { data } = await axios.get(url);
-      console.log(data);
 
       let productsMerged = data.data.data;
 
@@ -50,7 +48,7 @@ export const fetchProducts = (filter, products) => {
           isLoading: false,
           message: "Products Fetched",
           products: productsMerged,
-          totalProducts: data.results,
+          totalProducts: data.totalResults,
         })
       );
     };

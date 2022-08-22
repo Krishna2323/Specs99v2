@@ -44,11 +44,11 @@
     // height: fit-content;
     flex: 0 0 100%;
     // height: fit-content;
-    height: 25rem;
+    height: 30rem;
     background-color: white;
 
     @media (max-width: 37.5em) {
-      // height: 30rem;
+      height: 20rem;
       width: 100%;
     }
     & img {
@@ -70,7 +70,7 @@
     // height: max-content;
     width: 100%;
     // min-height: 18rem;
-    padding: 1.5rem;
+    padding: 1rem;
     // height: 100%;
     gap: 0.5rem;
     // background: var(--bg-image-grad-black);
@@ -87,7 +87,7 @@
     font-size: 1.5rem;
     line-height: 1.1;
     font-weight: 400;
-    margin: 0.5rem 0;
+    margin: 0rem 0;
     color: rgb(255, 255, 255);
     list-style: none;
     // margin-bottom: 1rem;
@@ -119,7 +119,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    // gap: 1rem;
     flex-wrap: wrap;
     & span {
       display: flex;
@@ -155,7 +155,7 @@
       flex-wrap: wrap;
       align-items: center;
       color: white;
-      height: 3rem;
+      // height: 3rem;
       font-size: 1.4rem;
       gap: 0.5rem;
 

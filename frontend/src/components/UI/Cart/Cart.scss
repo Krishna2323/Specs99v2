@@ -77,6 +77,7 @@
       // justify-content: center;
       gap: 2rem;
       // margin-bottom: 2rem;
+      height: fit-content;
 
       @media (max-width: 93.75em) {
         // grid-template-columns: 3fr 0.5fr 3fr 2fr;
@@ -90,6 +91,7 @@
       &-info-image {
         height: 15rem;
         grid-row: 1/-1;
+        overflow: hidden;
         background-color: white;
         @media (max-width: 37.5em) {
           grid-row: 1 / span 2;

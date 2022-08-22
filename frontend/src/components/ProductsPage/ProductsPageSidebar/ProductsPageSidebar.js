@@ -4,6 +4,7 @@ import "./ProductsPageSidebar.scss";
 import Slider from "@mui/material/Slider";
 import * as aiIcons from "react-icons/ai";
 import * as biIcons from "react-icons/bi";
+import * as FaIcons from "react-icons/fa";
 
 // import FormLabel from "@mui/material/FormLabel";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -37,12 +38,16 @@ const theme = createTheme({
 });
 
 const ProductsPageSidebar = (props) => {
+  const params = useParams();
+  const sidebarSelectStyle = {
+    fontSize: "2rem",
+    padding: ".3rem 1rem",
+  };
   const sidebarModifier = props.sidebarState
     ? "products-page-sidebar-open"
     : "";
-  const params = useParams();
   const { pathname } = useLocation();
-  const [initial, setInitial] = useState(true);
+  const { handleFilterChange: propsHandleFilterChange } = props;
 
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(20000);
@@ -86,7 +91,7 @@ const ProductsPageSidebar = (props) => {
   };
 
   const handleFilterChange = () => {
-    props.handleFilterChange({
+    propsHandleFilterChange({
       minPrice,
       maxPrice,
       ratingsAverage: minRating,
@@ -98,30 +103,36 @@ const ProductsPageSidebar = (props) => {
     });
     props.closeSidebar();
   };
-
-  // useDispatch(() => {
-  //   console.log();
-  // }, []);
-  useEffect(() => {
+  const resetAll = () => {
     setMinPrice(0);
-    setMaxPrice(2000);
+    setMaxPrice(20000);
     setFrameColor("");
     setFrameSize("");
     setGender("");
     setLensColor("");
     setTypeOfGlass("");
     setMinRating(0);
-  }, [pathname]);
+  };
+
+  // if (props.initial) {
+  //
+  // }
+
+  useEffect(() => {
+    resetAll();
+    propsHandleFilterChange({});
+    console.log(params);
+  }, [pathname, propsHandleFilterChange]);
 
   return (
     <ThemeProvider theme={theme}>
       <div className={`products-page-sidebar ${sidebarModifier}`}>
-        <button
+        {/* <button
           className="products-page-sidebar__close-btn"
           onClick={props.closeSidebar}
         >
           <aiIcons.AiOutlineClose />
-        </button>
+        </button> */}
         <h3 className="heading-5 products-page-sidebar__heading">Filter:</h3>
 
         {/* PRICE SORTING */}
@@ -133,11 +144,12 @@ const ProductsPageSidebar = (props) => {
             }
             min={0}
             max={20000}
-            defaultValue={[0, 20000]}
+            defaultValue={[minPrice, maxPrice]}
             color={"white"}
             onChange={handlePriceChange}
             disableSwap
             step={100}
+            value={[minPrice, maxPrice]}
           />
           <div className="products-page-sidebar__slider__price-lable">
             <p>
@@ -178,7 +190,7 @@ const ProductsPageSidebar = (props) => {
             lable="Glass Type"
             options={specsTypeOptions}
             allOption={true}
-            style={{ fontSize: "1.8rem", padding: ".3rem 1rem" }}
+            style={sidebarSelectStyle}
           />
         )}
 
@@ -188,17 +200,18 @@ const ProductsPageSidebar = (props) => {
           lable="Frame Size"
           options={sizeOptions}
           allOption={true}
-          style={{ fontSize: "1.8rem", padding: ".3rem 1rem" }}
+          style={sidebarSelectStyle}
         />
-
-        <SelectInput
-          onChange={handleFrameColorChange}
-          value={frameColor}
-          allOption={true}
-          lable="Frame Color"
-          options={availabelColors}
-          style={{ fontSize: "1.8rem", padding: ".3rem 1rem" }}
-        />
+        {!params.frameColor && (
+          <SelectInput
+            onChange={handleFrameColorChange}
+            value={frameColor}
+            allOption={true}
+            lable="Frame Color"
+            options={availabelColors}
+            style={sidebarSelectStyle}
+          />
+        )}
 
         <SelectInput
           onChange={handleLensColorChange}
@@ -206,7 +219,7 @@ const ProductsPageSidebar = (props) => {
           allOption={true}
           lable="Lens Color"
           options={availabelColors}
-          style={{ fontSize: "1.8rem", padding: ".3rem 1rem" }}
+          style={sidebarSelectStyle}
         />
 
         {!props.filter?.gender && (
@@ -216,7 +229,10 @@ const ProductsPageSidebar = (props) => {
             allOption={true}
             lable="Gender"
             options={genderOptions}
-            style={{ fontSize: "1.8rem", padding: ".3rem 1rem" }}
+            style={{
+              fontSize: "1.8rem",
+              padding: ".3rem 1rem",
+            }}
           />
         )}
 
@@ -227,10 +243,19 @@ const ProductsPageSidebar = (props) => {
           {" "}
           Apply
         </button>
+        <button
+          className="products-page-sidebar__filter-btn"
+          onClick={props.closeSidebar}
+        >
+          {!props.sidebarState ? (
+            <FaIcons.FaFilter />
+          ) : (
+            <aiIcons.AiOutlineClose />
+          )}
+        </button>
       </div>
     </ThemeProvider>
   );
 };
 
-export default ProductsPageSidebar;
-// products-page-sidebar__slider products-page-sidebar__slider__submit-btn__box
+export default React.memo(ProductsPageSidebar);

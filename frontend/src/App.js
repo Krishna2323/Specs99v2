@@ -36,6 +36,8 @@ import {
 import UserAccount from "./components/User/User/UserAccount/UserAccount";
 import ScrollToTop from "./components/UI/Container/ScrollToTop";
 import NotFound from "./components/UI/NotFound/NotFound";
+import { getCart } from "./store/cartSlice/cartActions";
+import ProtectRoute from "./components/HOC/ProtectRoute";
 
 function App() {
   const dispatch = useDispatch();
@@ -47,7 +49,7 @@ function App() {
     if (!user) {
       dispatch(loadUser());
     }
-  }, [dispatch, user]);
+  }, [dispatch]);
 
   return (
     <Container>
@@ -63,9 +65,14 @@ function App() {
           {/* PRODUCTS PAGE */}
           <Route path="/products/">
             <Route
-              path=":keyword"
+              path=":keyword/"
               element={WithDefaultFilter({})(ProductsPage)}
             />
+            <Route
+              path=":keyword/:frameColor"
+              element={WithDefaultFilter({})(ProductsPage)}
+            />
+
             <Route path="" element={WithDefaultFilter({})(ProductsPage)} />
           </Route>
 
@@ -80,7 +87,7 @@ function App() {
           {/* PRODUCTS PAGE WITH DEFAULT FILTERS START*/}
           {homeShapes1.map((e) => (
             <Route
-              key={e.id}
+              key={e.name}
               path={`/style/${e.name.split(" ").join("-")}`}
               element={WithDefaultFilter({
                 style: e.name.toLocaleLowerCase(),
@@ -91,7 +98,7 @@ function App() {
 
           {navGenderCategory.map((e) => (
             <Route
-              key={e.gender}
+              key={e.link}
               path={`/category/${e.gender.split(" ").join("-")}`}
               element={WithDefaultFilter({
                 gender: e.gender.toLocaleLowerCase(),
@@ -102,7 +109,7 @@ function App() {
 
           {navGlassCategory.map((e) => (
             <Route
-              key={e.glass}
+              key={e.link}
               path={`/${e.glass.split(" ").join("-")}`}
               element={WithDefaultFilter({
                 typeOfGlass: e.glass.toLocaleLowerCase(),
@@ -114,9 +121,9 @@ function App() {
           {/* ROUTES FOR ALL USERS END */}
 
           {/* LOGGED IN USER PAGES */}
-          <Route path="/user/account" element={<UserAccount />} />
+          <Route path="/user/account" element={ProtectRoute(UserAccount)} />
 
-          <Route path="/user/orders" element={<UserOrders />} />
+          <Route path="/user/orders" element={ProtectRoute(UserOrders)} />
 
           <Route
             path="/checkout"
@@ -134,29 +141,27 @@ function App() {
           {/* {LOGGED IN USER PAGES END} */}
 
           {/* ADMIN ROUTES */}
-          <Route path="/admin/editProducts" element={<AllProduct />} />
-          <Route path="/admin/dashboard" element={<DashBoard />} />
+          <Route
+            path="/admin/editProducts"
+            element={ProtectRoute(AllProduct)}
+          />
+          <Route path="/admin/dashboard" element={ProtectRoute(DashBoard)} />
           {/* <Route
-          path="/addProduct" element={<AddProduct product={products ? products[0] : undefined} />}
         /> */}
           <Route path="/admin/addProduct/">
             <Route
               path=""
-              element={
-                <AddUpdateProduct
-                  product={products ? products[0] : undefined}
-                  heading="Add Product"
-                />
-              }
+              element={ProtectRoute(AddUpdateProduct, {
+                product: products ? products[0] : undefined,
+                heading: "Add Product",
+              })}
             />
             <Route
               path=":id"
-              element={
-                <AddUpdateProduct
-                  action="updateProduct"
-                  heading="Update Product"
-                />
-              }
+              element={ProtectRoute(AddUpdateProduct, {
+                action: "updateProduct",
+                heading: "Update Product",
+              })}
             />
           </Route>
           <Route path="*" element={<NotFound />} />

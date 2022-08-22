@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Header.scss";
 import logo from "./../../../public/img/bs/logo-1.png";
 import Sidenav from "./Sidenav";
@@ -10,6 +10,7 @@ import * as MdIcons from "react-icons/md";
 
 import * as AiIcons from "react-icons/ai";
 import * as HiIcons from "react-icons/hi";
+import * as biIcons from "react-icons/bi";
 
 import * as FiIcons from "react-icons/fi";
 
@@ -22,6 +23,7 @@ import {
   navGenderCategory,
   navGlassCategory,
 } from "../../dummyData/sunglassesDummy";
+import { logoutUser } from "../../../store/userSlice/userActions";
 
 const setStyleOnNodelist = (thisKey, elements, targetLink) => {
   elements.forEach((el) => {
@@ -36,9 +38,13 @@ const setStyleOnNodelist = (thisKey, elements, targetLink) => {
 };
 
 const Header = (props) => {
-  const { cart, loginForm, signupForm } = useSelector((state) => state.ui);
+  const { cart, loginForm, signupForm, isLoading } = useSelector(
+    (state) => state.ui
+  );
   const [loginOptions, setLoginOptions] = useState(false);
+  const navigate = useNavigate();
   const { totalProducts } = useSelector((state) => state.cart);
+  const { isLoggedIn } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
 
@@ -77,9 +83,8 @@ const Header = (props) => {
           "mouseover",
           handleHover.bind({
             opacity: 1,
-            // background: "#343a40",
-            background: "var(--bg-image-grad-purple)",
 
+            background: "var(--bg-image-grad-purple)",
             color: "#fff",
             color2: "#999",
           })
@@ -93,6 +98,7 @@ const Header = (props) => {
           "mouseout",
           handleHover.bind({
             opacity: 1,
+            // background: "transparent",
             background: "var(--bg-image-grad-purple)",
             color: "#fff",
             color2: "#fff",
@@ -109,13 +115,6 @@ const Header = (props) => {
   const [sidebar, setSidebar] = useState(false);
   const [searchBar, setSearchBar] = useState(false);
 
-  const openLoginOptions = () => {
-    setLoginOptions(true);
-  };
-  const closeLoginOptions = () => {
-    setLoginOptions(false);
-  };
-
   const toggleLoginOptions = () => {
     setLoginOptions((prev) => !prev);
   };
@@ -123,7 +122,11 @@ const Header = (props) => {
   //////////////////////////SIGNUP FORM START/////////////////////////////////////
   //////////////////////////SIGNUP FORM END/////////////////////////////////////
 
-  const handleLogout = () => {};
+  const handleLogout = () => {
+    dispatch(logoutUser());
+    navigate("/");
+  };
+
   const closeAskModal = () => {
     setSearchBar(false);
   };
@@ -180,27 +183,21 @@ const Header = (props) => {
               <img src={logo} alt="Specs99_Logo" />
             </Link>
 
-            {navGenderCategory.map((e) => (
-              <li className="header-nav__open-item">
+            {/* {navGenderCategory.map((e) => (
+              <li className="header-nav__open-item" key={e.link}>
                 <Link className="header-nav__open-link" to={e.link}>
                   {e.gender}
                 </Link>
               </li>
-            ))}
+            ))} */}
 
             {navGlassCategory.map((e) => (
-              <li className="header-nav__open-item">
+              <li className="header-nav__open-item" key={e.link}>
                 <Link className="header-nav__open-link" to={e.link}>
                   {e.glass}
                 </Link>
               </li>
             ))}
-
-            {/* <li className="header-nav__open-item">
-              <Link className="header-nav__open-link" to={"/user/account"}>
-                My Account
-              </Link>
-            </li> */}
 
             <span onClick={handleSideNav} className="close-btn">
               <MdIcons.MdOutlineClose />
@@ -218,14 +215,19 @@ const Header = (props) => {
               className="header-nav__open-link header-nav__cta-cart"
               onClick={handleCartState}
             >
-              <span>{totalProducts}</span>
+              <span>
+                {/* {!totalProducts && <biIcons.BiDotsHorizontalRounded />} */}
+                {totalProducts ? (
+                  totalProducts
+                ) : (
+                  <biIcons.BiDotsHorizontalRounded />
+                )}
+              </span>
               <FiIcons.FiShoppingCart className="header-nav__cta-icons "></FiIcons.FiShoppingCart>
             </span>
             <span
               className="header-nav__open-link"
               onClick={toggleLoginOptions}
-              // onMouseEnter={openLoginOptions}
-              // onMouseLeave={closeLoginOptions}
             >
               <HiIcons.HiDotsVertical className="header-nav__cta-icons " />
               <div
@@ -233,9 +235,27 @@ const Header = (props) => {
                   loginOptions ? "header-nav__open-link__sub-link-open" : ""
                 }`}
               >
-                <span onClick={handleLoginFormState}>Login</span>
-                <span onClick={handleSignupFormState}>Signup</span>
-                <span>Logout</span>
+                {!isLoggedIn && (
+                  <>
+                    <span onClick={handleLoginFormState}>Login</span>
+                    <span onClick={handleSignupFormState}>Signup</span>
+                  </>
+                )}
+
+                {isLoggedIn && (
+                  <Fragment>
+                    {" "}
+                    <span className="header-nav__open-item">
+                      <Link
+                        className="header-nav__open-link"
+                        to={"/user/account"}
+                      >
+                        My Account
+                      </Link>
+                    </span>
+                    <span onClick={handleLogout}>Logout</span>
+                  </Fragment>
+                )}
               </div>
             </span>
           </div>

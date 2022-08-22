@@ -31,8 +31,7 @@ const SelectInput = (props) => {
             ? "form-row-select--invalid"
             : !props.error && "form-row-select--valid"
         }`}
-        // value={props.value}
-        defaultValue=""
+        value={props.value}
         placeholder="Select"
       >
         {props.allOption && <option value={""}>All</option>}

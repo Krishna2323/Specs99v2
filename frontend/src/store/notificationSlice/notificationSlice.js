@@ -37,6 +37,7 @@ export const clearNotication = () => {
   return async (dispatch) => {
     setTimeout(() => {
       dispatch(notificationActions.clearDisplay());
+      dispatch(notificationActions._clearNotication());
     }, 3000);
   };
 };

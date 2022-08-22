@@ -301,7 +301,7 @@ const AddProduct = (props) => {
 
   useEffect(() => {
     if (action === "addProduct" && type === "success") {
-      navigate("/allProducts");
+      navigate("/admin/editProducts");
     }
     if (props.action === "updateProduct") {
       dispatch(fetchProduct(params.id));

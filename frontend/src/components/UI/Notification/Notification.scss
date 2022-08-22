@@ -3,7 +3,7 @@
   top: 1rem;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--bg-image-grad-purple);
+  background: var(--bg-image-3-dark);
   padding: 1rem;
   border-radius: var(--brr-sm);
   z-index: 2000;
@@ -30,7 +30,6 @@
   &-close {
     animation: notification-close 0.3s ease-in forwards;
   }
-
   &__status {
     font-size: 2rem;
     font-weight: 500;

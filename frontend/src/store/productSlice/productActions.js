@@ -3,9 +3,9 @@ import {
   clearNotication,
   notificationActions,
 } from "../notificationSlice/notificationSlice";
-import { fetchProducts } from "../productsSlice/productsActions";
 import { productSliceAction } from "./productSlice";
 import { dispatchNotification } from "../helper/helper";
+import { fecthData } from "../actionHelpers/fetchData";
 
 export const addProduct = (data) => {
   return async (dispatch) => {
@@ -18,9 +18,7 @@ export const addProduct = (data) => {
         "addProduct"
       );
 
-      const res = await axios.post("/api/v1/products", data);
-
-      console.log(res);
+      await axios.post("/api/v1/products", data);
 
       dispatchNotification(
         dispatch,
@@ -118,8 +116,6 @@ export const deleteProduct = (id) => {
         "Product Deleted",
         "deleteProduct"
       );
-
-      // dispatch(fetchProducts());
     };
 
     try {
@@ -180,3 +176,22 @@ export const fetchProduct = (id) => {
     }
   };
 };
+
+export const fetchSimilarProducts =
+  (brandName = "", glassType = "") =>
+  async (dispatch) => {
+    await fecthData(
+      dispatch,
+      "similarProducts",
+      productSliceAction,
+      "setSimilarProducts",
+      `/api/v1/products/?limit=6&modelType=${glassType}`
+    );
+    await fecthData(
+      dispatch,
+      "similarBrand",
+      productSliceAction,
+      "setSimilarBrand",
+      `/api/v1/products/?limit=6&keyword=${brandName}`
+    );
+  };

@@ -145,16 +145,14 @@
       align-items: center;
       font-weight: 400;
       font-size: 2.4rem;
-      // margin-top: 2rem;
-      // margin-left: 1rem;
-      // justify-self: flex-end;
+
       align-self: center;
       margin-right: 1rem;
 
       & button {
         border: none;
-        // background: var(--bg-image-grad-grey-dark);
-        color: black;
+        background: var(--bg-image-grad-purple);
+        color: white;
         font-size: 2.4rem;
         font-weight: 400;
         border-radius: 100%;
@@ -167,6 +165,7 @@
         padding: 0 1rem;
         transition: all 0.3s;
         cursor: pointer;
+        box-shadow: var(--box-shadow-card);
 
         &:hover {
           transform: translateY(-1px);

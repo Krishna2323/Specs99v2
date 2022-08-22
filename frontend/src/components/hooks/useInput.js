@@ -4,7 +4,7 @@ const useInput = (validationFunction, initialValue) => {
   const [value, setValue] = useState(initialValue ? initialValue : "");
   const [isFocused, setIsFocused] = useState(false);
   const [isTouched, setIsTouched] = useState(false);
-  const valueIsValid = validationFunction(value);
+  let valueIsValid = validationFunction(value);
   const error = !valueIsValid;
   const [showError, setShowError] = useState(false);
   // const hasError = (isTouched && error) || (showError && error);
@@ -30,8 +30,7 @@ const useInput = (validationFunction, initialValue) => {
 
   const resetInput = () => {
     setValue("");
-    valueIsValid(false);
-    setIsTouched(false);
+    setShowError(false);
   };
 
   return {

@@ -78,20 +78,28 @@ exports.getAll = (Model) =>
       .search()
       .filter()
       .sort()
-      .limitFields()
-      .paginate()
-      .getLength();
+      .limitFields();
+    // .paginate()
     const doc = await featuresWithoutPagination.query;
 
-    // console.log(featuresWithoutPagination);
+    const featuresWithPagination = new APIFeatures(
+      Model.find(filter),
+      req.query
+    )
+      .search()
+      .filter()
+      .sort()
+      .limitFields()
+      .paginate();
+    const document = await featuresWithPagination.query;
 
     // SEND RESPONSE
     res.status(200).json({
       status: 'success',
-      results: doc.length,
+      results: document.length,
       totalResults: doc.length,
       data: {
-        data: doc,
+        data: document,
       },
     });
   });

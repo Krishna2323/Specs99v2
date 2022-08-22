@@ -15,6 +15,7 @@ const Cart = (props) => {
   const { open, onBackdropClick } = props;
   const { products, totalCost, totalProducts, isLoading, isError } =
     useSelector((state) => state.cart);
+  const { isLoggedIn } = useSelector((state) => state.user);
 
   const handleCheckout = () => {
     navigate("/checkout");
@@ -37,11 +38,14 @@ const Cart = (props) => {
               <h3 className="heading-1">Cart</h3>
               {isLoading && <Loading heading="loading" type="loading" />}
 
-              {!isLoading && !isError && totalProducts === 0 && (
+              {isLoggedIn && !isLoading && !isError && totalProducts === 0 && (
                 <Loading heading="Your Cart Is Empty :" type="error" />
               )}
 
-              {!isLoading && (
+              {!isLoggedIn && (
+                <Loading heading="Login To Get Access" type="error" />
+              )}
+              {!isLoading && isLoggedIn && (
                 <div className="cart-container">
                   {products &&
                     products.map((e) => (
@@ -59,7 +63,7 @@ const Cart = (props) => {
                     </div>
                     <div className="cart-container-summary__div-2">
                       <button
-                        disabled={products.length === 0}
+                        disabled={products && products.length === 0}
                         onClick={handleCheckout}
                         className="btn-primary"
                       >

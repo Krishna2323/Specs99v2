@@ -113,14 +113,6 @@ const Sidebar = (props) => {
               My Reviews
             </Link>
           </li>
-          <li className="dashboard-sidebar__nav-links__item dashboard-sidebar__nav-links__item-user">
-            <Link
-              to="/user/reviews"
-              className="dashboard-sidebar__nav-links__link"
-            >
-              Logout
-            </Link>
-          </li>
         </ul>
       </nav>
 

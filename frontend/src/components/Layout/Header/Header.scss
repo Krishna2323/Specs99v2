@@ -3,6 +3,7 @@
   grid-column: full-start/full-end;
   background: var(--bg-image-grad-purple);
   z-index: 2;
+  // background: transparent;
   // background: var(--bg-image-grad-grey-dark);
   // background: transparent;
 
@@ -24,6 +25,11 @@
       @media (max-width: 56.25rem) {
         display: flex;
       }
+
+      @media (max-width: 25rem) {
+        margin-right: 1rem;
+        font-size: 4.2rem;
+      }
     }
 
     &__logo {
@@ -41,6 +47,16 @@
           width: 20rem;
           height: 100%;
           object-fit: scale-down;
+        }
+      }
+
+      @media (max-width: 25rem) {
+        height: 5rem;
+        & img {
+          display: block;
+          width: 18rem;
+          height: 100%;
+          object-fit: scale;
         }
       }
     }
@@ -166,6 +182,10 @@
       justify-self: flex-end;
       gap: 3rem;
 
+      @media (max-width: 25rem) {
+        gap: 1.8rem;
+      }
+
       &-cart {
         position: relative;
         & span {
@@ -174,10 +194,10 @@
           right: 0;
           width: 2rem;
           height: 2rem;
-          // padding: 0.5rem;
           border-radius: 100%;
           background: var(--bg-image-1-dark);
           color: black;
+          fill: black;
           font-weight: 600;
           transform: translate(40%, -40%);
           font-size: 1.4rem;
@@ -203,7 +223,8 @@
       }
 
       & .header-nav__open-link {
-        position: relative;
+        // position: relative;
+
         &__sub-link {
           height: 0px;
           width: 0px;
@@ -235,6 +256,16 @@
             color: white;
             font-size: 1.8rem;
             cursor: pointer;
+            transition: all 0.2s;
+
+            &:hover {
+              transform: translateY(-1px);
+            }
+
+            & a {
+              text-decoration: none;
+              color: white;
+            }
           }
 
           @media (max-width: 56.25em) {

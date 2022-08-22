@@ -61,7 +61,7 @@ const Testimonials = (props) => {
         </h4> */}
         <Slider {...settings} pauseOnHover={true}>
           {dummyTestimonialsImage.map((el) => (
-            <div>
+            <div key={el.image}>
               <div className="testimonials__reviews__review">
                 <img
                   src={el.image}

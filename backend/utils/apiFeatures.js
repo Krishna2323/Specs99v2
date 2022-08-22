@@ -57,11 +57,6 @@ class ApiFeature {
     return this;
   }
 
-  getLength() {
-    this.totalLength = this.query.find().length;
-    return this;
-  }
-
   sort() {
     if (this.queryString.sort) {
       const sortBy = this.queryString.sort.split(',').join(' ');
@@ -80,6 +75,13 @@ class ApiFeature {
     } else {
       this.query = this.query.select('-__v');
     }
+
+    return this;
+  }
+
+  getLength() {
+    // this.totalLength = this.query.count();
+    // console.log(this.totalLength);
     return this;
   }
 

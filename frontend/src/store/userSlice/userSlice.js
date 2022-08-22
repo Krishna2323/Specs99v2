@@ -26,6 +26,13 @@ const userSlice = createSlice({
       state.isLoading = action.payload.isLoading;
       state.message = action.payload.message;
     },
+    logoutUser(state, action) {
+      state.user = action.payload.user;
+      state.isError = action.payload.isError;
+      state.isLoading = action.payload.isLoading;
+      state.message = action.payload.message;
+      state.isLoggedIn = action.payload.isLoggedIn;
+    },
   },
 });
 

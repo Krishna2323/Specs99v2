@@ -58,7 +58,7 @@
   // grid-template-rows: min-content;
   grid-template-rows: min-content;
 
-  column-gap: 5rem;
+  column-gap: 2rem;
   row-gap: 7rem;
   justify-content: space-evenly;
   @media (max-width: 93.5em) {
@@ -76,14 +76,15 @@
   }
   @media (max-width: 37.5em) {
     gap: 4px;
-    row-gap: 5rem;
+    row-gap: 2rem;
     // grid-template-columns: repeat(auto-fit, minmax(22rem, 23rem));
     grid-template-columns: repeat(auto-fit, minmax(40rem, 50rem));
+
     grid-template-columns: repeat(2, 1fr);
   }
-  @media (max-width: 31.25em) {
+  @media (max-width: 25em) {
     gap: 4px;
-    row-gap: 5rem;
+    row-gap: 2rem;
     // grid-template-columns: repeat(auto-fit, minmax(22rem, 23rem));
     grid-template-columns: repeat(auto-fit, minmax(30rem, 50rem));
     // grid-template-columns: repeat(2, 1fr);

@@ -1,10 +1,11 @@
 import { Rating } from "react-simple-star-rating";
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import * as BsIcons from "react-icons/bs";
 import * as FiIcons from "react-icons/fi";
 import { addItemToCart } from "../../../store/cartSlice/cartActions";
 import useNotification from "../../hooks/useNotification";
+import { firstLetterCap } from "../../helpers/textModifiers";
 
 const colors = ["#ff6b6b", "#74c0fc", "#40c057"];
 
@@ -19,7 +20,7 @@ const ProductPageDetail = () => {
 
   const handleAddToCart = () => {
     if (!isLoggedIn) {
-      notify("loading", "Oops", "Login To Use Cart");
+      notify("loading", "🤓", "Login To Use Cart");
       clearNotification();
       return;
     }
@@ -40,7 +41,9 @@ const ProductPageDetail = () => {
     <div className="product-detail-box">
       <span className="product-detail-box__id">{product._id}</span>
       <h2 className="product-detail-box__brand">{product.brand}</h2>
-      <h2 className="product-detail-box__title">{product.model}</h2>
+      <h2 className="product-detail-box__title">
+        {firstLetterCap(product.model)}
+      </h2>
 
       <span className="product-detail-box__price">
         <span className="product-detail-box__price-offer">
@@ -63,7 +66,7 @@ const ProductPageDetail = () => {
         <span className="product-detail-box__rating-average">
           {product.ratingsAverage}
         </span>
-        {product.ratingsQuantity} Ratings & 122 Reviews
+        {product.ratingsQuantity} Ratings
       </span>
 
       {/* RATING END */}
@@ -82,21 +85,26 @@ const ProductPageDetail = () => {
         {/* COLORS END */}
         {/* SPECS START */}
         <span className="product-detail-box__specs-size">
-          Size:{" "}
-          {product.size.replace(product.size[0], product.size[0].toUpperCase())}
+          Size: {firstLetterCap(product.size)}
         </span>
-        <span className="product-detail-box__specs-lens">
-          Lens: {product.lensType}
-        </span>
-        <span className="product-detail-box__specs-weight">
-          Lens Color: {product.lensColor}
-        </span>
-        <span className="product-detail-box__specs-weight">
-          Frame Color: {product.frameColor}
-        </span>
-        <span className="product-detail-box__specs-weight">
-          Frame Body: {product.frameType}
-        </span>
+        {product.modelType !== "accessories" && (
+          <span className="product-detail-box__specs-weight">
+            Lens Color: {firstLetterCap(product.lensColor)}
+          </span>
+        )}
+        {product.modelType !== ("contact lenses" || "accessories") && (
+          <Fragment>
+            <span className="product-detail-box__specs-lens">
+              Lens: {firstLetterCap(product.lensType)}
+            </span>
+            <span className="product-detail-box__specs-weight">
+              Frame Color: {firstLetterCap(product.frameColor)}
+            </span>
+            <span className="product-detail-box__specs-weight">
+              Frame Body: {firstLetterCap(product.frameType)}
+            </span>{" "}
+          </Fragment>
+        )}
       </div>
 
       {/* SPECS END */}

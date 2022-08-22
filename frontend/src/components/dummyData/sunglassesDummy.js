@@ -25,7 +25,7 @@ export const brandDummy = [
     name: "Upto 10% Off",
     brand: "Rayban",
     img: "https://india.ray-ban.com/pub/static/version1649445069/frontend/Aceturtle/Rayban_new/en_US/images/logo.svg",
-    link: "/brand/rayban",
+    link: "/products/rayban",
   },
   {
     id: 5,
@@ -33,26 +33,26 @@ export const brandDummy = [
     name: "Upto 10% Off",
     brand: "irus by Idee",
 
-    link: "/brand/idee",
+    link: "/products/idee",
   },
   {
     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYRMpzw5wXO6BVTDRLzTEjb79GUyDtJ35kMw&usqp=CAU",
     name: "Upto 14% Off",
     brand: "fastrack",
 
-    link: "/brand/fastrack",
+    link: "/products/fastrack",
   },
   {
     id: 7,
     img: "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/eb3a4241-39a1-4e44-a6fd-5c47bae9b644.jpg",
     name: "Upto 10% Off",
-    link: "/brand/vincent-chase",
+    link: "/products/vincent-chase",
     brand: "Vincent Chase",
   },
   {
     id: 6,
     img: "https://i.pinimg.com/564x/fe/b6/05/feb605d481ae0d7e4dd8429ec4c32d7d.jpg",
-    link: "/brand/valentino",
+    link: "/products/valentino",
     brand: "Valentino",
     name: "Valentino",
   },
@@ -60,7 +60,7 @@ export const brandDummy = [
     id: 7,
     name: "Vogue",
     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSP6LEEcl14t1vHPyFhuZzV1XJslyFotDanj9hxDJ_PA-YxLuOvDMgeyNNzi-nOi0hV1j8&usqp=CAU",
-    link: "/brand/vogue",
+    link: "/products/vogue",
     brand: "Vogue",
   },
 ];
@@ -174,4 +174,5 @@ export const navGlassCategory = [
   { glass: "Eyeglasses", link: "/eyeglasses" },
   { glass: "Contact Lenses", link: "/contact-lenses" },
   { glass: "Computer Glasses", link: "/computer-glasses" },
+  { glass: "Accessories", link: "/accessories" },
 ];

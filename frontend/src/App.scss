@@ -212,6 +212,16 @@
     #212529
   );
 
+  // --bg-image-grad-grey-dark: linear-gradient(
+  //   to right bottom,
+  //   #ffffff,
+  //   #ffffff,
+  //   #ffffff,
+  //   #ffffff,
+  //   #ffffff,
+  //   #ffffff
+  // );
+
   --bg-image-grad-white: linear-gradient(
     to right top,
     #495057,
@@ -438,7 +448,7 @@ body {
 
 .form-btn {
   font-family: inherit;
-  font-size: 3rem;
+  font-size: 2.8rem;
   width: fit-content;
   padding: 0.2rem 3rem;
   border-radius: 80px;
@@ -451,7 +461,6 @@ body {
   margin-top: 2rem;
   cursor: pointer;
   background: var(--bg-image-1-dark);
-
   transition: all 0.3s;
 
   &:hover {
@@ -592,8 +601,8 @@ body {
   }
 
   @media (max-width: 37.5em) {
-    font-size: 2.8rem;
-    padding: 0rem 2rem;
+    font-size: 2.3rem;
+    padding: 0rem 2.2rem;
   }
 }
 
@@ -659,13 +668,31 @@ body {
   color: white !important;
 }
 
+.slick-slider {
+  & > .slick-list {
+    display: flex;
+    align-items: stretch;
+
+    & .slick-track {
+      display: flex;
+
+      & .slick-active {
+        & > div {
+          // height: 100% !important;
+        }
+      }
+    }
+  }
+}
+.slick-slide {
+  height: unset;
+  min-height: unset;
+}
+
 .slick-arrow {
-  // background-color: aqua;
   &::after,
   &::before {
     color: white;
-    // background: var(--bg-image-1) !important;
-    // background-clip: text !important;
     opacity: 100 !important;
   }
 }

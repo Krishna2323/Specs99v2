@@ -13,6 +13,7 @@
       padding: 2rem 0;
       display: flex !important;
       justify-content: center;
+      height: 100%;
 
       &-inner {
         width: 95% !important;
@@ -33,6 +34,25 @@
   }
   @media (max-width: 37.5em) {
     // padding: 1rem;
-    padding: 4rem;
+    padding: 1rem;
+  }
+  @media (max-width: 25em) {
+    // padding: 1rem;
+    padding: 1rem;
+  }
+
+  & .slick-list {
+    display: flex;
+    align-items: stretch;
+
+    & .slick-track {
+      display: flex;
+
+      & .slick-slide {
+        & > div {
+          height: 100% !important;
+        }
+      }
+    }
   }
 }

@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { setStateToPayload } from "../actionHelpers/setStateToPayload";
 
 const homeProductsSlice = createSlice({
   name: "homeProducts",
@@ -29,32 +30,20 @@ const homeProductsSlice = createSlice({
     computerGlassesMessage: false,
   },
   reducers: {
-    setHomeProducts(state, action) {
-      state.eyeglasses = action.payload.eyeglasses || state.eyeglasses;
-      state.eyeglassesIsLoading = action.payload.eyeglassesIsLoading;
-      state.eyeglassesIsError = action.payload.eyeglassesIsError;
-      state.eyeglassesMessage = action.payload.eyeglassesMessage;
-
-      state.sunglasses = action.payload.sunglasses || state.sunglasses;
-      state.sunglassesIsLoading = action.payload.sunglassesIsLoading;
-      state.sunglassesIsError = action.payload.sunglassesIsError;
-      state.sunglassesMessage = action.payload.sunglassesMessage;
-
-      state.accessories = action.payload.accessories || state.accessories;
-      state.accessoriesIsLoading = action.payload.accessoriesIsLoading;
-      state.accessoriesIsError = action.payload.accessoriesIsError;
-      state.accessoriesMessage = action.payload.accessoriesMessage;
-
-      state.contactLenses = action.payload.contactLenses || state.contactLenses;
-      state.contactLensesIsLoading = action.payload.contactLensesIsLoading;
-      state.contactLensesIsError = action.payload.contactLensesIsError;
-      state.contactLensesMessage = action.payload.contactLensesMessage;
-
-      state.computerGlasses =
-        action.payload.computerGlasses || state.computerGlasses;
-      state.computerGlassesIsLoading = action.payload.computerGlassesIsLoading;
-      state.computerGlassesIsError = action.payload.computerGlassesIsError;
-      state.computerGlassesMessage = action.payload.computerGlassesMessage;
+    setHomeEyeglasses(state, action) {
+      setStateToPayload(state, action, "eyeglasses");
+    },
+    setHomeSunglasses(state, action) {
+      setStateToPayload(state, action, "sunglasses");
+    },
+    setHomeAccessories(state, action) {
+      setStateToPayload(state, action, "accessories");
+    },
+    setHomeContactLenses(state, action) {
+      setStateToPayload(state, action, "contactLenses");
+    },
+    setHomeComputerGlasses(state, action) {
+      setStateToPayload(state, action, "computerGlasses");
     },
   },
 });

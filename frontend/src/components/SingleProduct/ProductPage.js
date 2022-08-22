@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProduct } from "../../store/productSlice/productActions";
+import {
+  fetchProduct,
+  fetchSimilarProducts,
+} from "../../store/productSlice/productActions";
 import { useParams } from "react-router-dom";
 import "./ProductPage.scss";
 import SingleProductSec1 from "./SingleProductSec-1/SingleProductSec1";
@@ -12,9 +15,20 @@ import Loading from "../UI/Loading/Loading";
 import { fetchProducts } from "../../store/productsSlice/productsActions";
 
 const ProductPage = () => {
-  const { product, isLoading, isError, message } = useSelector(
-    (state) => state.product
-  );
+  const {
+    product,
+    isLoading,
+    isError,
+    message,
+    similarProducts,
+    similarProductsIsLoading,
+    similarProductsIsError,
+    similarProductsMessage,
+    similarBrand,
+    similarBrandIsLoading,
+    similarBrandIsError,
+    similarBrandMessage,
+  } = useSelector((state) => state.product);
   const {
     products,
     isLoading: topProductsLoading,
@@ -26,11 +40,15 @@ const ProductPage = () => {
   const { id } = params;
 
   useEffect(() => {
-    if (id) {
-      dispatch(fetchProduct(id));
-      dispatch(fetchProducts({}));
+    if (product) {
+      dispatch(fetchSimilarProducts(product.brand, product.modelType));
     }
-  }, [dispatch, id]);
+  }, [dispatch, product]);
+
+  useEffect(() => {
+    dispatch(fetchProduct(id));
+  }, []);
+
   return (
     <Fragment>
       <div className="single-product-container">
@@ -44,23 +62,23 @@ const ProductPage = () => {
         {product && (
           <Fragment>
             <SingleProductSec1 product={product} />
-            <SingleProductSec2 product={product} />
+            {/* <SingleProductSec2 product={product} /> */}
             <SingleProductSec3 product={product} />
             <TopProductSlider
-              products={products}
-              loading={topProductsLoading}
-              error={topProductsIsError}
-              message={topProductsMessage}
+              products={similarProducts}
+              loading={similarProductsIsLoading}
+              error={similarProductsIsError}
+              message={similarProductsMessage}
               heading={`Similar Products`}
               viewMore={`/${product.modelType.split(" ").join("-")}`}
             />
             <TopProductSlider
-              products={products}
-              loading={topProductsLoading}
-              error={topProductsIsError}
-              message={topProductsMessage}
+              products={similarBrand}
+              loading={similarBrandIsLoading}
+              error={similarBrandIsError}
+              message={similarBrandMessage}
               heading={`More From ${product.brand}`}
-              viewMore={`/brand/${product.brand.split(" ").join("-")}`}
+              viewMore={`/products/${product.brand.split(" ").join("-")}`}
             />
           </Fragment>
         )}

@@ -23,7 +23,7 @@ const AllProduct = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchProducts({}));
+    dispatch(fetchProducts({ limit: 100 }, []));
   }, [dispatch]);
   return (
     <div className="dashboard-component">

@@ -1,8 +1,8 @@
 .products-page-sidebar {
   width: 100%;
   height: 100%;
-  background: var(--bg-image-grad-grey-light);
   background: var(--bg-image-grad-purple);
+  background: var(--bg-image-grad-grey-dark);
   height: 90vh;
   height: 100%;
   //////////////////////
@@ -132,6 +132,29 @@
     }
   }
 
+  &__filter-btn {
+    position: fixed;
+    top: 10rem;
+    left: 103%;
+    font-size: 2.8rem;
+    color: white;
+    border: none;
+    background: var(--bg-image-grad-purple);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 5rem;
+    height: 5rem;
+    z-index: -1;
+    transition: all 0.2s;
+    display: none;
+    box-shadow: var(--box-shadow-dark);
+    @media (max-width: 75em) {
+      display: block;
+    }
+  }
+
   ////////////////////////////MEDIA QUERY
 
   @media (max-width: 75em) {
@@ -140,7 +163,7 @@
     // left: -100%;
     width: 28vw;
     height: 100vh;
-    z-index: 1001;
+    // z-index: 1001;
     transform: translate(-100%, 0%);
     transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
     gap: 3rem;
@@ -160,12 +183,15 @@
   ///////
 
   @media (max-width: 75em) {
-    position: absolute;
+    position: fixed;
     transform: translate(-100%, 0%);
-    width: 30rem;
-    top: 0;
+    width: 40rem;
+    top: 0rem;
     left: 0;
-    z-index: 2;
+    z-index: 1;
+    padding-top: 9rem;
+    height: 100%;
+
     transition: all 0.5s;
 
     &-open {
@@ -173,7 +199,10 @@
     }
   }
 
-  @media (max-width: 37.25em) {
+  @media (max-width: 25em) {
+    width: 70vw;
+  }
+  @media (max-width: 18.5em) {
     width: 80vw;
   }
 }
